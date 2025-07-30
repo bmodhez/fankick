@@ -52,11 +52,12 @@ const App = () => (
             />
           } />
           <Route path="/accessories/:category" element={
-            <PlaceholderPage 
-              title="Accessories Collection" 
-              description="Browse our curated selection of premium football accessories." 
+            <PlaceholderPage
+              title="Accessories Collection"
+              description="Browse our curated selection of premium football accessories."
             />
           } />
+          <Route path="/product/:id" element={<ProductPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
