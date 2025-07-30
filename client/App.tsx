@@ -10,6 +10,7 @@ import { Navigation } from "@/components/Navigation";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PlaceholderPage from "./pages/PlaceholderPage";
+import ProductPage from "./pages/ProductPage";
 
 const queryClient = new QueryClient();
 
