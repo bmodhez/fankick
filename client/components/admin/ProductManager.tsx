@@ -480,9 +480,11 @@ export function ProductManager() {
           <ProductCard
             key={product.id}
             product={product}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-            onDuplicate={handleDuplicate}
+            onEdit={handleEditProduct}
+            onDelete={handleDeleteProduct}
+            onDuplicate={handleDuplicateProduct}
+            isSelected={selectedProducts.has(product.id)}
+            onToggleSelect={toggleProductSelection}
           />
         ))}
       </div>
@@ -494,43 +496,29 @@ export function ProductManager() {
             No products found
           </h3>
           <p className="text-gray-500 mb-4">
-            Try adjusting your search or filters
+            {searchQuery || selectedCategory !== "all"
+              ? "Try adjusting your search or filters"
+              : "Start by adding your first product to the catalog"
+            }
           </p>
-          <Button className="bg-primary text-black hover:bg-primary/90">
+          <Button className="bg-primary text-black hover:bg-primary/90" onClick={handleAddProduct}>
             <Plus className="w-4 h-4 mr-2" />
             Add Your First Product
           </Button>
         </div>
       )}
 
-      {/* Add Product Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gray-800 border-gray-700">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="text-white">Add New Product</CardTitle>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowAddModal(false)}
-              >
-                ✕
-              </Button>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="text-center py-12">
-                <ImageIcon className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-gray-400 mb-2">
-                  Product Form
-                </h3>
-                <p className="text-gray-500">
-                  Detailed product creation form would be implemented here
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+      {/* Product Form Modal */}
+      <ProductForm
+        product={editingProduct}
+        isOpen={showProductForm}
+        onClose={() => {
+          setShowProductForm(false);
+          setEditingProduct(null);
+        }}
+        onSave={handleSaveProduct}
+        mode={formMode}
+      />
     </div>
   );
 }
