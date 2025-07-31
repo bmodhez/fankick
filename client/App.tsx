@@ -148,7 +148,15 @@ const App = () => (
   </QueryClientProvider>
 );
 
-const rootElement = document.getElementById("root");
-if (rootElement) {
-  createRoot(rootElement).render(<App />);
+const rootElement = document.getElementById("root")!;
+
+// Store root globally to prevent recreation on hot reload
+declare global {
+  var __APP_ROOT__: ReturnType<typeof createRoot> | undefined;
 }
+
+if (!globalThis.__APP_ROOT__) {
+  globalThis.__APP_ROOT__ = createRoot(rootElement);
+}
+
+globalThis.__APP_ROOT__.render(<App />);
