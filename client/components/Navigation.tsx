@@ -110,9 +110,67 @@ export function Navigation() {
               <Search className="h-4 w-4" />
             </Button>
             <ThemeToggle />
-            <Button variant="ghost" size="sm" className="text-white hover:text-primary">
-              <User className="h-4 w-4" />
-            </Button>
+
+            {/* User Authentication */}
+            {user ? (
+              <div className="relative">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:text-primary"
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                >
+                  <div className="flex items-center space-x-2">
+                    <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                      <span className="text-black font-bold text-xs">
+                        {user.name.charAt(0).toUpperCase()}
+                      </span>
+                    </div>
+                    {user.isAdmin && <Crown className="w-3 h-3 text-primary" />}
+                    <ChevronDown className="w-3 h-3" />
+                  </div>
+                </Button>
+
+                {showUserMenu && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg border z-50">
+                    <div className="px-4 py-3 border-b">
+                      <p className="font-medium">{user.name}</p>
+                      <p className="text-sm text-gray-500">{user.email}</p>
+                    </div>
+                    {user.isAdmin && (
+                      <Link
+                        to="/admin"
+                        className="block px-4 py-2 hover:bg-gray-100 flex items-center"
+                        onClick={() => setShowUserMenu(false)}
+                      >
+                        <Crown className="w-4 h-4 mr-2 text-primary" />
+                        Admin Panel
+                      </Link>
+                    )}
+                    <button
+                      onClick={() => {
+                        logout()
+                        setShowUserMenu(false)
+                      }}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center"
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-white hover:text-primary"
+                onClick={() => setShowAuthModal(true)}
+              >
+                <User className="w-4 h-4 mr-1" />
+                <span className="hidden sm:inline">Login</span>
+              </Button>
+            )}
             <Button variant="ghost" size="sm" className="relative text-white hover:text-primary">
               <ShoppingCart className="h-4 w-4" />
               <span className="absolute -top-1 -right-1 bg-primary text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
