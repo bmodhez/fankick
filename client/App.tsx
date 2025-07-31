@@ -19,7 +19,8 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
-      <TooltipProvider>
+      <CurrencyProvider>
+        <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -83,7 +84,8 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-      </TooltipProvider>
+        </TooltipProvider>
+      </CurrencyProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );
