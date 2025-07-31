@@ -100,6 +100,12 @@ const navigation = [
     icon: Settings,
     emoji: "⚙️",
   },
+  {
+    name: "Test Suite",
+    href: "/admin/test",
+    icon: Shield,
+    emoji: "🧪",
+  },
 ];
 
 const quickStats = [
