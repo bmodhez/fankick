@@ -53,7 +53,7 @@ export default function AdminPanel() {
       case '/admin/categories':
         return <PlaceholderContent title="Category Management" description="Organize products into categories and manage collections." />
       case '/admin/analytics':
-        return <PlaceholderContent title="Analytics & Reports" description="View detailed analytics, generate reports, and track performance metrics." />
+        return <Analytics />
       case '/admin/content':
         return <PlaceholderContent title="Content Management" description="Manage homepage content, banners, and promotional materials." />
       case '/admin/marketing':
