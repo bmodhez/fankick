@@ -70,6 +70,15 @@ const App = () => (
           } />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/admin/products" element={<AdminPanel />} />
+          <Route path="/admin/orders" element={<AdminPanel />} />
+          <Route path="/admin/customers" element={<AdminPanel />} />
+          <Route path="/admin/categories" element={<AdminPanel />} />
+          <Route path="/admin/analytics" element={<AdminPanel />} />
+          <Route path="/admin/content" element={<AdminPanel />} />
+          <Route path="/admin/marketing" element={<AdminPanel />} />
+          <Route path="/admin/chatbot" element={<AdminPanel />} />
+          <Route path="/admin/settings" element={<AdminPanel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
