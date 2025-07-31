@@ -351,11 +351,6 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
                   We've sent a 6-digit verification code to<br />
                   <span className="font-medium">{pendingVerificationPhone}</span>
                 </p>
-                {pendingVerificationPhone === '9322667822' && (
-                  <Badge className="bg-blue-100 text-blue-800 text-xs">
-                    Demo OTP: 123456
-                  </Badge>
-                )}
               </div>
 
               <div>
