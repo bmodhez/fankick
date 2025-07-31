@@ -40,6 +40,8 @@ function ProductCard({
   onEdit,
   onDelete,
   onDuplicate,
+  isSelected,
+  onToggleSelect,
 }: ProductCardProps) {
   const [showActions, setShowActions] = useState(false);
   const totalStock = product.variants.reduce(
@@ -49,7 +51,7 @@ function ProductCard({
   const isLowStock = totalStock < 10;
 
   return (
-    <Card className="bg-gray-800 border-gray-700 hover:border-primary/50 transition-colors">
+    <Card className={`bg-gray-800 border-gray-700 hover:border-primary/50 transition-colors ${isSelected ? 'ring-2 ring-primary' : ''}`}>
       <CardContent className="p-4">
         <div className="relative">
           <img
@@ -57,6 +59,17 @@ function ProductCard({
             alt={product.name}
             className="w-full h-48 object-cover rounded-lg mb-4"
           />
+
+          {/* Selection checkbox */}
+          <div className="absolute top-2 left-2">
+            <input
+              type="checkbox"
+              checked={isSelected}
+              onChange={() => onToggleSelect(product.id)}
+              className="w-4 h-4 text-primary bg-gray-700 border-gray-600 rounded focus:ring-primary focus:ring-2"
+            />
+          </div>
+
           <div className="absolute top-2 right-2 flex space-x-1">
             {product.isTrending && (
               <Badge className="bg-red-500 text-white text-xs">
@@ -71,7 +84,7 @@ function ProductCard({
               </Badge>
             )}
           </div>
-          <div className="absolute top-2 left-2">
+          <div className="absolute bottom-2 left-2">
             {isLowStock && (
               <Badge className="bg-yellow-500 text-black text-xs">
                 <AlertTriangle className="w-3 h-3 mr-1" />
