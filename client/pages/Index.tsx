@@ -21,6 +21,9 @@ import {
 } from 'lucide-react'
 
 export default function Index() {
+  const { selectedCurrency } = useCurrency()
+  const trendingProducts = getTrendingProducts(4)
+
   const heroCategories = [
     {
       title: 'Football Legends',
