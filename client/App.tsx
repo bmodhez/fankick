@@ -17,7 +17,8 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+    <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
+      <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -28,22 +29,28 @@ const App = () => (
               <Index />
             </div>
           } />
-          <Route path="/players" element={
-            <PlaceholderPage 
-              title="Player Collections" 
-              description="Discover exclusive merchandise from your favorite football stars including Messi, Ronaldo, Mbappé and more." 
+          <Route path="/football" element={
+            <PlaceholderPage
+              title="Football Collection"
+              description="Official jerseys, boots and gear from Messi, Ronaldo, Mbappé and football legends worldwide."
             />
           } />
-          <Route path="/clubs" element={
-            <PlaceholderPage 
-              title="Club Collections" 
-              description="Support your favorite teams with official merchandise from Al Nassr, PSG, Barcelona and clubs worldwide." 
+          <Route path="/anime" element={
+            <PlaceholderPage
+              title="Anime Collection"
+              description="Exclusive rings, chains, hoodies from Naruto, Chainsaw Man, Demon Slayer and top anime series."
             />
           } />
-          <Route path="/accessories" element={
-            <PlaceholderPage 
-              title="Football Accessories" 
-              description="Complete your fan collection with phone covers, mugs, caps and other premium accessories." 
+          <Route path="/pop-culture" element={
+            <PlaceholderPage
+              title="Pop Culture Collection"
+              description="Taylor Swift, K-pop, Marvel, and trending pop culture merchandise for true fans."
+            />
+          } />
+          <Route path="/collections" element={
+            <PlaceholderPage
+              title="All Collections"
+              description="Browse all our curated collections across football, anime, and pop culture categories."
             />
           } />
           <Route path="/trending" element={
@@ -52,10 +59,22 @@ const App = () => (
               description="Stay ahead of the game with the hottest football merchandise trending among fans worldwide." 
             />
           } />
-          <Route path="/accessories/:category" element={
+          <Route path="/football/:category" element={
             <PlaceholderPage
-              title="Accessories Collection"
-              description="Browse our curated selection of premium football accessories."
+              title="Football Category"
+              description="Browse specific football merchandise categories."
+            />
+          } />
+          <Route path="/anime/:category" element={
+            <PlaceholderPage
+              title="Anime Category"
+              description="Browse specific anime merchandise categories."
+            />
+          } />
+          <Route path="/pop-culture/:category" element={
+            <PlaceholderPage
+              title="Pop Culture Category"
+              description="Browse specific pop culture merchandise categories."
             />
           } />
           <Route path="/product/:id" element={<ProductPage />} />
@@ -63,7 +82,8 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-    </TooltipProvider>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
