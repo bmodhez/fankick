@@ -183,85 +183,100 @@ export default function Index() {
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {trendingProducts.map((product, index) => (
-              <Card key={index} className="group cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <CardContent className="p-0">
-                  <div className="relative">
-                    <img 
-                      src={product.image} 
-                      alt={product.name}
-                      className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    
-                    {/* Overlays */}
-                    <div className="absolute top-2 left-2 space-y-1">
-                      {product.trending && (
-                        <Badge className="bg-red-500 text-white text-xs">
-                          <TrendingUp className="w-3 h-3 mr-1" />
-                          TRENDING
-                        </Badge>
-                      )}
-                      <Badge className="bg-black/80 text-white text-xs">
-                        {product.category}
-                      </Badge>
-                    </div>
-                    
-                    <div className="absolute top-2 right-2">
-                      <Button variant="ghost" size="sm" className="bg-white/90 hover:bg-white">
-                        <Heart className="w-4 h-4" />
-                      </Button>
-                    </div>
-                    
-                    <div className="absolute bottom-2 left-2">
-                      <Badge className="bg-primary text-black text-xs font-bold">
-                        {product.stockAlert}
-                      </Badge>
-                    </div>
-                    
-                    <div className="absolute bottom-2 right-2 flex items-center space-x-1 bg-black/70 text-white px-2 py-1 rounded text-xs">
-                      <Eye className="w-3 h-3" />
-                      <span>{product.views}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="p-4">
-                    <h3 className="font-semibold mb-2 text-sm line-clamp-2">{product.name}</h3>
-                    
-                    <div className="flex items-center mb-3">
-                      <div className="flex items-center">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-3 h-3 ${
-                              i < Math.floor(product.rating) 
-                                ? 'text-yellow-400 fill-current' 
-                                : 'text-gray-300'
-                            }`}
-                          />
-                        ))}
+            {trendingProducts.map((product, index) => {
+              const convertedPrice = convertPrice(product.basePrice / 84.15, selectedCurrency.code) // Convert from INR base
+              const convertedOriginalPrice = convertPrice(product.originalPrice / 84.15, selectedCurrency.code)
+
+              return (
+                <Link key={index} to={`/product/${product.id}`}>
+                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden">
+                    <CardContent className="p-0">
+                      <div className="relative">
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+
+                        {/* Overlays */}
+                        <div className="absolute top-2 left-2 space-y-1">
+                          {product.isTrending && (
+                            <Badge className="bg-red-500 text-white text-xs">
+                              <TrendingUp className="w-3 h-3 mr-1" />
+                              TRENDING
+                            </Badge>
+                          )}
+                          {product.badges.map((badge, badgeIndex) => (
+                            <Badge key={badgeIndex} className="bg-black/80 text-white text-xs">
+                              {badge}
+                            </Badge>
+                          ))}
+                        </div>
+
+                        <div className="absolute top-2 right-2">
+                          <Button variant="ghost" size="sm" className="bg-white/90 hover:bg-white">
+                            <Heart className="w-4 h-4" />
+                          </Button>
+                        </div>
+
+                        <div className="absolute bottom-2 left-2">
+                          {product.stockAlert && (
+                            <Badge className="bg-primary text-black text-xs font-bold">
+                              {product.stockAlert}
+                            </Badge>
+                          )}
+                        </div>
+
+                        <div className="absolute bottom-2 right-2 flex items-center space-x-1 bg-black/70 text-white px-2 py-1 rounded text-xs">
+                          <Eye className="w-3 h-3" />
+                          <span>{(product.reviews / 100).toFixed(1)}K views</span>
+                        </div>
                       </div>
-                      <span className="text-xs text-gray-600 ml-2">
-                        {product.rating} ({product.reviews.toLocaleString()})
-                      </span>
-                    </div>
-                    
-                    <div className="flex items-center justify-between mb-3">
-                      <div>
-                        <span className="font-bold text-primary text-lg">₹{product.price.inr}</span>
-                        <span className="text-gray-400 line-through text-sm ml-2">₹{product.originalPrice.inr}</span>
+
+                      <div className="p-4">
+                        <h3 className="font-semibold mb-2 text-sm line-clamp-2">{product.name}</h3>
+
+                        <div className="flex items-center mb-3">
+                          <div className="flex items-center">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`w-3 h-3 ${
+                                  i < Math.floor(product.rating)
+                                    ? 'text-yellow-400 fill-current'
+                                    : 'text-gray-300'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                          <span className="text-xs text-gray-600 ml-2">
+                            {product.rating} ({product.reviews.toLocaleString()})
+                          </span>
+                        </div>
+
+                        <div className="flex items-center justify-between mb-3">
+                          <div>
+                            <span className="font-bold text-primary text-lg">
+                              {formatPrice(convertedPrice, selectedCurrency.code)}
+                            </span>
+                            <span className="text-gray-400 line-through text-sm ml-2">
+                              {formatPrice(convertedOriginalPrice, selectedCurrency.code)}
+                            </span>
+                          </div>
+                          <Badge className="bg-green-100 text-green-800 text-xs">
+                            {Math.round(((convertedOriginalPrice - convertedPrice) / convertedOriginalPrice) * 100)}% OFF
+                          </Badge>
+                        </div>
+
+                        <Button className="w-full bg-black text-white hover:bg-gray-800 font-semibold">
+                          Add to Cart
+                        </Button>
                       </div>
-                      <Badge className="bg-green-100 text-green-800 text-xs">
-                        {Math.round(((product.originalPrice.inr - product.price.inr) / product.originalPrice.inr) * 100)}% OFF
-                      </Badge>
-                    </div>
-                    
-                    <Button className="w-full bg-black text-white hover:bg-gray-800 font-semibold">
-                      Add to Cart
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                    </CardContent>
+                  </Card>
+                </Link>
+              )
+            })}
           </div>
           
           <div className="text-center mt-12">
