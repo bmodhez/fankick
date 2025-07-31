@@ -27,10 +27,12 @@ import {
 } from "lucide-react";
 
 interface ProductCardProps {
-  product: any;
-  onEdit: (product: any) => void;
+  product: Product;
+  onEdit: (product: Product) => void;
   onDelete: (id: string) => void;
-  onDuplicate: (product: any) => void;
+  onDuplicate: (product: Product) => void;
+  isSelected: boolean;
+  onToggleSelect: (id: string) => void;
 }
 
 function ProductCard({
