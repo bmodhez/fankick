@@ -128,7 +128,12 @@ const App = () => (
                   />
                   <Route
                     path="/product/:id"
-                    element={<ProductPage />}
+                    element={
+                      <>
+                        <Navigation />
+                        <ProductPage />
+                      </>
+                    }
                   />
                   <Route path="/admin" element={<AdminPanel />} />
                   <Route path="/admin/products" element={<AdminPanel />} />
