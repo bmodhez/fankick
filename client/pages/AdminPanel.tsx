@@ -36,6 +36,7 @@ export default function AdminPanel() {
     if (path === "/admin/marketing") return "Marketing Tools";
     if (path === "/admin/chatbot") return "Chatbot Management";
     if (path === "/admin/settings") return "Settings";
+    if (path === "/admin/test") return "Admin Test Suite";
     return "Admin Panel";
   };
 
