@@ -87,7 +87,7 @@ export function Navigation() {
                     <button
                       key={currency.code}
                       onClick={() => {
-                        setSelectedCurrency(currency)
+                        setCurrency(currency.code)
                         setShowCurrency(false)
                       }}
                       className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center space-x-2"
