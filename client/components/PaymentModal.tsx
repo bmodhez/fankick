@@ -32,6 +32,7 @@ interface PaymentModalProps {
 
 export function PaymentModal({ isOpen, onClose, product, shippingCost, codAvailable }: PaymentModalProps) {
   const { selectedCurrency } = useCurrency()
+  const { user } = useAuth()
   const [selectedPayment, setSelectedPayment] = useState('')
   const [isProcessing, setIsProcessing] = useState(false)
   const [orderComplete, setOrderComplete] = useState(false)
