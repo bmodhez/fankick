@@ -151,6 +151,17 @@ export function PaymentModal({ isOpen, onClose, product, shippingCost, codAvaila
         </CardHeader>
         
         <CardContent className="space-y-6">
+          {/* Login Required Notice */}
+          {!user && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+              <div className="text-blue-800 font-medium mb-2">Login Required</div>
+              <p className="text-blue-700 text-sm mb-3">Please log in to complete your purchase</p>
+              <Button className="bg-primary text-black hover:bg-primary/90" onClick={onClose}>
+                Login to Continue
+              </Button>
+            </div>
+          )}
+
           {/* Order Summary */}
           <div className="bg-gray-50 rounded-lg p-4">
             <h3 className="font-semibold mb-3">Order Summary</h3>
