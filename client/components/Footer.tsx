@@ -66,23 +66,23 @@ export function Footer() {
             <h3 className="font-heading font-semibold text-lg mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/help" className="text-gray-300 hover:text-primary text-sm">
-                  Help Center
-                </Link>
-              </li>
-              <li>
                 <Link to="/shipping" className="text-gray-300 hover:text-primary text-sm">
-                  Shipping Info
+                  Shipping Policy
                 </Link>
               </li>
               <li>
-                <Link to="/returns" className="text-gray-300 hover:text-primary text-sm">
-                  Returns & Exchanges
+                <Link to="/refunds" className="text-gray-300 hover:text-primary text-sm">
+                  Returns & Refunds
                 </Link>
               </li>
               <li>
-                <Link to="/size-guide" className="text-gray-300 hover:text-primary text-sm">
-                  Size Guide
+                <Link to="/terms" className="text-gray-300 hover:text-primary text-sm">
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacy" className="text-gray-300 hover:text-primary text-sm">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
