@@ -32,24 +32,9 @@ const App = () => (
               <Index />
             </div>
           } />
-          <Route path="/football" element={
-            <PlaceholderPage
-              title="Football Collection"
-              description="Official jerseys, boots and gear from Messi, Ronaldo, Mbappé and football legends worldwide."
-            />
-          } />
-          <Route path="/anime" element={
-            <PlaceholderPage
-              title="Anime Collection"
-              description="Exclusive rings, chains, hoodies from Naruto, Chainsaw Man, Demon Slayer and top anime series."
-            />
-          } />
-          <Route path="/pop-culture" element={
-            <PlaceholderPage
-              title="Pop Culture Collection"
-              description="Taylor Swift, K-pop, Marvel, and trending pop culture merchandise for true fans."
-            />
-          } />
+          <Route path="/football" element={<CategoryPage />} />
+          <Route path="/anime" element={<CategoryPage />} />
+          <Route path="/pop-culture" element={<CategoryPage />} />
           <Route path="/collections" element={
             <PlaceholderPage
               title="All Collections"
