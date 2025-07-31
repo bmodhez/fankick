@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { useCurrency } from '@/contexts/CurrencyContext'
+import { useAuth } from '@/contexts/AuthContext'
 import { getAvailablePaymentMethods, formatOrderId, generateTrackingNumber } from '@/utils/payments'
 import { formatPrice } from '@/utils/currency'
 import { 
