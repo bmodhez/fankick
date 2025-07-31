@@ -11,7 +11,10 @@ import { CURRENCIES } from '@/utils/currency'
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showCurrency, setShowCurrency] = useState(false)
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [showUserMenu, setShowUserMenu] = useState(false)
   const { selectedCurrency, setCurrency } = useCurrency()
+  const { user, logout, isAdmin } = useAuth()
 
   const currencies = Object.values(CURRENCIES)
 
