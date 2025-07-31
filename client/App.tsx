@@ -23,7 +23,8 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
       <CurrencyProvider>
-        <TooltipProvider>
+        <AuthProvider>
+          <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -68,11 +69,13 @@ const App = () => (
             />
           } />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/admin" element={<AdminPanel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-        </TooltipProvider>
+          </TooltipProvider>
+        </AuthProvider>
       </CurrencyProvider>
     </ThemeProvider>
   </QueryClientProvider>
