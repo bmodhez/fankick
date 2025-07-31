@@ -51,61 +51,6 @@ export default function Index() {
     }
   ]
 
-  const trendingProducts = [
-    {
-      id: 1,
-      name: 'Messi Inter Miami Jersey 2024',
-      price: { usd: 89, eur: 82, gbp: 71, cad: 121, sar: 334, inr: 7499 },
-      originalPrice: { usd: 119, eur: 109, gbp: 95, cad: 161, sar: 446, inr: 9999 },
-      image: '/placeholder.svg',
-      rating: 4.9,
-      reviews: 2847,
-      category: 'Football',
-      trending: true,
-      stockAlert: 'Only 3 left!',
-      views: '12.4K'
-    },
-    {
-      id: 2,
-      name: 'Naruto Akatsuki Ring Set',
-      price: { usd: 24, eur: 22, gbp: 19, cad: 33, sar: 90, inr: 1999 },
-      originalPrice: { usd: 39, eur: 36, gbp: 31, cad: 53, sar: 146, inr: 3299 },
-      image: '/placeholder.svg',
-      rating: 4.7,
-      reviews: 1523,
-      category: 'Anime',
-      trending: true,
-      stockAlert: 'Fast selling!',
-      views: '8.9K'
-    },
-    {
-      id: 3,
-      name: 'Taylor Swift Eras Tour Hoodie',
-      price: { usd: 45, eur: 41, gbp: 36, cad: 61, sar: 169, inr: 3799 },
-      originalPrice: { usd: 65, eur: 60, gbp: 52, cad: 88, sar: 244, inr: 5499 },
-      image: '/placeholder.svg',
-      rating: 4.8,
-      reviews: 3921,
-      category: 'Pop Culture',
-      trending: true,
-      stockAlert: 'Limited edition',
-      views: '15.2K'
-    },
-    {
-      id: 4,
-      name: 'Chainsaw Man Denji Hoodie',
-      price: { usd: 42, eur: 38, gbp: 33, cad: 57, sar: 158, inr: 3499 },
-      originalPrice: { usd: 58, eur: 53, gbp: 46, cad: 78, sar: 218, inr: 4899 },
-      image: '/placeholder.svg',
-      rating: 4.6,
-      reviews: 987,
-      category: 'Anime',
-      trending: false,
-      stockAlert: 'Back in stock!',
-      views: '6.7K'
-    }
-  ]
-
   const categories = [
     {
       name: 'Football Jerseys',
