@@ -140,6 +140,33 @@ const App = () => (
                       </>
                     }
                   />
+                  <Route
+                    path="/shipping"
+                    element={
+                      <>
+                        <Navigation />
+                        <ShippingPolicy />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/refunds"
+                    element={
+                      <>
+                        <Navigation />
+                        <RefundPolicy />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/privacy"
+                    element={
+                      <>
+                        <Navigation />
+                        <PrivacyPolicy />
+                      </>
+                    }
+                  />
                   <Route path="/admin" element={<AdminPanel />} />
                   <Route path="/admin/products" element={<AdminPanel />} />
                   <Route path="/admin/orders" element={<AdminPanel />} />
