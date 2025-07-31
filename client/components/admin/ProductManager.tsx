@@ -419,11 +419,23 @@ export function ProductManager() {
       <Card className="bg-gray-800 border-gray-700">
         <CardContent className="p-4">
           <div className="flex flex-col lg:flex-row gap-4">
+            <div className="flex items-center space-x-3">
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={selectedProducts.size === sortedProducts.length && sortedProducts.length > 0}
+                  onChange={selectAllProducts}
+                  className="w-4 h-4 text-primary bg-gray-700 border-gray-600 rounded focus:ring-primary focus:ring-2"
+                />
+                <span className="text-white text-sm">Select All</span>
+              </label>
+            </div>
+
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="Search products, tags, descriptions..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -455,6 +467,7 @@ export function ProductManager() {
                 <option value="price-low">Price: Low to High</option>
                 <option value="stock">Stock Level</option>
                 <option value="rating">Rating</option>
+                <option value="created">Recently Added</option>
               </select>
             </div>
           </div>
