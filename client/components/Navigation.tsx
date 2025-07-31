@@ -110,6 +110,7 @@ export function Navigation() {
             <Button variant="ghost" size="sm" className="hidden sm:flex text-white hover:text-primary">
               <Search className="h-4 w-4" />
             </Button>
+            <ThemeToggle />
             <Button variant="ghost" size="sm" className="text-white hover:text-primary">
               <User className="h-4 w-4" />
             </Button>
