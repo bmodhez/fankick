@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, Search, ShoppingCart, User, Globe, ChevronDown } from 'lucide-react'
+import { Menu, X, Search, ShoppingCart, User, Globe, ChevronDown, Crown, LogOut } from 'lucide-react'
 import { Button } from './ui/button'
 import { ThemeToggle } from './ThemeToggle'
+import { AuthModal } from './AuthModal'
 import { useCurrency } from '@/contexts/CurrencyContext'
+import { useAuth } from '@/contexts/AuthContext'
 import { CURRENCIES } from '@/utils/currency'
 
 export function Navigation() {
