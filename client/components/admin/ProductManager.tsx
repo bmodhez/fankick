@@ -153,9 +153,12 @@ function ProductCard({
                     <Copy className="w-4 h-4" />
                     <span>Duplicate</span>
                   </button>
-                  <button className="w-full text-left px-3 py-2 hover:bg-gray-600 flex items-center space-x-2 text-sm text-white">
-                    <Eye className="w-4 h-4" />
-                    <span>Preview</span>
+                  <button
+                    onClick={() => window.open(`/product/${product.id}`, '_blank')}
+                    className="w-full text-left px-3 py-2 hover:bg-gray-600 flex items-center space-x-2 text-sm text-white"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>View Product</span>
                   </button>
                   <hr className="border-gray-600" />
                   <button
