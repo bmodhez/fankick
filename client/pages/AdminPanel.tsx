@@ -94,6 +94,8 @@ export default function AdminPanel() {
             description="Configure system settings, user roles, and integrations."
           />
         );
+      case "/admin/test":
+        return <AdminTest />;
       default:
         return <Dashboard />;
     }
