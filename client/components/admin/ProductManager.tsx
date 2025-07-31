@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { PRODUCTS } from "@/data/products";
+import { PRODUCTS, Product } from "@/data/products";
+import { ProductForm } from "./ProductForm";
 import {
   Plus,
   Search,
@@ -22,6 +23,7 @@ import {
   Star,
   TrendingUp,
   Zap,
+  ExternalLink,
 } from "lucide-react";
 
 interface ProductCardProps {
