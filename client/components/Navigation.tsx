@@ -1,22 +1,32 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Menu, X, Search, ShoppingCart, User, Globe, ChevronDown, Crown, LogOut } from 'lucide-react'
-import { Button } from './ui/button'
-import { ThemeToggle } from './ThemeToggle'
-import { AuthModal } from './AuthModal'
-import { useCurrency } from '@/contexts/CurrencyContext'
-import { useAuth } from '@/contexts/AuthContext'
-import { CURRENCIES } from '@/utils/currency'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Menu,
+  X,
+  Search,
+  ShoppingCart,
+  User,
+  Globe,
+  ChevronDown,
+  Crown,
+  LogOut,
+} from "lucide-react";
+import { Button } from "./ui/button";
+import { ThemeToggle } from "./ThemeToggle";
+import { AuthModal } from "./AuthModal";
+import { useCurrency } from "@/contexts/CurrencyContext";
+import { useAuth } from "@/contexts/AuthContext";
+import { CURRENCIES } from "@/utils/currency";
 
 export function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [showCurrency, setShowCurrency] = useState(false)
-  const [showAuthModal, setShowAuthModal] = useState(false)
-  const [showUserMenu, setShowUserMenu] = useState(false)
-  const { selectedCurrency, setCurrency } = useCurrency()
-  const { user, logout, isAdmin } = useAuth()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showCurrency, setShowCurrency] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const { selectedCurrency, setCurrency } = useCurrency();
+  const { user, logout, isAdmin } = useAuth();
 
-  const currencies = Object.values(CURRENCIES)
+  const currencies = Object.values(CURRENCIES);
 
   return (
     <nav className="bg-black text-white sticky top-0 z-50 border-b border-gray-800">
@@ -35,26 +45,26 @@ export function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             <div className="flex items-center space-x-6">
-              <Link 
-                to="/football" 
+              <Link
+                to="/football"
                 className="hover:text-primary transition-colors font-medium"
               >
                 Football
               </Link>
-              <Link 
-                to="/anime" 
+              <Link
+                to="/anime"
                 className="hover:text-primary transition-colors font-medium"
               >
                 Anime
               </Link>
-              <Link 
-                to="/pop-culture" 
+              <Link
+                to="/pop-culture"
                 className="hover:text-primary transition-colors font-medium"
               >
                 Pop Culture
               </Link>
-              <Link 
-                to="/trending" 
+              <Link
+                to="/trending"
                 className="hover:text-primary transition-colors font-medium relative"
               >
                 Trending
@@ -62,8 +72,8 @@ export function Navigation() {
                   HOT
                 </span>
               </Link>
-              <Link 
-                to="/collections" 
+              <Link
+                to="/collections"
                 className="hover:text-primary transition-colors font-medium"
               >
                 Collections
@@ -82,18 +92,20 @@ export function Navigation() {
                 onClick={() => setShowCurrency(!showCurrency)}
               >
                 <Globe className="h-4 w-4 mr-1" />
-                <span className="text-sm">{selectedCurrency.flag} {selectedCurrency.symbol}</span>
+                <span className="text-sm">
+                  {selectedCurrency.flag} {selectedCurrency.symbol}
+                </span>
                 <ChevronDown className="h-3 w-3 ml-1" />
               </Button>
-              
+
               {showCurrency && (
                 <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg border z-50">
                   {currencies.map((currency) => (
                     <button
                       key={currency.code}
                       onClick={() => {
-                        setCurrency(currency.code)
-                        setShowCurrency(false)
+                        setCurrency(currency.code);
+                        setShowCurrency(false);
                       }}
                       className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center space-x-2"
                     >
@@ -106,7 +118,11 @@ export function Navigation() {
               )}
             </div>
 
-            <Button variant="ghost" size="sm" className="hidden sm:flex text-white hover:text-primary">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hidden sm:flex text-white hover:text-primary"
+            >
               <Search className="h-4 w-4" />
             </Button>
             <ThemeToggle />
@@ -149,8 +165,8 @@ export function Navigation() {
                     )}
                     <button
                       onClick={() => {
-                        logout()
-                        setShowUserMenu(false)
+                        logout();
+                        setShowUserMenu(false);
                       }}
                       className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center"
                     >
@@ -171,7 +187,11 @@ export function Navigation() {
                 <span className="hidden sm:inline">Login</span>
               </Button>
             )}
-            <Button variant="ghost" size="sm" className="relative text-white hover:text-primary">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="relative text-white hover:text-primary"
+            >
               <ShoppingCart className="h-4 w-4" />
               <span className="absolute -top-1 -right-1 bg-primary text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                 0
@@ -185,7 +205,11 @@ export function Navigation() {
               className="md:hidden text-white"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {isMenuOpen ? (
+                <X className="h-4 w-4" />
+              ) : (
+                <Menu className="h-4 w-4" />
+              )}
             </Button>
           </div>
         </div>
@@ -229,7 +253,7 @@ export function Navigation() {
               >
                 ✨ Collections
               </Link>
-              
+
               {/* Mobile Currency Selector */}
               <div className="pt-4 pb-3 border-t border-gray-800">
                 <div className="px-3 py-2">
@@ -239,13 +263,13 @@ export function Navigation() {
                       <button
                         key={currency.code}
                         onClick={() => {
-                          setCurrency(currency.code)
-                          setIsMenuOpen(false)
+                          setCurrency(currency.code);
+                          setIsMenuOpen(false);
                         }}
                         className={`px-2 py-1 text-xs rounded ${
                           selectedCurrency.code === currency.code
-                            ? 'bg-primary text-black'
-                            : 'bg-gray-800 text-white hover:bg-gray-700'
+                            ? "bg-primary text-black"
+                            : "bg-gray-800 text-white hover:bg-gray-700"
                         }`}
                       >
                         {currency.flag} {currency.code}
@@ -253,7 +277,10 @@ export function Navigation() {
                     ))}
                   </div>
                 </div>
-                <Button variant="ghost" className="w-full justify-start text-white hover:text-primary">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start text-white hover:text-primary"
+                >
                   <Search className="h-4 w-4 mr-2" />
                   Search Products
                 </Button>
@@ -270,5 +297,5 @@ export function Navigation() {
         defaultMode="login"
       />
     </nav>
-  )
+  );
 }

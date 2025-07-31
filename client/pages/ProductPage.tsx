@@ -1,22 +1,26 @@
-import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
-import { Navigation } from '@/components/Navigation'
-import { Footer } from '@/components/Footer'
-import { PaymentModal } from '@/components/PaymentModal'
-import { useCurrency } from '@/contexts/CurrencyContext'
-import { getProductById, getTrendingProducts } from '@/data/products'
-import { convertPrice, formatPrice } from '@/utils/currency'
-import { getAvailablePaymentMethods, calculateShippingCost, isCODAvailable } from '@/utils/payments'
-import { 
-  Star, 
-  ShoppingCart, 
-  Heart, 
-  Share2, 
-  Truck, 
-  Shield, 
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
+import { PaymentModal } from "@/components/PaymentModal";
+import { useCurrency } from "@/contexts/CurrencyContext";
+import { getProductById, getTrendingProducts } from "@/data/products";
+import { convertPrice, formatPrice } from "@/utils/currency";
+import {
+  getAvailablePaymentMethods,
+  calculateShippingCost,
+  isCODAvailable,
+} from "@/utils/payments";
+import {
+  Star,
+  ShoppingCart,
+  Heart,
+  Share2,
+  Truck,
+  Shield,
   RotateCcw,
   ChevronLeft,
   ChevronRight,
@@ -25,91 +29,117 @@ import {
   MapPin,
   Clock,
   CreditCard,
-  Banknote
-} from 'lucide-react'
+  Banknote,
+} from "lucide-react";
 
 export default function ProductPage() {
-  const { id } = useParams<{ id: string }>()
-  const { selectedCurrency } = useCurrency()
-  const [selectedImage, setSelectedImage] = useState(0)
-  const [selectedVariant, setSelectedVariant] = useState('')
-  const [quantity, setQuantity] = useState(1)
-  const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const { id } = useParams<{ id: string }>();
+  const { selectedCurrency } = useCurrency();
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedVariant, setSelectedVariant] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
-  const product = getProductById(id || '')
-  const relatedProducts = getTrendingProducts(3)
+  const product = getProductById(id || "");
+  const relatedProducts = getTrendingProducts(3);
 
   useEffect(() => {
     if (product && product.variants.length > 0) {
-      setSelectedVariant(product.variants[0].id)
+      setSelectedVariant(product.variants[0].id);
     }
-  }, [product])
+  }, [product]);
 
   if (!product) {
     return (
       <div className="min-h-screen bg-white">
         <Navigation />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Product Not Found</h1>
-          <p className="text-gray-600 mb-8">The product you're looking for doesn't exist.</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            Product Not Found
+          </h1>
+          <p className="text-gray-600 mb-8">
+            The product you're looking for doesn't exist.
+          </p>
           <Link to="/">
             <Button>Back to Home</Button>
           </Link>
         </div>
         <Footer />
       </div>
-    )
+    );
   }
 
-  const currentVariant = product.variants.find(v => v.id === selectedVariant) || product.variants[0]
-  const convertedPrice = convertPrice(currentVariant.price / 84.15, selectedCurrency.code)
-  const convertedOriginalPrice = convertPrice(currentVariant.originalPrice / 84.15, selectedCurrency.code)
-  
-  const paymentMethods = getAvailablePaymentMethods(selectedCurrency.code === 'INR' ? 'IN' : 'US')
-  const codAvailable = isCODAvailable(selectedCurrency.code === 'INR' ? 'IN' : 'US')
+  const currentVariant =
+    product.variants.find((v) => v.id === selectedVariant) ||
+    product.variants[0];
+  const convertedPrice = convertPrice(
+    currentVariant.price / 84.15,
+    selectedCurrency.code,
+  );
+  const convertedOriginalPrice = convertPrice(
+    currentVariant.originalPrice / 84.15,
+    selectedCurrency.code,
+  );
+
+  const paymentMethods = getAvailablePaymentMethods(
+    selectedCurrency.code === "INR" ? "IN" : "US",
+  );
+  const codAvailable = isCODAvailable(
+    selectedCurrency.code === "INR" ? "IN" : "US",
+  );
   const shippingInfo = calculateShippingCost(
-    selectedCurrency.code === 'INR' ? 'IN' : 'US', 
-    convertedPrice * quantity, 
-    product.shippingDays
-  )
+    selectedCurrency.code === "INR" ? "IN" : "US",
+    convertedPrice * quantity,
+    product.shippingDays,
+  );
 
   const reviews = [
     {
       id: 1,
-      name: 'Arjun K.',
+      name: "Arjun K.",
       rating: 5,
-      date: '2 days ago',
-      comment: 'Amazing quality! The product fits perfectly and the material is top-notch. Delivery was super fast.',
-      verified: true
+      date: "2 days ago",
+      comment:
+        "Amazing quality! The product fits perfectly and the material is top-notch. Delivery was super fast.",
+      verified: true,
     },
     {
       id: 2,
-      name: 'Priya S.',
+      name: "Priya S.",
       rating: 5,
-      date: '1 week ago',
-      comment: 'Got this as a gift and they absolutely loved it. Great quality and authentic feel.',
-      verified: true
+      date: "1 week ago",
+      comment:
+        "Got this as a gift and they absolutely loved it. Great quality and authentic feel.",
+      verified: true,
     },
     {
       id: 3,
-      name: 'Rohit M.',
+      name: "Rohit M.",
       rating: 4,
-      date: '2 weeks ago',
-      comment: 'Good product but sizing runs a bit large. Quality is excellent though.',
-      verified: true
-    }
-  ]
+      date: "2 weeks ago",
+      comment:
+        "Good product but sizing runs a bit large. Quality is excellent though.",
+      verified: true,
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
-          <Link to="/" className="hover:text-primary">Home</Link>
+          <Link to="/" className="hover:text-primary">
+            Home
+          </Link>
           <span>/</span>
-          <Link to={`/${product.category}`} className="hover:text-primary capitalize">{product.category}</Link>
+          <Link
+            to={`/${product.category}`}
+            className="hover:text-primary capitalize"
+          >
+            {product.category}
+          </Link>
           <span>/</span>
           <span className="text-gray-900">{product.name}</span>
         </nav>
@@ -118,12 +148,12 @@ export default function ProductPage() {
           {/* Product Images */}
           <div className="space-y-4">
             <div className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden">
-              <img 
-                src={product.images[selectedImage]} 
+              <img
+                src={product.images[selectedImage]}
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
-              
+
               {/* Badges */}
               <div className="absolute top-4 left-4 space-y-2">
                 {product.badges.map((badge, index) => (
@@ -132,10 +162,15 @@ export default function ProductPage() {
                   </Badge>
                 ))}
                 <Badge className="bg-green-600 text-white">
-                  {Math.round(((convertedOriginalPrice - convertedPrice) / convertedOriginalPrice) * 100)}% OFF
+                  {Math.round(
+                    ((convertedOriginalPrice - convertedPrice) /
+                      convertedOriginalPrice) *
+                      100,
+                  )}
+                  % OFF
                 </Badge>
               </div>
-              
+
               <div className="absolute top-4 right-4 space-y-2">
                 <Button size="sm" variant="outline" className="bg-white">
                   <Heart className="w-4 h-4" />
@@ -145,7 +180,7 @@ export default function ProductPage() {
                 </Button>
               </div>
             </div>
-            
+
             {/* Thumbnail Images */}
             <div className="flex space-x-2">
               {product.images.map((image, index) => (
@@ -153,10 +188,16 @@ export default function ProductPage() {
                   key={index}
                   onClick={() => setSelectedImage(index)}
                   className={`w-20 h-20 rounded-lg overflow-hidden border-2 ${
-                    selectedImage === index ? 'border-primary' : 'border-gray-200'
+                    selectedImage === index
+                      ? "border-primary"
+                      : "border-gray-200"
                   }`}
                 >
-                  <img src={image} alt={`View ${index + 1}`} className="w-full h-full object-cover" />
+                  <img
+                    src={image}
+                    alt={`View ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
                 </button>
               ))}
             </div>
@@ -168,16 +209,16 @@ export default function ProductPage() {
               <h1 className="text-3xl font-sport font-bold text-black mb-2">
                 {product.name}
               </h1>
-              
+
               <div className="flex items-center space-x-4 mb-4">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
                       className={`w-4 h-4 ${
-                        i < Math.floor(product.rating) 
-                          ? 'text-yellow-400 fill-current' 
-                          : 'text-gray-300'
+                        i < Math.floor(product.rating)
+                          ? "text-yellow-400 fill-current"
+                          : "text-gray-300"
                       }`}
                     />
                   ))}
@@ -185,7 +226,10 @@ export default function ProductPage() {
                     {product.rating} ({product.reviews} reviews)
                   </span>
                 </div>
-                <Badge variant="outline" className="text-primary border-primary">
+                <Badge
+                  variant="outline"
+                  className="text-primary border-primary"
+                >
                   In Stock ({currentVariant.stock} left)
                 </Badge>
               </div>
@@ -198,50 +242,58 @@ export default function ProductPage() {
                   {formatPrice(convertedOriginalPrice, selectedCurrency.code)}
                 </span>
                 <Badge className="bg-red-100 text-red-800">
-                  Save {formatPrice(convertedOriginalPrice - convertedPrice, selectedCurrency.code)}
+                  Save{" "}
+                  {formatPrice(
+                    convertedOriginalPrice - convertedPrice,
+                    selectedCurrency.code,
+                  )}
                 </Badge>
               </div>
             </div>
 
             {/* Variant Selection */}
-            {product.variants.some(v => v.size) && (
+            {product.variants.some((v) => v.size) && (
               <div>
                 <h3 className="font-semibold mb-3">Size</h3>
                 <div className="flex flex-wrap gap-2">
-                  {product.variants.filter(v => v.size).map((variant) => (
-                    <button
-                      key={variant.id}
-                      onClick={() => setSelectedVariant(variant.id)}
-                      className={`px-4 py-2 border rounded-lg font-medium ${
-                        selectedVariant === variant.id 
-                          ? 'border-primary bg-primary text-black' 
-                          : 'border-gray-300 hover:border-gray-400'
-                      }`}
-                    >
-                      {variant.size}
-                    </button>
-                  ))}
+                  {product.variants
+                    .filter((v) => v.size)
+                    .map((variant) => (
+                      <button
+                        key={variant.id}
+                        onClick={() => setSelectedVariant(variant.id)}
+                        className={`px-4 py-2 border rounded-lg font-medium ${
+                          selectedVariant === variant.id
+                            ? "border-primary bg-primary text-black"
+                            : "border-gray-300 hover:border-gray-400"
+                        }`}
+                      >
+                        {variant.size}
+                      </button>
+                    ))}
                 </div>
               </div>
             )}
 
-            {product.variants.some(v => v.color) && (
+            {product.variants.some((v) => v.color) && (
               <div>
                 <h3 className="font-semibold mb-3">Color</h3>
                 <div className="flex flex-wrap gap-2">
-                  {product.variants.filter(v => v.color).map((variant) => (
-                    <button
-                      key={variant.id}
-                      onClick={() => setSelectedVariant(variant.id)}
-                      className={`px-4 py-2 border rounded-lg font-medium ${
-                        selectedVariant === variant.id 
-                          ? 'border-primary bg-primary text-black' 
-                          : 'border-gray-300 hover:border-gray-400'
-                      }`}
-                    >
-                      {variant.color}
-                    </button>
-                  ))}
+                  {product.variants
+                    .filter((v) => v.color)
+                    .map((variant) => (
+                      <button
+                        key={variant.id}
+                        onClick={() => setSelectedVariant(variant.id)}
+                        className={`px-4 py-2 border rounded-lg font-medium ${
+                          selectedVariant === variant.id
+                            ? "border-primary bg-primary text-black"
+                            : "border-gray-300 hover:border-gray-400"
+                        }`}
+                      >
+                        {variant.color}
+                      </button>
+                    ))}
                 </div>
               </div>
             )}
@@ -261,7 +313,9 @@ export default function ProductPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setQuantity(Math.min(currentVariant.stock, quantity + 1))}
+                  onClick={() =>
+                    setQuantity(Math.min(currentVariant.stock, quantity + 1))
+                  }
                 >
                   <Plus className="w-4 h-4" />
                 </Button>
@@ -270,24 +324,25 @@ export default function ProductPage() {
 
             {/* Add to Cart */}
             <div className="space-y-3">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="w-full bg-primary text-black hover:bg-primary/90 font-semibold py-4"
                 disabled={currentVariant.stock === 0}
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
-                Add to Cart - {formatPrice(convertedPrice * quantity, selectedCurrency.code)}
+                Add to Cart -{" "}
+                {formatPrice(convertedPrice * quantity, selectedCurrency.code)}
               </Button>
-              
+
               {codAvailable && (
                 <Button size="lg" variant="outline" className="w-full py-4">
                   <Banknote className="w-5 h-5 mr-2" />
                   Buy Now with COD
                 </Button>
               )}
-              
-              <Button 
-                size="lg" 
+
+              <Button
+                size="lg"
                 className="w-full bg-black text-white hover:bg-gray-800 py-4"
                 onClick={() => setShowPaymentModal(true)}
               >
@@ -302,28 +357,38 @@ export default function ProductPage() {
                 <Truck className="w-5 h-5 text-primary" />
                 <div>
                   <p className="font-medium">
-                    {shippingInfo.isFree ? 'FREE' : formatPrice(shippingInfo.cost, selectedCurrency.code)} Shipping
+                    {shippingInfo.isFree
+                      ? "FREE"
+                      : formatPrice(
+                          shippingInfo.cost,
+                          selectedCurrency.code,
+                        )}{" "}
+                    Shipping
                   </p>
                   <p className="text-sm text-gray-600">
                     Estimated delivery in {shippingInfo.estimatedDays} days
                   </p>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-primary" />
                 <div>
                   <p className="font-medium">Global Shipping Available</p>
-                  <p className="text-sm text-gray-600">Ships to 150+ countries</p>
+                  <p className="text-sm text-gray-600">
+                    Ships to 150+ countries
+                  </p>
                 </div>
               </div>
-              
+
               {codAvailable && (
                 <div className="flex items-center space-x-3">
                   <Banknote className="w-5 h-5 text-primary" />
                   <div>
                     <p className="font-medium">Cash on Delivery Available</p>
-                    <p className="text-sm text-gray-600">Pay when you receive</p>
+                    <p className="text-sm text-gray-600">
+                      Pay when you receive
+                    </p>
                   </div>
                 </div>
               )}
@@ -344,7 +409,9 @@ export default function ProductPage() {
               <div className="text-center">
                 <Clock className="w-6 h-6 mx-auto mb-2 text-primary" />
                 <p className="text-sm font-medium">Fast Shipping</p>
-                <p className="text-xs text-gray-500">{product.shippingDays} days</p>
+                <p className="text-xs text-gray-500">
+                  {product.shippingDays} days
+                </p>
               </div>
             </div>
 
@@ -352,7 +419,7 @@ export default function ProductPage() {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Product Details</h3>
               <p className="text-gray-600">{product.description}</p>
-              
+
               {product.features && (
                 <div>
                   <h4 className="font-medium mb-2">Features:</h4>
@@ -366,11 +433,13 @@ export default function ProductPage() {
                   </ul>
                 </div>
               )}
-              
+
               {product.materials && (
                 <div>
                   <h4 className="font-medium mb-2">Materials:</h4>
-                  <p className="text-sm text-gray-600">{product.materials.join(', ')}</p>
+                  <p className="text-sm text-gray-600">
+                    {product.materials.join(", ")}
+                  </p>
                 </div>
               )}
             </div>
@@ -383,29 +452,33 @@ export default function ProductPage() {
             <h2 className="text-2xl font-sport font-bold">Customer Reviews</h2>
             <Button variant="outline">Write a Review</Button>
           </div>
-          
+
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-1">
               <Card>
                 <CardContent className="p-6 text-center">
-                  <div className="text-4xl font-bold text-primary mb-2">{product.rating}</div>
+                  <div className="text-4xl font-bold text-primary mb-2">
+                    {product.rating}
+                  </div>
                   <div className="flex justify-center mb-2">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
                         className={`w-4 h-4 ${
-                          i < Math.floor(product.rating) 
-                            ? 'text-yellow-400 fill-current' 
-                            : 'text-gray-300'
+                          i < Math.floor(product.rating)
+                            ? "text-yellow-400 fill-current"
+                            : "text-gray-300"
                         }`}
                       />
                     ))}
                   </div>
-                  <p className="text-sm text-gray-600">{product.reviews} total reviews</p>
+                  <p className="text-sm text-gray-600">
+                    {product.reviews} total reviews
+                  </p>
                 </CardContent>
               </Card>
             </div>
-            
+
             <div className="lg:col-span-2 space-y-6">
               {reviews.map((review) => (
                 <Card key={review.id}>
@@ -415,7 +488,9 @@ export default function ProductPage() {
                         <div className="flex items-center space-x-2 mb-1">
                           <span className="font-medium">{review.name}</span>
                           {review.verified && (
-                            <Badge variant="outline" className="text-xs">Verified Purchase</Badge>
+                            <Badge variant="outline" className="text-xs">
+                              Verified Purchase
+                            </Badge>
                           )}
                         </div>
                         <div className="flex items-center space-x-2">
@@ -424,14 +499,16 @@ export default function ProductPage() {
                               <Star
                                 key={i}
                                 className={`w-3 h-3 ${
-                                  i < review.rating 
-                                    ? 'text-yellow-400 fill-current' 
-                                    : 'text-gray-300'
+                                  i < review.rating
+                                    ? "text-yellow-400 fill-current"
+                                    : "text-gray-300"
                                 }`}
                               />
                             ))}
                           </div>
-                          <span className="text-sm text-gray-500">{review.date}</span>
+                          <span className="text-sm text-gray-500">
+                            {review.date}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -445,37 +522,57 @@ export default function ProductPage() {
 
         {/* Related Products */}
         <div className="mt-16">
-          <h2 className="text-2xl font-sport font-bold mb-8">You might also like</h2>
+          <h2 className="text-2xl font-sport font-bold mb-8">
+            You might also like
+          </h2>
           <div className="grid sm:grid-cols-3 gap-6">
             {relatedProducts.map((relatedProduct, index) => {
-              const relatedConvertedPrice = convertPrice(relatedProduct.basePrice / 84.15, selectedCurrency.code)
-              const relatedConvertedOriginalPrice = convertPrice(relatedProduct.originalPrice / 84.15, selectedCurrency.code)
-              
+              const relatedConvertedPrice = convertPrice(
+                relatedProduct.basePrice / 84.15,
+                selectedCurrency.code,
+              );
+              const relatedConvertedOriginalPrice = convertPrice(
+                relatedProduct.originalPrice / 84.15,
+                selectedCurrency.code,
+              );
+
               return (
                 <Link key={index} to={`/product/${relatedProduct.id}`}>
                   <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300">
                     <CardContent className="p-0">
                       <div className="relative">
-                        <img 
-                          src={relatedProduct.images[0]} 
+                        <img
+                          src={relatedProduct.images[0]}
                           alt={relatedProduct.name}
                           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                         />
-                        <Badge className="absolute top-2 right-2 bg-red-500 text-white">Sale</Badge>
+                        <Badge className="absolute top-2 right-2 bg-red-500 text-white">
+                          Sale
+                        </Badge>
                       </div>
                       <div className="p-4">
-                        <h3 className="font-semibold mb-2 text-sm line-clamp-2">{relatedProduct.name}</h3>
+                        <h3 className="font-semibold mb-2 text-sm line-clamp-2">
+                          {relatedProduct.name}
+                        </h3>
                         <div className="flex items-center mb-2">
                           <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="text-sm text-gray-600 ml-1">{relatedProduct.rating}</span>
+                          <span className="text-sm text-gray-600 ml-1">
+                            {relatedProduct.rating}
+                          </span>
                         </div>
                         <div className="flex items-center justify-between">
                           <div>
                             <span className="font-bold text-primary">
-                              {formatPrice(relatedConvertedPrice, selectedCurrency.code)}
+                              {formatPrice(
+                                relatedConvertedPrice,
+                                selectedCurrency.code,
+                              )}
                             </span>
                             <span className="text-gray-400 line-through text-sm ml-2">
-                              {formatPrice(relatedConvertedOriginalPrice, selectedCurrency.code)}
+                              {formatPrice(
+                                relatedConvertedOriginalPrice,
+                                selectedCurrency.code,
+                              )}
                             </span>
                           </div>
                           <Button size="sm">Add to Cart</Button>
@@ -484,7 +581,7 @@ export default function ProductPage() {
                     </CardContent>
                   </Card>
                 </Link>
-              )
+              );
             })}
           </div>
         </div>
@@ -498,7 +595,7 @@ export default function ProductPage() {
           name: product.name,
           image: product.images[0],
           price: convertedPrice,
-          quantity: quantity
+          quantity: quantity,
         }}
         shippingCost={shippingInfo.cost}
         codAvailable={codAvailable}
@@ -506,5 +603,5 @@ export default function ProductPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

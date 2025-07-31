@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
-import { Footer } from '@/components/Footer'
-import { useCurrency } from '@/contexts/CurrencyContext'
-import { getTrendingProducts } from '@/data/products'
-import { convertPrice, formatPrice } from '@/utils/currency'
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Footer } from "@/components/Footer";
+import { useCurrency } from "@/contexts/CurrencyContext";
+import { getTrendingProducts } from "@/data/products";
+import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   Star,
   TrendingUp,
@@ -17,84 +17,84 @@ import {
   Globe,
   Heart,
   Eye,
-  Timer
-} from 'lucide-react'
+  Timer,
+} from "lucide-react";
 
 export default function Index() {
-  const { selectedCurrency } = useCurrency()
-  const trendingProducts = getTrendingProducts(4)
+  const { selectedCurrency } = useCurrency();
+  const trendingProducts = getTrendingProducts(4);
 
   const heroCategories = [
     {
-      title: 'Football Legends',
-      subtitle: 'Messi • Ronaldo • Mbappé',
-      image: '/placeholder.svg',
-      cta: 'Shop Jerseys',
-      link: '/football',
-      color: 'from-green-600 to-blue-600'
+      title: "Football Legends",
+      subtitle: "Messi • Ronaldo • Mbappé",
+      image: "/placeholder.svg",
+      cta: "Shop Jerseys",
+      link: "/football",
+      color: "from-green-600 to-blue-600",
     },
     {
-      title: 'Anime Universe',
-      subtitle: 'Naruto • Chainsaw Man • Demon Slayer',
-      image: '/placeholder.svg',
-      cta: 'Explore Anime',
-      link: '/anime',
-      color: 'from-purple-600 to-pink-600'
+      title: "Anime Universe",
+      subtitle: "Naruto • Chainsaw Man • Demon Slayer",
+      image: "/placeholder.svg",
+      cta: "Explore Anime",
+      link: "/anime",
+      color: "from-purple-600 to-pink-600",
     },
     {
-      title: 'Pop Culture',
-      subtitle: 'Taylor Swift • K-pop • Marvel',
-      image: '/placeholder.svg',
-      cta: 'Discover More',
-      link: '/pop-culture',
-      color: 'from-red-600 to-orange-600'
-    }
-  ]
+      title: "Pop Culture",
+      subtitle: "Taylor Swift • K-pop • Marvel",
+      image: "/placeholder.svg",
+      cta: "Discover More",
+      link: "/pop-culture",
+      color: "from-red-600 to-orange-600",
+    },
+  ];
 
   const categories = [
     {
-      name: 'Football Jerseys',
+      name: "Football Jerseys",
       items: 350,
-      image: '/placeholder.svg',
-      description: 'Official jerseys from Messi, Ronaldo & more',
-      link: '/football/jerseys'
+      image: "/placeholder.svg",
+      description: "Official jerseys from Messi, Ronaldo & more",
+      link: "/football/jerseys",
     },
     {
-      name: 'Anime Rings',
+      name: "Anime Rings",
       items: 180,
-      image: '/placeholder.svg',
-      description: 'Exclusive rings from Naruto, One Piece & more',
-      link: '/anime/rings'
+      image: "/placeholder.svg",
+      description: "Exclusive rings from Naruto, One Piece & more",
+      link: "/anime/rings",
     },
     {
-      name: 'K-pop Merch',
+      name: "K-pop Merch",
       items: 240,
-      image: '/placeholder.svg',
-      description: 'BTS, Blackpink, Stray Kids official items',
-      link: '/pop-culture/kpop'
+      image: "/placeholder.svg",
+      description: "BTS, Blackpink, Stray Kids official items",
+      link: "/pop-culture/kpop",
     },
     {
-      name: 'Marvel Collection',
+      name: "Marvel Collection",
       items: 420,
-      image: '/placeholder.svg',
-      description: 'Superhero gear for true Marvel fans',
-      link: '/pop-culture/marvel'
-    }
-  ]
+      image: "/placeholder.svg",
+      description: "Superhero gear for true Marvel fans",
+      link: "/pop-culture/marvel",
+    },
+  ];
 
   const socialProof = [
-    { metric: '500K+', label: 'Happy Customers' },
-    { metric: '150+', label: 'Countries Shipped' },
-    { metric: '4.8★', label: 'Average Rating' },
-    { metric: '24/7', label: 'Customer Support' }
-  ]
+    { metric: "500K+", label: "Happy Customers" },
+    { metric: "150+", label: "Countries Shipped" },
+    { metric: "4.8★", label: "Average Rating" },
+    { metric: "24/7", label: "Customer Support" },
+  ];
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-black via-gray-900 to-black py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-5"></div>
-        
+
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
@@ -107,35 +107,45 @@ export default function Index() {
               <Globe className="w-5 h-5 mr-2" />
               Global Dropshipping • Free Worldwide Shipping
             </Badge>
-            
+
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-white mb-6 leading-tight">
               UNLEASH YOUR
               <span className="block bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
                 FANDOM
               </span>
             </h1>
-            
+
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-              From Messi's magic to Naruto's jutsu, Taylor's melodies to Marvel's heroes - 
-              get authentic merchandise that defines your passion. Trusted by 500K+ fans worldwide.
+              From Messi's magic to Naruto's jutsu, Taylor's melodies to
+              Marvel's heroes - get authentic merchandise that defines your
+              passion. Trusted by 500K+ fans worldwide.
             </p>
 
             {/* Social Proof */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-2xl mx-auto">
               {socialProof.map((item, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl font-bold text-primary">{item.metric}</div>
+                  <div className="text-2xl font-bold text-primary">
+                    {item.metric}
+                  </div>
                   <div className="text-sm text-gray-400">{item.label}</div>
                 </div>
               ))}
             </div>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-primary to-purple-500 text-black hover:opacity-90 font-bold px-8 py-4 text-lg">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-primary to-purple-500 text-black hover:opacity-90 font-bold px-8 py-4 text-lg"
+              >
                 <ShoppingBag className="w-5 h-5 mr-2" />
                 Shop Now
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg"
+              >
                 <TrendingUp className="w-5 h-5 mr-2" />
                 Trending Products
               </Button>
@@ -148,11 +158,17 @@ export default function Index() {
               <Link key={index} to={category.link}>
                 <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-gray-900 to-black border-gray-700">
                   <CardContent className="p-0">
-                    <div className={`h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}>
+                    <div
+                      className={`h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
+                    >
                       <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300"></div>
                       <div className="absolute bottom-6 left-6 text-white">
-                        <h3 className="font-sport font-bold text-2xl mb-1">{category.title}</h3>
-                        <p className="text-white/80 text-sm mb-3">{category.subtitle}</p>
+                        <h3 className="font-sport font-bold text-2xl mb-1">
+                          {category.title}
+                        </h3>
+                        <p className="text-white/80 text-sm mb-3">
+                          {category.subtitle}
+                        </p>
                         <Button className="bg-white text-black hover:bg-gray-100 font-semibold">
                           {category.cta}
                         </Button>
@@ -178,14 +194,21 @@ export default function Index() {
               WHAT'S HOT RIGHT NOW
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Join millions of fans worldwide who are rocking these trending items
+              Join millions of fans worldwide who are rocking these trending
+              items
             </p>
           </div>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {trendingProducts.map((product, index) => {
-              const convertedPrice = convertPrice(product.basePrice / 84.15, selectedCurrency.code) // Convert from INR base
-              const convertedOriginalPrice = convertPrice(product.originalPrice / 84.15, selectedCurrency.code)
+              const convertedPrice = convertPrice(
+                product.basePrice / 84.15,
+                selectedCurrency.code,
+              ); // Convert from INR base
+              const convertedOriginalPrice = convertPrice(
+                product.originalPrice / 84.15,
+                selectedCurrency.code,
+              );
 
               return (
                 <Link key={index} to={`/product/${product.id}`}>
@@ -207,14 +230,21 @@ export default function Index() {
                             </Badge>
                           )}
                           {product.badges.map((badge, badgeIndex) => (
-                            <Badge key={badgeIndex} className="bg-black/80 text-white text-xs">
+                            <Badge
+                              key={badgeIndex}
+                              className="bg-black/80 text-white text-xs"
+                            >
                               {badge}
                             </Badge>
                           ))}
                         </div>
 
                         <div className="absolute top-2 right-2">
-                          <Button variant="ghost" size="sm" className="bg-white/90 hover:bg-white">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="bg-white/90 hover:bg-white"
+                          >
                             <Heart className="w-4 h-4" />
                           </Button>
                         </div>
@@ -229,12 +259,16 @@ export default function Index() {
 
                         <div className="absolute bottom-2 right-2 flex items-center space-x-1 bg-black/70 text-white px-2 py-1 rounded text-xs">
                           <Eye className="w-3 h-3" />
-                          <span>{(product.reviews / 100).toFixed(1)}K views</span>
+                          <span>
+                            {(product.reviews / 100).toFixed(1)}K views
+                          </span>
                         </div>
                       </div>
 
                       <div className="p-4">
-                        <h3 className="font-semibold mb-2 text-sm line-clamp-2">{product.name}</h3>
+                        <h3 className="font-semibold mb-2 text-sm line-clamp-2">
+                          {product.name}
+                        </h3>
 
                         <div className="flex items-center mb-3">
                           <div className="flex items-center">
@@ -243,28 +277,40 @@ export default function Index() {
                                 key={i}
                                 className={`w-3 h-3 ${
                                   i < Math.floor(product.rating)
-                                    ? 'text-yellow-400 fill-current'
-                                    : 'text-gray-300'
+                                    ? "text-yellow-400 fill-current"
+                                    : "text-gray-300"
                                 }`}
                               />
                             ))}
                           </div>
                           <span className="text-xs text-gray-600 ml-2">
-                            {product.rating} ({product.reviews.toLocaleString()})
+                            {product.rating} ({product.reviews.toLocaleString()}
+                            )
                           </span>
                         </div>
 
                         <div className="flex items-center justify-between mb-3">
                           <div>
                             <span className="font-bold text-primary text-lg">
-                              {formatPrice(convertedPrice, selectedCurrency.code)}
+                              {formatPrice(
+                                convertedPrice,
+                                selectedCurrency.code,
+                              )}
                             </span>
                             <span className="text-gray-400 line-through text-sm ml-2">
-                              {formatPrice(convertedOriginalPrice, selectedCurrency.code)}
+                              {formatPrice(
+                                convertedOriginalPrice,
+                                selectedCurrency.code,
+                              )}
                             </span>
                           </div>
                           <Badge className="bg-green-100 text-green-800 text-xs">
-                            {Math.round(((convertedOriginalPrice - convertedPrice) / convertedOriginalPrice) * 100)}% OFF
+                            {Math.round(
+                              ((convertedOriginalPrice - convertedPrice) /
+                                convertedOriginalPrice) *
+                                100,
+                            )}
+                            % OFF
                           </Badge>
                         </div>
 
@@ -275,13 +321,16 @@ export default function Index() {
                     </CardContent>
                   </Card>
                 </Link>
-              )
+              );
             })}
           </div>
-          
+
           <div className="text-center mt-12">
             <Link to="/trending">
-              <Button size="lg" className="bg-gradient-to-r from-primary to-purple-500 text-black hover:opacity-90 font-bold px-8">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-primary to-purple-500 text-black hover:opacity-90 font-bold px-8"
+              >
                 View All Trending Products
               </Button>
             </Link>
@@ -300,27 +349,36 @@ export default function Index() {
               Discover curated collections that speak to your soul
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category, index) => (
               <Link key={index} to={category.link}>
                 <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 h-full">
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden">
-                      <img 
-                        src={category.image} 
+                      <img
+                        src={category.image}
                         alt={category.name}
                         className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                       <div className="absolute bottom-4 left-4 text-white">
-                        <h3 className="font-bold text-lg mb-1">{category.name}</h3>
-                        <p className="text-sm text-white/80">{category.items} products</p>
+                        <h3 className="font-bold text-lg mb-1">
+                          {category.name}
+                        </h3>
+                        <p className="text-sm text-white/80">
+                          {category.items} products
+                        </p>
                       </div>
                     </div>
                     <div className="p-4">
-                      <p className="text-gray-600 text-sm mb-4">{category.description}</p>
-                      <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all">
+                      <p className="text-gray-600 text-sm mb-4">
+                        {category.description}
+                      </p>
+                      <Button
+                        variant="outline"
+                        className="w-full group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all"
+                      >
                         Explore Collection
                       </Button>
                     </div>
@@ -338,18 +396,33 @@ export default function Index() {
           <div className="text-center text-black">
             <div className="flex items-center justify-center mb-4">
               <Globe className="w-8 h-8 mr-3" />
-              <h2 className="text-2xl font-sport font-bold">WORLDWIDE SHIPPING</h2>
+              <h2 className="text-2xl font-sport font-bold">
+                WORLDWIDE SHIPPING
+              </h2>
             </div>
             <p className="text-lg mb-6">
-              Free shipping to 150+ countries • Express delivery • Track your order in real-time
+              Free shipping to 150+ countries • Express delivery • Track your
+              order in real-time
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm font-medium">
-              <span className="bg-black/10 px-4 py-2 rounded-full">🇺🇸 USA: 5-7 days</span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">🇬🇧 UK: 7-10 days</span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">🇩🇪 Germany: 6-9 days</span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">🇨🇦 Canada: 8-12 days</span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">🇸🇦 Saudi: 5-8 days</span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">🇮🇳 India: 3-5 days</span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">
+                🇺🇸 USA: 5-7 days
+              </span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">
+                🇬🇧 UK: 7-10 days
+              </span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">
+                🇩🇪 Germany: 6-9 days
+              </span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">
+                🇨🇦 Canada: 8-12 days
+              </span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">
+                🇸🇦 Saudi: 5-8 days
+              </span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">
+                🇮🇳 India: 3-5 days
+              </span>
             </div>
           </div>
         </div>
@@ -362,18 +435,23 @@ export default function Index() {
             <h2 className="text-3xl lg:text-4xl font-sport font-bold text-black mb-4">
               FANKICK COMMUNITY
             </h2>
-            <p className="text-gray-600 text-lg mb-6">See how fans worldwide rock their FanKick gear</p>
+            <p className="text-gray-600 text-lg mb-6">
+              See how fans worldwide rock their FanKick gear
+            </p>
             <Button className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:opacity-90 font-semibold">
               <Instagram className="w-4 h-4 mr-2" />
               Follow @fankick_global
             </Button>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {Array.from({ length: 12 }, (_, i) => (
-              <div key={i} className="aspect-square bg-gray-200 rounded-xl overflow-hidden group cursor-pointer relative">
-                <img 
-                  src="/placeholder.svg" 
+              <div
+                key={i}
+                className="aspect-square bg-gray-200 rounded-xl overflow-hidden group cursor-pointer relative"
+              >
+                <img
+                  src="/placeholder.svg"
                   alt={`Community post ${i + 1}`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
@@ -388,5 +466,5 @@ export default function Index() {
 
       <Footer />
     </div>
-  )
+  );
 }

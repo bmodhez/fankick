@@ -1,9 +1,9 @@
-import { useState, ReactNode } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { useAuth } from '@/contexts/AuthContext'
-import { 
+import { useState, ReactNode } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/contexts/AuthContext";
+import {
   BarChart3,
   Package,
   ShoppingCart,
@@ -27,104 +27,136 @@ import {
   Megaphone,
   Bot,
   Shield,
-  Calendar
-} from 'lucide-react'
+  Calendar,
+} from "lucide-react";
 
 interface AdminLayoutProps {
-  children: ReactNode
-  title: string
+  children: ReactNode;
+  title: string;
 }
 
 const navigation = [
   {
-    name: 'Dashboard',
-    href: '/admin',
+    name: "Dashboard",
+    href: "/admin",
     icon: BarChart3,
-    emoji: '📊',
-    current: true
+    emoji: "📊",
+    current: true,
   },
   {
-    name: 'Products',
-    href: '/admin/products',
+    name: "Products",
+    href: "/admin/products",
     icon: Package,
-    emoji: '📦',
-    badge: '1.2K'
+    emoji: "📦",
+    badge: "1.2K",
   },
   {
-    name: 'Orders',
-    href: '/admin/orders',
+    name: "Orders",
+    href: "/admin/orders",
     icon: ShoppingCart,
-    emoji: '🛒',
-    badge: '45'
+    emoji: "🛒",
+    badge: "45",
   },
   {
-    name: 'Customers',
-    href: '/admin/customers',
+    name: "Customers",
+    href: "/admin/customers",
     icon: Users,
-    emoji: '👥',
-    badge: '2.8K'
+    emoji: "👥",
+    badge: "2.8K",
   },
   {
-    name: 'Categories',
-    href: '/admin/categories',
+    name: "Categories",
+    href: "/admin/categories",
     icon: Tag,
-    emoji: '🏷️'
+    emoji: "🏷️",
   },
   {
-    name: 'Analytics',
-    href: '/admin/analytics',
+    name: "Analytics",
+    href: "/admin/analytics",
     icon: TrendingUp,
-    emoji: '📈'
+    emoji: "📈",
   },
   {
-    name: 'Content',
-    href: '/admin/content',
+    name: "Content",
+    href: "/admin/content",
     icon: FileText,
-    emoji: '📝'
+    emoji: "📝",
   },
   {
-    name: 'Marketing',
-    href: '/admin/marketing',
+    name: "Marketing",
+    href: "/admin/marketing",
     icon: Megaphone,
-    emoji: '📢'
+    emoji: "📢",
   },
   {
-    name: 'Chatbot',
-    href: '/admin/chatbot',
+    name: "Chatbot",
+    href: "/admin/chatbot",
     icon: Bot,
-    emoji: '🤖'
+    emoji: "🤖",
   },
   {
-    name: 'Settings',
-    href: '/admin/settings',
+    name: "Settings",
+    href: "/admin/settings",
     icon: Settings,
-    emoji: '⚙️'
-  }
-]
+    emoji: "⚙️",
+  },
+];
 
 const quickStats = [
-  { name: 'Live Visitors', value: '234', change: '+12%', icon: Globe, color: 'text-green-400' },
-  { name: 'Today Sales', value: '₹45.2K', change: '+8%', icon: DollarSign, color: 'text-green-400' },
-  { name: 'Pending Orders', value: '23', change: '-5%', icon: ShoppingCart, color: 'text-red-400' },
-  { name: 'Stock Alerts', value: '8', change: '0%', icon: Bell, color: 'text-yellow-400' }
-]
+  {
+    name: "Live Visitors",
+    value: "234",
+    change: "+12%",
+    icon: Globe,
+    color: "text-green-400",
+  },
+  {
+    name: "Today Sales",
+    value: "₹45.2K",
+    change: "+8%",
+    icon: DollarSign,
+    color: "text-green-400",
+  },
+  {
+    name: "Pending Orders",
+    value: "23",
+    change: "-5%",
+    icon: ShoppingCart,
+    color: "text-red-400",
+  },
+  {
+    name: "Stock Alerts",
+    value: "8",
+    change: "0%",
+    icon: Bell,
+    color: "text-yellow-400",
+  },
+];
 
 export function AdminLayout({ children, title }: AdminLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
-  const location = useLocation()
-  const navigate = useNavigate()
-  const { user, logout } = useAuth()
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
-  const currentPath = location.pathname
+  const currentPath = location.pathname;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Mobile sidebar */}
-      <div className={`fixed inset-0 z-50 lg:hidden ${sidebarOpen ? 'block' : 'hidden'}`}>
-        <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setSidebarOpen(false)} />
+      <div
+        className={`fixed inset-0 z-50 lg:hidden ${sidebarOpen ? "block" : "hidden"}`}
+      >
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50"
+          onClick={() => setSidebarOpen(false)}
+        />
         <div className="fixed left-0 top-0 bottom-0 w-64 bg-gray-800 border-r border-gray-700">
-          <SidebarContent currentPath={currentPath} onItemClick={() => setSidebarOpen(false)} />
+          <SidebarContent
+            currentPath={currentPath}
+            onItemClick={() => setSidebarOpen(false)}
+          />
         </div>
       </div>
 
@@ -147,7 +179,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
               >
                 <Menu className="h-5 w-5" />
               </Button>
-              
+
               <div>
                 <h1 className="text-xl font-bold text-white">{title}</h1>
                 <p className="text-sm text-gray-400">FanKick Admin Panel</p>
@@ -168,7 +200,11 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
               </div>
 
               {/* Notifications */}
-              <Button variant="ghost" size="sm" className="relative text-gray-400 hover:text-white">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="relative text-gray-400 hover:text-white"
+              >
                 <Bell className="h-5 w-5" />
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                   3
@@ -204,11 +240,15 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs text-gray-400">{stat.name}</p>
-                      <p className="text-lg font-bold text-white">{stat.value}</p>
+                      <p className="text-lg font-bold text-white">
+                        {stat.value}
+                      </p>
                     </div>
                     <div className="flex items-center space-x-2">
                       <stat.icon className={`h-4 w-4 ${stat.color}`} />
-                      <span className={`text-xs ${stat.color}`}>{stat.change}</span>
+                      <span className={`text-xs ${stat.color}`}>
+                        {stat.change}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -218,15 +258,19 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
         </div>
 
         {/* Page content */}
-        <div className="p-4 sm:p-6 lg:p-8">
-          {children}
-        </div>
+        <div className="p-4 sm:p-6 lg:p-8">{children}</div>
       </div>
     </div>
-  )
+  );
 }
 
-function SidebarContent({ currentPath, onItemClick }: { currentPath: string; onItemClick?: () => void }) {
+function SidebarContent({
+  currentPath,
+  onItemClick,
+}: {
+  currentPath: string;
+  onItemClick?: () => void;
+}) {
   return (
     <div className="h-full flex flex-col">
       {/* Logo */}
@@ -244,9 +288,10 @@ function SidebarContent({ currentPath, onItemClick }: { currentPath: string; onI
       {/* Navigation */}
       <div className="flex-1 px-4 py-6 space-y-2">
         {navigation.map((item) => {
-          const isActive = currentPath === item.href || 
-                          (item.href !== '/admin' && currentPath.startsWith(item.href))
-          
+          const isActive =
+            currentPath === item.href ||
+            (item.href !== "/admin" && currentPath.startsWith(item.href));
+
           return (
             <Link
               key={item.name}
@@ -254,8 +299,8 @@ function SidebarContent({ currentPath, onItemClick }: { currentPath: string; onI
               onClick={onItemClick}
               className={`flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
                 isActive
-                  ? 'bg-gradient-to-r from-primary/20 to-purple-500/20 text-primary border border-primary/30'
-                  : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                  ? "bg-gradient-to-r from-primary/20 to-purple-500/20 text-primary border border-primary/30"
+                  : "text-gray-300 hover:text-white hover:bg-gray-700"
               }`}
             >
               <div className="flex items-center space-x-3">
@@ -268,17 +313,20 @@ function SidebarContent({ currentPath, onItemClick }: { currentPath: string; onI
                 </Badge>
               )}
             </Link>
-          )
+          );
         })}
       </div>
 
       {/* Bottom actions */}
       <div className="p-4 border-t border-gray-700">
-        <Link to="/" className="flex items-center space-x-3 px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg">
+        <Link
+          to="/"
+          className="flex items-center space-x-3 px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg"
+        >
           <Home className="h-4 w-4" />
           <span>Back to Store</span>
         </Link>
       </div>
     </div>
-  )
+  );
 }
