@@ -3,12 +3,15 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Footer } from '@/components/Footer'
-import { 
-  Star, 
-  TrendingUp, 
-  Zap, 
-  ShoppingBag, 
-  Instagram, 
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { getTrendingProducts } from '@/data/products'
+import { convertPrice, formatPrice } from '@/utils/currency'
+import {
+  Star,
+  TrendingUp,
+  Zap,
+  ShoppingBag,
+  Instagram,
   Clock,
   Users,
   Globe,
