@@ -262,6 +262,13 @@ export function Navigation() {
           </div>
         )}
       </div>
+
+      {/* Authentication Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        defaultMode="login"
+      />
     </nav>
   )
 }
