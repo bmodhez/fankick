@@ -176,12 +176,12 @@ export function Navigation() {
                       <button
                         key={currency.code}
                         onClick={() => {
-                          setSelectedCurrency(currency)
+                          setCurrency(currency.code)
                           setIsMenuOpen(false)
                         }}
                         className={`px-2 py-1 text-xs rounded ${
-                          selectedCurrency.code === currency.code 
-                            ? 'bg-primary text-black' 
+                          selectedCurrency.code === currency.code
+                            ? 'bg-primary text-black'
                             : 'bg-gray-800 text-white hover:bg-gray-700'
                         }`}
                       >
