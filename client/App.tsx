@@ -151,12 +151,7 @@ const App = () => (
   </QueryClientProvider>
 );
 
-// Prevent double root creation
 const rootElement = document.getElementById("root");
-if (rootElement && !rootElement._reactRoot) {
-  const root = createRoot(rootElement);
-  rootElement._reactRoot = root;
-  root.render(<App />);
-} else if (rootElement?._reactRoot) {
-  rootElement._reactRoot.render(<App />);
+if (rootElement) {
+  createRoot(rootElement).render(<App />);
 }
