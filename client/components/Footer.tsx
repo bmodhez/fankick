@@ -99,7 +99,7 @@ export function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-2 text-sm text-gray-300">
                 <Phone className="w-4 h-4 text-primary" />
-                <span>+91 9876543210</span>
+                <span>+91 9322667822</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-gray-300">
                 <Mail className="w-4 h-4 text-primary" />
@@ -107,7 +107,7 @@ export function Footer() {
               </div>
               <div className="flex items-start space-x-2 text-sm text-gray-300">
                 <MapPin className="w-4 h-4 text-primary mt-0.5" />
-                <span>Mumbai, Maharashtra, India</span>
+                <span>Mumbai, India</span>
               </div>
             </div>
             
