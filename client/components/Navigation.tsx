@@ -1,10 +1,22 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, Search, ShoppingCart, User } from 'lucide-react'
+import { Menu, X, Search, ShoppingCart, User, Globe, ChevronDown } from 'lucide-react'
 import { Button } from './ui/button'
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [showCurrency, setShowCurrency] = useState(false)
+
+  const currencies = [
+    { code: 'USD', symbol: '$', flag: '🇺🇸' },
+    { code: 'EUR', symbol: '€', flag: '🇪🇺' },
+    { code: 'GBP', symbol: '£', flag: '🇬🇧' },
+    { code: 'CAD', symbol: 'C$', flag: '🇨🇦' },
+    { code: 'SAR', symbol: 'ر.س', flag: '🇸🇦' },
+    { code: 'INR', symbol: '₹', flag: '🇮🇳' }
+  ]
+
+  const [selectedCurrency, setSelectedCurrency] = useState(currencies[5]) // Default to INR
 
   return (
     <nav className="bg-black text-white sticky top-0 z-50 border-b border-gray-800">
@@ -12,8 +24,8 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-black font-bold text-lg">⚽</span>
+            <div className="w-8 h-8 bg-gradient-to-r from-primary to-purple-500 rounded-full flex items-center justify-center">
+              <span className="text-black font-bold text-lg">⚡</span>
             </div>
             <span className="font-sport font-bold text-xl tracking-wide">
               FAN<span className="text-primary">KICK</span>
@@ -21,46 +33,88 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             <div className="flex items-center space-x-6">
               <Link 
-                to="/players" 
+                to="/football" 
                 className="hover:text-primary transition-colors font-medium"
               >
-                Players
+                Football
               </Link>
               <Link 
-                to="/clubs" 
+                to="/anime" 
                 className="hover:text-primary transition-colors font-medium"
               >
-                Clubs
+                Anime
               </Link>
               <Link 
-                to="/accessories" 
+                to="/pop-culture" 
                 className="hover:text-primary transition-colors font-medium"
               >
-                Accessories
+                Pop Culture
               </Link>
               <Link 
                 to="/trending" 
-                className="hover:text-primary transition-colors font-medium"
+                className="hover:text-primary transition-colors font-medium relative"
               >
                 Trending
+                <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                  HOT
+                </span>
+              </Link>
+              <Link 
+                to="/collections" 
+                className="hover:text-primary transition-colors font-medium"
+              >
+                Collections
               </Link>
             </div>
           </div>
 
           {/* Right side icons */}
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="hidden sm:flex">
+          <div className="flex items-center space-x-3">
+            {/* Currency Selector */}
+            <div className="relative hidden sm:block">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-white hover:text-primary"
+                onClick={() => setShowCurrency(!showCurrency)}
+              >
+                <Globe className="h-4 w-4 mr-1" />
+                <span className="text-sm">{selectedCurrency.flag} {selectedCurrency.symbol}</span>
+                <ChevronDown className="h-3 w-3 ml-1" />
+              </Button>
+              
+              {showCurrency && (
+                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg border z-50">
+                  {currencies.map((currency) => (
+                    <button
+                      key={currency.code}
+                      onClick={() => {
+                        setSelectedCurrency(currency)
+                        setShowCurrency(false)
+                      }}
+                      className="w-full px-4 py-2 text-left hover:bg-gray-100 flex items-center space-x-2"
+                    >
+                      <span>{currency.flag}</span>
+                      <span className="font-medium">{currency.code}</span>
+                      <span className="text-gray-500">{currency.symbol}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Button variant="ghost" size="sm" className="hidden sm:flex text-white hover:text-primary">
               <Search className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" className="text-white hover:text-primary">
               <User className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="sm" className="relative">
+            <Button variant="ghost" size="sm" className="relative text-white hover:text-primary">
               <ShoppingCart className="h-4 w-4" />
-              <span className="absolute -top-1 -right-1 bg-primary text-black text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 bg-primary text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                 0
               </span>
             </Button>
@@ -69,7 +123,7 @@ export function Navigation() {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden"
+              className="md:hidden text-white"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -82,37 +136,67 @@ export function Navigation() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-800">
               <Link
-                to="/players"
+                to="/football"
                 className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Players
+                ⚽ Football
               </Link>
               <Link
-                to="/clubs"
+                to="/anime"
                 className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Clubs
+                🎌 Anime
               </Link>
               <Link
-                to="/accessories"
+                to="/pop-culture"
                 className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Accessories
+                🎭 Pop Culture
               </Link>
               <Link
                 to="/trending"
                 className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Trending
+                🔥 Trending
               </Link>
+              <Link
+                to="/collections"
+                className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                ✨ Collections
+              </Link>
+              
+              {/* Mobile Currency Selector */}
               <div className="pt-4 pb-3 border-t border-gray-800">
-                <Button variant="ghost" className="w-full justify-start">
+                <div className="px-3 py-2">
+                  <span className="text-sm text-gray-400">Currency</span>
+                  <div className="grid grid-cols-3 gap-2 mt-2">
+                    {currencies.map((currency) => (
+                      <button
+                        key={currency.code}
+                        onClick={() => {
+                          setSelectedCurrency(currency)
+                          setIsMenuOpen(false)
+                        }}
+                        className={`px-2 py-1 text-xs rounded ${
+                          selectedCurrency.code === currency.code 
+                            ? 'bg-primary text-black' 
+                            : 'bg-gray-800 text-white hover:bg-gray-700'
+                        }`}
+                      >
+                        {currency.flag} {currency.code}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <Button variant="ghost" className="w-full justify-start text-white hover:text-primary">
                   <Search className="h-4 w-4 mr-2" />
-                  Search
+                  Search Products
                 </Button>
               </div>
             </div>
