@@ -165,14 +165,18 @@ export function ProductManager() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("name");
-  const [showAddModal, setShowAddModal] = useState(false);
+  const [showProductForm, setShowProductForm] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [formMode, setFormMode] = useState<"create" | "edit">("create");
+  const [selectedProducts, setSelectedProducts] = useState<Set<string>>(new Set());
 
   const categories = ["all", "football", "anime", "pop-culture"];
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch =
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchQuery.toLowerCase());
+      product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesCategory =
       selectedCategory === "all" || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
@@ -191,26 +195,84 @@ export function ProductManager() {
         );
       case "rating":
         return b.rating - a.rating;
+      case "created":
+        return new Date(b.id).getTime() - new Date(a.id).getTime();
       default:
         return a.name.localeCompare(b.name);
     }
   });
 
-  const handleEdit = (product: any) => {
-    console.log("Edit product:", product.id);
+  const handleAddProduct = () => {
+    setEditingProduct(null);
+    setFormMode("create");
+    setShowProductForm(true);
   };
 
-  const handleDelete = (id: string) => {
-    setProducts(products.filter((p) => p.id !== id));
+  const handleEditProduct = (product: Product) => {
+    setEditingProduct(product);
+    setFormMode("edit");
+    setShowProductForm(true);
   };
 
-  const handleDuplicate = (product: any) => {
-    const newProduct = {
+  const handleSaveProduct = (productData: Product) => {
+    if (formMode === "create") {
+      setProducts([...products, productData]);
+    } else {
+      setProducts(products.map(p => p.id === productData.id ? productData : p));
+    }
+    setShowProductForm(false);
+    setEditingProduct(null);
+  };
+
+  const handleDeleteProduct = (id: string) => {
+    if (confirm("Are you sure you want to delete this product? This action cannot be undone.")) {
+      setProducts(products.filter((p) => p.id !== id));
+      setSelectedProducts(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(id);
+        return newSet;
+      });
+    }
+  };
+
+  const handleDuplicateProduct = (product: Product) => {
+    const newProduct: Product = {
       ...product,
       id: `${product.id}-copy-${Date.now()}`,
       name: `${product.name} (Copy)`,
+      variants: product.variants.map(variant => ({
+        ...variant,
+        id: `${variant.id}-copy-${Date.now()}`,
+        sku: `${variant.sku}-COPY`,
+      })),
     };
     setProducts([...products, newProduct]);
+  };
+
+  const handleBulkDelete = () => {
+    if (selectedProducts.size === 0) return;
+    if (confirm(`Are you sure you want to delete ${selectedProducts.size} products? This action cannot be undone.`)) {
+      setProducts(products.filter(p => !selectedProducts.has(p.id)));
+      setSelectedProducts(new Set());
+    }
+  };
+
+  const toggleProductSelection = (productId: string) => {
+    const newSet = new Set(selectedProducts);
+    if (newSet.has(productId)) {
+      newSet.delete(productId);
+    } else {
+      newSet.add(productId);
+    }
+    setSelectedProducts(newSet);
+  };
+
+  const selectAllProducts = () => {
+    if (selectedProducts.size === sortedProducts.length) {
+      setSelectedProducts(new Set());
+    } else {
+      setSelectedProducts(new Set(sortedProducts.map(p => p.id)));
+    }
   };
 
   const lowStockCount = products.filter(
