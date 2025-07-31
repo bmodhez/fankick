@@ -319,6 +319,21 @@ export function ProductManager() {
           </p>
         </div>
         <div className="flex items-center space-x-3">
+          {selectedProducts.size > 0 && (
+            <div className="flex items-center space-x-2 px-3 py-1 bg-primary/20 rounded-lg">
+              <span className="text-primary text-sm font-medium">
+                {selectedProducts.size} selected
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleBulkDelete}
+                className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
+              >
+                <Trash className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
           <Button variant="outline" className="border-gray-600 text-gray-300">
             <Upload className="w-4 h-4 mr-2" />
             Import
@@ -329,7 +344,7 @@ export function ProductManager() {
           </Button>
           <Button
             className="bg-primary text-black hover:bg-primary/90"
-            onClick={() => setShowAddModal(true)}
+            onClick={handleAddProduct}
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Product
