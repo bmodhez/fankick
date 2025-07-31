@@ -5,6 +5,7 @@ import { AdminLayout } from '@/components/admin/AdminLayout'
 import { Dashboard } from '@/components/admin/Dashboard'
 import { ProductManager } from '@/components/admin/ProductManager'
 import { OrderManager } from '@/components/admin/OrderManager'
+import { Analytics } from '@/components/admin/Analytics'
 
 export default function AdminPanel() {
   const { user, isAdmin } = useAuth()
