@@ -489,7 +489,21 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
-      
+
+      {/* Payment Modal */}
+      <PaymentModal
+        isOpen={showPaymentModal}
+        onClose={() => setShowPaymentModal(false)}
+        product={{
+          name: product.name,
+          image: product.images[0],
+          price: convertedPrice,
+          quantity: quantity
+        }}
+        shippingCost={shippingInfo.cost}
+        codAvailable={codAvailable}
+      />
+
       <Footer />
     </div>
   )
