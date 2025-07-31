@@ -3,293 +3,387 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Footer } from '@/components/Footer'
-import { Star, TrendingUp, Zap, ShoppingBag, Instagram } from 'lucide-react'
+import { 
+  Star, 
+  TrendingUp, 
+  Zap, 
+  ShoppingBag, 
+  Instagram, 
+  Clock,
+  Users,
+  Globe,
+  Heart,
+  Eye,
+  Timer
+} from 'lucide-react'
 
 export default function Index() {
-  const featuredPlayers = [
+  const heroCategories = [
     {
-      name: 'Lionel Messi',
-      team: 'Inter Miami',
+      title: 'Football Legends',
+      subtitle: 'Messi • Ronaldo • Mbappé',
       image: '/placeholder.svg',
-      trending: true,
-      products: 156
+      cta: 'Shop Jerseys',
+      link: '/football',
+      color: 'from-green-600 to-blue-600'
     },
     {
-      name: 'Cristiano Ronaldo',
-      team: 'Al Nassr',
+      title: 'Anime Universe',
+      subtitle: 'Naruto • Chainsaw Man • Demon Slayer',
       image: '/placeholder.svg',
-      trending: true,
-      products: 203
+      cta: 'Explore Anime',
+      link: '/anime',
+      color: 'from-purple-600 to-pink-600'
     },
     {
-      name: 'Kylian Mbappé',
-      team: 'PSG',
+      title: 'Pop Culture',
+      subtitle: 'Taylor Swift • K-pop • Marvel',
       image: '/placeholder.svg',
-      trending: false,
-      products: 89
-    }
-  ]
-
-  const featuredClubs = [
-    {
-      name: 'Al Nassr',
-      league: 'Saudi Pro League',
-      image: '/placeholder.svg',
-      color: 'bg-yellow-500'
-    },
-    {
-      name: 'PSG',
-      league: 'Ligue 1',
-      image: '/placeholder.svg',
-      color: 'bg-blue-600'
-    },
-    {
-      name: 'FC Barcelona',
-      league: 'La Liga',
-      image: '/placeholder.svg',
-      color: 'bg-red-600'
+      cta: 'Discover More',
+      link: '/pop-culture',
+      color: 'from-red-600 to-orange-600'
     }
   ]
 
   const trendingProducts = [
     {
-      name: 'Messi Miami Jersey',
-      price: '₹2,999',
-      originalPrice: '₹3,999',
+      id: 1,
+      name: 'Messi Inter Miami Jersey 2024',
+      price: { usd: 89, eur: 82, gbp: 71, cad: 121, sar: 334, inr: 7499 },
+      originalPrice: { usd: 119, eur: 109, gbp: 95, cad: 161, sar: 446, inr: 9999 },
       image: '/placeholder.svg',
-      rating: 4.8,
-      reviews: 1247
+      rating: 4.9,
+      reviews: 2847,
+      category: 'Football',
+      trending: true,
+      stockAlert: 'Only 3 left!',
+      views: '12.4K'
     },
     {
-      name: 'Ronaldo Phone Cover',
-      price: '₹599',
-      originalPrice: '₹899',
-      image: '/placeholder.svg',
-      rating: 4.6,
-      reviews: 543
-    },
-    {
-      name: 'PSG Snapback Cap',
-      price: '₹1,299',
-      originalPrice: '₹1,799',
+      id: 2,
+      name: 'Naruto Akatsuki Ring Set',
+      price: { usd: 24, eur: 22, gbp: 19, cad: 33, sar: 90, inr: 1999 },
+      originalPrice: { usd: 39, eur: 36, gbp: 31, cad: 53, sar: 146, inr: 3299 },
       image: '/placeholder.svg',
       rating: 4.7,
-      reviews: 892
+      reviews: 1523,
+      category: 'Anime',
+      trending: true,
+      stockAlert: 'Fast selling!',
+      views: '8.9K'
     },
     {
-      name: 'Barcelona Mug',
-      price: '₹399',
-      originalPrice: '₹599',
+      id: 3,
+      name: 'Taylor Swift Eras Tour Hoodie',
+      price: { usd: 45, eur: 41, gbp: 36, cad: 61, sar: 169, inr: 3799 },
+      originalPrice: { usd: 65, eur: 60, gbp: 52, cad: 88, sar: 244, inr: 5499 },
       image: '/placeholder.svg',
-      rating: 4.5,
-      reviews: 234
+      rating: 4.8,
+      reviews: 3921,
+      category: 'Pop Culture',
+      trending: true,
+      stockAlert: 'Limited edition',
+      views: '15.2K'
+    },
+    {
+      id: 4,
+      name: 'Chainsaw Man Denji Hoodie',
+      price: { usd: 42, eur: 38, gbp: 33, cad: 57, sar: 158, inr: 3499 },
+      originalPrice: { usd: 58, eur: 53, gbp: 46, cad: 78, sar: 218, inr: 4899 },
+      image: '/placeholder.svg',
+      rating: 4.6,
+      reviews: 987,
+      category: 'Anime',
+      trending: false,
+      stockAlert: 'Back in stock!',
+      views: '6.7K'
     }
   ]
 
+  const categories = [
+    {
+      name: 'Football Jerseys',
+      items: 350,
+      image: '/placeholder.svg',
+      description: 'Official jerseys from Messi, Ronaldo & more',
+      link: '/football/jerseys'
+    },
+    {
+      name: 'Anime Rings',
+      items: 180,
+      image: '/placeholder.svg',
+      description: 'Exclusive rings from Naruto, One Piece & more',
+      link: '/anime/rings'
+    },
+    {
+      name: 'K-pop Merch',
+      items: 240,
+      image: '/placeholder.svg',
+      description: 'BTS, Blackpink, Stray Kids official items',
+      link: '/pop-culture/kpop'
+    },
+    {
+      name: 'Marvel Collection',
+      items: 420,
+      image: '/placeholder.svg',
+      description: 'Superhero gear for true Marvel fans',
+      link: '/pop-culture/marvel'
+    }
+  ]
+
+  const socialProof = [
+    { metric: '500K+', label: 'Happy Customers' },
+    { metric: '150+', label: 'Countries Shipped' },
+    { metric: '4.8★', label: 'Average Rating' },
+    { metric: '24/7', label: 'Customer Support' }
+  ]
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-black via-gray-900 to-black py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-10"></div>
+      <section className="relative bg-gradient-to-br from-black via-gray-900 to-black py-16 lg:py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-5"></div>
+        
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <Badge className="mb-6 bg-primary text-black font-semibold px-4 py-2">
-              <Zap className="w-4 h-4 mr-2" />
-              Global Football Merchandise
+          <div className="text-center mb-16">
+            <Badge className="mb-6 bg-gradient-to-r from-primary to-purple-500 text-black font-bold px-6 py-3 text-lg">
+              <Globe className="w-5 h-5 mr-2" />
+              Global Dropshipping • Free Worldwide Shipping
             </Badge>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-white mb-6">
-              GEAR UP FOR
-              <span className="block text-primary">GREATNESS</span>
+            
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-white mb-6 leading-tight">
+              UNLEASH YOUR
+              <span className="block bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+                FANDOM
+              </span>
             </h1>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              From Messi's magic to Ronaldo's power - get authentic football merchandise 
-              from your favorite players and clubs. Fast delivery, COD available.
+            
+            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+              From Messi's magic to Naruto's jutsu, Taylor's melodies to Marvel's heroes - 
+              get authentic merchandise that defines your passion. Trusted by 500K+ fans worldwide.
             </p>
+
+            {/* Social Proof */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-2xl mx-auto">
+              {socialProof.map((item, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-2xl font-bold text-primary">{item.metric}</div>
+                  <div className="text-sm text-gray-400">{item.label}</div>
+                </div>
+              ))}
+            </div>
+            
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary text-black hover:bg-primary/90 font-semibold px-8 py-4">
+              <Button size="lg" className="bg-gradient-to-r from-primary to-purple-500 text-black hover:opacity-90 font-bold px-8 py-4 text-lg">
                 <ShoppingBag className="w-5 h-5 mr-2" />
                 Shop Now
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-4">
-                View Trending
+              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg">
+                <TrendingUp className="w-5 h-5 mr-2" />
+                Trending Products
               </Button>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Player Collections */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-black mb-4">
-              PLAYER COLLECTIONS
-            </h2>
-            <p className="text-gray-600 text-lg">Official merchandise from football legends</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredPlayers.map((player, index) => (
-              <Card key={index} className="group cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden">
-                <CardContent className="p-0">
-                  <div className="relative">
-                    <img 
-                      src={player.image} 
-                      alt={player.name}
-                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    {player.trending && (
-                      <Badge className="absolute top-4 left-4 bg-primary text-black">
-                        <TrendingUp className="w-3 h-3 mr-1" />
-                        Trending
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-heading font-bold text-xl mb-2">{player.name}</h3>
-                    <p className="text-gray-600 mb-4">{player.team}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-500">{player.products} Products</span>
-                      <Button variant="outline" size="sm">View Collection</Button>
+          {/* Hero Categories */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {heroCategories.map((category, index) => (
+              <Link key={index} to={category.link}>
+                <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-gray-900 to-black border-gray-700">
+                  <CardContent className="p-0">
+                    <div className={`h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}>
+                      <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300"></div>
+                      <div className="absolute bottom-6 left-6 text-white">
+                        <h3 className="font-sport font-bold text-2xl mb-1">{category.title}</h3>
+                        <p className="text-white/80 text-sm mb-3">{category.subtitle}</p>
+                        <Button className="bg-white text-black hover:bg-gray-100 font-semibold">
+                          {category.cta}
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Club Collections */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-black mb-4">
-              CLUB COLLECTIONS
-            </h2>
-            <p className="text-gray-600 text-lg">Support your favorite teams worldwide</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredClubs.map((club, index) => (
-              <Card key={index} className="group cursor-pointer hover:shadow-xl transition-all duration-300">
-                <CardContent className="p-0">
-                  <div className={`h-32 ${club.color} relative overflow-hidden`}>
-                    <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
-                    <div className="absolute bottom-4 left-6 text-white">
-                      <h3 className="font-heading font-bold text-2xl">{club.name}</h3>
-                      <p className="text-white/80">{club.league}</p>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <Button className="w-full" variant="outline">
-                      Explore Collection
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
       {/* Trending Products */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
+            <Badge className="mb-4 bg-red-100 text-red-800 font-semibold px-4 py-2">
+              <Timer className="w-4 h-4 mr-2" />
+              Trending Now
+            </Badge>
             <h2 className="text-3xl lg:text-4xl font-sport font-bold text-black mb-4">
-              TRENDING NOW
+              WHAT'S HOT RIGHT NOW
             </h2>
-            <p className="text-gray-600 text-lg">What football fans are buying right now</p>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Join millions of fans worldwide who are rocking these trending items
+            </p>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {trendingProducts.map((product, index) => (
-              <Card key={index} className="group cursor-pointer hover:shadow-lg transition-all duration-300">
+              <Card key={index} className="group cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden">
                 <CardContent className="p-0">
                   <div className="relative">
                     <img 
                       src={product.image} 
                       alt={product.name}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <Badge className="absolute top-2 right-2 bg-red-500 text-white">
-                      Sale
-                    </Badge>
+                    
+                    {/* Overlays */}
+                    <div className="absolute top-2 left-2 space-y-1">
+                      {product.trending && (
+                        <Badge className="bg-red-500 text-white text-xs">
+                          <TrendingUp className="w-3 h-3 mr-1" />
+                          TRENDING
+                        </Badge>
+                      )}
+                      <Badge className="bg-black/80 text-white text-xs">
+                        {product.category}
+                      </Badge>
+                    </div>
+                    
+                    <div className="absolute top-2 right-2">
+                      <Button variant="ghost" size="sm" className="bg-white/90 hover:bg-white">
+                        <Heart className="w-4 h-4" />
+                      </Button>
+                    </div>
+                    
+                    <div className="absolute bottom-2 left-2">
+                      <Badge className="bg-primary text-black text-xs font-bold">
+                        {product.stockAlert}
+                      </Badge>
+                    </div>
+                    
+                    <div className="absolute bottom-2 right-2 flex items-center space-x-1 bg-black/70 text-white px-2 py-1 rounded text-xs">
+                      <Eye className="w-3 h-3" />
+                      <span>{product.views}</span>
+                    </div>
                   </div>
+                  
                   <div className="p-4">
-                    <h3 className="font-semibold mb-2 text-sm">{product.name}</h3>
-                    <div className="flex items-center mb-2">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-sm text-gray-600 ml-1">
-                        {product.rating} ({product.reviews})
+                    <h3 className="font-semibold mb-2 text-sm line-clamp-2">{product.name}</h3>
+                    
+                    <div className="flex items-center mb-3">
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-3 h-3 ${
+                              i < Math.floor(product.rating) 
+                                ? 'text-yellow-400 fill-current' 
+                                : 'text-gray-300'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-xs text-gray-600 ml-2">
+                        {product.rating} ({product.reviews.toLocaleString()})
                       </span>
                     </div>
-                    <div className="flex items-center justify-between">
+                    
+                    <div className="flex items-center justify-between mb-3">
                       <div>
-                        <span className="font-bold text-primary">{product.price}</span>
-                        <span className="text-gray-400 line-through text-sm ml-2">
-                          {product.originalPrice}
-                        </span>
+                        <span className="font-bold text-primary text-lg">₹{product.price.inr}</span>
+                        <span className="text-gray-400 line-through text-sm ml-2">₹{product.originalPrice.inr}</span>
                       </div>
-                      <Button size="sm">Add to Cart</Button>
+                      <Badge className="bg-green-100 text-green-800 text-xs">
+                        {Math.round(((product.originalPrice.inr - product.price.inr) / product.originalPrice.inr) * 100)}% OFF
+                      </Badge>
                     </div>
+                    
+                    <Button className="w-full bg-black text-white hover:bg-gray-800 font-semibold">
+                      Add to Cart
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
+          
+          <div className="text-center mt-12">
+            <Link to="/trending">
+              <Button size="lg" className="bg-gradient-to-r from-primary to-purple-500 text-black hover:opacity-90 font-bold px-8">
+                View All Trending Products
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Accessories Section */}
-      <section className="py-16 bg-black text-white">
+      {/* Product Categories */}
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-sport font-bold mb-4">
-              FOOTBALL ACCESSORIES
+            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-black mb-4">
+              SHOP BY PASSION
             </h2>
-            <p className="text-gray-300 text-lg">Complete your fan collection</p>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Discover curated collections that speak to your soul
+            </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center group cursor-pointer">
-              <div className="bg-primary rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <span className="text-3xl">📱</span>
-              </div>
-              <h3 className="font-heading font-bold text-xl mb-2">Phone Covers</h3>
-              <p className="text-gray-300 mb-4">Protect your phone with style</p>
-              <Link to="/accessories/phone-covers">
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black">
-                  Shop Now
-                </Button>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {categories.map((category, index) => (
+              <Link key={index} to={category.link}>
+                <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 h-full">
+                  <CardContent className="p-0">
+                    <div className="relative overflow-hidden">
+                      <img 
+                        src={category.image} 
+                        alt={category.name}
+                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      <div className="absolute bottom-4 left-4 text-white">
+                        <h3 className="font-bold text-lg mb-1">{category.name}</h3>
+                        <p className="text-sm text-white/80">{category.items} products</p>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <p className="text-gray-600 text-sm mb-4">{category.description}</p>
+                      <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all">
+                        Explore Collection
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Global Shipping Banner */}
+      <section className="py-12 bg-gradient-to-r from-primary to-purple-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center text-black">
+            <div className="flex items-center justify-center mb-4">
+              <Globe className="w-8 h-8 mr-3" />
+              <h2 className="text-2xl font-sport font-bold">WORLDWIDE SHIPPING</h2>
             </div>
-            
-            <div className="text-center group cursor-pointer">
-              <div className="bg-primary rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <span className="text-3xl">☕</span>
-              </div>
-              <h3 className="font-heading font-bold text-xl mb-2">Mugs & Bottles</h3>
-              <p className="text-gray-300 mb-4">Drink like a champion</p>
-              <Link to="/accessories/drinkware">
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black">
-                  Shop Now
-                </Button>
-              </Link>
-            </div>
-            
-            <div className="text-center group cursor-pointer">
-              <div className="bg-primary rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <span className="text-3xl">🧢</span>
-              </div>
-              <h3 className="font-heading font-bold text-xl mb-2">Caps & Hats</h3>
-              <p className="text-gray-300 mb-4">Top off your fan gear</p>
-              <Link to="/accessories/headwear">
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black">
-                  Shop Now
-                </Button>
-              </Link>
+            <p className="text-lg mb-6">
+              Free shipping to 150+ countries • Express delivery • Track your order in real-time
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 text-sm font-medium">
+              <span className="bg-black/10 px-4 py-2 rounded-full">🇺🇸 USA: 5-7 days</span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">🇬🇧 UK: 7-10 days</span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">🇩🇪 Germany: 6-9 days</span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">🇨🇦 Canada: 8-12 days</span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">🇸🇦 Saudi: 5-8 days</span>
+              <span className="bg-black/10 px-4 py-2 rounded-full">🇮🇳 India: 3-5 days</span>
             </div>
           </div>
         </div>
@@ -300,23 +394,26 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-sport font-bold text-black mb-4">
-              FOLLOW US
+              FANKICK COMMUNITY
             </h2>
-            <p className="text-gray-600 text-lg mb-6">See how fans rock their FanKick gear</p>
-            <Button className="bg-primary text-black hover:bg-primary/90">
+            <p className="text-gray-600 text-lg mb-6">See how fans worldwide rock their FanKick gear</p>
+            <Button className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:opacity-90 font-semibold">
               <Instagram className="w-4 h-4 mr-2" />
-              @fankick_official
+              Follow @fankick_global
             </Button>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-              <div key={i} className="aspect-square bg-gray-200 rounded-lg overflow-hidden group cursor-pointer">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {Array.from({ length: 12 }, (_, i) => (
+              <div key={i} className="aspect-square bg-gray-200 rounded-xl overflow-hidden group cursor-pointer relative">
                 <img 
                   src="/placeholder.svg" 
-                  alt={`Instagram post ${i}`}
+                  alt={`Community post ${i + 1}`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                  <Instagram className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
               </div>
             ))}
           </div>
