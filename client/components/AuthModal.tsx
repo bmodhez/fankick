@@ -159,14 +159,7 @@ export function AuthModal({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
         </CardHeader>
         
         <CardContent className="space-y-4">
-          {/* Admin Info Banner */}
-          {mode === 'login' && (
-            <div className="bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg p-3 text-sm">
-              <p className="font-medium text-purple-900">Demo Admin Access:</p>
-              <p className="text-purple-700">Email: modhbhavin05@gmail.com</p>
-              <p className="text-purple-700">Password: Bhavin@111005</p>
-            </div>
-          )}
+
 
           {/* Error/Success Messages */}
           {error && (
