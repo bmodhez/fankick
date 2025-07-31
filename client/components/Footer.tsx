@@ -155,7 +155,7 @@ export function Footer() {
               </p>
               <div className="flex space-x-4 mt-2 text-xs text-gray-500">
                 <Link to="/privacy" className="hover:text-primary">Privacy Policy</Link>
-                <Link to="/terms" className="hover:text-primary">Terms of Service</Link>
+                <Link to="/terms" className="hover:text-primary">Terms & Conditions</Link>
               </div>
             </div>
           </div>
