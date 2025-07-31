@@ -168,6 +168,15 @@ const App = () => (
                       </>
                     }
                   />
+                  <Route
+                    path="/contact"
+                    element={
+                      <>
+                        <Navigation />
+                        <Contact />
+                      </>
+                    }
+                  />
                   <Route path="/admin" element={<AdminPanel />} />
                   <Route path="/admin/products" element={<AdminPanel />} />
                   <Route path="/admin/orders" element={<AdminPanel />} />
