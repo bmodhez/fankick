@@ -9,17 +9,9 @@ import { CURRENCIES } from '@/utils/currency'
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showCurrency, setShowCurrency] = useState(false)
+  const { selectedCurrency, setCurrency } = useCurrency()
 
-  const currencies = [
-    { code: 'USD', symbol: '$', flag: '🇺🇸' },
-    { code: 'EUR', symbol: '€', flag: '🇪🇺' },
-    { code: 'GBP', symbol: '£', flag: '🇬🇧' },
-    { code: 'CAD', symbol: 'C$', flag: '🇨🇦' },
-    { code: 'SAR', symbol: 'ر.س', flag: '🇸🇦' },
-    { code: 'INR', symbol: '₹', flag: '🇮🇳' }
-  ]
-
-  const [selectedCurrency, setSelectedCurrency] = useState(currencies[5]) // Default to INR
+  const currencies = Object.values(CURRENCIES)
 
   return (
     <nav className="bg-black text-white sticky top-0 z-50 border-b border-gray-800">
