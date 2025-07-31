@@ -154,8 +154,10 @@ export function Footer() {
                 © 2024 FanKick. All rights reserved.
               </p>
               <div className="flex space-x-4 mt-2 text-xs text-gray-500">
-                <Link to="/privacy" className="hover:text-primary">Privacy Policy</Link>
-                <Link to="/terms" className="hover:text-primary">Terms & Conditions</Link>
+                <Link to="/privacy" className="hover:text-primary">Privacy</Link>
+                <Link to="/terms" className="hover:text-primary">Terms</Link>
+                <Link to="/shipping" className="hover:text-primary">Shipping</Link>
+                <Link to="/refunds" className="hover:text-primary">Returns</Link>
               </div>
             </div>
           </div>
