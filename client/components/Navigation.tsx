@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { Menu, X, Search, ShoppingCart, User, Globe, ChevronDown } from 'lucide-react'
 import { Button } from './ui/button'
 import { ThemeToggle } from './ThemeToggle'
+import { useCurrency } from '@/contexts/CurrencyContext'
+import { CURRENCIES } from '@/utils/currency'
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
