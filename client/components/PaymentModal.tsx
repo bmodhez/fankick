@@ -298,7 +298,7 @@ export function PaymentModal({ isOpen, onClose, product, shippingCost, codAvaila
             <Button 
               className="flex-1 bg-primary text-black hover:bg-primary/90" 
               onClick={selectedPayment === 'razorpay' ? handleRazorpayPayment : handlePayment}
-              disabled={!selectedPayment || isProcessing}
+              disabled={!selectedPayment || isProcessing || !user}
             >
               {isProcessing ? (
                 <div className="flex items-center space-x-2">
