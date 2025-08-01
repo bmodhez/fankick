@@ -18,7 +18,7 @@ import {
   Heart,
   ShoppingCart,
   Clock,
-  Fire,
+  Flame,
   Zap,
   Eye,
   SlidersHorizontal,
