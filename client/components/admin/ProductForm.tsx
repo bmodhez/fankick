@@ -202,6 +202,107 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
     }));
   };
 
+  // File upload handlers
+  const handleFileSelect = async (files: FileList) => {
+    setIsUploading(true);
+    const newImages: string[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        alert(`File ${file.name} is not an image and will be skipped.`);
+        continue;
+      }
+
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert(`File ${file.name} is too large (max 5MB) and will be skipped.`);
+        continue;
+      }
+
+      try {
+        // Simulate upload progress
+        const fileId = `upload-${Date.now()}-${i}`;
+        setUploadProgress(prev => ({ ...prev, [fileId]: 0 }));
+
+        // Convert file to data URL for demo purposes
+        // In production, you'd upload to a real service like AWS S3, Cloudinary, etc.
+        const dataUrl = await fileToDataUrl(file);
+
+        // Simulate upload progress
+        for (let progress = 0; progress <= 100; progress += 20) {
+          setUploadProgress(prev => ({ ...prev, [fileId]: progress }));
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
+
+        newImages.push(dataUrl);
+        setUploadProgress(prev => {
+          const newProgress = { ...prev };
+          delete newProgress[fileId];
+          return newProgress;
+        });
+      } catch (error) {
+        console.error(`Error uploading ${file.name}:`, error);
+        alert(`Failed to upload ${file.name}`);
+      }
+    }
+
+    // Add all successfully uploaded images
+    if (newImages.length > 0) {
+      setFormData((prev) => ({
+        ...prev,
+        images: [...prev.images, ...newImages],
+      }));
+    }
+
+    setIsUploading(false);
+  };
+
+  const fileToDataUrl = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      handleFileSelect(files);
+    }
+  };
+
+  const triggerFileSelect = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.multiple = true;
+    input.accept = 'image/*';
+    input.onchange = (e) => {
+      const files = (e.target as HTMLInputElement).files;
+      if (files) {
+        handleFileSelect(files);
+      }
+    };
+    input.click();
+  };
+
   const handleSave = () => {
     if (!formData.name || !formData.description || formData.variants.length === 0) {
       alert("Please fill in all required fields and add at least one variant.");
