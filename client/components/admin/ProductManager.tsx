@@ -101,7 +101,7 @@ function ProductCard({
               {product.name}
             </h3>
             <p className="text-xs text-gray-400 capitalize">
-              {product.category} ��� {product.subcategory}
+              {product.category} • {product.subcategory}
             </p>
           </div>
 
@@ -235,9 +235,9 @@ export function ProductManager() {
 
   const handleSaveProduct = (productData: Product) => {
     if (formMode === "create") {
-      setProducts([...products, productData]);
+      addProduct(productData);
     } else {
-      setProducts(products.map(p => p.id === productData.id ? productData : p));
+      updateProduct(productData);
     }
     setShowProductForm(false);
     setEditingProduct(null);
@@ -245,7 +245,7 @@ export function ProductManager() {
 
   const handleDeleteProduct = (id: string) => {
     if (confirm("Are you sure you want to delete this product? This action cannot be undone.")) {
-      setProducts(products.filter((p) => p.id !== id));
+      deleteProduct(id);
       setSelectedProducts(prev => {
         const newSet = new Set(prev);
         newSet.delete(id);
@@ -265,13 +265,13 @@ export function ProductManager() {
         sku: `${variant.sku}-COPY`,
       })),
     };
-    setProducts([...products, newProduct]);
+    addProduct(newProduct);
   };
 
   const handleBulkDelete = () => {
     if (selectedProducts.size === 0) return;
     if (confirm(`Are you sure you want to delete ${selectedProducts.size} products? This action cannot be undone.`)) {
-      setProducts(products.filter(p => !selectedProducts.has(p.id)));
+      selectedProducts.forEach(id => deleteProduct(id));
       setSelectedProducts(new Set());
     }
   };
