@@ -35,6 +35,7 @@ import {
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
   const { selectedCurrency } = useCurrency();
+  const { getProductById, getTrendingProducts } = useProducts();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState("");
   const [quantity, setQuantity] = useState(1);
