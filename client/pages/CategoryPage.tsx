@@ -33,8 +33,9 @@ export default function CategoryPage() {
     if (priceRange !== "all") {
       filtered = filtered.filter((product) => {
         const price = convertPrice(
-          product.basePrice / 84.15,
+          product.basePrice,
           selectedCurrency.code,
+          "INR"
         );
         switch (priceRange) {
           case "under-1000":
