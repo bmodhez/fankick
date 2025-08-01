@@ -33,7 +33,8 @@ const App = () => (
       <CurrencyProvider>
         <AuthProvider>
           <ProductProvider>
-            <TooltipProvider>
+            <CartProvider>
+              <TooltipProvider>
             <Toaster />
             <Sonner />
             <BrowserRouter>
@@ -201,7 +202,8 @@ const App = () => (
                 </Routes>
               </div>
             </BrowserRouter>
-            </TooltipProvider>
+              </TooltipProvider>
+            </CartProvider>
           </ProductProvider>
         </AuthProvider>
       </CurrencyProvider>
