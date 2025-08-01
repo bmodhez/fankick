@@ -531,12 +531,14 @@ export default function ProductPage() {
           <div className="grid sm:grid-cols-3 gap-6">
             {relatedProducts.map((relatedProduct, index) => {
               const relatedConvertedPrice = convertPrice(
-                relatedProduct.basePrice / 84.15,
+                relatedProduct.basePrice,
                 selectedCurrency.code,
+                "INR"
               );
               const relatedConvertedOriginalPrice = convertPrice(
-                relatedProduct.originalPrice / 84.15,
+                relatedProduct.originalPrice,
                 selectedCurrency.code,
+                "INR"
               );
 
               return (
