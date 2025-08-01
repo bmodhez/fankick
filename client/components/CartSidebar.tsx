@@ -32,8 +32,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
   if (!isOpen) return null;
 
-  const convertedTotal = convertPrice(totalPrice, selectedCurrency.code);
-  const shippingCost = convertedTotal > 50 ? 0 : convertPrice(5, selectedCurrency.code);
+  const convertedTotal = convertPrice(totalPrice, selectedCurrency.code, "INR");
+  const shippingCost = convertedTotal > 50 ? 0 : convertPrice(420, selectedCurrency.code, "INR"); // 420 INR = ~5 USD
   const discount = appliedCoupon ? (convertedTotal * appliedCoupon.discount) / 100 : 0;
   const finalTotal = convertedTotal + shippingCost - discount;
 
