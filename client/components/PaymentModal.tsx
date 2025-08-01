@@ -32,18 +32,17 @@ interface PaymentModalProps {
 export function PaymentModal({
   isOpen,
   onClose,
-  product,
-  shippingCost,
-  codAvailable,
+  amount,
+  currency,
+  items = [],
 }: PaymentModalProps) {
-  const { selectedCurrency } = useCurrency();
   const { user } = useAuth();
   const [selectedPayment, setSelectedPayment] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
   const [orderDetails, setOrderDetails] = useState<any>(null);
 
-  const country = selectedCurrency.code === "INR" ? "IN" : "US";
+  const country = currency === "INR" ? "IN" : "US";
   const paymentMethods = getAvailablePaymentMethods(country);
 
   const subtotal = product.price * product.quantity;
