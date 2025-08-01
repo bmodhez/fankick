@@ -47,7 +47,7 @@ export default function SearchResults() {
     // Filter by price range
     if (priceRange !== "all") {
       results = results.filter(product => {
-        const price = convertPrice(product.basePrice / 84.15, "INR", selectedCurrency);
+        const price = convertPrice(product.basePrice, selectedCurrency.code, "INR");
         switch (priceRange) {
           case "under-1000":
             return price < 1000;
