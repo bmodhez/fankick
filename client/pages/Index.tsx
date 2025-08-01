@@ -206,12 +206,14 @@ export default function Index() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {trendingProducts.map((product, index) => {
               const convertedPrice = convertPrice(
-                product.basePrice / 84.15,
+                product.basePrice,
                 selectedCurrency.code,
+                "INR"
               ); // Convert from INR base
               const convertedOriginalPrice = convertPrice(
-                product.originalPrice / 84.15,
+                product.originalPrice,
                 selectedCurrency.code,
+                "INR"
               );
 
               return (
