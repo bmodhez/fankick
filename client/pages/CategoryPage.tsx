@@ -145,8 +145,8 @@ export default function CategoryPage() {
               <option value="under-1000">
                 Under{" "}
                 {formatPrice(
-                  convertPrice(1000 / 84.15, selectedCurrency.code),
-                  selectedCurrency.code,
+                  convertPrice(1000, selectedCurrency.code, "INR"),
+                  selectedCurrency,
                 )}
               </option>
               <option value="1000-3000">
