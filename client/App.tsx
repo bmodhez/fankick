@@ -26,6 +26,7 @@ import ShippingPolicy from "./pages/ShippingPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Contact from "./pages/Contact";
+import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
 
