@@ -7,7 +7,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { PaymentModal } from "@/components/PaymentModal";
 import { useCurrency } from "@/contexts/CurrencyContext";
-import { getProductById, getTrendingProducts } from "@/data/products";
+import { useProducts } from "@/contexts/ProductContext";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   getAvailablePaymentMethods,
