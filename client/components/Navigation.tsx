@@ -10,6 +10,7 @@ import {
   ChevronDown,
   Crown,
   LogOut,
+  Heart,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { ThemeToggle } from "./ThemeToggle";
