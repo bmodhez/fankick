@@ -100,6 +100,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
   const [newFeature, setNewFeature] = useState("");
   const [newImage, setNewImage] = useState("");
   const [activeTab, setActiveTab] = useState("basic");
+  const [isDragOver, setIsDragOver] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<{ [key: string]: number }>({});
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (product && mode === "edit") {
