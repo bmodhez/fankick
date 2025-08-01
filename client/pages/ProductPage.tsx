@@ -239,10 +239,10 @@ export default function ProductPage() {
 
               <div className="flex items-center space-x-3 mb-6">
                 <span className="text-3xl font-bold text-primary">
-                  {formatPrice(convertedPrice, selectedCurrency.code)}
+                  {formatPrice(convertedPrice, selectedCurrency)}
                 </span>
                 <span className="text-xl text-gray-400 line-through">
-                  {formatPrice(convertedOriginalPrice, selectedCurrency.code)}
+                  {formatPrice(convertedOriginalPrice, selectedCurrency)}
                 </span>
                 <Badge className="bg-red-100 text-red-800">
                   Save{" "}
@@ -334,7 +334,7 @@ export default function ProductPage() {
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Add to Cart -{" "}
-                {formatPrice(convertedPrice * quantity, selectedCurrency.code)}
+                {formatPrice(convertedPrice * quantity, selectedCurrency)}
               </Button>
 
               {codAvailable && (
