@@ -352,6 +352,12 @@ export function Navigation() {
         onClose={() => setShowAuthModal(false)}
         defaultMode="login"
       />
+
+      {/* Cart Sidebar */}
+      <CartSidebar
+        isOpen={showCart}
+        onClose={() => setShowCart(false)}
+      />
     </nav>
   );
 }
