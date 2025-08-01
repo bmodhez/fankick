@@ -31,6 +31,18 @@ export function Navigation() {
 
   const currencies = Object.values(CURRENCIES);
 
+  const handleSearch = (query: string) => {
+    if (query.trim()) {
+      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+      setShowSearch(false);
+      setSearchQuery("");
+    }
+  };
+
+  const handleQuickSearch = () => {
+    setShowSearch(!showSearch);
+  };
+
   return (
     <nav className="bg-black text-white sticky top-0 z-50 border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
