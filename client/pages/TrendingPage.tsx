@@ -234,10 +234,10 @@ export default function TrendingPage() {
                         className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
                       >
                         <option value="all">All Prices</option>
-                        <option value="under-25">Under {formatPrice(25, selectedCurrency.code)}</option>
-                        <option value="25-50">{formatPrice(25, selectedCurrency.code)} - {formatPrice(50, selectedCurrency.code)}</option>
-                        <option value="50-100">{formatPrice(50, selectedCurrency.code)} - {formatPrice(100, selectedCurrency.code)}</option>
-                        <option value="over-100">Over {formatPrice(100, selectedCurrency.code)}</option>
+                        <option value="under-25">Under {formatPrice(convertPrice(25, selectedCurrency.code), selectedCurrency)}</option>
+                        <option value="25-50">{formatPrice(convertPrice(25, selectedCurrency.code), selectedCurrency)} - {formatPrice(convertPrice(50, selectedCurrency.code), selectedCurrency)}</option>
+                        <option value="50-100">{formatPrice(convertPrice(50, selectedCurrency.code), selectedCurrency)} - {formatPrice(convertPrice(100, selectedCurrency.code), selectedCurrency)}</option>
+                        <option value="over-100">Over {formatPrice(convertPrice(100, selectedCurrency.code), selectedCurrency)}</option>
                       </select>
                     </div>
                     
