@@ -5,7 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Footer } from "@/components/Footer";
 import { useCurrency } from "@/contexts/CurrencyContext";
-import { getProductsByCategory, Product } from "@/data/products";
+import { useProducts } from "@/contexts/ProductContext";
+import { Product } from "@/data/products";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   Star,
