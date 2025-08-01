@@ -106,11 +106,11 @@ export function QuickAdminAccess() {
           <h4 className="text-sm font-medium text-white mb-2">Admin Features:</h4>
           <ul className="text-xs text-gray-400 space-y-1">
             <li>• Complete Product CRUD Operations</li>
+            <li>• 📁 Folder Upload & Drag-Drop</li>
+            <li>• Bulk Image Management</li>
             <li>• Advanced Variant Management</li>
-            <li>• Bulk Operations & Selection</li>
             <li>• Real-time Search & Filtering</li>
             <li>• Stock Tracking & Analytics</li>
-            <li>• Image Management</li>
           </ul>
         </div>
       </CardContent>
