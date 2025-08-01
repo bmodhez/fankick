@@ -20,6 +20,7 @@ import {
 export default function CategoryPage() {
   const { category } = useParams<{ category: string }>();
   const { selectedCurrency } = useCurrency();
+  const { getProductsByCategory } = useProducts();
   const [sortBy, setSortBy] = useState("trending");
   const [priceRange, setPriceRange] = useState("all");
 
