@@ -66,6 +66,8 @@ export default function AdminPanel() {
             description="Organize products into categories and manage collections."
           />
         );
+      case "/admin/images":
+        return <BulkImageManager />;
       case "/admin/analytics":
         return <Analytics />;
       case "/admin/content":
