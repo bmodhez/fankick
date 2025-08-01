@@ -30,7 +30,8 @@ const App = () => (
     <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
       <CurrencyProvider>
         <AuthProvider>
-          <TooltipProvider>
+          <ProductProvider>
+            <TooltipProvider>
             <Toaster />
             <Sonner />
             <BrowserRouter>
@@ -194,7 +195,8 @@ const App = () => (
                 </Routes>
               </div>
             </BrowserRouter>
-          </TooltipProvider>
+            </TooltipProvider>
+          </ProductProvider>
         </AuthProvider>
       </CurrencyProvider>
     </ThemeProvider>
