@@ -45,8 +45,8 @@ export function PaymentModal({
   const country = currency === "INR" ? "IN" : "US";
   const paymentMethods = getAvailablePaymentMethods(country);
 
-  const subtotal = product.price * product.quantity;
-  const total = subtotal + shippingCost;
+  const subtotal = amount;
+  const total = subtotal;
 
   if (!isOpen) return null;
 
