@@ -244,11 +244,14 @@ export function Navigation() {
               variant="ghost"
               size="sm"
               className="relative text-white hover:text-primary"
+              onClick={() => setShowCart(true)}
             >
               <ShoppingCart className="h-4 w-4" />
-              <span className="absolute -top-1 -right-1 bg-primary text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                0
-              </span>
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-primary text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                  {totalItems > 99 ? "99+" : totalItems}
+                </span>
+              )}
             </Button>
 
             {/* Mobile menu button */}
