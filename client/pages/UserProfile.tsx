@@ -410,7 +410,7 @@ export default function UserProfile() {
                       <div className="flex items-center space-x-4">
                         <div className="text-right">
                           <div className="text-lg font-bold text-primary">
-                            {formatPrice(order.total, selectedCurrency.code)}
+                            {formatPrice(convertPrice(order.total, selectedCurrency.code), selectedCurrency)}
                           </div>
                         </div>
                         <div className="flex space-x-2">
