@@ -201,27 +201,64 @@ export function Navigation() {
                 </Button>
 
                 {showUserMenu && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg border z-50">
-                    <div className="px-4 py-3 border-b">
+                  <div className="absolute right-0 mt-2 w-56 bg-gray-800 text-white rounded-lg shadow-lg border border-gray-700 z-50">
+                    <div className="px-4 py-3 border-b border-gray-700">
                       <p className="font-medium">{user.name}</p>
-                      <p className="text-sm text-gray-500">{user.email}</p>
+                      <p className="text-sm text-gray-400">{user.email}</p>
+                      {user.isAdmin && (
+                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary text-black mt-1">
+                          <Crown className="w-3 h-3 mr-1" />
+                          Admin
+                        </span>
+                      )}
                     </div>
+
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 hover:bg-gray-700 flex items-center"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      <User className="w-4 h-4 mr-2" />
+                      My Profile
+                    </Link>
+
+                    <button
+                      onClick={() => {
+                        setShowCart(true);
+                        setShowUserMenu(false);
+                      }}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-700 flex items-center"
+                    >
+                      <ShoppingCart className="w-4 h-4 mr-2" />
+                      Cart ({totalItems})
+                    </button>
+
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 hover:bg-gray-700 flex items-center"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      <Heart className="w-4 h-4 mr-2" />
+                      Wishlist
+                    </Link>
+
                     {user.isAdmin && (
                       <Link
                         to="/admin"
-                        className="block px-4 py-2 hover:bg-gray-100 flex items-center"
+                        className="block px-4 py-2 hover:bg-gray-700 flex items-center border-t border-gray-700"
                         onClick={() => setShowUserMenu(false)}
                       >
                         <Crown className="w-4 h-4 mr-2 text-primary" />
                         Admin Panel
                       </Link>
                     )}
+
                     <button
                       onClick={() => {
                         logout();
                         setShowUserMenu(false);
                       }}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center"
+                      className="w-full text-left px-4 py-2 hover:bg-gray-700 flex items-center border-t border-gray-700 text-red-400"
                     >
                       <LogOut className="w-4 h-4 mr-2" />
                       Logout
