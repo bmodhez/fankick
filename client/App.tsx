@@ -100,15 +100,7 @@ const App = () => (
                   />
                   <Route
                     path="/trending"
-                    element={
-                      <>
-                        <Navigation />
-                        <PlaceholderPage
-                          title="Trending Now"
-                          description="Stay ahead of the game with the hottest football merchandise trending among fans worldwide."
-                        />
-                      </>
-                    }
+                    element={<TrendingPage />}
                   />
                   <Route
                     path="/football/:category"
