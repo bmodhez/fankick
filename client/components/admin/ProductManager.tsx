@@ -236,8 +236,10 @@ export function ProductManager() {
   const handleSaveProduct = (productData: Product) => {
     if (formMode === "create") {
       addProduct(productData);
+      alert(`✅ Product "${productData.name}" has been created successfully!\n\nChanges are now live on the main website.`);
     } else {
       updateProduct(productData);
+      alert(`✅ Product "${productData.name}" has been updated successfully!\n\nChanges are now live on the main website.`);
     }
     setShowProductForm(false);
     setEditingProduct(null);
