@@ -83,10 +83,54 @@ const App = () => (
                     element={
                       <>
                         <Navigation />
-                        <PlaceholderPage
-                          title="All Collections"
-                          description="Browse all our curated collections across football, anime, and pop culture categories."
-                        />
+                        <div className="min-h-screen bg-gray-900 py-16">
+                          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center mb-16">
+                              <h1 className="text-4xl lg:text-6xl font-sport font-bold text-white mb-4">
+                                ✨ COLLECTIONS
+                              </h1>
+                              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                                Discover our carefully curated collections across football, anime, and pop culture
+                              </p>
+                            </div>
+
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+                              <Link to="/football" className="group">
+                                <div className="bg-gradient-to-br from-green-600 to-blue-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
+                                  <div className="text-6xl mb-4">⚽</div>
+                                  <h2 className="text-2xl font-bold text-white mb-2">Football Legends</h2>
+                                  <p className="text-gray-200 mb-4">Messi, Ronaldo, Mbappé jerseys & gear</p>
+                                  <div className="bg-white/20 rounded-lg p-4">
+                                    <div className="text-white font-semibold">Featured: Official Jerseys</div>
+                                  </div>
+                                </div>
+                              </Link>
+
+                              <Link to="/anime" className="group">
+                                <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
+                                  <div className="text-6xl mb-4">🎌</div>
+                                  <h2 className="text-2xl font-bold text-white mb-2">Anime Universe</h2>
+                                  <p className="text-gray-200 mb-4">Naruto, Demon Slayer, One Piece merch</p>
+                                  <div className="bg-white/20 rounded-lg p-4">
+                                    <div className="text-white font-semibold">Featured: Premium Hoodies</div>
+                                  </div>
+                                </div>
+                              </Link>
+
+                              <Link to="/pop-culture" className="group">
+                                <div className="bg-gradient-to-br from-red-600 to-orange-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
+                                  <div className="text-6xl mb-4">🎭</div>
+                                  <h2 className="text-2xl font-bold text-white mb-2">Pop Culture</h2>
+                                  <p className="text-gray-200 mb-4">Taylor Swift, BTS, Marvel merch</p>
+                                  <div className="bg-white/20 rounded-lg p-4">
+                                    <div className="text-white font-semibold">Featured: Artist Merch</div>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                        <Footer />
                       </>
                     }
                   />
