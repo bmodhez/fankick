@@ -36,6 +36,10 @@ export function QuickAdminAccess() {
     navigate("/admin/test");
   };
 
+  const quickImages = () => {
+    navigate("/admin/images");
+  };
+
   return (
     <Card className="w-full max-w-md bg-gray-800 border-gray-700">
       <CardHeader>
