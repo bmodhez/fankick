@@ -447,7 +447,7 @@ export default function UserProfile() {
                     </h3>
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-lg font-bold text-primary">
-                        {formatPrice(item.price, selectedCurrency.code)}
+                        {formatPrice(convertPrice(item.price, selectedCurrency.code), selectedCurrency)}
                       </span>
                       <Badge className={item.inStock ? "bg-green-500 text-white" : "bg-red-500 text-white"}>
                         {item.inStock ? "In Stock" : "Out of Stock"}
