@@ -18,6 +18,7 @@ import PlaceholderPage from "./pages/PlaceholderPage";
 import ProductPage from "./pages/ProductPage";
 import CategoryPage from "./pages/CategoryPage";
 import SearchResults from "./pages/SearchResults";
+import UserProfile from "./pages/UserProfile";
 import AdminPanel from "./pages/AdminPanel";
 import TermsConditions from "./pages/TermsConditions";
 import ShippingPolicy from "./pages/ShippingPolicy";
