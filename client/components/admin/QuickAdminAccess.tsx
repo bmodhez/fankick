@@ -96,14 +96,25 @@ export function QuickAdminAccess() {
             {isLoading ? "Logging in..." : "Login as Admin"}
           </Button>
           
-          <Button 
-            onClick={quickAccess}
-            variant="outline"
-            className="w-full border-gray-600 text-gray-300"
-          >
-            <Settings className="w-4 h-4 mr-2" />
-            Test Suite (Direct Access)
-          </Button>
+          <div className="grid grid-cols-1 gap-2">
+            <Button
+              onClick={quickAccess}
+              variant="outline"
+              className="w-full border-gray-600 text-gray-300"
+            >
+              <Settings className="w-4 h-4 mr-2" />
+              Test Suite
+            </Button>
+
+            <Button
+              onClick={quickImages}
+              variant="outline"
+              className="w-full border-gray-600 text-gray-300"
+            >
+              <FolderOpen className="w-4 h-4 mr-2" />
+              📁 Folder Upload
+            </Button>
+          </div>
         </div>
 
         <div className="mt-4 p-3 bg-gray-700 rounded-lg">
