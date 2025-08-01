@@ -509,14 +509,14 @@ export default function UserProfile() {
                             {item.variant.color && ` • Color: ${item.variant.color}`}
                           </p>
                           <p className="text-primary font-semibold">
-                            {formatPrice(item.variant.price / 84.15, selectedCurrency.code)} × {item.quantity}
+                            {formatPrice(convertPrice(item.variant.price, selectedCurrency.code, "INR"), selectedCurrency)} × {item.quantity}
                           </p>
                         </div>
                       </div>
                     ))}
                     <div className="border-t border-gray-600 pt-4 flex justify-between items-center">
                       <span className="text-lg font-semibold text-white">
-                        Total: {formatPrice(totalPrice / 84.15, selectedCurrency.code)}
+                        Total: {formatPrice(convertPrice(totalPrice, selectedCurrency.code, "INR"), selectedCurrency)}
                       </span>
                       <Button className="bg-primary text-black hover:bg-primary/90">
                         <CreditCard className="w-4 h-4 mr-2" />
