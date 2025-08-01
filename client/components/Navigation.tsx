@@ -27,8 +27,10 @@ export function Navigation() {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showCart, setShowCart] = useState(false);
   const { selectedCurrency, setCurrency } = useCurrency();
   const { user, logout, isAdmin } = useAuth();
+  const { totalItems } = useCart();
   const navigate = useNavigate();
 
   const currencies = Object.values(CURRENCIES);
