@@ -410,8 +410,8 @@ export default function TrendingPage() {
                           
                           {/* Trending Badge */}
                           <div className="absolute top-3 left-3">
-                            <Badge className="bg-red-500 text-white animate-pulse">
-                              <Fire className="w-3 h-3 mr-1" />
+            <Badge className="bg-red-500 text-white animate-pulse">
+                              <Flame className="w-3 h-3 mr-1" />
                               Trending
                             </Badge>
                           </div>
