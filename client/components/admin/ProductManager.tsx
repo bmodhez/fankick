@@ -298,6 +298,14 @@ export function ProductManager() {
     }
   };
 
+  const handleResetProducts = () => {
+    if (confirm("⚠️ This will reset all products to their original state and remove all your changes.\n\nAre you sure you want to continue?")) {
+      refreshProducts();
+      setSelectedProducts(new Set());
+      alert("✅ Products have been reset to original state.\n\nAll changes have been cleared.");
+    }
+  };
+
   const lowStockCount = products.filter(
     (p) => p.variants.reduce((sum: number, v: any) => sum + v.stock, 0) < 10,
   ).length;
