@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
-import { Shield, Lock, User, Settings } from "lucide-react";
+import { Shield, Lock, User, Settings, FolderOpen } from "lucide-react";
 
 export function QuickAdminAccess() {
   const [email, setEmail] = useState("modhbhavin05@gmail.com");
