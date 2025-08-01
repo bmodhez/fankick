@@ -189,6 +189,7 @@ export function ProductManager() {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [formMode, setFormMode] = useState<"create" | "edit">("create");
   const [selectedProducts, setSelectedProducts] = useState<Set<string>>(new Set());
+  const [lastSyncTime, setLastSyncTime] = useState<string>("");
 
   const categories = ["all", "football", "anime", "pop-culture"];
 
