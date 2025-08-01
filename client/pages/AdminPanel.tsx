@@ -32,6 +32,7 @@ export default function AdminPanel() {
     if (path === "/admin/orders") return "Order Management";
     if (path === "/admin/customers") return "Customer Management";
     if (path === "/admin/categories") return "Category Management";
+    if (path === "/admin/images") return "Image Management";
     if (path === "/admin/analytics") return "Analytics & Reports";
     if (path === "/admin/content") return "Content Management";
     if (path === "/admin/marketing") return "Marketing Tools";
