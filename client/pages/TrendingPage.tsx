@@ -329,7 +329,7 @@ export default function TrendingPage() {
                               </h3>
                               <div className="flex items-center space-x-2">
                                 <Badge className="bg-red-500 text-white">
-                                  <Fire className="w-3 h-3 mr-1" />
+                                  <Flame className="w-3 h-3 mr-1" />
                                   Trending
                                 </Badge>
                                 {product.isExclusive && (
