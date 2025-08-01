@@ -293,7 +293,7 @@ export default function CategoryPage() {
                       <div className="flex items-center justify-between mb-3">
                         <div>
                           <span className="font-bold text-primary text-lg">
-                            {formatPrice(convertedPrice, selectedCurrency.code)}
+                            {formatPrice(convertedPrice, selectedCurrency)}
                           </span>
                           <span className="text-gray-400 line-through text-sm ml-2">
                             {formatPrice(
