@@ -10,7 +10,7 @@ import { Footer } from "@/components/Footer";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useCurrency } from "@/contexts/CurrencyContext";
-import { formatPrice } from "@/utils/currency";
+import { formatPrice, convertPrice } from "@/utils/currency";
 import {
   User,
   Mail,
