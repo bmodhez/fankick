@@ -318,7 +318,17 @@ export default function Index() {
                           </Badge>
                         </div>
 
-                        <Button className="w-full bg-black text-white hover:bg-gray-800 font-semibold">
+                        <Button
+                          className="w-full bg-black text-white hover:bg-gray-800 font-semibold"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            if (product.variants.length > 0) {
+                              addToCart(product, product.variants[0]);
+                              alert(`✅ ${product.name} added to cart!`);
+                            }
+                          }}
+                        >
                           Add to Cart
                         </Button>
                       </div>
