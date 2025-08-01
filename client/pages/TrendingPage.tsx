@@ -367,10 +367,10 @@ export default function TrendingPage() {
                             <div className="flex items-center justify-between">
                               <div>
                                 <span className="text-2xl font-bold text-primary">
-                                  {formatPrice(convertedPrice, selectedCurrency.code)}
+                                  {formatPrice(convertedPrice, selectedCurrency)}
                                 </span>
                                 <span className="text-gray-400 line-through text-lg ml-2">
-                                  {formatPrice(convertedOriginalPrice, selectedCurrency.code)}
+                                  {formatPrice(convertedOriginalPrice, selectedCurrency)}
                                 </span>
                               </div>
                               
@@ -468,10 +468,10 @@ export default function TrendingPage() {
                         <div className="flex items-center justify-between mb-3">
                           <div>
                             <span className="text-lg font-bold text-primary">
-                              {formatPrice(convertedPrice, selectedCurrency.code)}
+                              {formatPrice(convertedPrice, selectedCurrency)}
                             </span>
                             <span className="text-sm text-gray-400 line-through ml-2">
-                              {formatPrice(convertedOriginalPrice, selectedCurrency.code)}
+                              {formatPrice(convertedOriginalPrice, selectedCurrency)}
                             </span>
                           </div>
                           <Badge className="bg-green-100 text-green-800 text-xs">
@@ -521,7 +521,7 @@ export default function TrendingPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {["football", "anime", "pop-culture"].map((category) => {
                 const categoryProducts = trendingProducts.filter(p => p.category === category);
-                const categoryIcon = category === "football" ? "⚽" : category === "anime" ? "🎌" : "🎭";
+                const categoryIcon = category === "football" ? "⚽" : category === "anime" ? "🎌" : "���";
                 
                 return (
                   <Link
