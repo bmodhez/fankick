@@ -59,7 +59,7 @@ export default function TrendingPage() {
     // Apply price range filter
     if (priceRange !== "all") {
       filtered = filtered.filter(product => {
-        const price = convertPrice(product.basePrice / 84.15, "INR", selectedCurrency.code);
+        const price = convertPrice(product.basePrice, selectedCurrency.code, "INR");
         switch (priceRange) {
           case "under-25":
             return price < 25;
