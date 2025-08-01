@@ -356,6 +356,13 @@ export function ProductManager() {
             Export
           </Button>
           <Button
+            variant="outline"
+            onClick={handleResetProducts}
+            className="border-red-600 text-red-400 hover:bg-red-600/10"
+          >
+            🔄 Reset All
+          </Button>
+          <Button
             className="bg-primary text-black hover:bg-primary/90"
             onClick={handleAddProduct}
           >
