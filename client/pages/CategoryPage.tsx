@@ -163,8 +163,8 @@ export default function CategoryPage() {
               <option value="over-3000">
                 Over{" "}
                 {formatPrice(
-                  convertPrice(3000 / 84.15, selectedCurrency.code),
-                  selectedCurrency.code,
+                  convertPrice(3000, selectedCurrency.code, "INR"),
+                  selectedCurrency,
                 )}
               </option>
             </select>
