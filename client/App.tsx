@@ -182,6 +182,7 @@ const App = () => (
                   <Route path="/admin/orders" element={<AdminPanel />} />
                   <Route path="/admin/customers" element={<AdminPanel />} />
                   <Route path="/admin/categories" element={<AdminPanel />} />
+                  <Route path="/admin/images" element={<AdminPanel />} />
                   <Route path="/admin/analytics" element={<AdminPanel />} />
                   <Route path="/admin/content" element={<AdminPanel />} />
                   <Route path="/admin/marketing" element={<AdminPanel />} />
