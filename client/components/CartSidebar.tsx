@@ -293,7 +293,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             {shippingCost > 0 && (
               <div className="bg-blue-500/20 border border-blue-500 rounded p-2 text-blue-400 text-sm">
                 <Truck className="w-4 h-4 inline mr-2" />
-                Add {formatPrice(50 - convertedTotal, selectedCurrency)} more for FREE shipping!
+                Add {formatPrice(freeShippingThreshold - convertedTotal, selectedCurrency)} more for FREE shipping!
               </div>
             )}
 
