@@ -23,8 +23,11 @@ export function Navigation() {
   const [showCurrency, setShowCurrency] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { selectedCurrency, setCurrency } = useCurrency();
   const { user, logout, isAdmin } = useAuth();
+  const navigate = useNavigate();
 
   const currencies = Object.values(CURRENCIES);
 
