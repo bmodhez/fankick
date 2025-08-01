@@ -246,6 +246,7 @@ export function ProductManager() {
   };
 
   const handleDeleteProduct = (id: string) => {
+    const productToDelete = products.find(p => p.id === id);
     if (confirm("Are you sure you want to delete this product? This action cannot be undone.")) {
       deleteProduct(id);
       setSelectedProducts(prev => {
@@ -253,6 +254,7 @@ export function ProductManager() {
         newSet.delete(id);
         return newSet;
       });
+      alert(`✅ Product "${productToDelete?.name || 'Unknown'}" has been deleted successfully!\n\nChanges are now live on the main website.`);
     }
   };
 
