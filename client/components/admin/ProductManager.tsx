@@ -328,11 +328,14 @@ export function ProductManager() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-white">
-            📦 Product Management
-          </h2>
+          <div className="flex items-center space-x-3 mb-2">
+            <h2 className="text-2xl font-bold text-white">
+              📦 Product Management
+            </h2>
+            <SyncStatus lastUpdated={lastSyncTime} />
+          </div>
           <p className="text-gray-400">
-            Manage your inventory and product catalog
+            Manage your inventory and product catalog • Changes sync to main website in real-time
           </p>
         </div>
         <div className="flex items-center space-x-3">
