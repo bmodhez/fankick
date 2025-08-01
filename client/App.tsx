@@ -94,6 +94,10 @@ const App = () => (
                     element={<SearchResults />}
                   />
                   <Route
+                    path="/profile"
+                    element={<UserProfile />}
+                  />
+                  <Route
                     path="/trending"
                     element={
                       <>
