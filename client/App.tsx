@@ -87,6 +87,10 @@ const App = () => (
                     }
                   />
                   <Route
+                    path="/search"
+                    element={<SearchResults />}
+                  />
+                  <Route
                     path="/trending"
                     element={
                       <>
