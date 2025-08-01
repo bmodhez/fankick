@@ -23,6 +23,7 @@ import {
 
 export default function Index() {
   const { selectedCurrency } = useCurrency();
+  const { getTrendingProducts } = useProducts();
   const trendingProducts = getTrendingProducts(4);
 
   const heroCategories = [
