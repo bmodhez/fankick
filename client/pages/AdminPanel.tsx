@@ -7,6 +7,7 @@ import { ProductManager } from "@/components/admin/ProductManager";
 import { OrderManager } from "@/components/admin/OrderManager";
 import { Analytics } from "@/components/admin/Analytics";
 import { AdminTest } from "@/components/admin/AdminTest";
+import { BulkImageManager } from "@/components/admin/BulkImageManager";
 
 export default function AdminPanel() {
   const { user, isAdmin } = useAuth();
