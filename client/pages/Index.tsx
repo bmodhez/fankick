@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Footer } from "@/components/Footer";
 import { QuickAdminAccess } from "@/components/admin/QuickAdminAccess";
 import { useCurrency } from "@/contexts/CurrencyContext";
-import { getTrendingProducts } from "@/data/products";
+import { useProducts } from "@/contexts/ProductContext";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   Star,
