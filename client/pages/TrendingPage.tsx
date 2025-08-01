@@ -302,14 +302,14 @@ export default function TrendingPage() {
             }>
               {trendingProducts.map((product) => {
                 const convertedPrice = convertPrice(
-                  product.basePrice / 84.15,
-                  "INR",
+                  product.basePrice,
                   selectedCurrency.code,
+                  "INR"
                 );
                 const convertedOriginalPrice = convertPrice(
-                  product.originalPrice / 84.15,
-                  "INR",
+                  product.originalPrice,
                   selectedCurrency.code,
+                  "INR"
                 );
 
                 if (viewMode === "list") {
