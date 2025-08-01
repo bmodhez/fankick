@@ -122,7 +122,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               {items.map((item) => {
                 const convertedPrice = convertPrice(
                   item.variant.price,
-                  selectedCurrency.code
+                  selectedCurrency.code,
+                  "INR"
                 );
 
                 return (
