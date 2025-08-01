@@ -635,42 +635,237 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-white">Product Images</h3>
                 <div className="flex items-center space-x-2">
-                  <Input
-                    value={newImage}
-                    onChange={(e) => setNewImage(e.target.value)}
-                    placeholder="Enter image URL"
-                    className="bg-gray-700 border-gray-600 text-white w-64"
-                  />
-                  <Button onClick={addImage} className="bg-primary text-black hover:bg-primary/90">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add
-                  </Button>
+                  <span className="text-sm text-gray-400">
+                    {formData.images.length} image{formData.images.length !== 1 ? 's' : ''}
+                  </span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {formData.images.map((image, index) => (
-                  <Card key={index} className="bg-gray-700 border-gray-600">
-                    <CardContent className="p-4">
-                      <div className="relative">
-                        <img
-                          src={image}
-                          alt={`Product ${index + 1}`}
-                          className="w-full h-32 object-cover rounded-lg"
-                        />
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => removeImage(index)}
-                          className="absolute top-1 right-1 text-red-400 hover:text-red-300 bg-black/50 hover:bg-black/70"
-                        >
-                          <X className="w-3 h-3" />
-                        </Button>
+              {/* Upload Methods */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Drag & Drop Upload */}
+                <Card className="bg-gray-700 border-gray-600">
+                  <CardContent className="p-6">
+                    <h4 className="text-white font-medium mb-4 flex items-center">
+                      <FolderOpen className="w-5 h-5 mr-2" />
+                      Upload from Folder
+                    </h4>
+
+                    <div
+                      className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
+                        isDragOver
+                          ? 'border-primary bg-primary/10'
+                          : 'border-gray-500 hover:border-primary/50 hover:bg-gray-600/50'
+                      }`}
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
+                      onClick={triggerFileSelect}
+                    >
+                      <CloudUpload className={`w-12 h-12 mx-auto mb-4 ${isDragOver ? 'text-primary' : 'text-gray-400'}`} />
+                      <p className="text-white font-medium mb-2">
+                        {isDragOver ? 'Drop images here' : 'Drag & drop images here'}
+                      </p>
+                      <p className="text-gray-400 text-sm mb-4">
+                        or click to browse from your computer
+                      </p>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="border-gray-600 text-gray-300 hover:bg-gray-600"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          triggerFileSelect();
+                        }}
+                      >
+                        <FileImage className="w-4 h-4 mr-2" />
+                        Choose Files
+                      </Button>
+                      <p className="text-xs text-gray-500 mt-3">
+                        Supports: JPG, PNG, GIF, WebP (Max 5MB each)
+                      </p>
+                    </div>
+
+                    {/* Upload Progress */}
+                    {Object.keys(uploadProgress).length > 0 && (
+                      <div className="mt-4 space-y-2">
+                        {Object.entries(uploadProgress).map(([fileId, progress]) => (
+                          <div key={fileId} className="space-y-1">
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-400">Uploading...</span>
+                              <span className="text-primary">{progress}%</span>
+                            </div>
+                            <div className="w-full bg-gray-600 rounded-full h-2">
+                              <div
+                                className="bg-primary h-2 rounded-full transition-all duration-300"
+                                style={{ width: `${progress}%` }}
+                              />
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                    )}
+                  </CardContent>
+                </Card>
+
+                {/* URL Upload */}
+                <Card className="bg-gray-700 border-gray-600">
+                  <CardContent className="p-6">
+                    <h4 className="text-white font-medium mb-4 flex items-center">
+                      <Link className="w-5 h-5 mr-2" />
+                      Add from URL
+                    </h4>
+
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-white mb-2">
+                          Image URL
+                        </label>
+                        <Input
+                          value={newImage}
+                          onChange={(e) => setNewImage(e.target.value)}
+                          placeholder="https://example.com/image.jpg"
+                          className="bg-gray-600 border-gray-500 text-white"
+                        />
+                      </div>
+
+                      <Button
+                        onClick={addImage}
+                        disabled={!newImage.trim()}
+                        className="w-full bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        Add Image URL
+                      </Button>
+
+                      <div className="p-3 bg-gray-600 rounded-lg">
+                        <p className="text-xs text-gray-400 mb-2">💡 Quick URLs for testing:</p>
+                        <div className="space-y-1">
+                          {[
+                            'https://via.placeholder.com/400x400/10b981/ffffff?text=Product+1',
+                            'https://via.placeholder.com/400x400/8b5cf6/ffffff?text=Product+2',
+                            'https://via.placeholder.com/400x400/f59e0b/ffffff?text=Product+3'
+                          ].map((url, index) => (
+                            <button
+                              key={index}
+                              onClick={() => setNewImage(url)}
+                              className="block w-full text-left text-xs text-gray-300 hover:text-primary truncate"
+                            >
+                              {url}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
+
+              {/* Loading State */}
+              {isUploading && (
+                <div className="flex items-center justify-center p-4 bg-gray-700/50 rounded-lg">
+                  <Loader className="w-5 h-5 animate-spin text-primary mr-3" />
+                  <span className="text-white">Processing images...</span>
+                </div>
+              )}
+
+              {/* Images Grid */}
+              {formData.images.length > 0 ? (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-white font-medium">Uploaded Images</h4>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setFormData(prev => ({ ...prev, images: ["/placeholder.svg"] }))}
+                      className="border-gray-600 text-gray-300"
+                    >
+                      <Trash className="w-4 h-4 mr-2" />
+                      Clear All
+                    </Button>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {formData.images.map((image, index) => (
+                      <Card key={index} className="bg-gray-700 border-gray-600 group hover:border-primary/50 transition-colors">
+                        <CardContent className="p-3">
+                          <div className="relative">
+                            <img
+                              src={image}
+                              alt={`Product ${index + 1}`}
+                              className="w-full h-32 object-cover rounded-lg"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = "/placeholder.svg";
+                              }}
+                            />
+
+                            {/* Image Actions */}
+                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center space-x-2">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => window.open(image, '_blank')}
+                                className="text-white hover:text-primary bg-black/70 hover:bg-black/90"
+                              >
+                                <Eye className="w-4 h-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => removeImage(index)}
+                                className="text-red-400 hover:text-red-300 bg-black/70 hover:bg-black/90"
+                              >
+                                <Trash className="w-4 h-4" />
+                              </Button>
+                            </div>
+
+                            {/* Primary Image Badge */}
+                            {index === 0 && (
+                              <div className="absolute top-2 left-2">
+                                <Badge className="bg-primary text-black text-xs">
+                                  Primary
+                                </Badge>
+                              </div>
+                            )}
+
+                            {/* Image Index */}
+                            <div className="absolute bottom-2 right-2">
+                              <Badge className="bg-black/70 text-white text-xs">
+                                {index + 1}
+                              </Badge>
+                            </div>
+                          </div>
+
+                          {/* Image Details */}
+                          <div className="mt-2">
+                            <p className="text-xs text-gray-400 truncate">
+                              {image.length > 50 ? `${image.substring(0, 50)}...` : image}
+                            </p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+
+                  {/* Reorder Instructions */}
+                  <div className="p-3 bg-gray-700 rounded-lg">
+                    <p className="text-sm text-gray-400">
+                      💡 <strong>Tip:</strong> The first image will be used as the main product image.
+                      You can reorder images by deleting and re-adding them in your preferred order.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <ImageIcon className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-gray-400 mb-2">
+                    No images uploaded yet
+                  </h3>
+                  <p className="text-gray-500 mb-4">
+                    Upload images using the methods above to showcase your product
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
