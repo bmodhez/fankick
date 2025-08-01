@@ -14,8 +14,10 @@ import {
 import { Button } from "./ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { AuthModal } from "./AuthModal";
+import { CartSidebar } from "./CartSidebar";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
 import { CURRENCIES } from "@/utils/currency";
 
 export function Navigation() {
