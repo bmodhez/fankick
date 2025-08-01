@@ -199,12 +199,14 @@ export default function CategoryPage() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredAndSortedProducts.map((product) => {
             const convertedPrice = convertPrice(
-              product.basePrice / 84.15,
+              product.basePrice,
               selectedCurrency.code,
+              "INR"
             );
             const convertedOriginalPrice = convertPrice(
-              product.originalPrice / 84.15,
+              product.originalPrice,
               selectedCurrency.code,
+              "INR"
             );
 
             return (
