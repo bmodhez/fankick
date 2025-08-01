@@ -101,7 +101,7 @@ function ProductCard({
               {product.name}
             </h3>
             <p className="text-xs text-gray-400 capitalize">
-              {product.category} • {product.subcategory}
+              {product.category} ��� {product.subcategory}
             </p>
           </div>
 
@@ -180,7 +180,7 @@ function ProductCard({
 }
 
 export function ProductManager() {
-  const [products, setProducts] = useState(PRODUCTS);
+  const { products, updateProduct, deleteProduct, addProduct } = useProducts();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("name");
