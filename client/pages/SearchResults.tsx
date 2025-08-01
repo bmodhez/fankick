@@ -305,14 +305,14 @@ export default function SearchResults() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
             {searchResults.map((product) => {
               const convertedPrice = convertPrice(
-                product.basePrice / 84.15,
-                "INR",
-                selectedCurrency,
+                product.basePrice,
+                selectedCurrency.code,
+                "INR"
               );
               const convertedOriginalPrice = convertPrice(
-                product.originalPrice / 84.15,
-                "INR",
-                selectedCurrency,
+                product.originalPrice,
+                selectedCurrency.code,
+                "INR"
               );
 
               return (
