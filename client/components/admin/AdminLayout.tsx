@@ -71,6 +71,12 @@ const navigation = [
     emoji: "🏷️",
   },
   {
+    name: "Images",
+    href: "/admin/images",
+    icon: Image,
+    emoji: "🖼️",
+  },
+  {
     name: "Analytics",
     href: "/admin/analytics",
     icon: TrendingUp,
