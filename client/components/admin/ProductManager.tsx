@@ -180,7 +180,7 @@ function ProductCard({
 }
 
 export function ProductManager() {
-  const { products, updateProduct, deleteProduct, addProduct } = useProducts();
+  const { products, updateProduct, deleteProduct, addProduct, refreshProducts } = useProducts();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("name");
