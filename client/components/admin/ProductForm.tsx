@@ -21,6 +21,11 @@ import {
   Image as ImageIcon,
   AlertTriangle,
   Copy,
+  FolderOpen,
+  CloudUpload,
+  Link,
+  FileImage,
+  Loader,
 } from "lucide-react";
 
 interface ProductFormProps {
