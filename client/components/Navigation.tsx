@@ -133,13 +133,47 @@ export function Navigation() {
               )}
             </div>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              className="hidden sm:flex text-white hover:text-primary"
-            >
-              <Search className="h-4 w-4" />
-            </Button>
+            <div className="relative">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hidden sm:flex text-white hover:text-primary"
+                onClick={handleQuickSearch}
+              >
+                <Search className="h-4 w-4" />
+              </Button>
+
+              {/* Quick Search Dropdown */}
+              {showSearch && (
+                <div className="absolute right-0 mt-2 w-80 bg-gray-800 border border-gray-700 rounded-lg shadow-lg z-50 p-4">
+                  <div className="flex space-x-2">
+                    <input
+                      type="text"
+                      placeholder="Search products..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                          handleSearch(searchQuery);
+                        }
+                      }}
+                      className="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
+                      autoFocus
+                    />
+                    <Button
+                      onClick={() => handleSearch(searchQuery)}
+                      className="bg-primary text-black hover:bg-primary/90"
+                      size="sm"
+                    >
+                      <Search className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  <div className="mt-3 text-xs text-gray-400">
+                    Try: "Naruto", "Messi", "Taylor Swift", "Football Jersey"
+                  </div>
+                </div>
+              )}
+            </div>
             <ThemeToggle />
 
             {/* User Authentication */}
