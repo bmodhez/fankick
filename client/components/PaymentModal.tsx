@@ -24,14 +24,9 @@ import {
 interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  product: {
-    name: string;
-    image: string;
-    price: number;
-    quantity: number;
-  };
-  shippingCost: number;
-  codAvailable: boolean;
+  amount: number;
+  currency: string;
+  items?: any[];
 }
 
 export function PaymentModal({
