@@ -27,11 +27,23 @@ export const COUNTRY_CURRENCY_MAP: Record<string, string> = {
   IN: "INR",
 };
 
-export function convertPrice(usdPrice: number, toCurrency: string): number {
-  const currency = CURRENCIES[toCurrency];
-  if (!currency) return usdPrice;
+export function convertPrice(basePrice: number, toCurrency: string, fromCurrency: string = "USD"): number {
+  const fromCurrencyData = CURRENCIES[fromCurrency];
+  const toCurrencyData = CURRENCIES[toCurrency];
 
-  const convertedPrice = usdPrice * currency.rate;
+  if (!fromCurrencyData || !toCurrencyData) return basePrice;
+
+  // If converting from and to the same currency, return as is
+  if (fromCurrency === toCurrency) return basePrice;
+
+  // Convert to USD first if not already USD
+  let usdPrice = basePrice;
+  if (fromCurrency !== "USD") {
+    usdPrice = basePrice / fromCurrencyData.rate;
+  }
+
+  // Convert from USD to target currency
+  const convertedPrice = usdPrice * toCurrencyData.rate;
 
   // Round to appropriate decimal places based on currency
   if (toCurrency === "JPY" || toCurrency === "KRW") {
