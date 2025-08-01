@@ -74,12 +74,14 @@ export default function ProductPage() {
     product.variants.find((v) => v.id === selectedVariant) ||
     product.variants[0];
   const convertedPrice = convertPrice(
-    currentVariant.price / 84.15,
+    currentVariant.price,
     selectedCurrency.code,
+    "INR"
   );
   const convertedOriginalPrice = convertPrice(
-    currentVariant.originalPrice / 84.15,
+    currentVariant.originalPrice,
     selectedCurrency.code,
+    "INR"
   );
 
   const paymentMethods = getAvailablePaymentMethods(
