@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Product } from "@/data/products";
 import { ProductForm } from "./ProductForm";
+import { SyncStatus } from "./SyncStatus";
 import { useProducts } from "@/contexts/ProductContext";
 import {
   Plus,
