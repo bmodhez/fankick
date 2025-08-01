@@ -25,6 +25,7 @@ import {
 export default function Index() {
   const { selectedCurrency } = useCurrency();
   const { getTrendingProducts } = useProducts();
+  const { addToCart } = useCart();
   const trendingProducts = getTrendingProducts(4);
 
   const heroCategories = [
