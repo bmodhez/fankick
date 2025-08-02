@@ -33,6 +33,11 @@ export default function SearchResults() {
   const [sortBy, setSortBy] = useState("relevance");
   const [showFilters, setShowFilters] = useState(false);
 
+  // Scroll to top when search query changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [query]);
+
   // Search results
   const searchResults = useMemo(() => {
     if (!query) return [];
