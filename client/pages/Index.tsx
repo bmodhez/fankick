@@ -394,7 +394,7 @@ export default function Index() {
                       </div>
                     </div>
                     <div className="p-4">
-                      <p className="text-gray-600 text-sm mb-4">
+                      <p className="text-muted-foreground text-sm mb-4">
                         {category.description}
                       </p>
                       <Button
