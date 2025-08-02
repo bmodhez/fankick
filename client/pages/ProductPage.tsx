@@ -566,7 +566,7 @@ export default function ProductPage() {
                         </h3>
                         <div className="flex items-center mb-2">
                           <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="text-sm text-gray-600 ml-1">
+                          <span className="text-sm text-muted-foreground ml-1">
                             {relatedProduct.rating}
                           </span>
                         </div>
