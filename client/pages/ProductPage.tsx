@@ -383,7 +383,7 @@ export default function ProductPage() {
                 <MapPin className="w-5 h-5 text-primary" />
                 <div>
                   <p className="font-medium">Global Shipping Available</p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     Ships to 150+ countries
                   </p>
                 </div>
