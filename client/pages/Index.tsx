@@ -29,6 +29,11 @@ export default function Index() {
   const { addToCart } = useCart();
   const trendingProducts = getTrendingProducts(4);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const heroCategories = [
     {
       title: "Football Legends",
