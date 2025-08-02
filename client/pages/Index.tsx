@@ -295,7 +295,7 @@ export default function Index() {
                               />
                             ))}
                           </div>
-                          <span className="text-xs text-gray-600 ml-2">
+                          <span className="text-xs text-muted-foreground ml-2">
                             {product.rating} ({product.reviews.toLocaleString()}
                             )
                           </span>
