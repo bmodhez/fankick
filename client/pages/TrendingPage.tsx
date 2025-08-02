@@ -358,12 +358,12 @@ export default function TrendingPage() {
                                     }`}
                                   />
                                 ))}
-                                <span className="text-sm text-gray-400 ml-2">
+                                <span className="text-sm text-muted-foreground ml-2">
                                   {product.rating} ({product.reviews.toLocaleString()})
                                 </span>
                               </div>
                               
-                              <div className="flex items-center text-sm text-gray-400">
+                              <div className="flex items-center text-sm text-muted-foreground">
                                 <Clock className="w-4 h-4 mr-1" />
                                 {product.shippingDays} days delivery
                               </div>
@@ -374,7 +374,7 @@ export default function TrendingPage() {
                                 <span className="text-2xl font-bold text-primary">
                                   {formatPrice(convertedPrice, selectedCurrency)}
                                 </span>
-                                <span className="text-gray-400 line-through text-lg ml-2">
+                                <span className="text-muted-foreground line-through text-lg ml-2">
                                   {formatPrice(convertedOriginalPrice, selectedCurrency)}
                                 </span>
                               </div>
@@ -458,7 +458,7 @@ export default function TrendingPage() {
                                 }`}
                               />
                             ))}
-                            <span className="text-xs text-gray-400 ml-1">
+                            <span className="text-xs text-muted-foreground ml-1">
                               ({product.reviews.toLocaleString()})
                             </span>
                           </div>
@@ -475,7 +475,7 @@ export default function TrendingPage() {
                             <span className="text-lg font-bold text-primary">
                               {formatPrice(convertedPrice, selectedCurrency)}
                             </span>
-                            <span className="text-sm text-gray-400 line-through ml-2">
+                            <span className="text-sm text-muted-foreground line-through ml-2">
                               {formatPrice(convertedOriginalPrice, selectedCurrency)}
                             </span>
                           </div>
@@ -490,12 +490,12 @@ export default function TrendingPage() {
                         </div>
 
                         <div className="flex items-center justify-between mb-3">
-                          <span className="text-xs text-gray-400 flex items-center">
+                          <span className="text-xs text-muted-foreground flex items-center">
                             <Clock className="w-3 h-3 mr-1" />
                             {product.shippingDays} days
                           </span>
                           {product.codAvailable && (
-                            <Badge variant="outline" className="text-xs border-gray-600 text-gray-400">
+                            <Badge variant="outline" className="text-xs border-border text-muted-foreground">
                               COD
                             </Badge>
                           )}
@@ -539,7 +539,7 @@ export default function TrendingPage() {
                       <h3 className="text-xl font-semibold text-white mb-2 capitalize group-hover:text-primary transition-colors">
                         {category === "pop-culture" ? "Pop Culture" : category}
                       </h3>
-                      <p className="text-gray-400 mb-4">
+                      <p className="text-muted-foreground mb-4">
                         {categoryProducts.length} trending products
                       </p>
                       <Button variant="outline" className="border-gray-600 text-gray-300 group-hover:border-primary group-hover:text-primary">
