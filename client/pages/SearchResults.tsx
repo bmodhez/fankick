@@ -373,7 +373,7 @@ export default function SearchResults() {
                               }`}
                             />
                           ))}
-                          <span className="text-xs text-gray-400 ml-1">
+                          <span className="text-xs text-muted-foreground ml-1">
                             ({product.reviews})
                           </span>
                         </div>
@@ -390,19 +390,19 @@ export default function SearchResults() {
                           <span className="text-lg font-bold text-primary">
                             {formatPrice(convertedPrice, selectedCurrency)}
                           </span>
-                          <span className="text-sm text-gray-400 line-through ml-2">
+                          <span className="text-sm text-muted-foreground line-through ml-2">
                             {formatPrice(convertedOriginalPrice, selectedCurrency)}
                           </span>
                         </div>
                       </div>
 
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-gray-400 flex items-center">
+                        <span className="text-xs text-muted-foreground flex items-center">
                           <Clock className="w-3 h-3 mr-1" />
                           {product.shippingDays} days delivery
                         </span>
                         {product.codAvailable && (
-                          <Badge variant="outline" className="text-xs border-gray-600 text-gray-400">
+                          <Badge variant="outline" className="text-xs border-border text-muted-foreground">
                             COD Available
                           </Badge>
                         )}
@@ -427,7 +427,7 @@ export default function SearchResults() {
             <h2 className="text-xl font-semibold text-white mb-2">
               No results found for "{query}"
             </h2>
-            <p className="text-gray-400 mb-6">
+            <p className="text-muted-foreground mb-6">
               Try searching with different keywords or check out our popular products
             </p>
             
