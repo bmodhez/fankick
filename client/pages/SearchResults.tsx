@@ -128,7 +128,7 @@ export default function SearchResults() {
             {/* Search Bar */}
             <div className="flex-1 relative">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <Input
                   type="text"
                   placeholder="Search products, brands, categories..."
@@ -159,7 +159,7 @@ export default function SearchResults() {
                       onClick={() => handleSearch(suggestion)}
                       className="w-full text-left px-4 py-2 hover:bg-gray-700 text-white border-b border-gray-700 last:border-b-0"
                     >
-                      <Search className="w-4 h-4 inline mr-2 text-gray-400" />
+                      <Search className="w-4 h-4 inline mr-2 text-muted-foreground" />
                       {suggestion}
                     </button>
                   ))}
@@ -187,7 +187,7 @@ export default function SearchResults() {
           <div className="mt-4">
             {query ? (
               <div className="flex items-center justify-between">
-                <p className="text-gray-400">
+                <p className="text-muted-foreground">
                   {searchResults.length > 0 ? (
                     <>
                       Showing <span className="text-white font-medium">{searchResults.length}</span> results for{" "}
@@ -220,13 +220,13 @@ export default function SearchResults() {
                 <h2 className="text-xl font-semibold text-white mb-2">
                   Search FanKick Products
                 </h2>
-                <p className="text-gray-400 mb-6">
+                <p className="text-muted-foreground mb-6">
                   Find your favorite anime, football, and pop culture merchandise
                 </p>
                 
                 {/* Popular Searches */}
                 <div className="max-w-2xl mx-auto">
-                  <p className="text-sm text-gray-500 mb-3">Popular searches:</p>
+                  <p className="text-sm text-muted-foreground mb-3">Popular searches:</p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     {popularSearches.map((term, index) => (
                       <Button
@@ -257,7 +257,7 @@ export default function SearchResults() {
                     variant="ghost"
                     size="sm"
                     onClick={clearFilters}
-                    className="text-gray-400 hover:text-white"
+                    className="text-muted-foreground hover:text-foreground"
                   >
                     <X className="w-4 h-4 mr-2" />
                     Clear All
