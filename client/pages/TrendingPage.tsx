@@ -39,6 +39,11 @@ export default function TrendingPage() {
   const [viewMode, setViewMode] = useState("grid");
   const [showFilters, setShowFilters] = useState(false);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Get trending products and all products for filtering
   const trendingProducts = useMemo(() => {
     let filtered = products.filter(product => product.isTrending);
@@ -220,7 +225,7 @@ export default function TrendingPage() {
                         <option value="all">All Categories</option>
                         <option value="football">⚽ Football</option>
                         <option value="anime">🎌 Anime</option>
-                        <option value="pop-culture">🎭 Pop Culture</option>
+                        <option value="pop-culture">�� Pop Culture</option>
                       </select>
                     </div>
                     
