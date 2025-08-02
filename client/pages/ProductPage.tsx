@@ -480,7 +480,7 @@ export default function ProductPage() {
                       />
                     ))}
                   </div>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     {product.reviews} total reviews
                   </p>
                 </CardContent>
