@@ -134,7 +134,7 @@ export function Footer() {
             <div>
               <h4 className="font-medium mb-2">We Accept</h4>
               <div className="flex items-center space-x-4">
-                <div className="bg-white rounded px-2 py-1">
+                <div className="bg-primary rounded px-2 py-1">
                   <span className="text-black text-sm font-medium">COD</span>
                 </div>
                 <div className="bg-blue-600 rounded px-2 py-1">
