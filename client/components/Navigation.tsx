@@ -119,7 +119,7 @@ export function Navigation() {
               </Button>
 
               {showCurrency && (
-                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg border z-50">
+                <div className="absolute right-0 mt-2 w-48 bg-background border rounded-lg shadow-lg z-50">
                   {currencies.map((currency) => (
                     <button
                       key={currency.code}
