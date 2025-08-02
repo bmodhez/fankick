@@ -3,7 +3,7 @@ import { Footer } from '@/components/Footer'
 
 export default function RefundPolicy() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Navigation />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -36,7 +36,7 @@ export default function RefundPolicy() {
             
             <div className="bg-blue-50 rounded-lg p-4 mb-4">
               <p className="text-gray-800 font-medium mb-2">
-                📅 <strong>14-Day Return Window</strong>
+                �� <strong>14-Day Return Window</strong>
               </p>
               <p className="text-gray-700 text-sm">
                 You have 14 days from the date you receive your item to request a return. 
