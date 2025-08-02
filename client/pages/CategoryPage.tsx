@@ -110,7 +110,7 @@ export default function CategoryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
@@ -252,7 +252,7 @@ export default function CategoryPage() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="bg-white/90 hover:bg-white"
+                          className="bg-background/90 hover:bg-background"
                         >
                           <Heart className="w-4 h-4" />
                         </Button>
