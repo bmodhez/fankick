@@ -373,7 +373,7 @@ export default function ProductPage() {
                         )}{" "}
                     Shipping
                   </p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     Estimated delivery in {shippingInfo.estimatedDays} days
                   </p>
                 </div>
