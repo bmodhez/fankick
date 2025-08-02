@@ -394,7 +394,7 @@ export default function ProductPage() {
                   <Banknote className="w-5 h-5 text-primary" />
                   <div>
                     <p className="font-medium">Cash on Delivery Available</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-muted-foreground">
                       Pay when you receive
                     </p>
                   </div>
