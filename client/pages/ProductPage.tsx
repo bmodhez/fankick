@@ -50,6 +50,11 @@ export default function ProductPage() {
     }
   }, [product]);
 
+  // Scroll to top when component mounts or product ID changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
   if (!product) {
     return (
       <div className="min-h-screen bg-white">
