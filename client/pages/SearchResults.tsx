@@ -353,7 +353,7 @@ export default function SearchResults() {
                         <Button
                           size="sm"
                           variant="secondary"
-                          className="bg-white/90 text-black hover:bg-white"
+                          className="bg-background/90 hover:bg-background"
                         >
                           <Heart className="w-4 h-4" />
                         </Button>
