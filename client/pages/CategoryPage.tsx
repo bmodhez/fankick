@@ -285,7 +285,7 @@ export default function CategoryPage() {
                               className={`w-3 h-3 ${
                                 i < Math.floor(product.rating)
                                   ? "text-yellow-400 fill-current"
-                                  : "text-gray-300"
+                                  : "text-muted-foreground"
                               }`}
                             />
                           ))}
@@ -317,7 +317,7 @@ export default function CategoryPage() {
                         </Badge>
                       </div>
 
-                      <Button className="w-full bg-black text-white hover:bg-gray-800 font-semibold">
+                      <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
                         Quick Buy
                       </Button>
                     </div>
