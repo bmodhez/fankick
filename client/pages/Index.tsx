@@ -193,7 +193,7 @@ export default function Index() {
       </section>
 
       {/* Trending Products */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-muted">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Badge className="mb-4 bg-red-100 text-red-800 font-semibold px-4 py-2">
