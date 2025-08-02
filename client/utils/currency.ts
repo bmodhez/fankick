@@ -53,12 +53,14 @@ export function convertPrice(basePrice: number, toCurrency: string, fromCurrency
   return Math.round(convertedPrice * 100) / 100;
 }
 
-export function formatPrice(price: number, currency: string): string {
-  const currencyData = CURRENCIES[currency];
+export function formatPrice(price: number, currency: string | Currency): string {
+  const currencyCode = typeof currency === 'string' ? currency : currency.code;
+  const currencyData = typeof currency === 'string' ? CURRENCIES[currency] : currency;
+
   if (!currencyData) return `$${price}`;
 
   // Special formatting for different currencies
-  switch (currency) {
+  switch (currencyCode) {
     case "USD":
     case "CAD":
       return `${currencyData.symbol}${price.toFixed(2)}`;
