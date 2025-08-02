@@ -26,6 +26,11 @@ export default function CategoryPage() {
 
   const allProducts = getProductsByCategory(category || "");
 
+  // Scroll to top when category changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [category]);
+
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = [...allProducts];
 
