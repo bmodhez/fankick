@@ -40,6 +40,11 @@ export default function UserProfile() {
   const navigate = useNavigate();
   
   const [activeTab, setActiveTab] = useState("profile");
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({
     name: user?.name || "",
