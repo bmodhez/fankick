@@ -3,7 +3,7 @@ import { Footer } from '@/components/Footer'
 
 export default function ShippingPolicy() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Navigation />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -54,7 +54,7 @@ export default function ShippingPolicy() {
 
           {/* Shipping Methods & Times */}
           <section className="mb-8">
-            <h2 className="text-2xl font-bold text-black mb-4">🚚 **Shipping Methods & Delivery Times**</h2>
+            <h2 className="text-2xl font-bold text-black mb-4">���� **Shipping Methods & Delivery Times**</h2>
             
             <h3 className="text-xl font-semibold text-gray-800 mb-3">Standard Shipping (Free on orders €50+)</h3>
             
