@@ -415,7 +415,7 @@ export default function Index() {
       {/* Global Shipping Banner */}
       <section className="py-12 bg-gradient-to-r from-primary to-purple-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-black">
+          <div className="text-center text-foreground">
             <div className="flex items-center justify-center mb-4">
               <Globe className="w-8 h-8 mr-3" />
               <h2 className="text-2xl font-sport font-bold">
