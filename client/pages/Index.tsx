@@ -200,10 +200,10 @@ export default function Index() {
               <Timer className="w-4 h-4 mr-2" />
               Trending Now
             </Badge>
-            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-black mb-4">
+            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-foreground mb-4">
               WHAT'S HOT RIGHT NOW
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Join millions of fans worldwide who are rocking these trending
               items
             </p>
