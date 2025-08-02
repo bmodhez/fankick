@@ -434,10 +434,10 @@ export default function TrendingPage() {
                           {/* Actions */}
                           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <div className="flex space-x-2">
-                              <Button variant="secondary" size="sm" className="bg-white/90 text-black hover:bg-white">
+                              <Button variant="secondary" size="sm" className="bg-background/90 hover:bg-background">
                                 <Eye className="w-4 h-4" />
                               </Button>
-                              <Button variant="secondary" size="sm" className="bg-white/90 text-black hover:bg-white">
+                              <Button variant="secondary" size="sm" className="bg-background/90 hover:bg-background">
                                 <Heart className="w-4 h-4" />
                               </Button>
                             </div>
