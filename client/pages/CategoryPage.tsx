@@ -113,7 +113,7 @@ export default function CategoryPage() {
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
-        <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
+        <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-8">
           <Link to="/" className="hover:text-primary">
             Home
           </Link>
@@ -144,7 +144,7 @@ export default function CategoryPage() {
             <select
               value={priceRange}
               onChange={(e) => setPriceRange(e.target.value)}
-              className="px-3 py-1 border border-gray-300 rounded text-sm"
+              className="px-3 py-1 border border-border rounded text-sm bg-background text-foreground"
             >
               <option value="all">All Prices</option>
               <option value="under-1000">
@@ -183,7 +183,7 @@ export default function CategoryPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-1 border border-gray-300 rounded text-sm"
+              className="px-3 py-1 border border-border rounded text-sm bg-background text-foreground"
             >
               <option value="trending">Trending</option>
               <option value="price-low">Price: Low to High</option>
@@ -300,7 +300,7 @@ export default function CategoryPage() {
                           <span className="font-bold text-primary text-lg">
                             {formatPrice(convertedPrice, selectedCurrency)}
                           </span>
-                          <span className="text-gray-400 line-through text-sm ml-2">
+                          <span className="text-muted-foreground line-through text-sm ml-2">
                             {formatPrice(
                               convertedOriginalPrice,
                               selectedCurrency.code,
