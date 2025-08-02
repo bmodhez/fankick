@@ -180,10 +180,10 @@ export default function ProductPage() {
               </div>
 
               <div className="absolute top-4 right-4 space-y-2">
-                <Button size="sm" variant="outline" className="bg-white">
+                <Button size="sm" variant="outline" className="bg-background">
                   <Heart className="w-4 h-4" />
                 </Button>
-                <Button size="sm" variant="outline" className="bg-white">
+                <Button size="sm" variant="outline" className="bg-background">
                   <Share2 className="w-4 h-4" />
                 </Button>
               </div>
