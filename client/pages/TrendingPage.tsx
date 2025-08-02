@@ -137,7 +137,7 @@ export default function TrendingPage() {
             </h1>
             <TrendingUp className="w-8 h-8 text-primary animate-bounce" />
           </div>
-          <p className="text-xl text-gray-400 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
             Discover the hottest products in football, anime, and pop culture that fans are obsessing over right now!
           </p>
           
@@ -148,7 +148,7 @@ export default function TrendingPage() {
                 <CardContent className="p-4 text-center">
                   <stat.icon className={`w-6 h-6 ${stat.color} mx-auto mb-2`} />
                   <div className="text-2xl font-bold text-white">{stat.value}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </CardContent>
               </Card>
             ))}
@@ -162,7 +162,7 @@ export default function TrendingPage() {
               <div className="flex flex-col lg:flex-row gap-4">
                 {/* Search */}
                 <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     type="text"
                     placeholder="Search trending products..."
@@ -266,7 +266,7 @@ export default function TrendingPage() {
                   </div>
                   
                   <div className="mt-4 flex justify-between items-center">
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-muted-foreground">
                       Showing {trendingProducts.length} trending products
                     </p>
                     <Button
@@ -288,11 +288,11 @@ export default function TrendingPage() {
         <div className="mb-16">
           {trendingProducts.length === 0 ? (
             <div className="text-center py-16">
-              <TrendingUp className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-400 mb-2">
+              <TrendingUp className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-muted-foreground mb-2">
                 No trending products found
               </h3>
-              <p className="text-gray-500 mb-6">
+              <p className="text-muted-foreground mb-6">
                 Try adjusting your filters or search terms
               </p>
               <Button onClick={clearFilters} className="bg-primary text-black hover:bg-primary/90">
