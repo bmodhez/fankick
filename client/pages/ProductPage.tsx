@@ -445,7 +445,7 @@ export default function ProductPage() {
               {product.materials && (
                 <div>
                   <h4 className="font-medium mb-2">Materials:</h4>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-muted-foreground">
                     {product.materials.join(", ")}
                   </p>
                 </div>
