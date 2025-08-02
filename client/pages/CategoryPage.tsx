@@ -118,7 +118,7 @@ export default function CategoryPage() {
             Home
           </Link>
           <span>/</span>
-          <span className="text-gray-900 capitalize">{category}</span>
+          <span className="text-foreground capitalize">{category}</span>
         </nav>
 
         {/* Header */}
@@ -126,19 +126,19 @@ export default function CategoryPage() {
           <div className="text-6xl mb-4">
             {categoryEmoji[category as keyof typeof categoryEmoji] || "🛍️"}
           </div>
-          <h1 className="text-4xl lg:text-5xl font-sport font-bold text-black mb-4">
+          <h1 className="text-4xl lg:text-5xl font-sport font-bold text-foreground mb-4">
             {getCategoryTitle(category || "")}
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {getCategoryDescription(category || "")}
           </p>
         </div>
 
         {/* Filters and Sort */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 p-4 bg-gray-50 rounded-lg">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 p-4 bg-muted rounded-lg">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <Filter className="w-4 h-4 text-gray-600" />
+              <Filter className="w-4 h-4 text-muted-foreground" />
               <span className="text-sm font-medium">Price Range:</span>
             </div>
             <select
@@ -177,7 +177,7 @@ export default function CategoryPage() {
 
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <SlidersHorizontal className="w-4 h-4 text-gray-600" />
+              <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
               <span className="text-sm font-medium">Sort by:</span>
             </div>
             <select
@@ -195,7 +195,7 @@ export default function CategoryPage() {
 
         {/* Results Count */}
         <div className="mb-6">
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             Showing {filteredAndSortedProducts.length} products
           </p>
         </div>
@@ -290,7 +290,7 @@ export default function CategoryPage() {
                             />
                           ))}
                         </div>
-                        <span className="text-xs text-gray-600 ml-2">
+                        <span className="text-xs text-muted-foreground ml-2">
                           {product.rating} ({product.reviews})
                         </span>
                       </div>
@@ -333,7 +333,7 @@ export default function CategoryPage() {
           <div className="text-center py-16">
             <div className="text-6xl mb-4">😕</div>
             <h3 className="text-xl font-semibold mb-2">No products found</h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-muted-foreground mb-6">
               Try adjusting your filters or browse other categories
             </p>
             <Link to="/">
