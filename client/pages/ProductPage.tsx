@@ -520,7 +520,7 @@ export default function ProductPage() {
                         </div>
                       </div>
                     </div>
-                    <p className="text-gray-700">{review.comment}</p>
+                    <p className="text-muted-foreground">{review.comment}</p>
                   </CardContent>
                 </Card>
               ))}
