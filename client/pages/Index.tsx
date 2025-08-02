@@ -100,7 +100,7 @@ export default function Index() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-black via-gray-900 to-black py-16 lg:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-5"></div>
@@ -361,7 +361,7 @@ export default function Index() {
       </section>
 
       {/* Product Categories */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-sport font-bold text-black mb-4">
