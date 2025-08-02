@@ -273,7 +273,7 @@ export default function TrendingPage() {
                       variant="ghost"
                       size="sm"
                       onClick={clearFilters}
-                      className="text-gray-400 hover:text-white"
+                      className="text-muted-foreground hover:text-foreground"
                     >
                       Clear All Filters
                     </Button>
