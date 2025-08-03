@@ -33,32 +33,19 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Helper function to safely save to localStorage
-  const saveToLocalStorage = (key: string, data: any) => {
+  // Load products from backend API
+  const loadProductsFromAPI = async () => {
     try {
-      localStorage.setItem(key, JSON.stringify(data));
-      return true;
+      setIsLoading(true);
+      const apiProducts = await productApi.getAll();
+      setProducts(apiProducts);
     } catch (error) {
-      if (isStorageQuotaExceeded(error)) {
-        console.warn(
-          "localStorage quota exceeded. Clearing old data and retrying...",
-        );
-        try {
-          // Clear localStorage and try again
-          localStorage.clear();
-          localStorage.setItem(key, JSON.stringify(data));
-          return true;
-        } catch (retryError) {
-          console.error(
-            "Failed to save to localStorage even after clearing:",
-            retryError,
-          );
-          return false;
-        }
-      } else {
-        console.error("Error saving to localStorage:", error);
-        return false;
-      }
+      console.error('Error loading products from API:', error);
+      // On error, we could fallback to cached products or show an error state
+      setProducts([]);
+    } finally {
+      setIsLoading(false);
+      setIsInitialized(true);
     }
   };
 
