@@ -491,7 +491,7 @@ export default function ProductPage() {
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <div className="flex items-center space-x-2 mb-1">
-                          <span className="font-medium">{review.name}</span>
+                          <span className="font-medium text-gray-900 dark:text-white">{review.name}</span>
                           {review.verified && (
                             <Badge variant="outline" className="text-xs">
                               Verified Purchase
@@ -511,13 +511,13 @@ export default function ProductPage() {
                               />
                             ))}
                           </div>
-                          <span className="text-sm text-gray-500">
+                          <span className="text-sm text-gray-600 dark:text-gray-400">
                             {review.date}
                           </span>
                         </div>
                       </div>
                     </div>
-                    <p className="text-muted-foreground">{review.comment}</p>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{review.comment}</p>
                   </CardContent>
                 </Card>
               ))}
