@@ -382,7 +382,16 @@ export default function TrendingPage() {
                               </div>
                               
                               <div className="flex items-center space-x-2">
-                                <Button variant="outline" size="sm" className="border-gray-600 text-gray-300">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="border-gray-600 text-gray-300"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    console.log(`Added ${product.name} to wishlist`);
+                                  }}
+                                >
                                   <Heart className="w-4 h-4" />
                                 </Button>
                                 <Button 
