@@ -96,12 +96,19 @@ export function AuthModal({
       return;
     }
 
-    const result = await signup(email, phone, name, password);
+    const result = await signup({
+      email,
+      password,
+      firstName: name,
+      phone
+    });
 
     if (result.success) {
-      setPendingVerificationPhone(phone);
-      setMode("verify-otp");
-      setSuccess("Account created! Please verify your phone number.");
+      setSuccess("Account created successfully! You are now logged in.");
+      setTimeout(() => {
+        resetForm();
+        onClose();
+      }, 1000);
     } else {
       setError(result.error || "Signup failed");
     }
