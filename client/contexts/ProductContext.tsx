@@ -27,15 +27,23 @@ export function ProductProvider({ children }: ProductProviderProps) {
   // Sync with localStorage for persistence
   useEffect(() => {
     const savedProducts = localStorage.getItem('fankick-products');
+    console.log('ProductContext: Checking localStorage');
+    console.log('ProductContext: SavedProducts exists:', !!savedProducts);
+    console.log('ProductContext: Initial PRODUCTS length:', PRODUCTS.length);
+
     if (savedProducts) {
       try {
         const parsedProducts = JSON.parse(savedProducts);
+        console.log('ProductContext: Parsed products length:', parsedProducts.length);
         setProducts(parsedProducts);
       } catch (error) {
         console.error('Error loading saved products:', error);
         // Fallback to default products
         setProducts(PRODUCTS);
       }
+    } else {
+      console.log('ProductContext: No saved products, using default PRODUCTS');
+      setProducts(PRODUCTS);
     }
   }, []);
 
