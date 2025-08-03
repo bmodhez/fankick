@@ -143,11 +143,16 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   <div key={item.id} className="bg-gray-800/50 rounded-xl p-4 border border-gray-600 hover:border-primary/30 transition-all shadow-lg">
                     <div className="flex space-x-3">
                       {/* Product Image */}
-                      <img
-                        src={item.product.images[0]}
-                        alt={item.product.name}
-                        className="w-16 h-16 object-cover rounded-lg"
-                      />
+                      <div className="relative">
+                        <img
+                          src={item.product.images[0]}
+                          alt={item.product.name}
+                          className="w-20 h-20 object-cover rounded-xl border-2 border-gray-600"
+                        />
+                        <div className="absolute -top-2 -left-2 bg-primary text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
+                          {item.quantity}
+                        </div>
+                      </div>
                       
                       {/* Product Details */}
                       <div className="flex-1 space-y-2">
