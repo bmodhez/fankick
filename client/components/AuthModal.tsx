@@ -231,7 +231,7 @@ export function AuthModal({
                 <button
                   type="button"
                   onClick={() => setMode("signup")}
-                  className="text-sm text-primary font-medium hover:underline"
+                  className="text-sm text-primary font-semibold hover:text-purple-600 transition-colors duration-200 hover:scale-105 inline-block"
                 >
                   Sign up
                 </button>
