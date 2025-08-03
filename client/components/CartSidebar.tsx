@@ -127,7 +127,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               </Button>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-6">
               {items.map((item) => {
                 const convertedPrice = convertPrice(
                   item.variant.price,
@@ -136,7 +136,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 );
 
                 return (
-                  <div key={item.id} className="bg-gray-800/50 rounded-xl p-4 border border-gray-600 hover:border-primary/30 transition-all shadow-lg">
+                  <div key={item.id} className="bg-gradient-to-r from-gray-800/60 to-gray-700/40 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/40 hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
                     <div className="flex space-x-3">
                       {/* Product Image */}
                       <div className="relative">
@@ -151,8 +151,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       </div>
                       
                       {/* Product Details */}
-                      <div className="flex-1 space-y-2">
-                        <h4 className="font-medium text-white text-sm line-clamp-2">
+                      <div className="flex-1 space-y-3">
+                        <h4 className="font-semibold text-white text-base line-clamp-2 leading-tight">
                           {item.product.name}
                         </h4>
                         
