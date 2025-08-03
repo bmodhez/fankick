@@ -32,7 +32,8 @@ import { Footer } from "./components/Footer";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
+  <ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
       <CurrencyProvider>
         <AuthProvider>
@@ -252,7 +253,8 @@ const App = () => (
         </AuthProvider>
       </CurrencyProvider>
     </ThemeProvider>
-  </QueryClientProvider>
+    </QueryClientProvider>
+  </ErrorBoundary>
 );
 
 const rootElement = document.getElementById("root")!;
