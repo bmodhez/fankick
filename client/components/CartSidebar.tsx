@@ -236,7 +236,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
         {/* Cart Summary */}
         {items.length > 0 && (
-          <div className="border-t border-gray-700 p-4 space-y-4">
+          <div className="border-t border-gray-600 p-6 space-y-5 bg-gradient-to-t from-gray-800 to-gray-800/50">
             {/* Coupon Code */}
             <div className="space-y-2">
               <div className="flex space-x-2">
