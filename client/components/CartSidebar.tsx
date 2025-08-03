@@ -176,26 +176,26 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         </p>
                         
                         {/* Quantity Controls */}
-                        <div className="flex items-center justify-between mt-3">
-                          <div className="flex items-center space-x-1 bg-gray-700 rounded-lg p-1">
+                        <div className="flex items-center justify-between mt-4">
+                          <div className="flex items-center bg-gray-700/70 rounded-xl p-1 border border-gray-600">
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="w-8 h-8 p-0 hover:bg-gray-600 text-gray-300"
+                              className="w-9 h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
                             >
-                              <Minus className="w-3 h-3" />
+                              <Minus className="w-4 h-4" />
                             </Button>
-                            <span className="text-white font-bold w-10 text-center bg-gray-600 rounded px-2 py-1">
+                            <span className="text-white font-bold w-12 text-center bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-lg mx-1 py-2 border border-primary/30">
                               {item.quantity}
                             </span>
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="w-8 h-8 p-0 hover:bg-gray-600 text-gray-300"
+                              className="w-9 h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
                             >
-                              <Plus className="w-3 h-3" />
+                              <Plus className="w-4 h-4" />
                             </Button>
                           </div>
 
