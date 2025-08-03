@@ -113,17 +113,19 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         {/* Cart Items */}
         <div className="flex-1 overflow-y-auto p-4">
           {items.length === 0 ? (
-            <div className="text-center py-16">
-              <ShoppingBag className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-400 mb-2">
+            <div className="text-center py-20">
+              <div className="w-24 h-24 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <ShoppingBag className="w-12 h-12 text-gray-500" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">
                 Your cart is empty
               </h3>
-              <p className="text-gray-500 mb-6">
-                Add some amazing products to get started!
+              <p className="text-gray-400 mb-8 leading-relaxed px-4">
+                Add some amazing products to get started with your shopping journey!
               </p>
-              <Button 
+              <Button
                 onClick={onClose}
-                className="bg-primary text-black hover:bg-primary/90"
+                className="bg-primary text-black hover:bg-primary/90 px-8 py-3 rounded-xl font-semibold shadow-lg transform hover:scale-105 transition-all"
               >
                 Continue Shopping
               </Button>
