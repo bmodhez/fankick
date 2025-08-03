@@ -142,7 +142,7 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="hidden sm:flex text-white hover:text-primary"
+                className="hidden sm:flex text-foreground hover:text-primary"
                 onClick={handleQuickSearch}
               >
                 <Search className="h-4 w-4" />
