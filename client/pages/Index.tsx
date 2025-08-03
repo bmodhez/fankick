@@ -375,7 +375,7 @@ export default function Index() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category, index) => (
               <Link key={index} to={category.link}>
-                <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 h-full">
+                <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 h-full border border-border/50 hover:border-primary/20 bg-card">
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden">
                       <img
