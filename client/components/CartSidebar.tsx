@@ -319,14 +319,14 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             )}
 
             {/* Security & Benefits */}
-            <div className="grid grid-cols-2 gap-2 text-xs text-gray-400">
-              <div className="flex items-center">
-                <ShieldCheck className="w-3 h-3 mr-1 text-green-400" />
-                Secure checkout
+            <div className="grid grid-cols-2 gap-3 text-xs">
+              <div className="flex items-center bg-green-500/10 border border-green-500/30 rounded-lg p-2">
+                <ShieldCheck className="w-4 h-4 mr-2 text-green-400" />
+                <span className="text-green-300 font-medium">Secure Payment</span>
               </div>
-              <div className="flex items-center">
-                <Gift className="w-3 h-3 mr-1 text-purple-400" />
-                Gift wrapping
+              <div className="flex items-center bg-purple-500/10 border border-purple-500/30 rounded-lg p-2">
+                <Gift className="w-4 h-4 mr-2 text-purple-400" />
+                <span className="text-purple-300 font-medium">Gift Options</span>
               </div>
             </div>
 
