@@ -102,7 +102,7 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/50 to-purple-50/30 dark:from-background dark:via-secondary dark:to-background py-16 lg:py-24 overflow-hidden border-b border-border/20">
+      <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-16 lg:py-24 overflow-hidden border-b border-border/20">
         <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-5"></div>
 
         {/* Animated background elements */}
