@@ -1,1 +1,1246 @@
-[]
+[
+  {
+    "id": "messi-inter-miami-jersey",
+    "name": "Lionel Messi Inter Miami CF Jersey 2024 - Official Home Kit",
+    "description": "Official Lionel Messi Inter Miami CF home jersey for the 2024 season. Premium quality moisture-wicking fabric with official team badges, sponsors, and Messi's iconic number 10. Perfect for true football fans and collectors.",
+    "category": "football",
+    "subcategory": "jerseys",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "messi-s",
+        "size": "S",
+        "price": 7999,
+        "originalPrice": 9999,
+        "stock": 5,
+        "sku": "MES-MIA-S"
+      },
+      {
+        "id": "messi-m",
+        "size": "M",
+        "price": 7999,
+        "originalPrice": 9999,
+        "stock": 12,
+        "sku": "MES-MIA-M"
+      },
+      {
+        "id": "messi-l",
+        "size": "L",
+        "price": 7999,
+        "originalPrice": 9999,
+        "stock": 8,
+        "sku": "MES-MIA-L"
+      },
+      {
+        "id": "messi-xl",
+        "size": "XL",
+        "price": 7999,
+        "originalPrice": 9999,
+        "stock": 3,
+        "sku": "MES-MIA-XL"
+      },
+      {
+        "id": "messi-xxl",
+        "size": "XXL",
+        "price": 8499,
+        "originalPrice": 10499,
+        "stock": 2,
+        "sku": "MES-MIA-XXL"
+      }
+    ],
+    "basePrice": 7999,
+    "originalPrice": 9999,
+    "rating": 4.9,
+    "reviews": 2847,
+    "tags": [
+      "Messi",
+      "Inter Miami",
+      "MLS",
+      "Official",
+      "Limited Edition"
+    ],
+    "badges": [
+      "FanKick Exclusive",
+      "Limited Stock",
+      "Ships Worldwide"
+    ],
+    "shippingDays": 7,
+    "codAvailable": true,
+    "isTrending": true,
+    "isExclusive": true,
+    "stockAlert": "Only 3 left in XL!",
+    "brand": "Adidas",
+    "materials": [
+      "100% Polyester",
+      "Moisture-wicking fabric",
+      "Official team badges"
+    ],
+    "features": [
+      "Official Messi name & number",
+      "Team crest and sponsors",
+      "Authentic fit",
+      "Machine washable"
+    ],
+    "sizeGuide": {
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "measurements": {
+        "S": "Chest: 36-38\"",
+        "M": "Chest: 38-40\"",
+        "L": "Chest: 40-42\"",
+        "XL": "Chest: 42-44\"",
+        "XXL": "Chest: 44-46\""
+      }
+    }
+  },
+  {
+    "id": "ronaldo-al-nassr-jersey",
+    "name": "Cristiano Ronaldo Al Nassr Jersey 2024 - Official Saudi League Kit",
+    "description": "Official Cristiano Ronaldo Al Nassr jersey featuring the iconic CR7 branding. Premium quality with official Saudi Pro League badges and Ronaldo's legendary number 7.",
+    "category": "football",
+    "subcategory": "jerseys",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "ronaldo-s",
+        "size": "S",
+        "price": 8499,
+        "originalPrice": 10999,
+        "stock": 8,
+        "sku": "CR7-NAS-S"
+      },
+      {
+        "id": "ronaldo-m",
+        "size": "M",
+        "price": 8499,
+        "originalPrice": 10999,
+        "stock": 15,
+        "sku": "CR7-NAS-M"
+      },
+      {
+        "id": "ronaldo-l",
+        "size": "L",
+        "price": 8499,
+        "originalPrice": 10999,
+        "stock": 12,
+        "sku": "CR7-NAS-L"
+      },
+      {
+        "id": "ronaldo-xl",
+        "size": "XL",
+        "price": 8499,
+        "originalPrice": 10999,
+        "stock": 6,
+        "sku": "CR7-NAS-XL"
+      }
+    ],
+    "basePrice": 8499,
+    "originalPrice": 10999,
+    "rating": 4.8,
+    "reviews": 1923,
+    "tags": [
+      "Ronaldo",
+      "Al Nassr",
+      "Saudi League",
+      "CR7",
+      "Official"
+    ],
+    "badges": [
+      "Ships Worldwide",
+      "Trending Now"
+    ],
+    "shippingDays": 8,
+    "codAvailable": true,
+    "isTrending": true,
+    "isExclusive": false,
+    "brand": "Nike",
+    "materials": [
+      "Dri-FIT technology",
+      "100% Polyester"
+    ],
+    "features": [
+      "Official CR7 name & number",
+      "Al Nassr crest",
+      "Saudi Pro League badges"
+    ]
+  },
+  {
+    "id": "football-boots-predator",
+    "name": "Adidas Predator Elite Football Boots - Messi Edition",
+    "description": "Professional-grade football boots inspired by Messi's playing style. Features advanced grip technology, lightweight design, and superior ball control for the perfect game.",
+    "category": "football",
+    "subcategory": "boots",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "boots-38",
+        "size": "6 (EU 38)",
+        "price": 12999,
+        "originalPrice": 15999,
+        "stock": 4,
+        "sku": "PRED-38"
+      },
+      {
+        "id": "boots-39",
+        "size": "7 (EU 39)",
+        "price": 12999,
+        "originalPrice": 15999,
+        "stock": 8,
+        "sku": "PRED-39"
+      },
+      {
+        "id": "boots-40",
+        "size": "8 (EU 40)",
+        "price": 12999,
+        "originalPrice": 15999,
+        "stock": 6,
+        "sku": "PRED-40"
+      },
+      {
+        "id": "boots-41",
+        "size": "9 (EU 41)",
+        "price": 12999,
+        "originalPrice": 15999,
+        "stock": 3,
+        "sku": "PRED-41"
+      },
+      {
+        "id": "boots-42",
+        "size": "10 (EU 42)",
+        "price": 12999,
+        "originalPrice": 15999,
+        "stock": 2,
+        "sku": "PRED-42"
+      }
+    ],
+    "basePrice": 12999,
+    "originalPrice": 15999,
+    "rating": 4.7,
+    "reviews": 892,
+    "tags": [
+      "Football Boots",
+      "Messi",
+      "Predator",
+      "Professional",
+      "Elite"
+    ],
+    "badges": [
+      "Limited Stock",
+      "Professional Grade"
+    ],
+    "shippingDays": 12,
+    "codAvailable": false,
+    "isTrending": false,
+    "isExclusive": true,
+    "stockAlert": "Low stock alert!",
+    "brand": "Adidas",
+    "features": [
+      "Advanced grip technology",
+      "Lightweight design",
+      "Superior ball control",
+      "Professional grade"
+    ]
+  },
+  {
+    "id": "naruto-akatsuki-ring-set",
+    "name": "Naruto Akatsuki Ring Set - Complete 10 Ring Collection",
+    "description": "Complete set of 10 official Akatsuki rings from Naruto series. High-quality metal construction with authentic engravings. Perfect for cosplay and collectors.",
+    "category": "anime",
+    "subcategory": "rings",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "akatsuki-full",
+        "size": "Full Set",
+        "price": 1999,
+        "originalPrice": 3299,
+        "stock": 25,
+        "sku": "NAR-AKA-SET"
+      },
+      {
+        "id": "akatsuki-single",
+        "size": "Single Ring",
+        "price": 299,
+        "originalPrice": 499,
+        "stock": 150,
+        "sku": "NAR-AKA-1"
+      }
+    ],
+    "basePrice": 1999,
+    "originalPrice": 3299,
+    "rating": 4.7,
+    "reviews": 1523,
+    "tags": [
+      "Naruto",
+      "Akatsuki",
+      "Rings",
+      "Cosplay",
+      "Collector"
+    ],
+    "badges": [
+      "Fast Selling",
+      "Ships Worldwide"
+    ],
+    "shippingDays": 10,
+    "codAvailable": true,
+    "isTrending": true,
+    "isExclusive": false,
+    "stockAlert": "Fast selling!",
+    "materials": [
+      "High-quality metal alloy",
+      "Anti-tarnish coating"
+    ],
+    "features": [
+      "Complete 10-ring set",
+      "Authentic engravings",
+      "Adjustable sizes",
+      "Gift box included"
+    ]
+  },
+  {
+    "id": "chainsaw-man-hoodie",
+    "name": "Chainsaw Man Denji Hoodie - Premium Anime Streetwear",
+    "description": "Premium quality Chainsaw Man hoodie featuring Denji artwork. Ultra-soft cotton blend with kangaroo pocket and adjustable hood. Perfect for anime fans and streetwear enthusiasts.",
+    "category": "anime",
+    "subcategory": "hoodies",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "chainsaw-s-black",
+        "size": "S",
+        "color": "Black",
+        "price": 2499,
+        "originalPrice": 3499,
+        "stock": 12,
+        "sku": "CSM-S-BLK"
+      },
+      {
+        "id": "chainsaw-m-black",
+        "size": "M",
+        "color": "Black",
+        "price": 2499,
+        "originalPrice": 3499,
+        "stock": 18,
+        "sku": "CSM-M-BLK"
+      },
+      {
+        "id": "chainsaw-l-black",
+        "size": "L",
+        "color": "Black",
+        "price": 2499,
+        "originalPrice": 3499,
+        "stock": 15,
+        "sku": "CSM-L-BLK"
+      },
+      {
+        "id": "chainsaw-xl-black",
+        "size": "XL",
+        "color": "Black",
+        "price": 2499,
+        "originalPrice": 3499,
+        "stock": 8,
+        "sku": "CSM-XL-BLK"
+      },
+      {
+        "id": "chainsaw-s-white",
+        "size": "S",
+        "color": "White",
+        "price": 2499,
+        "originalPrice": 3499,
+        "stock": 10,
+        "sku": "CSM-S-WHT"
+      },
+      {
+        "id": "chainsaw-m-white",
+        "size": "M",
+        "color": "White",
+        "price": 2499,
+        "originalPrice": 3499,
+        "stock": 14,
+        "sku": "CSM-M-WHT"
+      },
+      {
+        "id": "chainsaw-l-white",
+        "size": "L",
+        "color": "White",
+        "price": 2499,
+        "originalPrice": 3499,
+        "stock": 11,
+        "sku": "CSM-L-WHT"
+      }
+    ],
+    "basePrice": 2499,
+    "originalPrice": 3499,
+    "rating": 4.6,
+    "reviews": 987,
+    "tags": [
+      "Chainsaw Man",
+      "Denji",
+      "Hoodie",
+      "Anime",
+      "Streetwear"
+    ],
+    "badges": [
+      "Back in Stock",
+      "Premium Quality"
+    ],
+    "shippingDays": 10,
+    "codAvailable": true,
+    "isTrending": false,
+    "isExclusive": false,
+    "stockAlert": "Back in stock!",
+    "materials": [
+      "80% Cotton, 20% Polyester",
+      "Pre-shrunk fabric"
+    ],
+    "features": [
+      "Premium anime artwork",
+      "Kangaroo pocket",
+      "Adjustable hood",
+      "Unisex design"
+    ]
+  },
+  {
+    "id": "demon-slayer-necklace",
+    "name": "Demon Slayer Tanjiro Hanafuda Earrings Necklace Set",
+    "description": "Beautiful Demon Slayer inspired necklace featuring Tanjiro's iconic Hanafuda earrings design. Hypoallergenic materials with adjustable chain length.",
+    "category": "anime",
+    "subcategory": "necklaces",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "tanjiro-necklace",
+        "size": "One Size",
+        "price": 899,
+        "originalPrice": 1299,
+        "stock": 35,
+        "sku": "DS-TAN-NECK"
+      }
+    ],
+    "basePrice": 899,
+    "originalPrice": 1299,
+    "rating": 4.5,
+    "reviews": 654,
+    "tags": [
+      "Demon Slayer",
+      "Tanjiro",
+      "Necklace",
+      "Hanafuda",
+      "Jewelry"
+    ],
+    "badges": [
+      "Hypoallergenic",
+      "Adjustable"
+    ],
+    "shippingDays": 8,
+    "codAvailable": true,
+    "isTrending": false,
+    "isExclusive": false,
+    "materials": [
+      "Stainless steel",
+      "Hypoallergenic coating"
+    ],
+    "features": [
+      "Authentic Hanafuda design",
+      "Adjustable chain 16-20\"",
+      "Gift box included"
+    ]
+  },
+  {
+    "id": "naruto-akatsuki-hoodie",
+    "name": "Naruto Akatsuki Cloud Hoodie - Premium Anime Streetwear",
+    "description": "Official Naruto Akatsuki organization hoodie featuring the iconic red clouds pattern. Premium heavyweight cotton with embroidered logo and kangaroo pocket.",
+    "category": "anime",
+    "subcategory": "hoodies",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "akatsuki-s-black",
+        "size": "S",
+        "color": "Black",
+        "price": 2799,
+        "originalPrice": 3799,
+        "stock": 14,
+        "sku": "NAR-AKA-S-BLK"
+      },
+      {
+        "id": "akatsuki-m-black",
+        "size": "M",
+        "color": "Black",
+        "price": 2799,
+        "originalPrice": 3799,
+        "stock": 20,
+        "sku": "NAR-AKA-M-BLK"
+      },
+      {
+        "id": "akatsuki-l-black",
+        "size": "L",
+        "color": "Black",
+        "price": 2799,
+        "originalPrice": 3799,
+        "stock": 16,
+        "sku": "NAR-AKA-L-BLK"
+      },
+      {
+        "id": "akatsuki-xl-black",
+        "size": "XL",
+        "color": "Black",
+        "price": 2799,
+        "originalPrice": 3799,
+        "stock": 12,
+        "sku": "NAR-AKA-XL-BLK"
+      },
+      {
+        "id": "akatsuki-s-red",
+        "size": "S",
+        "color": "Red",
+        "price": 2799,
+        "originalPrice": 3799,
+        "stock": 10,
+        "sku": "NAR-AKA-S-RED"
+      },
+      {
+        "id": "akatsuki-m-red",
+        "size": "M",
+        "color": "Red",
+        "price": 2799,
+        "originalPrice": 3799,
+        "stock": 15,
+        "sku": "NAR-AKA-M-RED"
+      },
+      {
+        "id": "akatsuki-l-red",
+        "size": "L",
+        "color": "Red",
+        "price": 2799,
+        "originalPrice": 3799,
+        "stock": 13,
+        "sku": "NAR-AKA-L-RED"
+      }
+    ],
+    "basePrice": 2799,
+    "originalPrice": 3799,
+    "rating": 4.8,
+    "reviews": 1456,
+    "tags": [
+      "Naruto",
+      "Akatsuki",
+      "Hoodie",
+      "Anime",
+      "Streetwear"
+    ],
+    "badges": [
+      "Fan Favorite",
+      "Premium Quality"
+    ],
+    "shippingDays": 9,
+    "codAvailable": true,
+    "isTrending": true,
+    "isExclusive": false,
+    "materials": [
+      "85% Cotton, 15% Polyester",
+      "Heavyweight fleece"
+    ],
+    "features": [
+      "Iconic red clouds pattern",
+      "Embroidered Akatsuki logo",
+      "Kangaroo pocket",
+      "Drawstring hood"
+    ]
+  },
+  {
+    "id": "demon-slayer-tanjiro-hoodie",
+    "name": "Demon Slayer Tanjiro Kamado Hoodie - Anime Fashion Collection",
+    "description": "Premium Demon Slayer hoodie featuring Tanjiro's iconic checkered pattern and water breathing technique artwork. Soft fleece interior with vibrant colors.",
+    "category": "anime",
+    "subcategory": "hoodies",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "tanjiro-s-green",
+        "size": "S",
+        "color": "Forest Green",
+        "price": 2699,
+        "originalPrice": 3599,
+        "stock": 18,
+        "sku": "DS-TAN-S-GRN"
+      },
+      {
+        "id": "tanjiro-m-green",
+        "size": "M",
+        "color": "Forest Green",
+        "price": 2699,
+        "originalPrice": 3599,
+        "stock": 24,
+        "sku": "DS-TAN-M-GRN"
+      },
+      {
+        "id": "tanjiro-l-green",
+        "size": "L",
+        "color": "Forest Green",
+        "price": 2699,
+        "originalPrice": 3599,
+        "stock": 19,
+        "sku": "DS-TAN-L-GRN"
+      },
+      {
+        "id": "tanjiro-xl-green",
+        "size": "XL",
+        "color": "Forest Green",
+        "price": 2699,
+        "originalPrice": 3599,
+        "stock": 11,
+        "sku": "DS-TAN-XL-GRN"
+      },
+      {
+        "id": "tanjiro-s-black",
+        "size": "S",
+        "color": "Black",
+        "price": 2699,
+        "originalPrice": 3599,
+        "stock": 16,
+        "sku": "DS-TAN-S-BLK"
+      },
+      {
+        "id": "tanjiro-m-black",
+        "size": "M",
+        "color": "Black",
+        "price": 2699,
+        "originalPrice": 3599,
+        "stock": 21,
+        "sku": "DS-TAN-M-BLK"
+      }
+    ],
+    "basePrice": 2699,
+    "originalPrice": 3599,
+    "rating": 4.7,
+    "reviews": 1234,
+    "tags": [
+      "Demon Slayer",
+      "Tanjiro",
+      "Hoodie",
+      "Anime",
+      "Water Breathing"
+    ],
+    "badges": [
+      "New Arrival",
+      "Fan Favorite"
+    ],
+    "shippingDays": 10,
+    "codAvailable": true,
+    "isTrending": true,
+    "isExclusive": false,
+    "materials": [
+      "Cotton-polyester blend",
+      "Soft fleece interior"
+    ],
+    "features": [
+      "Checkered pattern design",
+      "Water breathing artwork",
+      "Premium print quality",
+      "Comfortable fit"
+    ]
+  },
+  {
+    "id": "attack-on-titan-survey-corps-hoodie",
+    "name": "Attack on Titan Survey Corps Wings of Freedom Hoodie",
+    "description": "Official Survey Corps hoodie featuring the iconic Wings of Freedom emblem. Military-inspired design with regiment patches and premium construction.",
+    "category": "anime",
+    "subcategory": "hoodies",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "aot-s-khaki",
+        "size": "S",
+        "color": "Military Khaki",
+        "price": 2899,
+        "originalPrice": 3999,
+        "stock": 12,
+        "sku": "AOT-SC-S-KHK"
+      },
+      {
+        "id": "aot-m-khaki",
+        "size": "M",
+        "color": "Military Khaki",
+        "price": 2899,
+        "originalPrice": 3999,
+        "stock": 17,
+        "sku": "AOT-SC-M-KHK"
+      },
+      {
+        "id": "aot-l-khaki",
+        "size": "L",
+        "color": "Military Khaki",
+        "price": 2899,
+        "originalPrice": 3999,
+        "stock": 14,
+        "sku": "AOT-SC-L-KHK"
+      },
+      {
+        "id": "aot-xl-khaki",
+        "size": "XL",
+        "color": "Military Khaki",
+        "price": 2899,
+        "originalPrice": 3999,
+        "stock": 9,
+        "sku": "AOT-SC-XL-KHK"
+      },
+      {
+        "id": "aot-s-black",
+        "size": "S",
+        "color": "Black",
+        "price": 2899,
+        "originalPrice": 3999,
+        "stock": 15,
+        "sku": "AOT-SC-S-BLK"
+      },
+      {
+        "id": "aot-m-black",
+        "size": "M",
+        "color": "Black",
+        "price": 2899,
+        "originalPrice": 3999,
+        "stock": 20,
+        "sku": "AOT-SC-M-BLK"
+      }
+    ],
+    "basePrice": 2899,
+    "originalPrice": 3999,
+    "rating": 4.9,
+    "reviews": 1867,
+    "tags": [
+      "Attack on Titan",
+      "Survey Corps",
+      "Military",
+      "Wings of Freedom"
+    ],
+    "badges": [
+      "Official",
+      "Premium Quality",
+      "Military Style"
+    ],
+    "shippingDays": 11,
+    "codAvailable": true,
+    "isTrending": true,
+    "isExclusive": true,
+    "stockAlert": "High demand - order now!",
+    "materials": [
+      "Premium cotton blend",
+      "Military-grade stitching"
+    ],
+    "features": [
+      "Wings of Freedom emblem",
+      "Regiment patches",
+      "Military-inspired design",
+      "Durable construction"
+    ]
+  },
+  {
+    "id": "one-piece-straw-hat-hoodie",
+    "name": "One Piece Straw Hat Pirates Hoodie - Luffy's Crew Collection",
+    "description": "Join Luffy's crew with this premium Straw Hat Pirates hoodie featuring the iconic skull logo and crew member signatures. Adventure awaits!",
+    "category": "anime",
+    "subcategory": "hoodies",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "onepiece-s-navy",
+        "size": "S",
+        "color": "Navy Blue",
+        "price": 2599,
+        "originalPrice": 3499,
+        "stock": 22,
+        "sku": "OP-SH-S-NVY"
+      },
+      {
+        "id": "onepiece-m-navy",
+        "size": "M",
+        "color": "Navy Blue",
+        "price": 2599,
+        "originalPrice": 3499,
+        "stock": 28,
+        "sku": "OP-SH-M-NVY"
+      },
+      {
+        "id": "onepiece-l-navy",
+        "size": "L",
+        "color": "Navy Blue",
+        "price": 2599,
+        "originalPrice": 3499,
+        "stock": 25,
+        "sku": "OP-SH-L-NVY"
+      },
+      {
+        "id": "onepiece-xl-navy",
+        "size": "XL",
+        "color": "Navy Blue",
+        "price": 2599,
+        "originalPrice": 3499,
+        "stock": 18,
+        "sku": "OP-SH-XL-NVY"
+      },
+      {
+        "id": "onepiece-s-red",
+        "size": "S",
+        "color": "Red",
+        "price": 2599,
+        "originalPrice": 3499,
+        "stock": 20,
+        "sku": "OP-SH-S-RED"
+      },
+      {
+        "id": "onepiece-m-red",
+        "size": "M",
+        "color": "Red",
+        "price": 2599,
+        "originalPrice": 3499,
+        "stock": 24,
+        "sku": "OP-SH-M-RED"
+      }
+    ],
+    "basePrice": 2599,
+    "originalPrice": 3499,
+    "rating": 4.6,
+    "reviews": 987,
+    "tags": [
+      "One Piece",
+      "Luffy",
+      "Straw Hat Pirates",
+      "Adventure",
+      "Anime"
+    ],
+    "badges": [
+      "Adventure Ready",
+      "Crew Collection"
+    ],
+    "shippingDays": 10,
+    "codAvailable": true,
+    "isTrending": false,
+    "isExclusive": false,
+    "materials": [
+      "Soft cotton blend",
+      "Fade-resistant print"
+    ],
+    "features": [
+      "Straw Hat Pirates logo",
+      "Crew signatures",
+      "Adventure-themed design",
+      "Comfortable hood"
+    ]
+  },
+  {
+    "id": "jujutsu-kaisen-gojo-hoodie",
+    "name": "Jujutsu Kaisen Satoru Gojo Infinity Hoodie - Limitless Power",
+    "description": "Premium Jujutsu Kaisen hoodie featuring Gojo's Infinity technique and Six Eyes design. Mysterious and powerful, just like the strongest sorcerer.",
+    "category": "anime",
+    "subcategory": "hoodies",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "gojo-s-white",
+        "size": "S",
+        "color": "Pure White",
+        "price": 2999,
+        "originalPrice": 4199,
+        "stock": 11,
+        "sku": "JJK-GJ-S-WHT"
+      },
+      {
+        "id": "gojo-m-white",
+        "size": "M",
+        "color": "Pure White",
+        "price": 2999,
+        "originalPrice": 4199,
+        "stock": 16,
+        "sku": "JJK-GJ-M-WHT"
+      },
+      {
+        "id": "gojo-l-white",
+        "size": "L",
+        "color": "Pure White",
+        "price": 2999,
+        "originalPrice": 4199,
+        "stock": 13,
+        "sku": "JJK-GJ-L-WHT"
+      },
+      {
+        "id": "gojo-xl-white",
+        "size": "XL",
+        "color": "Pure White",
+        "price": 2999,
+        "originalPrice": 4199,
+        "stock": 8,
+        "sku": "JJK-GJ-XL-WHT"
+      },
+      {
+        "id": "gojo-s-black",
+        "size": "S",
+        "color": "Black",
+        "price": 2999,
+        "originalPrice": 4199,
+        "stock": 14,
+        "sku": "JJK-GJ-S-BLK"
+      },
+      {
+        "id": "gojo-m-black",
+        "size": "M",
+        "color": "Black",
+        "price": 2999,
+        "originalPrice": 4199,
+        "stock": 19,
+        "sku": "JJK-GJ-M-BLK"
+      }
+    ],
+    "basePrice": 2999,
+    "originalPrice": 4199,
+    "rating": 4.8,
+    "reviews": 1543,
+    "tags": [
+      "Jujutsu Kaisen",
+      "Gojo",
+      "Infinity",
+      "Six Eyes",
+      "Sorcerer"
+    ],
+    "badges": [
+      "Strongest Sorcerer",
+      "Limitless Power",
+      "Premium"
+    ],
+    "shippingDays": 9,
+    "codAvailable": true,
+    "isTrending": true,
+    "isExclusive": true,
+    "stockAlert": "Limited edition - get yours now!",
+    "materials": [
+      "Premium cotton blend",
+      "Holographic accents"
+    ],
+    "features": [
+      "Infinity technique design",
+      "Six Eyes artwork",
+      "Holographic details",
+      "Premium construction"
+    ]
+  },
+  {
+    "id": "taylor-swift-eras-hoodie",
+    "name": "Taylor Swift Eras Tour Hoodie - Official Merchandise",
+    "description": "Official Taylor Swift Eras Tour hoodie featuring iconic tour artwork. Premium cotton blend with embroidered details and tour dates on the back.",
+    "category": "pop-culture",
+    "subcategory": "hoodies",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "eras-s-lavender",
+        "size": "S",
+        "color": "Lavender",
+        "price": 3799,
+        "originalPrice": 5499,
+        "stock": 8,
+        "sku": "TS-ERAS-S-LAV"
+      },
+      {
+        "id": "eras-m-lavender",
+        "size": "M",
+        "color": "Lavender",
+        "price": 3799,
+        "originalPrice": 5499,
+        "stock": 12,
+        "sku": "TS-ERAS-M-LAV"
+      },
+      {
+        "id": "eras-l-lavender",
+        "size": "L",
+        "color": "Lavender",
+        "price": 3799,
+        "originalPrice": 5499,
+        "stock": 6,
+        "sku": "TS-ERAS-L-LAV"
+      },
+      {
+        "id": "eras-xl-lavender",
+        "size": "XL",
+        "color": "Lavender",
+        "price": 3799,
+        "originalPrice": 5499,
+        "stock": 4,
+        "sku": "TS-ERAS-XL-LAV"
+      },
+      {
+        "id": "eras-s-black",
+        "size": "S",
+        "color": "Black",
+        "price": 3799,
+        "originalPrice": 5499,
+        "stock": 10,
+        "sku": "TS-ERAS-S-BLK"
+      },
+      {
+        "id": "eras-m-black",
+        "size": "M",
+        "color": "Black",
+        "price": 3799,
+        "originalPrice": 5499,
+        "stock": 15,
+        "sku": "TS-ERAS-M-BLK"
+      }
+    ],
+    "basePrice": 3799,
+    "originalPrice": 5499,
+    "rating": 4.8,
+    "reviews": 3921,
+    "tags": [
+      "Taylor Swift",
+      "Eras Tour",
+      "Official",
+      "Limited Edition",
+      "Concert"
+    ],
+    "badges": [
+      "Limited Edition",
+      "Official Merch",
+      "Ships Worldwide"
+    ],
+    "shippingDays": 14,
+    "codAvailable": false,
+    "isTrending": true,
+    "isExclusive": true,
+    "stockAlert": "Limited edition - few left!",
+    "materials": [
+      "Premium cotton blend",
+      "Embroidered details"
+    ],
+    "features": [
+      "Official tour merchandise",
+      "Embroidered artwork",
+      "Tour dates on back",
+      "Limited edition"
+    ]
+  },
+  {
+    "id": "bts-dynamite-tshirt",
+    "name": "BTS Dynamite Official T-Shirt - K-Pop Merchandise",
+    "description": "Official BTS Dynamite era t-shirt featuring colorful artwork and member signatures. Comfortable cotton fabric with vibrant print that won't fade.",
+    "category": "pop-culture",
+    "subcategory": "tshirts",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "bts-s",
+        "size": "S",
+        "price": 1599,
+        "originalPrice": 2299,
+        "stock": 20,
+        "sku": "BTS-DYN-S"
+      },
+      {
+        "id": "bts-m",
+        "size": "M",
+        "price": 1599,
+        "originalPrice": 2299,
+        "stock": 25,
+        "sku": "BTS-DYN-M"
+      },
+      {
+        "id": "bts-l",
+        "size": "L",
+        "price": 1599,
+        "originalPrice": 2299,
+        "stock": 18,
+        "sku": "BTS-DYN-L"
+      },
+      {
+        "id": "bts-xl",
+        "size": "XL",
+        "price": 1599,
+        "originalPrice": 2299,
+        "stock": 12,
+        "sku": "BTS-DYN-XL"
+      }
+    ],
+    "basePrice": 1599,
+    "originalPrice": 2299,
+    "rating": 4.7,
+    "reviews": 2156,
+    "tags": [
+      "BTS",
+      "K-pop",
+      "Dynamite",
+      "Official",
+      "ARMY"
+    ],
+    "badges": [
+      "Official BTS Merch",
+      "ARMY Approved"
+    ],
+    "shippingDays": 12,
+    "codAvailable": true,
+    "isTrending": true,
+    "isExclusive": false,
+    "materials": [
+      "100% Cotton",
+      "Fade-resistant print"
+    ],
+    "features": [
+      "Official BTS merchandise",
+      "Member signatures",
+      "Vibrant colors",
+      "Comfortable fit"
+    ]
+  },
+  {
+    "id": "marvel-spiderman-hoodie",
+    "name": "Marvel Spider-Man No Way Home Hoodie - Premium Superhero Apparel",
+    "description": "Official Marvel Spider-Man No Way Home hoodie featuring the three Spider-Men. Premium quality with detailed graphics and comfortable fit for superhero fans.",
+    "category": "pop-culture",
+    "subcategory": "hoodies",
+    "images": [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    "variants": [
+      {
+        "id": "spidey-s-red",
+        "size": "S",
+        "color": "Red",
+        "price": 2999,
+        "originalPrice": 4299,
+        "stock": 15,
+        "sku": "MAR-SM-S-RED"
+      },
+      {
+        "id": "spidey-m-red",
+        "size": "M",
+        "color": "Red",
+        "price": 2999,
+        "originalPrice": 4299,
+        "stock": 22,
+        "sku": "MAR-SM-M-RED"
+      },
+      {
+        "id": "spidey-l-red",
+        "size": "L",
+        "color": "Red",
+        "price": 2999,
+        "originalPrice": 4299,
+        "stock": 18,
+        "sku": "MAR-SM-L-RED"
+      },
+      {
+        "id": "spidey-xl-red",
+        "size": "XL",
+        "color": "Red",
+        "price": 2999,
+        "originalPrice": 4299,
+        "stock": 10,
+        "sku": "MAR-SM-XL-RED"
+      },
+      {
+        "id": "spidey-s-black",
+        "size": "S",
+        "color": "Black",
+        "price": 2999,
+        "originalPrice": 4299,
+        "stock": 12,
+        "sku": "MAR-SM-S-BLK"
+      },
+      {
+        "id": "spidey-m-black",
+        "size": "M",
+        "color": "Black",
+        "price": 2999,
+        "originalPrice": 4299,
+        "stock": 16,
+        "sku": "MAR-SM-M-BLK"
+      }
+    ],
+    "basePrice": 2999,
+    "originalPrice": 4299,
+    "rating": 4.6,
+    "reviews": 1387,
+    "tags": [
+      "Marvel",
+      "Spider-Man",
+      "No Way Home",
+      "Superhero",
+      "Official"
+    ],
+    "badges": [
+      "Marvel Official",
+      "Superhero Collection"
+    ],
+    "shippingDays": 11,
+    "codAvailable": true,
+    "isTrending": false,
+    "isExclusive": false,
+    "materials": [
+      "Cotton-polyester blend",
+      "Official Marvel licensing"
+    ],
+    "features": [
+      "Three Spider-Men artwork",
+      "Detailed graphics",
+      "Official Marvel merchandise",
+      "Comfortable hood"
+    ]
+  }
+]
