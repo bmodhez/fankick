@@ -83,11 +83,7 @@ export async function loginUser(req: Request, res: Response) {
 
     const response: AuthResponse = {
       success: true,
-      data: {
-        user: authData.user,
-        sessionToken: authData.session.sessionToken,
-        expiresAt: authData.session.expiresAt
-      },
+      data: authData,
       message: 'Login successful'
     };
     
