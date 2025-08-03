@@ -10,6 +10,21 @@ import {
   deleteProduct,
   updateProductStock,
 } from "./routes/products";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getCurrentUser,
+  updateUserProfile,
+  getUserAddresses,
+  addUserAddress,
+  getUserCart,
+  addToCart,
+  removeFromCart,
+  getUserWishlist,
+  addToWishlist,
+  removeFromWishlist,
+} from "./routes/users";
 import "./database/init.js"; // Initialize database on startup
 
 export function createServer() {
