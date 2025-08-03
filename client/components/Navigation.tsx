@@ -373,7 +373,7 @@ export function Navigation() {
                 </div>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-white hover:text-primary"
+                  className="w-full justify-start text-foreground hover:text-primary"
                 >
                   <Search className="h-4 w-4 mr-2" />
                   Search Products
