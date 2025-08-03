@@ -49,15 +49,15 @@ export function Navigation() {
   };
 
   return (
-    <nav className="bg-black text-white sticky top-0 z-50 border-b border-gray-800">
+    <nav className="bg-background border-border sticky top-0 z-50 border-b backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-primary to-purple-500 rounded-full flex items-center justify-center">
-              <span className="text-black font-bold text-lg">⚡</span>
+              <span className="text-primary-foreground font-bold text-lg">⚡</span>
             </div>
-            <span className="font-sport font-bold text-xl tracking-wide">
+            <span className="font-sport font-bold text-xl tracking-wide text-foreground">
               FAN<span className="text-primary">KICK</span>
             </span>
           </Link>
