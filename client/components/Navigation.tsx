@@ -54,8 +54,8 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-primary to-purple-500 rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">⚡</span>
+            <div className="w-8 h-8 bg-gradient-to-r from-primary via-cyan-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg shadow-primary/25 animate-pulse">
+              <span className="text-white font-bold text-lg">⚡</span>
             </div>
             <span className="font-sport font-bold text-xl tracking-wide text-foreground">
               FAN<span className="text-primary">KICK</span>
