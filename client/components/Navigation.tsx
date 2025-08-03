@@ -311,7 +311,7 @@ export function Navigation() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-800">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border">
               <Link
                 to="/football"
                 className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
