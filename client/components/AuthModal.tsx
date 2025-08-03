@@ -128,11 +128,11 @@ export function AuthModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 min-h-screen overflow-y-auto">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 min-h-screen overflow-y-auto animate-in fade-in duration-300">
       <div className="flex items-center justify-center min-h-full py-12 px-4">
-        <Card className="w-full max-w-md relative">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-xl font-bold">
+        <Card className="w-full max-w-md relative bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 border-2 border-gray-200/20 dark:border-gray-700/20 shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
+        <CardHeader className="flex flex-row items-center justify-between bg-gradient-to-r from-primary/10 to-purple-500/10 border-b border-gray-200/20 dark:border-gray-700/20">
+          <CardTitle className="text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
             {mode === "login" && "Welcome Back"}
             {mode === "signup" && "Join FanKick"}
             {mode === "verify-otp" && "Verify Phone"}
