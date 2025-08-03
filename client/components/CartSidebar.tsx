@@ -77,16 +77,25 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       />
 
       {/* Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-gray-900 z-[61] shadow-xl border-l border-gray-700 flex flex-col">
+      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-gradient-to-b from-gray-900 to-gray-800 z-[61] shadow-2xl border-l border-gray-600 flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-700">
-          <div className="flex items-center space-x-2">
-            <ShoppingBag className="w-5 h-5 text-primary" />
-            <h2 className="text-lg font-semibold text-white">
-              Shopping Cart
-            </h2>
+        <div className="flex items-center justify-between p-6 border-b border-gray-600 bg-gradient-to-r from-primary/10 to-purple-500/10">
+          <div className="flex items-center space-x-3">
+            <div className="p-2 bg-primary/20 rounded-full">
+              <ShoppingBag className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white">
+                Shopping Cart
+              </h2>
+              {totalItems > 0 && (
+                <p className="text-sm text-gray-300">
+                  {totalItems} item{totalItems > 1 ? 's' : ''} in cart
+                </p>
+              )}
+            </div>
             {totalItems > 0 && (
-              <Badge className="bg-primary text-black">
+              <Badge className="bg-primary text-black font-bold px-3 py-1">
                 {totalItems}
               </Badge>
             )}
@@ -95,9 +104,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="text-gray-400 hover:text-white"
+            className="text-gray-400 hover:text-white hover:bg-gray-700 rounded-full p-2"
           >
-            <X className="w-5 h-5" />
+            <X className="w-6 h-6" />
           </Button>
         </div>
 
