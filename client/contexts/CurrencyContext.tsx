@@ -66,7 +66,7 @@ export function CurrencyProvider({ children }: CurrencyProviderProps) {
   return (
     <CurrencyContext.Provider
       value={{
-        selectedCurrency,
+        selectedCurrency: selectedCurrency || CURRENCIES.USD,
         setCurrency,
         isLoading,
       }}
