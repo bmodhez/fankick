@@ -314,35 +314,35 @@ export function Navigation() {
             <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border">
               <Link
                 to="/football"
-                className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
                 ⚽ Football
               </Link>
               <Link
                 to="/anime"
-                className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
                 🎌 Anime
               </Link>
               <Link
                 to="/pop-culture"
-                className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
                 🎭 Pop Culture
               </Link>
               <Link
                 to="/trending"
-                className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
                 🔥 Trending
               </Link>
               <Link
                 to="/collections"
-                className="block px-3 py-2 text-base font-medium hover:text-primary hover:bg-gray-900 rounded-md"
+                className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
                 ✨ Collections
