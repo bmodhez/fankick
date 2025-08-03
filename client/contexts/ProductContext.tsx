@@ -116,6 +116,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
       localStorage.removeItem("fankick-product-changes");
       localStorage.removeItem("fankick-products-version");
     }
+    setIsInitialized(true);
   }, []);
 
   // Save to localStorage whenever products change (with error handling)
