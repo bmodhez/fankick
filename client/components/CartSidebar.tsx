@@ -140,7 +140,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 );
 
                 return (
-                  <div key={item.id} className="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                  <div key={item.id} className="bg-gray-800/50 rounded-xl p-4 border border-gray-600 hover:border-primary/30 transition-all shadow-lg">
                     <div className="flex space-x-3">
                       {/* Product Image */}
                       <img
