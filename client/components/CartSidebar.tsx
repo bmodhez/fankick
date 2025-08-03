@@ -331,17 +331,36 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             </div>
 
             {/* Checkout Button */}
-            <Button
-              onClick={handleCheckout}
-              className="w-full bg-gradient-to-r from-primary to-green-400 text-black hover:from-primary/90 hover:to-green-400/90 font-bold py-4 rounded-xl shadow-lg transform hover:scale-105 transition-all"
-            >
-              <CreditCard className="w-5 h-5 mr-2" />
-              Proceed to Checkout • {formatPrice(finalTotal, selectedCurrency)}
-            </Button>
+            <div className="relative">
+              <Button
+                onClick={handleCheckout}
+                className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/90 hover:via-green-400/90 hover:to-blue-400/90 font-bold py-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/30"
+              >
+                <div className="flex items-center justify-center">
+                  <CreditCard className="w-6 h-6 mr-3" />
+                  <div className="text-center">
+                    <div className="text-lg">Proceed to Checkout</div>
+                    <div className="text-sm opacity-90">{formatPrice(finalTotal, selectedCurrency)}</div>
+                  </div>
+                </div>
+              </Button>
+
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-green-400/20 rounded-2xl blur-xl -z-10"></div>
+            </div>
             
-            <p className="text-xs text-gray-500 text-center">
-              Secure checkout powered by multiple payment methods
-            </p>
+            <div className="text-center space-y-2">
+              <p className="text-xs text-gray-400 flex items-center justify-center">
+                <ShieldCheck className="w-3 h-3 mr-1 text-green-400" />
+                256-bit SSL encrypted • Multiple payment options
+              </p>
+              <div className="flex justify-center space-x-4 text-xs text-gray-500">
+                <span>💳 Card</span>
+                <span>📱 UPI</span>
+                <span>🏦 NetBanking</span>
+                <span>💰 COD</span>
+              </div>
+            </div>
           </div>
         )}
       </div>
