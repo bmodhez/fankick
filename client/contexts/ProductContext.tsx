@@ -39,6 +39,21 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Load local products immediately on initialization
+  useEffect(() => {
+    const loadLocalProducts = async () => {
+      try {
+        const { PRODUCTS } = await import("@/data/products");
+        setProducts(PRODUCTS);
+        console.log("Loaded local products as initial data");
+      } catch (error) {
+        console.error("Failed to load local products:", error);
+      }
+    };
+
+    loadLocalProducts();
+  }, []);
+
   // Load products from backend API with local fallback
   const loadProductsFromAPI = async (signal?: AbortSignal) => {
     try {
