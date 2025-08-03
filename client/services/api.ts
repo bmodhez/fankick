@@ -22,6 +22,7 @@ class ApiError extends Error {
 async function apiRequest<T>(
   endpoint: string,
   options: RequestInit = {},
+  retries: number = 1,
 ): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
 
@@ -34,30 +35,55 @@ async function apiRequest<T>(
     signal: options.signal || AbortSignal.timeout(30000), // 30 second timeout
   };
 
-  try {
-    const response = await fetch(url, { ...defaultOptions, ...options });
+  let lastError: Error;
 
-    if (!response.ok) {
-      throw new ApiError(
-        response.status,
-        `HTTP error! status: ${response.status}`,
-      );
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      console.log(`API Request ${attempt + 1}/${retries + 1}: ${options.method || 'GET'} ${url}`);
+
+      const response = await fetch(url, { ...defaultOptions, ...options });
+
+      if (!response.ok) {
+        throw new ApiError(
+          response.status,
+          `HTTP error! status: ${response.status}`,
+        );
+      }
+
+      const result: ApiResponse<T> = await response.json();
+
+      if (!result.success) {
+        throw new Error(result.error || "API request failed");
+      }
+
+      console.log(`API Request successful: ${options.method || 'GET'} ${url}`);
+      return result.data!;
+    } catch (error) {
+      lastError = error as Error;
+
+      // Handle AbortError more gracefully
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new Error('Request was cancelled or timed out');
+      }
+
+      // Don't retry on client errors (4xx) or if it's the last attempt
+      if (error instanceof ApiError && error.status >= 400 && error.status < 500) {
+        throw error;
+      }
+
+      if (attempt === retries) {
+        console.error(`API Request failed after ${retries + 1} attempts:`, error);
+        throw error;
+      }
+
+      // Wait before retrying (exponential backoff)
+      const delay = Math.min(1000 * Math.pow(2, attempt), 5000);
+      console.log(`API Request failed, retrying in ${delay}ms...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
     }
-
-    const result: ApiResponse<T> = await response.json();
-
-    if (!result.success) {
-      throw new Error(result.error || "API request failed");
-    }
-
-    return result.data!;
-  } catch (error) {
-    // Handle AbortError more gracefully
-    if (error instanceof Error && error.name === 'AbortError') {
-      throw new Error('Request was cancelled or timed out');
-    }
-    throw error;
   }
+
+  throw lastError!;
 }
 
 export const productApi = {
