@@ -92,13 +92,13 @@ export async function loginUser(req: Request, res: Response) {
     
     res.json(response);
   } catch (error) {
-    console.error('Error logging in user:', error);
-    
+    console.error('Login error for user:', error.message);
+
     const response: AuthResponse = {
       success: false,
       error: error instanceof Error ? error.message : 'Login failed'
     };
-    
+
     res.status(401).json(response);
   }
 }
