@@ -165,7 +165,7 @@ export function AuthModal({
 
           {/* Login Form */}
           {mode === "login" && (
-            <form onSubmit={handleLogin} className="space-y-4">
+            <form onSubmit={handleLogin} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email Address
@@ -236,7 +236,7 @@ export function AuthModal({
 
           {/* Signup Form */}
           {mode === "signup" && (
-            <form onSubmit={handleSignup} className="space-y-4">
+            <form onSubmit={handleSignup} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Full Name
