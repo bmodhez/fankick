@@ -137,6 +137,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
     getProductsBySubcategory,
     searchProducts,
     refreshProducts,
+    isLoading,
   };
 
   // Don't render children until context is fully initialized
