@@ -122,7 +122,7 @@ export default function Index() {
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-foreground mb-6 leading-tight">
               UNLEASH YOUR
-              <span className="block bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-primary via-cyan-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
                 FANDOM
               </span>
             </h1>
