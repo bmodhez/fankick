@@ -378,6 +378,14 @@ export function Navigation() {
                   <Search className="h-4 w-4 mr-2" />
                   Search Products
                 </Button>
+
+                {/* Theme Toggle in Mobile Menu */}
+                <div className="px-3 py-2 border-t border-border mt-2 pt-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">Theme</span>
+                    <ThemeToggle />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
