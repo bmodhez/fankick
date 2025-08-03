@@ -219,6 +219,15 @@ export function ProductProvider({ children }: ProductProviderProps) {
     refreshProducts,
   };
 
+  // Don't render children until context is fully initialized
+  if (!isInitialized) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
   return (
     <ProductContext.Provider value={value}>
       {children}
