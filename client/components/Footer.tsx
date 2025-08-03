@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { Button } from './ui/button'
+import { useCurrency } from '@/contexts/CurrencyContext'
 import { Instagram, Twitter, Facebook, Mail, Phone, MapPin } from 'lucide-react'
 
 export function Footer() {
+  const { selectedCurrency } = useCurrency();
   return (
     <footer className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
