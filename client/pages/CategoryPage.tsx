@@ -26,13 +26,6 @@ export default function CategoryPage() {
 
   const allProducts = getProductsByCategory(category || "");
 
-  // Debug logging
-  useEffect(() => {
-    console.log("Category:", category);
-    console.log("All products count:", allProducts.length);
-    console.log("Products:", allProducts);
-  }, [category, allProducts]);
-
   // Scroll to top when category changes
   useEffect(() => {
     window.scrollTo(0, 0);
