@@ -68,6 +68,7 @@ export function Navigation() {
   };
 
   const handleQuickSearch = () => {
+    console.log("Search button clicked");
     setShowSearch(!showSearch);
   };
 
@@ -288,7 +289,10 @@ export function Navigation() {
                 variant="ghost"
                 size="sm"
                 className="text-foreground hover:text-primary"
-                onClick={() => setShowAuthModal(true)}
+                onClick={() => {
+                  console.log("Login button clicked");
+                  setShowAuthModal(true);
+                }}
               >
                 <User className="w-4 h-4 mr-1" />
                 <span className="hidden sm:inline">Login</span>
@@ -298,7 +302,10 @@ export function Navigation() {
               variant="ghost"
               size="sm"
               className="relative text-foreground hover:text-primary"
-              onClick={() => setShowCart(true)}
+              onClick={() => {
+                console.log("Cart button clicked");
+                setShowCart(true);
+              }}
             >
               <ShoppingCart className="h-4 w-4" />
               {totalItems > 0 && (
