@@ -119,10 +119,9 @@ export function ProductProvider({ children }: ProductProviderProps) {
     );
   };
 
-  const refreshProducts = () => {
-    // Reset to original products (useful for testing)
-    setProducts(PRODUCTS);
-    localStorage.removeItem("fankick-products");
+  const refreshProducts = async () => {
+    // Reload products from API
+    await loadProductsFromAPI();
   };
 
   const value: ProductContextType = {
