@@ -111,10 +111,10 @@ function ProductCard({
           <div className="flex items-center justify-between">
             <div>
               <p className="text-lg font-bold text-primary">
-                ₹{product.basePrice.toLocaleString()}
+                ₹{(product.basePrice || 0).toLocaleString()}
               </p>
               <p className="text-xs text-gray-400 line-through">
-                ₹{product.originalPrice.toLocaleString()}
+                ₹{(product.originalPrice || 0).toLocaleString()}
               </p>
             </div>
             <div className="text-right">
