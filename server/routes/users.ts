@@ -187,8 +187,8 @@ export async function updateUserProfile(req: Request, res: Response) {
       return res.status(401).json(response);
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
-    
+    const currentUser = await userService.getUserFromSession(sessionToken);
+
     if (!currentUser) {
       const response: UserResponse = {
         success: false,
@@ -196,7 +196,7 @@ export async function updateUserProfile(req: Request, res: Response) {
       };
       return res.status(401).json(response);
     }
-    
+
     const updateData = req.body;
     const updatedUser = await userService.updateUser(currentUser.id, updateData);
     
