@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { productService } from "../services/productServicePostgres.js";
+import { productService } from "../services/productService.js";
 import { ProductCreateRequest, ProductResponse } from "../types/product.js";
 
 // GET /api/products - Get all products
