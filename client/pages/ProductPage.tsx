@@ -259,7 +259,7 @@ export default function ProductPage() {
             {/* Variant Selection */}
             {product.variants.some((v) => v.size) && (
               <div>
-                <h3 className="font-semibold mb-3">Size</h3>
+                <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Size</h3>
                 <div className="flex flex-wrap gap-2">
                   {product.variants
                     .filter((v) => v.size)
