@@ -54,6 +54,12 @@ export function PaymentModal({
   const [orderComplete, setOrderComplete] = useState(false);
   const [orderDetails, setOrderDetails] = useState<any>(null);
 
+  // Safety check for currency
+  if (!selectedCurrency || !selectedCurrency.code) {
+    console.warn('PaymentModal: selectedCurrency is invalid:', selectedCurrency);
+    return null;
+  }
+
   const country = selectedCurrency.code === "INR" ? "IN" : "US";
   const paymentMethods = getAvailablePaymentMethods(country);
 
