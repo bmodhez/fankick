@@ -118,7 +118,7 @@ export default function Index() {
               Global Dropshipping • Free Worldwide Shipping
             </Badge>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-foreground mb-6 leading-tight">
               UNLEASH YOUR
               <span className="block bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
                 FANDOM
