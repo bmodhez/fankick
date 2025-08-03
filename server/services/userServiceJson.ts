@@ -23,11 +23,33 @@ const sessions = new Map<string, { userId: string; expiresAt: Date }>();
 async function initializeDatabase() {
   try {
     await fs.access(USERS_DB_PATH);
+    // Check if database is empty and create test user
+    const users = await loadUsers();
+    if (users.length === 0) {
+      await createTestUser();
+    }
   } catch (error) {
     // Create users database file
     const dir = path.dirname(USERS_DB_PATH);
     await fs.mkdir(dir, { recursive: true });
     await fs.writeFile(USERS_DB_PATH, JSON.stringify([], null, 2));
+    // Create test user
+    await createTestUser();
+  }
+}
+
+async function createTestUser() {
+  try {
+    const userService = new UserServiceJson();
+    await userService.registerUser({
+      email: 'test@example.com',
+      password: 'test123',
+      firstName: 'Test',
+      lastName: 'User'
+    });
+    console.log('Created test user: test@example.com / test123');
+  } catch (error) {
+    console.log('Test user may already exist or failed to create:', error.message);
   }
 }
 
