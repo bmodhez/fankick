@@ -327,7 +327,7 @@ export default function Index() {
                         </div>
 
                         <Button
-                          className="w-full bg-black text-white hover:bg-gray-800 font-semibold"
+                          className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/80 font-semibold"
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
