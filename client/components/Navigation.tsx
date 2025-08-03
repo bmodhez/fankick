@@ -162,7 +162,7 @@ export function Navigation() {
                           handleSearch(searchQuery);
                         }
                       }}
-                      className="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="flex-1 px-3 py-2 bg-background border border-border rounded text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                       autoFocus
                     />
                     <Button
