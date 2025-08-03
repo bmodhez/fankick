@@ -136,15 +136,29 @@ export function Footer() {
             <div>
               <h4 className="font-medium mb-2">We Accept</h4>
               <div className="flex items-center space-x-4">
-                <div className="bg-primary rounded px-2 py-1">
-                  <span className="text-black text-sm font-medium">COD</span>
-                </div>
-                <div className="bg-blue-600 rounded px-2 py-1">
-                  <span className="text-white text-sm font-medium">Razorpay</span>
-                </div>
-                <div className="bg-gray-700 rounded px-2 py-1">
-                  <span className="text-white text-sm font-medium">UPI</span>
-                </div>
+                {selectedCurrency.code === "INR" && (
+                  <>
+                    <div className="bg-primary rounded px-2 py-1">
+                      <span className="text-black text-sm font-medium">COD</span>
+                    </div>
+                    <div className="bg-blue-600 rounded px-2 py-1">
+                      <span className="text-white text-sm font-medium">Razorpay</span>
+                    </div>
+                    <div className="bg-gray-700 rounded px-2 py-1">
+                      <span className="text-white text-sm font-medium">UPI</span>
+                    </div>
+                  </>
+                )}
+                {selectedCurrency.code !== "INR" && (
+                  <>
+                    <div className="bg-blue-600 rounded px-2 py-1">
+                      <span className="text-white text-sm font-medium">PayPal</span>
+                    </div>
+                    <div className="bg-gray-700 rounded px-2 py-1">
+                      <span className="text-white text-sm font-medium">Stripe</span>
+                    </div>
+                  </>
+                )}
                 <div className="bg-gray-700 rounded px-2 py-1">
                   <span className="text-white text-sm font-medium">Cards</span>
                 </div>
