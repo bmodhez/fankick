@@ -323,10 +323,15 @@ export function AuthModal({
 
               <Button
                 type="submit"
-                className="w-full bg-primary text-black hover:bg-primary/90 font-semibold"
+                className="w-full bg-gradient-to-r from-primary via-purple-500 to-pink-500 text-white hover:from-primary/90 hover:via-purple-500/90 hover:to-pink-500/90 font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={isLoading}
               >
-                {isLoading ? "Creating account..." : "Create Account"}
+                {isLoading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Creating account...</span>
+                  </div>
+                ) : "Create Account"}
               </Button>
 
               <div className="text-center">
@@ -336,7 +341,7 @@ export function AuthModal({
                 <button
                   type="button"
                   onClick={() => setMode("login")}
-                  className="text-sm text-primary font-medium hover:underline"
+                  className="text-sm text-primary font-semibold hover:text-purple-600 transition-colors duration-200 hover:scale-105 inline-block"
                 >
                   Sign in
                 </button>
