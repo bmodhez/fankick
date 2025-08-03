@@ -1,0 +1,3 @@
+// This is a backup of the old JSON-based ProductService
+// The service has been migrated to PostgreSQL in productServicePostgres.ts
+// This file is kept for reference and rollback purposes if needed
