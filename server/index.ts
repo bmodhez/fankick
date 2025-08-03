@@ -64,5 +64,26 @@ export function createServer() {
   app.delete("/api/products/:id", deleteProduct);
   app.put("/api/products/:id/stock", updateProductStock);
 
+  // User Authentication routes
+  app.post("/api/auth/register", registerUser);
+  app.post("/api/auth/login", loginUser);
+  app.post("/api/auth/logout", logoutUser);
+  app.get("/api/auth/me", getCurrentUser);
+
+  // User Profile routes
+  app.put("/api/users/profile", updateUserProfile);
+  app.get("/api/users/addresses", getUserAddresses);
+  app.post("/api/users/addresses", addUserAddress);
+
+  // User Cart routes
+  app.get("/api/users/cart", getUserCart);
+  app.post("/api/users/cart", addToCart);
+  app.delete("/api/users/cart/:itemId", removeFromCart);
+
+  // User Wishlist routes
+  app.get("/api/users/wishlist", getUserWishlist);
+  app.post("/api/users/wishlist", addToWishlist);
+  app.delete("/api/users/wishlist/:productId", removeFromWishlist);
+
   return app;
 }
