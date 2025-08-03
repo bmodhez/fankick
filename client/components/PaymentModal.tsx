@@ -27,6 +27,14 @@ interface PaymentModalProps {
   amount: number;
   currency: string;
   items?: any[];
+  product?: {
+    name: string;
+    image: string;
+    price: number;
+    quantity: number;
+  };
+  shippingCost?: number;
+  codAvailable?: boolean;
 }
 
 export function PaymentModal({
