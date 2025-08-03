@@ -150,16 +150,16 @@ export function AuthModal({
         <CardContent className="space-y-6 p-8">
           {/* Error/Success Messages */}
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-3 flex items-center space-x-2">
-              <AlertCircle className="w-4 h-4 text-red-600" />
-              <span className="text-red-700 text-sm">{error}</span>
+            <div className="bg-gradient-to-r from-red-50 to-red-100 border border-red-200 rounded-xl p-4 flex items-center space-x-3 animate-in slide-in-from-top-2 duration-200">
+              <AlertCircle className="w-5 h-5 text-red-600 animate-pulse" />
+              <span className="text-red-700 text-sm font-medium">{error}</span>
             </div>
           )}
 
           {success && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3 flex items-center space-x-2">
-              <CheckCircle className="w-4 h-4 text-green-600" />
-              <span className="text-green-700 text-sm">{success}</span>
+            <div className="bg-gradient-to-r from-green-50 to-emerald-100 border border-green-200 rounded-xl p-4 flex items-center space-x-3 animate-in slide-in-from-top-2 duration-200">
+              <CheckCircle className="w-5 h-5 text-green-600 animate-pulse" />
+              <span className="text-green-700 text-sm font-medium">{success}</span>
             </div>
           )}
 
