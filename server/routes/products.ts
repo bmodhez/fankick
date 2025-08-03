@@ -118,9 +118,12 @@ export async function updateProduct(req: Request, res: Response) {
     const { id } = req.params;
     const updateData = req.body;
 
+    console.log(`Updating product ${id} with data:`, JSON.stringify(updateData, null, 2));
+
     const updatedProduct = await productService.updateProduct(id, updateData);
 
     if (!updatedProduct) {
+      console.log(`Product ${id} not found for update`);
       const response: ProductResponse = {
         success: false,
         error: "Product not found",
@@ -128,6 +131,7 @@ export async function updateProduct(req: Request, res: Response) {
       return res.status(404).json(response);
     }
 
+    console.log(`Product ${id} updated successfully`);
     const response: ProductResponse = {
       success: true,
       data: updatedProduct,
