@@ -115,7 +115,7 @@ export default function Index() {
           <div className="text-center mb-16">
             <Badge className="mb-6 bg-gradient-to-r from-primary to-purple-500 text-black font-bold px-6 py-3 text-lg">
               <Globe className="w-5 h-5 mr-2" />
-              Global Dropshipping • Free Worldwide Shipping
+              Global Dropshipping �� Free Worldwide Shipping
             </Badge>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-foreground mb-6 leading-tight">
@@ -166,7 +166,7 @@ export default function Index() {
           <div className="grid md:grid-cols-3 gap-6">
             {heroCategories.map((category, index) => (
               <Link key={index} to={category.link}>
-                <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-gray-900 to-black border-gray-700">
+                <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-secondary to-background border-border">
                   <CardContent className="p-0">
                     <div
                       className={`h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
