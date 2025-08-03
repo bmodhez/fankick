@@ -64,10 +64,6 @@ export function ProductProvider({ children }: ProductProviderProps) {
           console.error("Failed to load fallback products:", fallbackError);
         }
       }
-      // On error, we could fallback to cached products or show an error state
-      if (!signal?.aborted) {
-        setProducts([]);
-      }
     } finally {
       if (!signal?.aborted) {
         setIsLoading(false);
