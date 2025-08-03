@@ -28,5 +28,8 @@ export async function initializeDatabase() {
   }
 }
 
-// Auto-initialize when this module is imported
-initializeDatabase().catch(console.error);
+// Auto-initialize when this module is imported, but don't block on errors
+initializeDatabase().catch((error) => {
+  console.error('Database initialization failed:', error);
+  console.log('Server will continue without database initialization');
+});
