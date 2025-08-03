@@ -40,24 +40,36 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   // Load products from backend API
-  const loadProductsFromAPI = async () => {
+  const loadProductsFromAPI = async (signal?: AbortSignal) => {
     try {
       setIsLoading(true);
       const apiProducts = await productApi.getAll();
       setProducts(apiProducts);
     } catch (error) {
-      console.error("Error loading products from API:", error);
+      // Don't log errors for cancelled requests
+      if (error instanceof Error && error.name !== 'AbortError' && !error.message.includes('cancelled')) {
+        console.error("Error loading products from API:", error);
+      }
       // On error, we could fallback to cached products or show an error state
-      setProducts([]);
+      if (!signal?.aborted) {
+        setProducts([]);
+      }
     } finally {
-      setIsLoading(false);
-      setIsInitialized(true);
+      if (!signal?.aborted) {
+        setIsLoading(false);
+        setIsInitialized(true);
+      }
     }
   };
 
   // Load products from API on mount
   useEffect(() => {
-    loadProductsFromAPI();
+    const abortController = new AbortController();
+    loadProductsFromAPI(abortController.signal);
+
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   // CRUD operations with API calls
