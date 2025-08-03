@@ -63,9 +63,18 @@ async function apiRequest<T>(
     } catch (error) {
       lastError = error as Error;
 
-      // Handle AbortError more gracefully
-      if (error instanceof Error && error.name === "AbortError") {
-        throw new Error("Request was cancelled or timed out");
+      // Handle specific fetch errors
+      if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          throw new Error("Request was cancelled or timed out");
+        }
+
+        // Handle network/fetch failures
+        if (error.message.includes("Failed to fetch") ||
+            error.message.includes("NetworkError") ||
+            error.message.includes("ERR_NETWORK")) {
+          throw new Error("Network error. Please check your connection and try again.");
+        }
       }
 
       // Don't retry on client errors (4xx) or if it's the last attempt
