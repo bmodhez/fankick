@@ -71,13 +71,13 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   return (
     <>
       {/* Overlay */}
-      <div 
-        className="fixed inset-0 bg-black bg-opacity-50 z-50"
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50 z-[60]"
         onClick={onClose}
       />
-      
+
       {/* Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-gray-900 z-50 shadow-xl border-l border-gray-700 flex flex-col">
+      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-gray-900 z-[61] shadow-xl border-l border-gray-700 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
           <div className="flex items-center space-x-2">
