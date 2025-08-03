@@ -24,7 +24,7 @@ interface CurrencyProviderProps {
 export function CurrencyProvider({ children }: CurrencyProviderProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCurrency, setSelectedCurrency] = useState<Currency>(
-    CURRENCIES.USD,
+    CURRENCIES.USD || { code: "USD", symbol: "$", flag: "🇺🇸", rate: 1 },
   );
 
   useEffect(() => {
