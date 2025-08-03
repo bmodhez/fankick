@@ -113,7 +113,7 @@ export async function logoutUser(req: Request, res: Response) {
       return res.status(400).json(response);
     }
     
-    await userService.logoutUser(sessionToken);
+    await userService.logout(sessionToken);
     
     const response: AuthResponse = {
       success: true,
@@ -146,7 +146,7 @@ export async function getCurrentUser(req: Request, res: Response) {
       return res.status(401).json(response);
     }
     
-    const user = await userService.verifySession(sessionToken);
+    const user = await userService.getUserFromSession(sessionToken);
     
     if (!user) {
       const response: UserResponse = {
@@ -187,7 +187,7 @@ export async function updateUserProfile(req: Request, res: Response) {
       return res.status(401).json(response);
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
 
     if (!currentUser) {
       const response: UserResponse = {
@@ -239,7 +239,7 @@ export async function getUserAddresses(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -276,7 +276,7 @@ export async function addUserAddress(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -324,7 +324,7 @@ export async function getUserCart(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -361,7 +361,7 @@ export async function addToCart(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -408,7 +408,7 @@ export async function removeFromCart(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -453,7 +453,7 @@ export async function getUserWishlist(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -490,7 +490,7 @@ export async function addToWishlist(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -537,7 +537,7 @@ export async function removeFromWishlist(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
