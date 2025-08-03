@@ -50,7 +50,7 @@ export function getAvailablePaymentMethods(country: string): PaymentMethod[] {
 }
 
 export function isCODAvailable(country: string): boolean {
-  return ["IN", "SA"].includes(country);
+  return country === "IN"; // COD only available in India
 }
 
 export interface RazorpayOptions {
