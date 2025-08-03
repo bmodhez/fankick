@@ -137,12 +137,17 @@ export function AuthModal({
             {mode === "signup" && "Join FanKick"}
             {mode === "verify-otp" && "Verify Phone"}
           </CardTitle>
-          <Button variant="ghost" size="sm" onClick={onClose}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClose}
+            className="hover:bg-red-100 dark:hover:bg-red-900/20 hover:text-red-600 transition-all duration-200 hover:scale-110"
+          >
             <X className="w-4 h-4" />
           </Button>
         </CardHeader>
 
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6 p-8">
           {/* Error/Success Messages */}
           {error && (
             <div className="bg-red-50 border border-red-200 rounded-lg p-3 flex items-center space-x-2">
