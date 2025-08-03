@@ -399,7 +399,7 @@ export default function Index() {
                       </p>
                       <Button
                         variant="outline"
-                        className="w-full group-hover:bg-primary group-hover:text-black group-hover:border-primary transition-all"
+                        className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all"
                       >
                         Explore Collection
                       </Button>
