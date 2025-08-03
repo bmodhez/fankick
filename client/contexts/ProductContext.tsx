@@ -5,8 +5,8 @@ import {
   useEffect,
   ReactNode,
 } from "react";
-import { PRODUCTS, Product } from "@/data/products";
-import { isStorageQuotaExceeded } from "@/utils/storage";
+import { Product } from "@/data/products";
+import { productApi } from "@/services/api";
 
 interface ProductContextType {
   products: Product[];
