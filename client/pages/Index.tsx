@@ -226,7 +226,7 @@ export default function Index() {
 
               return (
                 <Link key={index} to={`/product/${product.id}`}>
-                  <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 overflow-hidden border border-border/50 hover:border-primary/20 bg-card">
+                  <Card className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/10 hover:scale-105 transition-all duration-500 overflow-hidden border border-border/50 hover:border-primary/30 bg-card/80 backdrop-blur-sm hover:bg-gradient-to-br hover:from-primary/5 hover:to-purple-500/5">
                     <CardContent className="p-0">
                       <div className="relative">
                         <img
