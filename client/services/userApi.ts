@@ -111,14 +111,13 @@ async function userApiRequest<T>(
       
       const response = await fetch(url, { ...defaultOptions, ...options });
 
-      if (!response.ok) {
-        throw new UserApiError(
-          response.status,
-          `HTTP error! status: ${response.status}`,
-        );
-      }
-
       const result: ApiResponse<T> = await response.json();
+
+      if (!response.ok) {
+        // Use the server's error message if available, otherwise use generic message
+        const errorMessage = result.error || `HTTP error! status: ${response.status}`;
+        throw new UserApiError(response.status, errorMessage);
+      }
 
       if (!result.success) {
         throw new Error(result.error || "API request failed");
