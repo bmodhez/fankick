@@ -7,7 +7,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
-import { SimpleNav } from "@/components/SimpleNav";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
@@ -30,7 +29,6 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Contact from "./pages/Contact";
 import TestPage from "./pages/TestPage";
 import { Footer } from "./components/Footer";
-import { DebugCart } from "./components/DebugCart";
 
 const queryClient = new QueryClient();
 
@@ -52,9 +50,8 @@ const App = () => (
                           path="/"
                           element={
                             <>
-                              <SimpleNav />
+                              <Navigation />
                               <Index />
-                              <DebugCart />
                             </>
                           }
                         />
