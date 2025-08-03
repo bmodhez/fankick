@@ -218,7 +218,9 @@ export function ProductProvider({ children }: ProductProviderProps) {
   };
 
   return (
-    <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
+    <ProductContext.Provider value={value}>
+      {children}
+    </ProductContext.Provider>
   );
 }
 
