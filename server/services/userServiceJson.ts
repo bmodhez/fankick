@@ -159,20 +159,88 @@ export class UserServiceJson {
   async updateUser(userId: string, updateData: Partial<User>): Promise<User> {
     const users = await loadUsers();
     const userIndex = users.findIndex(u => u.id === userId);
-    
+
     if (userIndex === -1) {
       throw new Error('User not found');
     }
-    
+
     // Update user data
     users[userIndex] = {
       ...users[userIndex],
       ...updateData,
       updatedAt: new Date().toISOString()
     };
-    
+
     await saveUsers(users);
     return userToPublic(users[userIndex]);
+  }
+
+  async verifySession(sessionToken: string): Promise<User | null> {
+    return this.getUserFromSession(sessionToken);
+  }
+
+  async logoutUser(sessionToken: string): Promise<boolean> {
+    sessions.delete(sessionToken);
+    return true;
+  }
+
+  async getUserAddresses(userId: string): Promise<any[]> {
+    // Simple implementation - return empty array for now
+    return [];
+  }
+
+  async addUserAddress(userId: string, addressData: any): Promise<any> {
+    // Simple implementation - return mock address for now
+    return {
+      id: `addr_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      userId,
+      ...addressData,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+  }
+
+  async getUserCart(userId: string): Promise<any[]> {
+    // Simple implementation - return empty array for now
+    return [];
+  }
+
+  async addToCart(userId: string, productId: string, variantId: string, quantity: number = 1): Promise<any> {
+    // Simple implementation - return mock cart item for now
+    return {
+      id: `cart_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      userId,
+      productId,
+      variantId,
+      quantity,
+      addedAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+  }
+
+  async removeFromCart(userId: string, itemId: string): Promise<boolean> {
+    // Simple implementation - always return true for now
+    return true;
+  }
+
+  async getUserWishlist(userId: string): Promise<any[]> {
+    // Simple implementation - return empty array for now
+    return [];
+  }
+
+  async addToWishlist(userId: string, productId: string): Promise<any> {
+    // Simple implementation - return mock wishlist item for now
+    return {
+      id: `wish_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      userId,
+      productId,
+      addedAt: new Date().toISOString()
+    };
+  }
+
+  async removeFromWishlist(userId: string, productId: string): Promise<boolean> {
+    // Simple implementation - always return true for now
+    return true;
   }
 }
 
