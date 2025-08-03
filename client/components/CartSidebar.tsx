@@ -157,17 +157,21 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         </h4>
                         
                         {/* Variant Info */}
-                        <div className="flex items-center space-x-2 text-xs text-gray-400">
+                        <div className="flex items-center gap-3 text-xs">
                           {item.variant.size && (
-                            <span>Size: {item.variant.size}</span>
+                            <span className="bg-gray-600/50 px-2 py-1 rounded-full text-gray-300">
+                              Size: {item.variant.size}
+                            </span>
                           )}
                           {item.variant.color && (
-                            <span>• Color: {item.variant.color}</span>
+                            <span className="bg-gray-600/50 px-2 py-1 rounded-full text-gray-300">
+                              {item.variant.color}
+                            </span>
                           )}
                         </div>
-                        
+
                         {/* Price */}
-                        <p className="font-semibold text-primary">
+                        <p className="font-bold text-lg text-primary bg-primary/10 px-3 py-1 rounded-lg inline-block">
                           {formatPrice(convertedPrice, selectedCurrency)}
                         </p>
                         
