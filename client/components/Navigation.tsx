@@ -351,7 +351,7 @@ export function Navigation() {
               {/* Mobile Currency Selector */}
               <div className="pt-4 pb-3 border-t border-gray-800">
                 <div className="px-3 py-2">
-                  <span className="text-sm text-gray-400">Currency</span>
+                  <span className="text-sm text-muted-foreground">Currency</span>
                   <div className="grid grid-cols-3 gap-2 mt-2">
                     {currencies.map((currency) => (
                       <button
