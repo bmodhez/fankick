@@ -29,8 +29,9 @@ interface ProductProviderProps {
 }
 
 export function ProductProvider({ children }: ProductProviderProps) {
-  const [products, setProducts] = useState<Product[]>(PRODUCTS);
+  const [products, setProducts] = useState<Product[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Helper function to safely save to localStorage
   const saveToLocalStorage = (key: string, data: any) => {
