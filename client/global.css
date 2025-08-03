@@ -167,6 +167,22 @@
     background: linear-gradient(to bottom, #00ff7f, #16a34a);
   }
 
+  /* Cart slide-in animation */
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out forwards;
+  }
+
   /* Gradient text utilities */
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent;

@@ -73,7 +73,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       />
 
       {/* Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-lg bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 z-[61] shadow-2xl border-l-2 border-primary/20 flex flex-col backdrop-blur-sm">
+      <div className="fixed right-0 top-0 h-full w-full max-w-lg bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 z-[61] shadow-2xl border-l-2 border-primary/20 flex flex-col backdrop-blur-sm transform transition-transform duration-300 ease-out animate-slide-in">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b-2 border-gray-600/50 bg-gradient-to-r from-primary/15 via-purple-500/10 to-blue-500/15 backdrop-blur-sm">
           <div className="flex items-center space-x-3">
