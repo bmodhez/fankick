@@ -165,3 +165,7 @@ export function getShippingInfo(currency: string): {
       };
   }
 }
+
+export function isCODSupportedForCurrency(currencyCode: string): boolean {
+  return currencyCode === "INR"; // COD only available for Indian Rupees
+}
