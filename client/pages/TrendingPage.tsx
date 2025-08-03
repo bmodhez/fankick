@@ -109,7 +109,8 @@ export default function TrendingPage() {
     e.stopPropagation();
     if (product.variants.length > 0) {
       addToCart(product, product.variants[0]);
-      alert(`✅ ${product.name} added to cart!`);
+      // Show a toast notification instead of alert
+      console.log(`✅ ${product.name} added to cart!`);
     }
   };
 
