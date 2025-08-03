@@ -56,22 +56,41 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   // CRUD operations with API calls
 
-  const updateProduct = (updatedProduct: Product) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === updatedProduct.id ? updatedProduct : product,
-      ),
-    );
+  const updateProduct = async (updatedProduct: Product) => {
+    try {
+      await productApi.update(updatedProduct.id, updatedProduct);
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === updatedProduct.id ? updatedProduct : product,
+        ),
+      );
+    } catch (error) {
+      console.error('Error updating product:', error);
+      throw error;
+    }
   };
 
-  const deleteProduct = (id: string) => {
-    setProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== id),
-    );
+  const deleteProduct = async (id: string) => {
+    try {
+      await productApi.delete(id);
+      setProducts((prevProducts) =>
+        prevProducts.filter((product) => product.id !== id),
+      );
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      throw error;
+    }
   };
 
-  const addProduct = (newProduct: Product) => {
-    setProducts((prevProducts) => [...prevProducts, newProduct]);
+  const addProduct = async (newProduct: Omit<Product, 'id' | 'rating' | 'reviews' | 'createdAt' | 'updatedAt'>) => {
+    try {
+      const createdProduct = await productApi.create(newProduct);
+      setProducts((prevProducts) => [...prevProducts, createdProduct]);
+      return createdProduct;
+    } catch (error) {
+      console.error('Error adding product:', error);
+      throw error;
+    }
   };
 
   const getProductById = (id: string): Product | undefined => {
