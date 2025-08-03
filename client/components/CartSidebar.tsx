@@ -62,7 +62,6 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
   const handleCheckout = () => {
     if (items.length === 0) {
-      alert("Your cart is empty!");
       return;
     }
     setShowPaymentModal(true);
