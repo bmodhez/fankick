@@ -141,7 +141,13 @@ async function userApiRequest<T>(
         throw new Error('Request was cancelled or timed out');
       }
 
+      // Don't retry client errors (4xx) or if it's a JSON parsing issue
       if (error instanceof UserApiError && error.status >= 400 && error.status < 500) {
+        throw error;
+      }
+
+      // Don't retry JSON parsing errors or abort errors
+      if (error instanceof Error && (error.message.includes('JSON') || error.name === "AbortError")) {
         throw error;
       }
 
