@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { userService } from '../services/userService.js';
+import { userService } from '../services/userServiceJson.js';
 import { UserCreateRequest, UserLoginRequest, AuthResponse, UserResponse } from '../types/user.js';
 
 // POST /api/auth/register - Register new user
