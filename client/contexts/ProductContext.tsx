@@ -217,6 +217,13 @@ export function ProductProvider({ children }: ProductProviderProps) {
     refreshProducts,
   };
 
+  // Debug logging
+  console.log("ProductProvider rendering with value:", {
+    productsLength: products.length,
+    hasGetProductById: !!getProductById,
+    valueKeys: Object.keys(value)
+  });
+
   return (
     <ProductContext.Provider value={value}>
       {children}
