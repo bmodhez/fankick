@@ -123,8 +123,18 @@ async function userApiRequest<T>(
       }
 
       if (!response.ok) {
-        // Use the server's error message if available, otherwise use generic message
-        const errorMessage = result.error || `HTTP error! status: ${response.status}`;
+        // Use the server's error message if available, otherwise use user-friendly message
+        let errorMessage = result.error || `HTTP error! status: ${response.status}`;
+
+        // Provide user-friendly messages for common HTTP status codes
+        if (response.status === 401) {
+          errorMessage = result.error || "Invalid email or password";
+        } else if (response.status === 400) {
+          errorMessage = result.error || "Invalid request data";
+        } else if (response.status === 500) {
+          errorMessage = result.error || "Server error. Please try again later";
+        }
+
         throw new UserApiError(response.status, errorMessage);
       }
 
