@@ -30,24 +30,34 @@ async function apiRequest<T>(
       "Content-Type": "application/json",
       ...options.headers,
     },
+    // Add default timeout to prevent hanging requests
+    signal: options.signal || AbortSignal.timeout(30000), // 30 second timeout
   };
 
-  const response = await fetch(url, { ...defaultOptions, ...options });
+  try {
+    const response = await fetch(url, { ...defaultOptions, ...options });
 
-  if (!response.ok) {
-    throw new ApiError(
-      response.status,
-      `HTTP error! status: ${response.status}`,
-    );
+    if (!response.ok) {
+      throw new ApiError(
+        response.status,
+        `HTTP error! status: ${response.status}`,
+      );
+    }
+
+    const result: ApiResponse<T> = await response.json();
+
+    if (!result.success) {
+      throw new Error(result.error || "API request failed");
+    }
+
+    return result.data!;
+  } catch (error) {
+    // Handle AbortError more gracefully
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new Error('Request was cancelled or timed out');
+    }
+    throw error;
   }
-
-  const result: ApiResponse<T> = await response.json();
-
-  if (!result.success) {
-    throw new Error(result.error || "API request failed");
-  }
-
-  return result.data!;
 }
 
 export const productApi = {
