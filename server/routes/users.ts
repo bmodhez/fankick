@@ -69,17 +69,20 @@ export async function registerUser(req: Request, res: Response) {
 export async function loginUser(req: Request, res: Response) {
   try {
     const loginData: UserLoginRequest = req.body;
-    
+    console.log('Login attempt for email:', loginData.email);
+
     // Basic validation
     if (!loginData.email || !loginData.password) {
+      console.log('Login failed: Missing email or password');
       const response: AuthResponse = {
         success: false,
         error: 'Email and password are required'
       };
       return res.status(400).json(response);
     }
-    
+
     const authData = await userService.loginUser(loginData);
+    console.log('Login successful for:', loginData.email);
 
     const response: AuthResponse = {
       success: true,
