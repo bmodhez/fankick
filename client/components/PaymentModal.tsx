@@ -89,7 +89,7 @@ export function PaymentModal({
         amount: Math.round(total * 100), // Amount in paise
         currency: "INR",
         name: "FanKick",
-        description: product.name,
+        description: product?.name || "FanKick Purchase",
         image: "/placeholder.svg",
         handler: (response: any) => {
           console.log("Payment successful:", response);
