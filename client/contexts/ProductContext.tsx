@@ -24,6 +24,31 @@ interface ProductProviderProps {
 export function ProductProvider({ children }: ProductProviderProps) {
   const [products, setProducts] = useState<Product[]>(PRODUCTS);
 
+  // Helper function to safely save to localStorage
+  const saveToLocalStorage = (key: string, data: any) => {
+    try {
+      localStorage.setItem(key, JSON.stringify(data));
+      return true;
+    } catch (error) {
+      if (error instanceof DOMException && error.code === 22) {
+        // QuotaExceededError
+        console.warn('localStorage quota exceeded. Clearing old data and retrying...');
+        try {
+          // Clear localStorage and try again
+          localStorage.clear();
+          localStorage.setItem(key, JSON.stringify(data));
+          return true;
+        } catch (retryError) {
+          console.error('Failed to save to localStorage even after clearing:', retryError);
+          return false;
+        }
+      } else {
+        console.error('Error saving to localStorage:', error);
+        return false;
+      }
+    }
+  };
+
   // Sync with localStorage for persistence
   useEffect(() => {
     const savedProducts = localStorage.getItem('fankick-products');
@@ -37,24 +62,30 @@ export function ProductProvider({ children }: ProductProviderProps) {
         } else {
           // If saved data is empty or invalid, use default products
           setProducts(PRODUCTS);
-          localStorage.setItem('fankick-products', JSON.stringify(PRODUCTS));
+          saveToLocalStorage('fankick-products', PRODUCTS);
         }
       } catch (error) {
         console.error('Error loading saved products:', error);
         // Fallback to default products
         setProducts(PRODUCTS);
-        localStorage.setItem('fankick-products', JSON.stringify(PRODUCTS));
+        saveToLocalStorage('fankick-products', PRODUCTS);
       }
     } else {
-      // No saved products, use default and save to localStorage
+      // No saved products, use default products
+      // Don't save to localStorage initially to avoid quota issues
       setProducts(PRODUCTS);
-      localStorage.setItem('fankick-products', JSON.stringify(PRODUCTS));
     }
   }, []);
 
-  // Save to localStorage whenever products change
+  // Save to localStorage whenever products change (with error handling)
   useEffect(() => {
-    localStorage.setItem('fankick-products', JSON.stringify(products));
+    // Only save if products have been modified from the original PRODUCTS
+    // This prevents unnecessary saves and reduces quota usage
+    if (products.length !== PRODUCTS.length || products.some((product, index) =>
+      !PRODUCTS[index] || product.id !== PRODUCTS[index].id
+    )) {
+      saveToLocalStorage('fankick-products', products);
+    }
   }, [products]);
 
   const updateProduct = (updatedProduct: Product) => {
