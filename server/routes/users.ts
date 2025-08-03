@@ -79,15 +79,11 @@ export async function loginUser(req: Request, res: Response) {
       return res.status(400).json(response);
     }
     
-    const { user, session } = await userService.loginUser(loginData);
-    
+    const authData = await userService.loginUser(loginData);
+
     const response: AuthResponse = {
       success: true,
-      data: {
-        user,
-        sessionToken: session.sessionToken,
-        expiresAt: session.expiresAt
-      },
+      data: authData,
       message: 'Login successful'
     };
     
