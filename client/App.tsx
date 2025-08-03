@@ -27,6 +27,7 @@ import ShippingPolicy from "./pages/ShippingPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Contact from "./pages/Contact";
+import TestPage from "./pages/TestPage";
 import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
@@ -271,6 +272,7 @@ const App = () => (
                           element={<AdminPanel />}
                         />
                         <Route path="/admin/test" element={<AdminPanel />} />
+                        <Route path="/test" element={<TestPage />} />
                         <Route path="*" element={<NotFound />} />
                       </Routes>
                     </div>
