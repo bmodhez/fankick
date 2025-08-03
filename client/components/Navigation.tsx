@@ -187,7 +187,7 @@ export function Navigation() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-white hover:text-primary"
+                  className="text-foreground hover:text-primary"
                   onClick={() => setShowUserMenu(!showUserMenu)}
                 >
                   <div className="flex items-center space-x-2">
