@@ -171,29 +171,29 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         </p>
                         
                         {/* Quantity Controls */}
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
+                        <div className="flex items-center justify-between mt-3">
+                          <div className="flex items-center space-x-1 bg-gray-700 rounded-lg p-1">
                             <Button
-                              variant="outline"
+                              variant="ghost"
                               size="sm"
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="w-8 h-8 p-0 border-gray-600"
+                              className="w-8 h-8 p-0 hover:bg-gray-600 text-gray-300"
                             >
                               <Minus className="w-3 h-3" />
                             </Button>
-                            <span className="text-white font-medium w-8 text-center">
+                            <span className="text-white font-bold w-10 text-center bg-gray-600 rounded px-2 py-1">
                               {item.quantity}
                             </span>
                             <Button
-                              variant="outline"
+                              variant="ghost"
                               size="sm"
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="w-8 h-8 p-0 border-gray-600"
+                              className="w-8 h-8 p-0 hover:bg-gray-600 text-gray-300"
                             >
                               <Plus className="w-3 h-3" />
                             </Button>
                           </div>
-                          
+
                           <Button
                             variant="ghost"
                             size="sm"
