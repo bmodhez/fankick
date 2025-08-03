@@ -272,10 +272,14 @@ export function ProductManager() {
       // More user-friendly error handling
       let errorMessage = "Unknown error occurred";
       if (error instanceof Error) {
-        if (error.message.includes("cancelled") || error.message.includes("aborted")) {
+        if (
+          error.message.includes("cancelled") ||
+          error.message.includes("aborted")
+        ) {
           errorMessage = "Request was cancelled. Please try again.";
         } else if (error.message.includes("Failed to fetch")) {
-          errorMessage = "Network error. Please check your connection and try again.";
+          errorMessage =
+            "Network error. Please check your connection and try again.";
         } else {
           errorMessage = error.message;
         }

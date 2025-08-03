@@ -118,7 +118,10 @@ export async function updateProduct(req: Request, res: Response) {
     const { id } = req.params;
     const updateData = req.body;
 
-    console.log(`Updating product ${id} with data:`, JSON.stringify(updateData, null, 2));
+    console.log(
+      `Updating product ${id} with data:`,
+      JSON.stringify(updateData, null, 2),
+    );
 
     const updatedProduct = await productService.updateProduct(id, updateData);
 

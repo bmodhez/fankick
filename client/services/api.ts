@@ -39,7 +39,9 @@ async function apiRequest<T>(
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      console.log(`API Request ${attempt + 1}/${retries + 1}: ${options.method || 'GET'} ${url}`);
+      console.log(
+        `API Request ${attempt + 1}/${retries + 1}: ${options.method || "GET"} ${url}`,
+      );
 
       const response = await fetch(url, { ...defaultOptions, ...options });
 
@@ -56,30 +58,37 @@ async function apiRequest<T>(
         throw new Error(result.error || "API request failed");
       }
 
-      console.log(`API Request successful: ${options.method || 'GET'} ${url}`);
+      console.log(`API Request successful: ${options.method || "GET"} ${url}`);
       return result.data!;
     } catch (error) {
       lastError = error as Error;
 
       // Handle AbortError more gracefully
-      if (error instanceof Error && error.name === 'AbortError') {
-        throw new Error('Request was cancelled or timed out');
+      if (error instanceof Error && error.name === "AbortError") {
+        throw new Error("Request was cancelled or timed out");
       }
 
       // Don't retry on client errors (4xx) or if it's the last attempt
-      if (error instanceof ApiError && error.status >= 400 && error.status < 500) {
+      if (
+        error instanceof ApiError &&
+        error.status >= 400 &&
+        error.status < 500
+      ) {
         throw error;
       }
 
       if (attempt === retries) {
-        console.error(`API Request failed after ${retries + 1} attempts:`, error);
+        console.error(
+          `API Request failed after ${retries + 1} attempts:`,
+          error,
+        );
         throw error;
       }
 
       // Wait before retrying (exponential backoff)
       const delay = Math.min(1000 * Math.pow(2, attempt), 5000);
       console.log(`API Request failed, retrying in ${delay}ms...`);
-      await new Promise(resolve => setTimeout(resolve, delay));
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
 
@@ -119,18 +128,26 @@ export const productApi = {
       "id" | "rating" | "reviews" | "createdAt" | "updatedAt"
     >,
   ): Promise<Product> {
-    return apiRequest<Product>("/products", {
-      method: "POST",
-      body: JSON.stringify(productData),
-    }, 2); // Retry up to 2 times for create operations
+    return apiRequest<Product>(
+      "/products",
+      {
+        method: "POST",
+        body: JSON.stringify(productData),
+      },
+      2,
+    ); // Retry up to 2 times for create operations
   },
 
   // Update existing product
   async update(id: string, productData: Partial<Product>): Promise<Product> {
-    return apiRequest<Product>(`/products/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(productData),
-    }, 2); // Retry up to 2 times for update operations
+    return apiRequest<Product>(
+      `/products/${id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(productData),
+      },
+      2,
+    ); // Retry up to 2 times for update operations
   },
 
   // Delete product

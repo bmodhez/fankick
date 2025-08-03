@@ -47,7 +47,11 @@ export function ProductProvider({ children }: ProductProviderProps) {
       setProducts(apiProducts);
     } catch (error) {
       // Don't log errors for cancelled requests
-      if (error instanceof Error && error.name !== 'AbortError' && !error.message.includes('cancelled')) {
+      if (
+        error instanceof Error &&
+        error.name !== "AbortError" &&
+        !error.message.includes("cancelled")
+      ) {
         console.error("Error loading products from API:", error);
       }
       // On error, we could fallback to cached products or show an error state
