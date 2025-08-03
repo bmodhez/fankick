@@ -6,7 +6,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useCurrency } from "@/contexts/CurrencyContext";
-import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
 export default function TestPage() {
@@ -47,7 +46,7 @@ export default function TestPage() {
 
   const testCurrency = () => {
     addTestResult("Testing currency functionality...");
-    addTestResult(`���️ Current currency: ${selectedCurrency.code} (${selectedCurrency.symbol})`);
+    addTestResult(`ℹ️ Current currency: ${selectedCurrency.code} (${selectedCurrency.symbol})`);
     setCurrency("USD");
     addTestResult("✅ Changed currency to USD");
     setTimeout(() => {
@@ -79,7 +78,6 @@ export default function TestPage() {
 
   return (
     <div className="min-h-screen bg-gray-900">
-      <Navigation />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Card className="bg-gray-800 border-gray-700">
