@@ -1,109 +1,18 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
-
-export interface User {
-  id: string;
-  email: string;
-  phone: string;
-  name: string;
-  isAdmin: boolean;
-  isVerified: boolean;
-  createdAt: string;
-  lastLogin: string;
-  orders: number;
-  totalSpent: number;
-}
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { userApi, User, UserCreateRequest, UserLoginRequest } from "@/services/userApi";
 
 interface AuthContextType {
   user: User | null;
-  users: User[];
   isLoading: boolean;
-  login: (
-    email: string,
-    password: string,
-  ) => Promise<{ success: boolean; error?: string }>;
-  signup: (
-    email: string,
-    phone: string,
-    name: string,
-    password: string,
-  ) => Promise<{ success: boolean; error?: string }>;
-  verifyOTP: (
-    phone: string,
-    otp: string,
-  ) => Promise<{ success: boolean; error?: string }>;
-  logout: () => void;
-  sendOTP: (phone: string) => Promise<{ success: boolean; error?: string }>;
-  isAdmin: () => boolean;
-  getAllUsers: () => User[];
+  isAuthenticated: boolean;
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  signup: (userData: UserCreateRequest) => Promise<{ success: boolean; error?: string }>;
+  logout: () => Promise<void>;
+  updateProfile: (updateData: Partial<User>) => Promise<{ success: boolean; error?: string }>;
+  refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// Admin credentials
-const ADMIN_EMAIL = "modhbhavin05@gmail.com";
-const ADMIN_PHONE = "9322667822";
-const ADMIN_PASSWORD = "Bhavin@111005";
-
-// Mock users database - In production, this would be a real database
-const MOCK_USERS: User[] = [
-  {
-    id: "admin-001",
-    email: ADMIN_EMAIL,
-    phone: ADMIN_PHONE,
-    name: "Bhavin Modh",
-    isAdmin: true,
-    isVerified: true,
-    createdAt: "2024-01-01",
-    lastLogin: new Date().toISOString(),
-    orders: 0,
-    totalSpent: 0,
-  },
-  {
-    id: "user-001",
-    email: "user1@example.com",
-    phone: "9876543210",
-    name: "John Doe",
-    isAdmin: false,
-    isVerified: true,
-    createdAt: "2024-01-15",
-    lastLogin: "2024-01-20",
-    orders: 3,
-    totalSpent: 15999,
-  },
-  {
-    id: "user-002",
-    email: "user2@example.com",
-    phone: "8765432109",
-    name: "Jane Smith",
-    isAdmin: false,
-    isVerified: false,
-    createdAt: "2024-01-18",
-    lastLogin: "2024-01-19",
-    orders: 1,
-    totalSpent: 2499,
-  },
-  {
-    id: "user-003",
-    email: "user3@example.com",
-    phone: "7654321098",
-    name: "Mike Johnson",
-    isAdmin: false,
-    isVerified: true,
-    createdAt: "2024-01-10",
-    lastLogin: "2024-01-22",
-    orders: 5,
-    totalSpent: 28499,
-  },
-];
-
-// Mock OTP storage - In production, this would be handled by SMS service
-const otpStore: Record<string, { otp: string; expires: number }> = {};
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -111,221 +20,186 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
-  const [users, setUsers] = useState<User[]>(MOCK_USERS);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Check for existing session on startup
+  const checkSession = async () => {
+    try {
+      setIsLoading(true);
+      const sessionToken = localStorage.getItem('sessionToken');
+      const expiresAt = localStorage.getItem('sessionExpiresAt');
+      
+      if (!sessionToken || !expiresAt) {
+        setIsLoading(false);
+        return;
+      }
+      
+      // Check if session is expired
+      if (new Date() >= new Date(expiresAt)) {
+        localStorage.removeItem('sessionToken');
+        localStorage.removeItem('sessionExpiresAt');
+        setIsLoading(false);
+        return;
+      }
+      
+      // Verify session with server
+      const currentUser = await userApi.getCurrentUser();
+      setUser(currentUser);
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error('Session verification failed:', error);
+      // Clear invalid session
+      localStorage.removeItem('sessionToken');
+      localStorage.removeItem('sessionExpiresAt');
+      setUser(null);
+      setIsAuthenticated(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    // Check if user is logged in from localStorage
-    const storedUser = localStorage.getItem("fankick-user");
-    if (storedUser) {
-      try {
-        const parsedUser = JSON.parse(storedUser);
-        // Find updated user data
-        const currentUser = users.find((u) => u.id === parsedUser.id);
-        if (currentUser) {
-          setUser(currentUser);
-        }
-      } catch (error) {
-        console.error("Error parsing stored user:", error);
-        localStorage.removeItem("fankick-user");
-      }
-    }
-    setIsLoading(false);
-  }, [users]);
+    checkSession();
+  }, []);
 
-  const login = async (
-    email: string,
-    password: string,
-  ): Promise<{ success: boolean; error?: string }> => {
+  const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
-      // Check admin credentials
-      if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-        const adminUser = users.find((u) => u.email === ADMIN_EMAIL);
-        if (adminUser) {
-          // Update last login
-          const updatedAdmin = {
-            ...adminUser,
-            lastLogin: new Date().toISOString(),
-          };
-          setUsers((prev) =>
-            prev.map((u) => (u.id === adminUser.id ? updatedAdmin : u)),
-          );
-          setUser(updatedAdmin);
-          localStorage.setItem("fankick-user", JSON.stringify(updatedAdmin));
-          return { success: true };
+      setIsLoading(true);
+      
+      const authData = await userApi.login({ email, password });
+      
+      // Store session data
+      localStorage.setItem('sessionToken', authData.sessionToken);
+      localStorage.setItem('sessionExpiresAt', authData.expiresAt);
+      
+      setUser(authData.user);
+      setIsAuthenticated(true);
+      
+      return { success: true };
+    } catch (error) {
+      console.error('Login failed:', error);
+      
+      let errorMessage = 'Login failed';
+      if (error instanceof Error) {
+        if (error.message.includes('Invalid email or password')) {
+          errorMessage = 'Invalid email or password';
+        } else if (error.message.includes('network') || error.message.includes('fetch')) {
+          errorMessage = 'Network error. Please check your connection.';
+        } else {
+          errorMessage = error.message;
         }
       }
+      
+      return { success: false, error: errorMessage };
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-      // Check regular users (for demo purposes, accept any password for existing users)
-      const foundUser = users.find((u) => u.email === email);
-      if (foundUser) {
-        const updatedUser = {
-          ...foundUser,
-          lastLogin: new Date().toISOString(),
-        };
-        setUsers((prev) =>
-          prev.map((u) => (u.id === foundUser.id ? updatedUser : u)),
-        );
-        setUser(updatedUser);
-        localStorage.setItem("fankick-user", JSON.stringify(updatedUser));
+  const signup = async (userData: UserCreateRequest): Promise<{ success: boolean; error?: string }> => {
+    try {
+      setIsLoading(true);
+      
+      const newUser = await userApi.register(userData);
+      
+      // Auto-login after successful registration
+      const loginResult = await login(userData.email, userData.password);
+      
+      if (loginResult.success) {
         return { success: true };
-      }
-
-      return { success: false, error: "Invalid email or password" };
-    } catch (error) {
-      return { success: false, error: "Login failed. Please try again." };
-    }
-  };
-
-  const signup = async (
-    email: string,
-    phone: string,
-    name: string,
-    password: string,
-  ): Promise<{ success: boolean; error?: string }> => {
-    try {
-      // Check if user already exists
-      if (users.find((u) => u.email === email || u.phone === phone)) {
-        return {
-          success: false,
-          error: "User with this email or phone already exists",
+      } else {
+        // Registration successful but login failed
+        return { 
+          success: true, 
+          error: 'Registration successful. Please log in manually.' 
         };
       }
-
-      // Create new user
-      const newUser: User = {
-        id: "user-" + Date.now(),
-        email,
-        phone,
-        name,
-        isAdmin: false,
-        isVerified: false,
-        createdAt: new Date().toISOString(),
-        lastLogin: new Date().toISOString(),
-        orders: 0,
-        totalSpent: 0,
-      };
-
-      setUsers((prev) => [...prev, newUser]);
-      setUser(newUser);
-      localStorage.setItem("fankick-user", JSON.stringify(newUser));
-
-      // Send OTP for verification
-      await sendOTP(phone);
-
-      return { success: true };
     } catch (error) {
-      return { success: false, error: "Signup failed. Please try again." };
-    }
-  };
-
-  const sendOTP = async (
-    phone: string,
-  ): Promise<{ success: boolean; error?: string }> => {
-    try {
-      // Generate 6-digit OTP
-      const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
-      // Store OTP with 5 minute expiry
-      otpStore[phone] = {
-        otp,
-        expires: Date.now() + 5 * 60 * 1000, // 5 minutes
-      };
-
-      // In production, send SMS here
-      console.log(`OTP for ${phone}: ${otp}`); // For demo purposes
-
-      // For admin phone, always use fixed OTP for demo
-      if (phone === ADMIN_PHONE) {
-        otpStore[phone].otp = "123456";
-      }
-
-      return { success: true };
-    } catch (error) {
-      return { success: false, error: "Failed to send OTP. Please try again." };
-    }
-  };
-
-  const verifyOTP = async (
-    phone: string,
-    otp: string,
-  ): Promise<{ success: boolean; error?: string }> => {
-    try {
-      const storedOTP = otpStore[phone];
-
-      if (!storedOTP) {
-        return {
-          success: false,
-          error: "OTP not found. Please request a new one.",
-        };
-      }
-
-      if (Date.now() > storedOTP.expires) {
-        delete otpStore[phone];
-        return {
-          success: false,
-          error: "OTP has expired. Please request a new one.",
-        };
-      }
-
-      if (storedOTP.otp !== otp) {
-        return { success: false, error: "Invalid OTP. Please try again." };
-      }
-
-      // Mark user as verified
-      const userToVerify = users.find((u) => u.phone === phone);
-      if (userToVerify) {
-        const verifiedUser = { ...userToVerify, isVerified: true };
-        setUsers((prev) =>
-          prev.map((u) => (u.id === userToVerify.id ? verifiedUser : u)),
-        );
-
-        if (user && user.id === userToVerify.id) {
-          setUser(verifiedUser);
-          localStorage.setItem("fankick-user", JSON.stringify(verifiedUser));
+      console.error('Signup failed:', error);
+      
+      let errorMessage = 'Registration failed';
+      if (error instanceof Error) {
+        if (error.message.includes('already exists')) {
+          errorMessage = 'An account with this email already exists';
+        } else if (error.message.includes('network') || error.message.includes('fetch')) {
+          errorMessage = 'Network error. Please check your connection.';
+        } else {
+          errorMessage = error.message;
         }
       }
-
-      // Clean up OTP
-      delete otpStore[phone];
-
-      return { success: true };
-    } catch (error) {
-      return {
-        success: false,
-        error: "OTP verification failed. Please try again.",
-      };
+      
+      return { success: false, error: errorMessage };
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("fankick-user");
+  const logout = async (): Promise<void> => {
+    try {
+      // Notify server about logout
+      await userApi.logout();
+    } catch (error) {
+      console.error('Logout request failed:', error);
+      // Continue with local logout even if server request fails
+    } finally {
+      // Clear local session data
+      localStorage.removeItem('sessionToken');
+      localStorage.removeItem('sessionExpiresAt');
+      setUser(null);
+      setIsAuthenticated(false);
+    }
   };
 
-  const isAdmin = () => {
-    return user?.isAdmin === true;
+  const updateProfile = async (updateData: Partial<User>): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const updatedUser = await userApi.updateProfile(updateData);
+      setUser(updatedUser);
+      return { success: true };
+    } catch (error) {
+      console.error('Profile update failed:', error);
+      
+      let errorMessage = 'Failed to update profile';
+      if (error instanceof Error) {
+        if (error.message.includes('network') || error.message.includes('fetch')) {
+          errorMessage = 'Network error. Please check your connection.';
+        } else {
+          errorMessage = error.message;
+        }
+      }
+      
+      return { success: false, error: errorMessage };
+    }
   };
 
-  const getAllUsers = () => {
-    return users;
+  const refreshUser = async (): Promise<void> => {
+    try {
+      if (isAuthenticated) {
+        const currentUser = await userApi.getCurrentUser();
+        setUser(currentUser);
+      }
+    } catch (error) {
+      console.error('Failed to refresh user data:', error);
+      // If refresh fails, user might be logged out
+      if (error instanceof Error && error.message.includes('401')) {
+        await logout();
+      }
+    }
+  };
+
+  const value: AuthContextType = {
+    user,
+    isLoading,
+    isAuthenticated,
+    login,
+    signup,
+    logout,
+    updateProfile,
+    refreshUser,
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        users,
-        isLoading,
-        login,
-        signup,
-        verifyOTP,
-        logout,
-        sendOTP,
-        isAdmin,
-        getAllUsers,
-      }}
-    >
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
@@ -338,3 +212,5 @@ export function useAuth() {
   }
   return context;
 }
+
+export type { User };
