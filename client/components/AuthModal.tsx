@@ -128,8 +128,9 @@ export function AuthModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 min-h-screen">
-      <Card className="w-full max-w-md my-8 mx-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 min-h-screen overflow-y-auto">
+      <div className="flex items-center justify-center min-h-full py-12 px-4">
+        <Card className="w-full max-w-md relative">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-xl font-bold">
             {mode === "login" && "Welcome Back"}
@@ -335,7 +336,8 @@ export function AuthModal({
 
 
         </CardContent>
-      </Card>
+        </Card>
+      </div>
     </div>
   );
 }
