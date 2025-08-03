@@ -11,15 +11,16 @@ import { productApi } from "@/services/api";
 interface ProductContextType {
   products: Product[];
   setProducts: (products: Product[]) => void;
-  updateProduct: (product: Product) => void;
-  deleteProduct: (id: string) => void;
-  addProduct: (product: Product) => void;
+  updateProduct: (product: Product) => Promise<void>;
+  deleteProduct: (id: string) => Promise<void>;
+  addProduct: (product: Omit<Product, 'id' | 'rating' | 'reviews' | 'createdAt' | 'updatedAt'>) => Promise<Product>;
   getProductById: (id: string) => Product | undefined;
   getProductsByCategory: (category: string) => Product[];
   getTrendingProducts: (limit?: number) => Product[];
   getProductsBySubcategory: (subcategory: string) => Product[];
   searchProducts: (query: string) => Product[];
-  refreshProducts: () => void;
+  refreshProducts: () => Promise<void>;
+  isLoading: boolean;
 }
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
