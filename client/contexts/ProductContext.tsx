@@ -52,18 +52,16 @@ export function ProductProvider({ children }: ProductProviderProps) {
         error.name !== "AbortError" &&
         !error.message.includes("cancelled")
       ) {
-        console.error("Error loading products from API:", error);
+        console.warn("API failed, falling back to local products data:", error.message);
 
-        // For network failures, fall back to local data or show user-friendly message
-        if (error.message.includes("Failed to fetch") || error.message.includes("Network error")) {
-          console.warn("Network error detected, falling back to local products data");
-          // Fallback to local products data if available
-          try {
-            const { PRODUCTS } = await import("@/data/products");
-            setProducts(PRODUCTS);
-          } catch (fallbackError) {
-            console.error("Failed to load fallback products:", fallbackError);
-          }
+        // Always fall back to local data on any API failure
+        try {
+          const { PRODUCTS } = await import("@/data/products");
+          setProducts(PRODUCTS);
+          console.log("Successfully loaded local products data as fallback");
+          return; // Exit early since we have data
+        } catch (fallbackError) {
+          console.error("Failed to load fallback products:", fallbackError);
         }
       }
       // On error, we could fallback to cached products or show an error state
