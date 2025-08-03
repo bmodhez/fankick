@@ -93,24 +93,33 @@ export function ProductProvider({ children }: ProductProviderProps) {
     }
   };
 
-  // Load products from API on mount
+  // Try to enhance with API data (non-blocking)
   useEffect(() => {
     const abortController = new AbortController();
 
-    // Add a timeout to prevent hanging indefinitely
-    const timeoutId = setTimeout(() => {
-      console.warn('API loading timeout, continuing with local data');
+    // Give local data time to load first, then try API
+    const delayedApiLoad = setTimeout(() => {
+      loadProductsFromAPI(abortController.signal)
+        .catch(() => {
+          // API failed, but we already have local data loaded
+          console.log('API enhancement failed, continuing with local data');
+        })
+        .finally(() => {
+          setIsLoading(false);
+          setIsInitialized(true);
+        });
+    }, 500); // Short delay to let local data load
+
+    // Ensure we're not loading forever
+    const maxTimeout = setTimeout(() => {
       setIsLoading(false);
       setIsInitialized(true);
-    }, 8000); // 8 second timeout
-
-    loadProductsFromAPI(abortController.signal).finally(() => {
-      clearTimeout(timeoutId);
-    });
+    }, 10000);
 
     return () => {
       abortController.abort();
-      clearTimeout(timeoutId);
+      clearTimeout(delayedApiLoad);
+      clearTimeout(maxTimeout);
     };
   }, []);
 
