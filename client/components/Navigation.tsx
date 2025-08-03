@@ -67,7 +67,7 @@ export function Navigation() {
             <div className="flex items-center space-x-6">
               <Link
                 to="/football"
-                className="hover:text-primary transition-colors font-medium"
+                className="text-foreground hover:text-primary transition-colors font-medium"
               >
                 Football
               </Link>
