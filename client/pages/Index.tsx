@@ -125,7 +125,7 @@ export default function Index() {
               </span>
             </h1>
 
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
               From Messi's magic to Naruto's jutsu, Taylor's melodies to
               Marvel's heroes - get authentic merchandise that defines your
               passion. Trusted by 500K+ fans worldwide.
