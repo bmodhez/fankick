@@ -286,7 +286,7 @@ export default function SearchResults() {
                 {/* Price Range Filter */}
                 <div>
                   <label className="block text-sm font-medium text-white mb-2">
-                    Price Range ({selectedCurrency})
+                    Price Range ({selectedCurrency.code})
                   </label>
                   <select
                     value={priceRange}
