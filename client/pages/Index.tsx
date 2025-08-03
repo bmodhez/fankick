@@ -166,7 +166,7 @@ export default function Index() {
           <div className="grid md:grid-cols-3 gap-6">
             {heroCategories.map((category, index) => (
               <Link key={index} to={category.link}>
-                <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-secondary to-background border-border">
+                <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-secondary to-background border-border shadow-lg hover:shadow-xl">
                   <CardContent className="p-0">
                     <div
                       className={`h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
