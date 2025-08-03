@@ -108,7 +108,7 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-white hover:text-primary"
+                className="text-foreground hover:text-primary"
                 onClick={() => setShowCurrency(!showCurrency)}
               >
                 <Globe className="h-4 w-4 mr-1" />
