@@ -148,7 +148,7 @@ export default function Index() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-primary to-purple-500 text-black hover:opacity-90 font-bold px-8 py-4 text-lg"
+                className="bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 font-bold px-8 py-4 text-lg transition-all duration-300 border border-white/20 backdrop-blur-sm"
               >
                 <ShoppingBag className="w-5 h-5 mr-2" />
                 Shop Now
