@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE TABLE IF NOT EXISTS product_variants (
     id VARCHAR(255) PRIMARY KEY,
     product_id VARCHAR(255) NOT NULL REFERENCES products(id) ON DELETE CASCADE,
-    size VARCHAR(10),
+    size VARCHAR(50),
     color VARCHAR(50),
     price DECIMAL(10,2) NOT NULL,
     original_price DECIMAL(10,2),
