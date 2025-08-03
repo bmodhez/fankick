@@ -235,18 +235,23 @@ export function ProductManager() {
     setShowProductForm(true);
   };
 
-  const handleSaveProduct = (productData: Product) => {
-    if (formMode === "create") {
-      addProduct(productData);
-      setLastSyncTime(new Date().toISOString());
-      alert(`✅ Product "${productData.name}" has been created successfully!\n\nChanges are now live on the main website.`);
-    } else {
-      updateProduct(productData);
-      setLastSyncTime(new Date().toISOString());
-      alert(`✅ Product "${productData.name}" has been updated successfully!\n\nChanges are now live on the main website.`);
+  const handleSaveProduct = async (productData: Product) => {
+    try {
+      if (formMode === "create") {
+        await addProduct(productData);
+        setLastSyncTime(new Date().toISOString());
+        alert(`✅ Product "${productData.name}" has been created successfully!\n\nChanges are now saved to the backend and live on the main website.`);
+      } else {
+        await updateProduct(productData);
+        setLastSyncTime(new Date().toISOString());
+        alert(`✅ Product "${productData.name}" has been updated successfully!\n\nChanges are now saved to the backend and live on the main website.`);
+      }
+      setShowProductForm(false);
+      setEditingProduct(null);
+    } catch (error) {
+      console.error('Error saving product:', error);
+      alert(`❌ Error saving product: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
-    setShowProductForm(false);
-    setEditingProduct(null);
   };
 
   const handleDeleteProduct = (id: string) => {
