@@ -10,6 +10,7 @@ import {
   deleteProduct,
   updateProductStock,
 } from "./routes/products";
+import "./database/init.js"; // Initialize database on startup
 
 export function createServer() {
   const app = express();
