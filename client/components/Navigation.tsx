@@ -367,6 +367,10 @@ export function Navigation() {
                 <Button
                   variant="ghost"
                   className="w-full justify-start text-foreground hover:text-primary"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    navigate('/search');
+                  }}
                 >
                   <Search className="h-4 w-4 mr-2" />
                   Search Products
