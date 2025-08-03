@@ -268,9 +268,20 @@ export function ProductManager() {
       setEditingProduct(null);
     } catch (error) {
       console.error("Error saving product:", error);
-      alert(
-        `❌ Error saving product: ${error instanceof Error ? error.message : "Unknown error"}`,
-      );
+
+      // More user-friendly error handling
+      let errorMessage = "Unknown error occurred";
+      if (error instanceof Error) {
+        if (error.message.includes("cancelled") || error.message.includes("aborted")) {
+          errorMessage = "Request was cancelled. Please try again.";
+        } else if (error.message.includes("Failed to fetch")) {
+          errorMessage = "Network error. Please check your connection and try again.";
+        } else {
+          errorMessage = error.message;
+        }
+      }
+
+      alert(`❌ Error saving product: ${errorMessage}`);
     }
   };
 
