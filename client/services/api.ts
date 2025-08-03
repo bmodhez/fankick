@@ -130,7 +130,7 @@ export const productApi = {
     return apiRequest<Product>(`/products/${id}`, {
       method: "PUT",
       body: JSON.stringify(productData),
-    });
+    }, 2); // Retry up to 2 times for update operations
   },
 
   // Delete product
