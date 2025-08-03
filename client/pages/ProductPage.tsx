@@ -454,7 +454,7 @@ export default function ProductPage() {
         {/* Reviews Section */}
         <div className="mt-16">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-sport font-bold">Customer Reviews</h2>
+            <h2 className="text-2xl font-sport font-bold text-gray-900 dark:text-white">Customer Reviews</h2>
             <Button variant="outline">Write a Review</Button>
           </div>
 
