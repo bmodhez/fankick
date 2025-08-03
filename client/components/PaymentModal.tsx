@@ -43,6 +43,9 @@ export function PaymentModal({
   amount,
   currency,
   items = [],
+  product,
+  shippingCost = 0,
+  codAvailable = false,
 }: PaymentModalProps) {
   const { user } = useAuth();
   const [selectedPayment, setSelectedPayment] = useState("");
