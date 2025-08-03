@@ -309,7 +309,7 @@ export default function Index() {
                                 selectedCurrency.code,
                               )}
                             </span>
-                            <span className="text-gray-400 line-through text-sm ml-2">
+                            <span className="text-muted-foreground line-through text-sm ml-2">
                               {formatPrice(
                                 convertedOriginalPrice,
                                 selectedCurrency.code,
