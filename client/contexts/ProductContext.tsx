@@ -99,11 +99,10 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
     // Add a timeout to prevent hanging indefinitely
     const timeoutId = setTimeout(() => {
-      console.warn('Product loading timeout, initializing with empty state');
-      setProducts([]);
+      console.warn('API loading timeout, continuing with local data');
       setIsLoading(false);
       setIsInitialized(true);
-    }, 10000); // 10 second timeout
+    }, 8000); // 8 second timeout
 
     loadProductsFromAPI(abortController.signal).finally(() => {
       clearTimeout(timeoutId);
