@@ -138,7 +138,7 @@ export default function Index() {
                   <div className="text-2xl font-bold text-primary">
                     {item.metric}
                   </div>
-                  <div className="text-sm text-gray-400">{item.label}</div>
+                  <div className="text-sm text-muted-foreground">{item.label}</div>
                 </div>
               ))}
             </div>
