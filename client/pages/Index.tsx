@@ -290,7 +290,7 @@ export default function Index() {
                                 className={`w-3 h-3 ${
                                   i < Math.floor(product.rating)
                                     ? "text-yellow-400 fill-current"
-                                    : "text-gray-300"
+                                    : "text-muted-foreground"
                                 }`}
                               />
                             ))}
