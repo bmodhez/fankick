@@ -51,7 +51,7 @@ const App = () => (
                           path="/"
                           element={
                             <>
-                              <Navigation />
+                              <SimpleNav />
                               <Index />
                             </>
                           }
