@@ -487,7 +487,7 @@ export default function Index() {
       </section>
 
       {/* Admin Access Section - For Testing */}
-      <section className="py-12 bg-gray-900">
+      <section className="py-12 bg-secondary/50 dark:bg-gray-900 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-foreground mb-2">
