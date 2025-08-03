@@ -43,7 +43,7 @@ export function AuthModal({
   const [otp, setOtp] = useState("");
   const [pendingVerificationPhone, setPendingVerificationPhone] = useState("");
 
-  const { login, signup, verifyOTP, sendOTP } = useAuth();
+  const { login, signup } = useAuth();
 
   if (!isOpen) return null;
 
@@ -111,43 +111,13 @@ export function AuthModal({
 
   const handleVerifyOTP = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError("");
-
-    if (otp.length !== 6) {
-      setError("Please enter a valid 6-digit OTP");
-      setIsLoading(false);
-      return;
-    }
-
-    const result = await verifyOTP(pendingVerificationPhone, otp);
-
-    if (result.success) {
-      setSuccess("Phone verified successfully!");
-      setTimeout(() => {
-        resetForm();
-        onClose();
-      }, 1000);
-    } else {
-      setError(result.error || "OTP verification failed");
-    }
-
-    setIsLoading(false);
+    // OTP verification not implemented yet
+    setError("OTP verification not implemented yet");
   };
 
   const handleResendOTP = async () => {
-    setIsLoading(true);
-    setError("");
-
-    const result = await sendOTP(pendingVerificationPhone);
-
-    if (result.success) {
-      setSuccess("OTP sent successfully!");
-    } else {
-      setError(result.error || "Failed to send OTP");
-    }
-
-    setIsLoading(false);
+    // OTP sending not implemented yet
+    setError("OTP sending not implemented yet");
   };
 
   return (
@@ -356,62 +326,7 @@ export function AuthModal({
             </form>
           )}
 
-          {/* OTP Verification Form */}
-          {mode === "verify-otp" && (
-            <form onSubmit={handleVerifyOTP} className="space-y-4">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Smartphone className="w-8 h-8 text-primary" />
-                </div>
-                <p className="text-sm text-gray-600 mb-4">
-                  We've sent a 6-digit verification code to
-                  <br />
-                  <span className="font-medium">
-                    {pendingVerificationPhone}
-                  </span>
-                </p>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Verification Code
-                </label>
-                <input
-                  type="text"
-                  value={otp}
-                  onChange={(e) =>
-                    setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-center text-lg font-mono"
-                  placeholder="000000"
-                  maxLength={6}
-                  required
-                />
-              </div>
-
-              <Button
-                type="submit"
-                className="w-full bg-primary text-black hover:bg-primary/90 font-semibold"
-                disabled={isLoading || otp.length !== 6}
-              >
-                {isLoading ? "Verifying..." : "Verify Phone"}
-              </Button>
-
-              <div className="text-center">
-                <span className="text-sm text-gray-600">
-                  Didn't receive the code?{" "}
-                </span>
-                <button
-                  type="button"
-                  onClick={handleResendOTP}
-                  className="text-sm text-primary font-medium hover:underline"
-                  disabled={isLoading}
-                >
-                  Resend OTP
-                </button>
-              </div>
-            </form>
-          )}
         </CardContent>
       </Card>
     </div>
