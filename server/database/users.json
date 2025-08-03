@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "id": "user_1754248350794_jp4tg6pk2",
+    "email": "test@example.com",
+    "firstName": "Test",
+    "lastName": "User",
+    "isVerified": false,
+    "isActive": true,
+    "createdAt": "2025-08-03T19:12:30.794Z",
+    "updatedAt": "2025-08-03T19:12:30.794Z",
+    "passwordHash": "$2b$10$kDzrWb6qxFH.KPQOnH/PQucaQzRD9lMNQNNmTIS30poPN6y1kkYk."
+  }
+]
