@@ -197,25 +197,52 @@ export function PaymentModal({
           {/* Order Summary */}
           <div className="bg-gray-50 rounded-lg p-4">
             <h3 className="font-semibold mb-3">Order Summary</h3>
-            <div className="flex items-center space-x-3 mb-4">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-16 h-16 object-cover rounded"
-              />
-              <div className="flex-1">
-                <h4 className="font-medium text-sm">{product.name}</h4>
-                <p className="text-sm text-gray-600">
-                  Quantity: {product.quantity}
-                </p>
+            {product && (
+              <div className="flex items-center space-x-3 mb-4">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-16 h-16 object-cover rounded"
+                />
+                <div className="flex-1">
+                  <h4 className="font-medium text-sm">{product.name}</h4>
+                  <p className="text-sm text-gray-600">
+                    Quantity: {product.quantity}
+                  </p>
+                </div>
+                <span className="font-bold">
+                  {formatPrice(
+                    product.price * product.quantity,
+                    selectedCurrency,
+                  )}
+                </span>
               </div>
-              <span className="font-bold">
-                {formatPrice(
-                  product.price * product.quantity,
-                  selectedCurrency.code,
-                )}
-              </span>
-            </div>
+            )}
+            {!product && items.length > 0 && (
+              <div className="space-y-3 mb-4">
+                {items.map((item, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <img
+                      src={item.image || "/placeholder.svg"}
+                      alt={item.name}
+                      className="w-12 h-12 object-cover rounded"
+                    />
+                    <div className="flex-1">
+                      <h4 className="font-medium text-sm">{item.name}</h4>
+                      <p className="text-sm text-gray-600">
+                        Quantity: {item.quantity}
+                      </p>
+                    </div>
+                    <span className="font-bold text-sm">
+                      {formatPrice(
+                        item.price * item.quantity,
+                        selectedCurrency,
+                      )}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
 
             <div className="space-y-2 text-sm border-t pt-3">
               <div className="flex justify-between">
