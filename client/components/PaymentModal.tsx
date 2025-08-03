@@ -57,7 +57,7 @@ export function PaymentModal({
   const paymentMethods = getAvailablePaymentMethods(country);
 
   const subtotal = amount;
-  const total = subtotal;
+  const total = subtotal + (shippingCost || 0);
 
   if (!isOpen) return null;
 
