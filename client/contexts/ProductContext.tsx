@@ -225,6 +225,11 @@ export function ProductProvider({ children }: ProductProviderProps) {
 export function useProducts() {
   const context = useContext(ProductContext);
   if (context === undefined) {
+    console.error("ProductContext is undefined. Component tree:", {
+      context,
+      ProductContext,
+      available: !!ProductContext
+    });
     throw new Error("useProducts must be used within a ProductProvider");
   }
   return context;
