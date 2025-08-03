@@ -54,41 +54,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
     loadProductsFromAPI();
   }, []);
 
-  // Save to localStorage whenever products change (with error handling)
-  useEffect(() => {
-    // Only save if products have been modified from the original PRODUCTS
-    // This prevents unnecessary saves and reduces quota usage
-    const hasChanges =
-      products.length !== PRODUCTS.length ||
-      products.some((product, index) => {
-        const original = PRODUCTS[index];
-        return (
-          !original ||
-          product.id !== original.id ||
-          JSON.stringify(product) !== JSON.stringify(original)
-        );
-      });
-
-    if (hasChanges) {
-      // Instead of saving the entire products array, save only the changes
-      // to reduce localStorage usage
-      const changes = products.filter((product) => {
-        const original = PRODUCTS.find((p) => p.id === product.id);
-        return (
-          !original || JSON.stringify(product) !== JSON.stringify(original)
-        );
-      });
-
-      // If there are too many changes (indicating mostly new products),
-      // save the full array, otherwise save just the changes
-      if (changes.length > PRODUCTS.length * 0.5) {
-        saveToLocalStorage("fankick-products", products);
-      } else {
-        saveToLocalStorage("fankick-product-changes", changes);
-        saveToLocalStorage("fankick-products-version", "changes");
-      }
-    }
-  }, [products]);
+  // CRUD operations with API calls
 
   const updateProduct = (updatedProduct: Product) => {
     setProducts((prevProducts) =>
