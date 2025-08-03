@@ -203,9 +203,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             variant="ghost"
                             size="sm"
                             onClick={() => removeFromCart(item.id)}
-                            className="text-red-400 hover:text-red-300"
+                            className="text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl p-2 transition-all transform hover:scale-105"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-5 h-5" />
                           </Button>
                         </div>
                       </div>
@@ -224,10 +224,10 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       clearCart();
                     }
                   }}
-                  className="w-full border-gray-600 text-gray-400 hover:text-white"
+                  className="w-full border-2 border-red-500/30 text-red-400 hover:text-white hover:bg-red-500/20 hover:border-red-400 rounded-xl py-3 transition-all font-medium"
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
-                  Clear Cart
+                  Clear All Items
                 </Button>
               )}
             </div>
