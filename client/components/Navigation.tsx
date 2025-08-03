@@ -127,7 +127,7 @@ export function Navigation() {
           {/* Right side icons */}
           <div className="flex items-center space-x-3">
             {/* Currency Selector */}
-            <div className="relative hidden sm:block">
+            <div className="relative hidden sm:block" ref={currencyRef}>
               <Button
                 variant="ghost"
                 size="sm"
@@ -161,7 +161,7 @@ export function Navigation() {
               )}
             </div>
 
-            <div className="relative">
+            <div className="relative" ref={searchRef}>
               <Button
                 variant="ghost"
                 size="sm"
@@ -206,7 +206,7 @@ export function Navigation() {
 
             {/* User Authentication */}
             {user ? (
-              <div className="relative">
+              <div className="relative" ref={userMenuRef}>
                 <Button
                   variant="ghost"
                   size="sm"
