@@ -73,9 +73,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       />
 
       {/* Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-gradient-to-b from-gray-900 to-gray-800 z-[61] shadow-2xl border-l border-gray-600 flex flex-col">
+      <div className="fixed right-0 top-0 h-full w-full max-w-lg bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 z-[61] shadow-2xl border-l-2 border-primary/20 flex flex-col backdrop-blur-sm">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-600 bg-gradient-to-r from-primary/10 to-purple-500/10">
+        <div className="flex items-center justify-between p-6 border-b-2 border-gray-600/50 bg-gradient-to-r from-primary/15 via-purple-500/10 to-blue-500/15 backdrop-blur-sm">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-primary/20 rounded-full">
               <ShoppingBag className="w-6 h-6 text-primary" />
@@ -107,7 +107,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         </div>
 
         {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
           {items.length === 0 ? (
             <div className="text-center py-20">
               <div className="w-24 h-24 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-6">
