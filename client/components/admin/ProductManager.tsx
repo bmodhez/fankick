@@ -254,16 +254,22 @@ export function ProductManager() {
     }
   };
 
-  const handleDeleteProduct = (id: string) => {
+  const handleDeleteProduct = async (id: string) => {
     const productToDelete = products.find(p => p.id === id);
     if (confirm("Are you sure you want to delete this product? This action cannot be undone.")) {
-      deleteProduct(id);
-      setSelectedProducts(prev => {
-        const newSet = new Set(prev);
-        newSet.delete(id);
-        return newSet;
-      });
-      alert(`✅ Product "${productToDelete?.name || 'Unknown'}" has been deleted successfully!\n\nChanges are now live on the main website.`);
+      try {
+        await deleteProduct(id);
+        setSelectedProducts(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(id);
+          return newSet;
+        });
+        setLastSyncTime(new Date().toISOString());
+        alert(`✅ Product "${productToDelete?.name || 'Unknown'}" has been deleted successfully!\n\nChanges are now saved to the backend and live on the main website.`);
+      } catch (error) {
+        console.error('Error deleting product:', error);
+        alert(`❌ Error deleting product: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
     }
   };
 
