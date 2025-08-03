@@ -281,7 +281,7 @@ export function Navigation() {
             <Button
               variant="ghost"
               size="sm"
-              className="relative text-white hover:text-primary"
+              className="relative text-foreground hover:text-primary"
               onClick={() => setShowCart(true)}
             >
               <ShoppingCart className="h-4 w-4" />
