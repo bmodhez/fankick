@@ -50,9 +50,6 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
     if (coupon) {
       setAppliedCoupon({ code: couponCode.toUpperCase(), discount: coupon.discount });
       setCouponCode("");
-      alert(`🎉 Coupon applied! You saved ${coupon.discount}%`);
-    } else {
-      alert("❌ Invalid coupon code. Try: WELCOME10, SAVE20, or FANKICK15");
     }
   };
 
