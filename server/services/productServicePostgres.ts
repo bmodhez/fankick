@@ -4,6 +4,13 @@ import { Product, ProductCreateRequest } from '../types/product.js';
 export class ProductServicePostgres {
   // Helper method to convert database row to Product object
   private dbRowToProduct(productRow: any, variants: any[]): Product {
+    // Calculate base price and original price from variants
+    const variantPrices = variants.map(v => parseFloat(v.price)).filter(p => !isNaN(p));
+    const variantOriginalPrices = variants.map(v => v.original_price ? parseFloat(v.original_price) : null).filter(p => p !== null);
+
+    const basePrice = variantPrices.length > 0 ? Math.min(...variantPrices) : 0;
+    const originalPrice = variantOriginalPrices.length > 0 ? Math.min(...variantOriginalPrices) : basePrice;
+
     return {
       id: productRow.id,
       name: productRow.name,
@@ -17,6 +24,8 @@ export class ProductServicePostgres {
       isFeatured: productRow.is_featured,
       rating: parseFloat(productRow.rating) || 4.5,
       reviews: productRow.reviews || 0,
+      basePrice,
+      originalPrice,
       variants: variants.map(v => ({
         id: v.id,
         size: v.size,
@@ -29,7 +38,12 @@ export class ProductServicePostgres {
         isAvailable: v.is_available
       })),
       createdAt: productRow.created_at,
-      updatedAt: productRow.updated_at
+      updatedAt: productRow.updated_at,
+      // Add missing fields that the frontend expects
+      badges: [],
+      shippingDays: 5,
+      codAvailable: true,
+      isExclusive: false
     };
   }
 
