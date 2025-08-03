@@ -10,10 +10,13 @@ export async function initializeDatabase() {
   try {
     console.log("Initializing database schema...");
 
-    // Read and execute schema SQL
+    // Read and execute product schema SQL
     const schemaSQL = readFileSync(join(__dirname, "schema.sql"), "utf-8");
-
     await pool.query(schemaSQL);
+
+    // Read and execute user schema SQL
+    const userSchemaSQL = readFileSync(join(__dirname, "userSchema.sql"), "utf-8");
+    await pool.query(userSchemaSQL);
 
     console.log("Database schema initialized successfully");
 
