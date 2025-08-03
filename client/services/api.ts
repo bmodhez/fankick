@@ -31,8 +31,8 @@ async function apiRequest<T>(
       "Content-Type": "application/json",
       ...options.headers,
     },
-    // Add default timeout to prevent hanging requests
-    signal: options.signal || AbortSignal.timeout(30000), // 30 second timeout
+    // Add shorter timeout to fail fast on network issues
+    signal: options.signal || AbortSignal.timeout(10000), // 10 second timeout
   };
 
   let lastError: Error;
