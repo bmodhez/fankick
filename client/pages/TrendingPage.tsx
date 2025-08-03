@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 
 export default function TrendingPage() {
+  const navigate = useNavigate();
   const { selectedCurrency } = useCurrency();
   const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
