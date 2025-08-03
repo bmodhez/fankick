@@ -202,10 +202,10 @@ export function Navigation() {
                 </Button>
 
                 {showUserMenu && (
-                  <div className="absolute right-0 mt-2 w-56 bg-gray-800 text-white rounded-lg shadow-lg border border-gray-700 z-50">
-                    <div className="px-4 py-3 border-b border-gray-700">
+                  <div className="absolute right-0 mt-2 w-56 bg-background text-foreground rounded-lg shadow-lg border border-border z-50">
+                    <div className="px-4 py-3 border-b border-border">
                       <p className="font-medium">{user.name}</p>
-                      <p className="text-sm text-gray-400">{user.email}</p>
+                      <p className="text-sm text-muted-foreground">{user.email}</p>
                       {user.isAdmin && (
                         <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary text-black mt-1">
                           <Crown className="w-3 h-3 mr-1" />
