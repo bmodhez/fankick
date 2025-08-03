@@ -115,7 +115,7 @@ export default function Index() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <Badge className="mb-6 bg-gradient-to-r from-primary to-purple-500 text-black font-bold px-6 py-3 text-lg">
+            <Badge className="mb-6 bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white shadow-2xl shadow-primary/25 border border-white/20 backdrop-blur-sm font-bold px-6 py-3 text-lg animate-pulse">
               <Globe className="w-5 h-5 mr-2" />
               Global Dropshipping �� Free Worldwide Shipping
             </Badge>
