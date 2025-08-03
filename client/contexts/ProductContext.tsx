@@ -31,8 +31,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
       localStorage.setItem(key, JSON.stringify(data));
       return true;
     } catch (error) {
-      if (error instanceof DOMException && error.code === 22) {
-        // QuotaExceededError
+      if (isStorageQuotaExceeded(error)) {
         console.warn('localStorage quota exceeded. Clearing old data and retrying...');
         try {
           // Clear localStorage and try again
