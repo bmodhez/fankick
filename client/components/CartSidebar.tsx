@@ -273,7 +273,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             </div>
 
             {/* Price Breakdown */}
-            <div className="space-y-3 text-sm bg-gray-700/30 rounded-xl p-4 border border-gray-600">
+            <div className="space-y-4 text-sm bg-gradient-to-br from-gray-700/40 to-gray-600/30 rounded-2xl p-5 border-2 border-gray-600/50 backdrop-blur-sm">
               <div className="flex justify-between text-gray-300">
                 <span>Subtotal ({totalItems} items)</span>
                 <span>{formatPrice(convertedTotal, selectedCurrency)}</span>
@@ -297,9 +297,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 </div>
               )}
               
-              <div className="border-t border-gray-600 pt-2 flex justify-between font-semibold text-white">
-                <span>Total</span>
-                <span className="text-primary">
+              <div className="border-t-2 border-gray-600/70 pt-3 flex justify-between font-bold text-lg">
+                <span className="text-white">Total Amount</span>
+                <span className="text-primary bg-primary/10 px-3 py-1 rounded-lg">
                   {formatPrice(finalTotal, selectedCurrency)}
                 </span>
               </div>
@@ -307,9 +307,14 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
             {/* Free Shipping Message */}
             {shippingCost > 0 && (
-              <div className="bg-blue-500/20 border border-blue-500 rounded p-2 text-blue-400 text-sm">
-                <Truck className="w-4 h-4 inline mr-2" />
-                Add {formatPrice(freeShippingThreshold - convertedTotal, selectedCurrency)} more for FREE shipping!
+              <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-2 border-blue-400/50 rounded-xl p-4 text-blue-300 text-sm font-medium">
+                <div className="flex items-center">
+                  <Truck className="w-5 h-5 mr-3 text-blue-400" />
+                  <div>
+                    <div className="font-semibold">Almost there!</div>
+                    <div>Add {formatPrice(freeShippingThreshold - convertedTotal, selectedCurrency)} more for FREE shipping!</div>
+                  </div>
+                </div>
               </div>
             )}
 
