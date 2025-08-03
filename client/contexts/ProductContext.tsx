@@ -52,9 +52,31 @@ export function ProductProvider({ children }: ProductProviderProps) {
   // Sync with localStorage for persistence
   useEffect(() => {
     const savedProducts = localStorage.getItem('fankick-products');
+    const savedVersion = localStorage.getItem('fankick-products-version');
+    const savedChanges = localStorage.getItem('fankick-product-changes');
 
-    if (savedProducts) {
-      try {
+    try {
+      // Check if we have a changes-based storage
+      if (savedVersion === 'changes' && savedChanges) {
+        const changes = JSON.parse(savedChanges);
+        if (Array.isArray(changes)) {
+          // Apply changes to original PRODUCTS
+          const updatedProducts = [...PRODUCTS];
+          changes.forEach(changedProduct => {
+            const index = updatedProducts.findIndex(p => p.id === changedProduct.id);
+            if (index >= 0) {
+              updatedProducts[index] = changedProduct;
+            } else {
+              updatedProducts.push(changedProduct);
+            }
+          });
+          setProducts(updatedProducts);
+          return;
+        }
+      }
+
+      // Fallback to full products storage
+      if (savedProducts) {
         const parsedProducts = JSON.parse(savedProducts);
         // Only use saved products if they contain data and have valid structure
         if (parsedProducts && Array.isArray(parsedProducts) && parsedProducts.length > 0) {
@@ -62,18 +84,19 @@ export function ProductProvider({ children }: ProductProviderProps) {
         } else {
           // If saved data is empty or invalid, use default products
           setProducts(PRODUCTS);
-          saveToLocalStorage('fankick-products', PRODUCTS);
         }
-      } catch (error) {
-        console.error('Error loading saved products:', error);
-        // Fallback to default products
+      } else {
+        // No saved products, use default products
         setProducts(PRODUCTS);
-        saveToLocalStorage('fankick-products', PRODUCTS);
       }
-    } else {
-      // No saved products, use default products
-      // Don't save to localStorage initially to avoid quota issues
+    } catch (error) {
+      console.error('Error loading saved products:', error);
+      // Fallback to default products
       setProducts(PRODUCTS);
+      // Clear corrupted data
+      localStorage.removeItem('fankick-products');
+      localStorage.removeItem('fankick-product-changes');
+      localStorage.removeItem('fankick-products-version');
     }
   }, []);
 
