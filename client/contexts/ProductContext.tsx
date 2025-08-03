@@ -39,11 +39,17 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load products from backend API
+  // Load products from backend API with local fallback
   const loadProductsFromAPI = async (signal?: AbortSignal) => {
     try {
       setIsLoading(true);
+
+      // Try to load from API with a shorter timeout for faster fallback
+      const timeoutController = new AbortController();
+      const apiTimeout = setTimeout(() => timeoutController.abort(), 5000); // 5 second timeout
+
       const apiProducts = await productApi.getAll();
+      clearTimeout(apiTimeout);
       setProducts(apiProducts);
     } catch (error) {
       // Don't log errors for cancelled requests
