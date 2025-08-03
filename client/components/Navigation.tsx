@@ -173,7 +173,7 @@ export function Navigation() {
                       <Search className="w-4 h-4" />
                     </Button>
                   </div>
-                  <div className="mt-3 text-xs text-gray-400">
+                  <div className="mt-3 text-xs text-muted-foreground">
                     Try: "Naruto", "Messi", "Taylor Swift", "Football Jersey"
                   </div>
                 </div>
