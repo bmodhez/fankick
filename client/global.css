@@ -136,6 +136,17 @@
     overflow: hidden;
   }
 
+  /* Ensure buttons are clickable */
+  button {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+  }
+
+  button:disabled {
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+  }
+
   /* Gradient text utilities */
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent;
