@@ -113,7 +113,7 @@ export async function logoutUser(req: Request, res: Response) {
       return res.status(400).json(response);
     }
     
-    await userService.logoutUser(sessionToken);
+    await userService.logout(sessionToken);
     
     const response: AuthResponse = {
       success: true,
@@ -146,7 +146,7 @@ export async function getCurrentUser(req: Request, res: Response) {
       return res.status(401).json(response);
     }
     
-    const user = await userService.verifySession(sessionToken);
+    const user = await userService.getUserFromSession(sessionToken);
     
     if (!user) {
       const response: UserResponse = {
