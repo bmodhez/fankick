@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Footer } from "@/components/Footer";
+import { Navigation } from "@/components/Navigation";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { Product } from "@/data/products";
