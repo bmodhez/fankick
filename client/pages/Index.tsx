@@ -335,7 +335,6 @@ export default function Index() {
                             e.stopPropagation();
                             if (product.variants.length > 0) {
                               addToCart(product, product.variants[0]);
-                              alert(`✅ ${product.name} added to cart!`);
                             }
                           }}
                         >
