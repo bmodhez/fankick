@@ -24,7 +24,11 @@ async function apiRequest<T>(
   options: RequestInit = {},
   retries: number = 1,
 ): Promise<T> {
-  const url = `${API_BASE_URL}${endpoint}`;
+  // Try with configured API base URL first, then fallback to relative URL
+  const urls = [
+    `${API_BASE_URL}${endpoint}`,
+    endpoint // Fallback to relative URL
+  ];
 
   const defaultOptions: RequestInit = {
     headers: {
