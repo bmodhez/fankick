@@ -30,6 +30,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Contact from "./pages/Contact";
 import TestPage from "./pages/TestPage";
 import { Footer } from "./components/Footer";
+import { DebugCart } from "./components/DebugCart";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,7 @@ const App = () => (
                             <>
                               <SimpleNav />
                               <Index />
+                              <DebugCart />
                             </>
                           }
                         />
