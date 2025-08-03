@@ -111,7 +111,16 @@ async function userApiRequest<T>(
       
       const response = await fetch(url, { ...defaultOptions, ...options });
 
-      const result: ApiResponse<T> = await response.json();
+      let result: ApiResponse<T>;
+      try {
+        result = await response.json();
+      } catch (jsonError) {
+        // If JSON parsing fails, throw a generic error
+        throw new UserApiError(
+          response.status,
+          `HTTP error! status: ${response.status}`,
+        );
+      }
 
       if (!response.ok) {
         // Use the server's error message if available, otherwise use generic message
