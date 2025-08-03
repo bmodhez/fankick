@@ -39,7 +39,7 @@ export default function UserProfile() {
   const { items: cartItems, totalPrice } = useCart();
   const { selectedCurrency } = useCurrency();
   const navigate = useNavigate();
-  
+
   const [activeTab, setActiveTab] = useState("profile");
 
   // Scroll to top when component mounts
@@ -64,10 +64,14 @@ export default function UserProfile() {
       total: 89.99,
       items: 3,
       image: "/placeholder.svg",
-      products: ["Naruto Akatsuki Hoodie", "Messi Jersey", "Taylor Swift T-Shirt"],
+      products: [
+        "Naruto Akatsuki Hoodie",
+        "Messi Jersey",
+        "Taylor Swift T-Shirt",
+      ],
     },
     {
-      id: "ORD-002", 
+      id: "ORD-002",
       date: "2024-01-10",
       status: "shipped",
       total: 159.99,
@@ -151,7 +155,7 @@ export default function UserProfile() {
   return (
     <div className="min-h-screen bg-gray-900">
       <Navigation />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* User Header */}
         <Card className="bg-gray-800 border-gray-700 mb-8">
@@ -164,7 +168,7 @@ export default function UserProfile() {
                   <User className="w-10 h-10 text-black" />
                 )}
               </div>
-              
+
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
                   <h1 className="text-2xl font-bold text-white">{user.name}</h1>
@@ -174,35 +178,42 @@ export default function UserProfile() {
                       Admin
                     </Badge>
                   )}
-                  <Badge className="bg-green-500 text-white">
-                    ✓ Verified
-                  </Badge>
+                  <Badge className="bg-green-500 text-white">✓ Verified</Badge>
                 </div>
-                
+
                 <p className="text-gray-400 mb-3">{user.email}</p>
-                
+
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
                   <div className="text-center">
-                    <div className="text-xl font-bold text-primary">{orders.length}</div>
+                    <div className="text-xl font-bold text-primary">
+                      {orders.length}
+                    </div>
                     <div className="text-gray-400">Orders</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-xl font-bold text-primary">{wishlist.length}</div>
+                    <div className="text-xl font-bold text-primary">
+                      {wishlist.length}
+                    </div>
                     <div className="text-gray-400">Wishlist</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-xl font-bold text-primary">{cartItems.length}</div>
+                    <div className="text-xl font-bold text-primary">
+                      {cartItems.length}
+                    </div>
                     <div className="text-gray-400">Cart Items</div>
                   </div>
                   <div className="text-center">
                     <div className="text-xl font-bold text-primary">
-                      {formatPrice(convertPrice(totalPrice, selectedCurrency.code, "INR"), selectedCurrency)}
+                      {formatPrice(
+                        convertPrice(totalPrice, selectedCurrency.code, "INR"),
+                        selectedCurrency,
+                      )}
                     </div>
                     <div className="text-gray-400">Cart Total</div>
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex flex-col space-y-2">
                 {isAdmin() && (
                   <Link to="/admin">
@@ -256,7 +267,9 @@ export default function UserProfile() {
               <Card className="bg-gray-800 border-gray-700">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-white">Personal Information</CardTitle>
+                    <CardTitle className="text-white">
+                      Personal Information
+                    </CardTitle>
                     <Button
                       variant="outline"
                       size="sm"
@@ -285,14 +298,16 @@ export default function UserProfile() {
                     {isEditing ? (
                       <Input
                         value={editForm.name}
-                        onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                        onChange={(e) =>
+                          setEditForm({ ...editForm, name: e.target.value })
+                        }
                         className="bg-gray-700 border-gray-600 text-white"
                       />
                     ) : (
                       <p className="text-gray-300">{editForm.name}</p>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-white mb-2">
                       Email
@@ -300,14 +315,16 @@ export default function UserProfile() {
                     {isEditing ? (
                       <Input
                         value={editForm.email}
-                        onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                        onChange={(e) =>
+                          setEditForm({ ...editForm, email: e.target.value })
+                        }
                         className="bg-gray-700 border-gray-600 text-white"
                       />
                     ) : (
                       <p className="text-gray-300">{editForm.email}</p>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-white mb-2">
                       Phone
@@ -315,14 +332,16 @@ export default function UserProfile() {
                     {isEditing ? (
                       <Input
                         value={editForm.phone}
-                        onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
+                        onChange={(e) =>
+                          setEditForm({ ...editForm, phone: e.target.value })
+                        }
                         className="bg-gray-700 border-gray-600 text-white"
                       />
                     ) : (
                       <p className="text-gray-300">{editForm.phone}</p>
                     )}
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-white mb-2">
                       Address
@@ -330,14 +349,16 @@ export default function UserProfile() {
                     {isEditing ? (
                       <Textarea
                         value={editForm.address}
-                        onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
+                        onChange={(e) =>
+                          setEditForm({ ...editForm, address: e.target.value })
+                        }
                         className="bg-gray-700 border-gray-600 text-white"
                       />
                     ) : (
                       <p className="text-gray-300">{editForm.address}</p>
                     )}
                   </div>
-                  
+
                   {isEditing && (
                     <Button
                       onClick={handleSaveProfile}
@@ -351,28 +372,32 @@ export default function UserProfile() {
 
               <Card className="bg-gray-800 border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-white">Account Statistics</CardTitle>
+                  <CardTitle className="text-white">
+                    Account Statistics
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Calendar className="w-8 h-8 text-primary mx-auto mb-2" />
-                      <div className="text-lg font-bold text-white">Jan 2024</div>
+                      <div className="text-lg font-bold text-white">
+                        Jan 2024
+                      </div>
                       <div className="text-sm text-gray-400">Member Since</div>
                     </div>
-                    
+
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Star className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
                       <div className="text-lg font-bold text-white">Gold</div>
                       <div className="text-sm text-gray-400">Member Tier</div>
                     </div>
-                    
+
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Gift className="w-8 h-8 text-purple-400 mx-auto mb-2" />
                       <div className="text-lg font-bold text-white">3</div>
                       <div className="text-sm text-gray-400">Rewards</div>
                     </div>
-                    
+
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Truck className="w-8 h-8 text-green-400 mx-auto mb-2" />
                       <div className="text-lg font-bold text-white">15</div>
@@ -399,9 +424,12 @@ export default function UserProfile() {
                         />
                         <div>
                           <div className="flex items-center space-x-3 mb-2">
-                            <h3 className="font-semibold text-white">Order #{order.id}</h3>
+                            <h3 className="font-semibold text-white">
+                              Order #{order.id}
+                            </h3>
                             <Badge className={getStatusColor(order.status)}>
-                              {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                              {order.status.charAt(0).toUpperCase() +
+                                order.status.slice(1)}
                             </Badge>
                           </div>
                           <p className="text-sm text-gray-400 mb-1">
@@ -412,19 +440,30 @@ export default function UserProfile() {
                           </p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center space-x-4">
                         <div className="text-right">
                           <div className="text-lg font-bold text-primary">
-                            {formatPrice(convertPrice(order.total, selectedCurrency.code), selectedCurrency)}
+                            {formatPrice(
+                              convertPrice(order.total, selectedCurrency.code),
+                              selectedCurrency,
+                            )}
                           </div>
                         </div>
                         <div className="flex space-x-2">
-                          <Button variant="outline" size="sm" className="border-gray-600 text-gray-300">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-gray-600 text-gray-300"
+                          >
                             <Eye className="w-4 h-4 mr-2" />
                             View
                           </Button>
-                          <Button variant="outline" size="sm" className="border-gray-600 text-gray-300">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-gray-600 text-gray-300"
+                          >
                             <Download className="w-4 h-4 mr-2" />
                             Invoice
                           </Button>
@@ -453,21 +492,34 @@ export default function UserProfile() {
                     </h3>
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-lg font-bold text-primary">
-                        {formatPrice(convertPrice(item.price, selectedCurrency.code), selectedCurrency)}
+                        {formatPrice(
+                          convertPrice(item.price, selectedCurrency.code),
+                          selectedCurrency,
+                        )}
                       </span>
-                      <Badge className={item.inStock ? "bg-green-500 text-white" : "bg-red-500 text-white"}>
+                      <Badge
+                        className={
+                          item.inStock
+                            ? "bg-green-500 text-white"
+                            : "bg-red-500 text-white"
+                        }
+                      >
                         {item.inStock ? "In Stock" : "Out of Stock"}
                       </Badge>
                     </div>
                     <div className="flex space-x-2">
-                      <Button 
+                      <Button
                         disabled={!item.inStock}
                         className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
                       >
                         <ShoppingCart className="w-4 h-4 mr-2" />
                         Add to Cart
                       </Button>
-                      <Button variant="outline" size="sm" className="border-gray-600 text-red-400">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-gray-600 text-red-400"
+                      >
                         <X className="w-4 h-4" />
                       </Button>
                     </div>
@@ -502,27 +554,49 @@ export default function UserProfile() {
                 ) : (
                   <div className="space-y-4">
                     {cartItems.map((item) => (
-                      <div key={item.id} className="flex items-center space-x-4 p-4 bg-gray-700 rounded-lg">
+                      <div
+                        key={item.id}
+                        className="flex items-center space-x-4 p-4 bg-gray-700 rounded-lg"
+                      >
                         <img
                           src={item.product.images[0]}
                           alt={item.product.name}
                           className="w-16 h-16 object-cover rounded-lg"
                         />
                         <div className="flex-1">
-                          <h4 className="font-medium text-white">{item.product.name}</h4>
+                          <h4 className="font-medium text-white">
+                            {item.product.name}
+                          </h4>
                           <p className="text-sm text-gray-400">
                             {item.variant.size && `Size: ${item.variant.size}`}
-                            {item.variant.color && ` • Color: ${item.variant.color}`}
+                            {item.variant.color &&
+                              ` • Color: ${item.variant.color}`}
                           </p>
                           <p className="text-primary font-semibold">
-                            {formatPrice(convertPrice(item.variant.price, selectedCurrency.code, "INR"), selectedCurrency)} × {item.quantity}
+                            {formatPrice(
+                              convertPrice(
+                                item.variant.price,
+                                selectedCurrency.code,
+                                "INR",
+                              ),
+                              selectedCurrency,
+                            )}{" "}
+                            × {item.quantity}
                           </p>
                         </div>
                       </div>
                     ))}
                     <div className="border-t border-gray-600 pt-4 flex justify-between items-center">
                       <span className="text-lg font-semibold text-white">
-                        Total: {formatPrice(convertPrice(totalPrice, selectedCurrency.code, "INR"), selectedCurrency)}
+                        Total:{" "}
+                        {formatPrice(
+                          convertPrice(
+                            totalPrice,
+                            selectedCurrency.code,
+                            "INR",
+                          ),
+                          selectedCurrency,
+                        )}
                       </span>
                       <Button className="bg-primary text-black hover:bg-primary/90">
                         <CreditCard className="w-4 h-4 mr-2" />

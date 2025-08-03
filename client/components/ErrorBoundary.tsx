@@ -1,7 +1,7 @@
-import React, { Component, ReactNode } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { AlertTriangle, RefreshCw } from 'lucide-react';
+import React, { Component, ReactNode } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AlertTriangle, RefreshCw } from "lucide-react";
 
 interface Props {
   children: ReactNode;
@@ -23,7 +23,7 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Error boundary caught an error:', error, errorInfo);
+    console.error("Error boundary caught an error:", error, errorInfo);
   }
 
   handleReset = () => {
@@ -32,7 +32,7 @@ class ErrorBoundary extends Component<Props, State> {
       localStorage.clear();
       window.location.reload();
     } catch (error) {
-      console.error('Error clearing localStorage:', error);
+      console.error("Error clearing localStorage:", error);
       window.location.reload();
     }
   };
@@ -50,25 +50,25 @@ class ErrorBoundary extends Component<Props, State> {
             </CardHeader>
             <CardContent className="text-center space-y-4">
               <p className="text-muted-foreground">
-                The application encountered an error. This might be due to storage issues or corrupted data.
+                The application encountered an error. This might be due to
+                storage issues or corrupted data.
               </p>
-              
-              {this.state.error?.message.includes('quota') && (
+
+              {this.state.error?.message.includes("quota") && (
                 <p className="text-sm text-muted-foreground bg-muted p-3 rounded">
-                  <strong>Storage Issue:</strong> Your browser's storage is full. Clicking "Reset & Reload" will clear the storage and fix this issue.
+                  <strong>Storage Issue:</strong> Your browser's storage is
+                  full. Clicking "Reset & Reload" will clear the storage and fix
+                  this issue.
                 </p>
               )}
-              
+
               <div className="space-y-2">
-                <Button 
-                  onClick={this.handleReset}
-                  className="w-full"
-                >
+                <Button onClick={this.handleReset} className="w-full">
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Reset & Reload
                 </Button>
-                
-                <Button 
+
+                <Button
                   variant="outline"
                   onClick={() => window.location.reload()}
                   className="w-full"

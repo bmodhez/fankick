@@ -27,7 +27,11 @@ export const COUNTRY_CURRENCY_MAP: Record<string, string> = {
   IN: "INR",
 };
 
-export function convertPrice(basePrice: number, toCurrency: string, fromCurrency: string = "USD"): number {
+export function convertPrice(
+  basePrice: number,
+  toCurrency: string,
+  fromCurrency: string = "USD",
+): number {
   const fromCurrencyData = CURRENCIES[fromCurrency];
   const toCurrencyData = CURRENCIES[toCurrency];
 
@@ -53,9 +57,13 @@ export function convertPrice(basePrice: number, toCurrency: string, fromCurrency
   return Math.round(convertedPrice * 100) / 100;
 }
 
-export function formatPrice(price: number, currency: string | Currency): string {
-  const currencyCode = typeof currency === 'string' ? currency : currency.code;
-  const currencyData = typeof currency === 'string' ? CURRENCIES[currency] : currency;
+export function formatPrice(
+  price: number,
+  currency: string | Currency,
+): string {
+  const currencyCode = typeof currency === "string" ? currency : currency.code;
+  const currencyData =
+    typeof currency === "string" ? CURRENCIES[currency] : currency;
 
   if (!currencyData) return `$${price}`;
 

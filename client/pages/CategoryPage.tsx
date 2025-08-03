@@ -28,7 +28,11 @@ export default function CategoryPage() {
   const allProducts = getProductsByCategory(category || "");
 
   // If no products found and category is valid, it might be a loading issue
-  if (allProducts.length === 0 && category && ["football", "anime", "pop-culture"].includes(category)) {
+  if (
+    allProducts.length === 0 &&
+    category &&
+    ["football", "anime", "pop-culture"].includes(category)
+  ) {
     return (
       <div className="min-h-screen bg-background">
         <Navigation />
@@ -57,7 +61,7 @@ export default function CategoryPage() {
         const price = convertPrice(
           product.basePrice,
           selectedCurrency.code,
-          "INR"
+          "INR",
         );
         switch (priceRange) {
           case "under-1000":
@@ -223,12 +227,12 @@ export default function CategoryPage() {
             const convertedPrice = convertPrice(
               product.basePrice,
               selectedCurrency.code,
-              "INR"
+              "INR",
             );
             const convertedOriginalPrice = convertPrice(
               product.originalPrice,
               selectedCurrency.code,
-              "INR"
+              "INR",
             );
 
             return (
