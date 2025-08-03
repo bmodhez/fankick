@@ -336,8 +336,14 @@ export function Navigation() {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden text-foreground"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden text-foreground cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("Mobile menu button clicked");
+                setIsMenuOpen(!isMenuOpen);
+              }}
+              style={{ pointerEvents: 'auto' }}
             >
               {isMenuOpen ? (
                 <X className="h-4 w-4" />
