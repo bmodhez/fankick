@@ -451,7 +451,7 @@ export default function Index() {
       </section>
 
       {/* Instagram Feed */}
-      <section className="py-16 bg-muted">
+      <section className="py-16 bg-slate-50/50 dark:bg-muted border-y border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-sport font-bold text-foreground mb-4">
