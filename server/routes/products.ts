@@ -1,15 +1,15 @@
-import { Request, Response } from 'express';
-import { productService } from '../services/productService.js';
-import { ProductCreateRequest, ProductResponse } from '../types/product.js';
+import { Request, Response } from "express";
+import { productService } from "../services/productService.js";
+import { ProductCreateRequest, ProductResponse } from "../types/product.js";
 
 // GET /api/products - Get all products
 export async function getAllProducts(req: Request, res: Response) {
   try {
     const { category, search, trending } = req.query;
-    
+
     let products;
-    
-    if (trending === 'true') {
+
+    if (trending === "true") {
       const limit = parseInt(req.query.limit as string) || 8;
       products = await productService.getTrendingProducts(limit);
     } else if (category) {
@@ -22,15 +22,15 @@ export async function getAllProducts(req: Request, res: Response) {
 
     const response: ProductResponse = {
       success: true,
-      data: products
+      data: products,
     };
 
     res.json(response);
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     const response: ProductResponse = {
       success: false,
-      error: 'Failed to fetch products'
+      error: "Failed to fetch products",
     };
     res.status(500).json(response);
   }
@@ -45,22 +45,22 @@ export async function getProductById(req: Request, res: Response) {
     if (!product) {
       const response: ProductResponse = {
         success: false,
-        error: 'Product not found'
+        error: "Product not found",
       };
       return res.status(404).json(response);
     }
 
     const response: ProductResponse = {
       success: true,
-      data: product
+      data: product,
     };
 
     res.json(response);
   } catch (error) {
-    console.error('Error fetching product:', error);
+    console.error("Error fetching product:", error);
     const response: ProductResponse = {
       success: false,
-      error: 'Failed to fetch product'
+      error: "Failed to fetch product",
     };
     res.status(500).json(response);
   }
@@ -72,10 +72,15 @@ export async function createProduct(req: Request, res: Response) {
     const productData: ProductCreateRequest = req.body;
 
     // Basic validation
-    if (!productData.name || !productData.description || !productData.category) {
+    if (
+      !productData.name ||
+      !productData.description ||
+      !productData.category
+    ) {
       const response: ProductResponse = {
         success: false,
-        error: 'Missing required fields: name, description, and category are required'
+        error:
+          "Missing required fields: name, description, and category are required",
       };
       return res.status(400).json(response);
     }
@@ -83,7 +88,7 @@ export async function createProduct(req: Request, res: Response) {
     if (!productData.variants || productData.variants.length === 0) {
       const response: ProductResponse = {
         success: false,
-        error: 'At least one product variant is required'
+        error: "At least one product variant is required",
       };
       return res.status(400).json(response);
     }
@@ -93,15 +98,15 @@ export async function createProduct(req: Request, res: Response) {
     const response: ProductResponse = {
       success: true,
       data: newProduct,
-      message: 'Product created successfully'
+      message: "Product created successfully",
     };
 
     res.status(201).json(response);
   } catch (error) {
-    console.error('Error creating product:', error);
+    console.error("Error creating product:", error);
     const response: ProductResponse = {
       success: false,
-      error: 'Failed to create product'
+      error: "Failed to create product",
     };
     res.status(500).json(response);
   }
@@ -118,7 +123,7 @@ export async function updateProduct(req: Request, res: Response) {
     if (!updatedProduct) {
       const response: ProductResponse = {
         success: false,
-        error: 'Product not found'
+        error: "Product not found",
       };
       return res.status(404).json(response);
     }
@@ -126,15 +131,15 @@ export async function updateProduct(req: Request, res: Response) {
     const response: ProductResponse = {
       success: true,
       data: updatedProduct,
-      message: 'Product updated successfully'
+      message: "Product updated successfully",
     };
 
     res.json(response);
   } catch (error) {
-    console.error('Error updating product:', error);
+    console.error("Error updating product:", error);
     const response: ProductResponse = {
       success: false,
-      error: 'Failed to update product'
+      error: "Failed to update product",
     };
     res.status(500).json(response);
   }
@@ -149,22 +154,22 @@ export async function deleteProduct(req: Request, res: Response) {
     if (!deleted) {
       const response: ProductResponse = {
         success: false,
-        error: 'Product not found'
+        error: "Product not found",
       };
       return res.status(404).json(response);
     }
 
     const response: ProductResponse = {
       success: true,
-      message: 'Product deleted successfully'
+      message: "Product deleted successfully",
     };
 
     res.json(response);
   } catch (error) {
-    console.error('Error deleting product:', error);
+    console.error("Error deleting product:", error);
     const response: ProductResponse = {
       success: false,
-      error: 'Failed to delete product'
+      error: "Failed to delete product",
     };
     res.status(500).json(response);
   }
@@ -176,35 +181,39 @@ export async function updateProductStock(req: Request, res: Response) {
     const { id } = req.params;
     const { variantId, stock } = req.body;
 
-    if (typeof stock !== 'number' || stock < 0) {
+    if (typeof stock !== "number" || stock < 0) {
       const response: ProductResponse = {
         success: false,
-        error: 'Stock must be a non-negative number'
+        error: "Stock must be a non-negative number",
       };
       return res.status(400).json(response);
     }
 
-    const updated = await productService.updateProductStock(id, variantId, stock);
+    const updated = await productService.updateProductStock(
+      id,
+      variantId,
+      stock,
+    );
 
     if (!updated) {
       const response: ProductResponse = {
         success: false,
-        error: 'Product or variant not found'
+        error: "Product or variant not found",
       };
       return res.status(404).json(response);
     }
 
     const response: ProductResponse = {
       success: true,
-      message: 'Stock updated successfully'
+      message: "Stock updated successfully",
     };
 
     res.json(response);
   } catch (error) {
-    console.error('Error updating stock:', error);
+    console.error("Error updating stock:", error);
     const response: ProductResponse = {
       success: false,
-      error: 'Failed to update stock'
+      error: "Failed to update stock",
     };
     res.status(500).json(response);
   }

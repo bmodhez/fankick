@@ -1,11 +1,13 @@
 # Backend API Setup
 
 ## Overview
+
 The application now includes a complete backend API that handles all product data operations. Products are no longer stored in localStorage but are managed through a proper backend server with persistent storage.
 
 ## Backend Structure
 
 ### API Endpoints
+
 - `GET /api/products` - Get all products (supports filtering by category, search, trending)
 - `GET /api/products/:id` - Get single product by ID
 - `POST /api/products` - Create new product
@@ -14,6 +16,7 @@ The application now includes a complete backend API that handles all product dat
 - `PUT /api/products/:id/stock` - Update product stock
 
 ### Files Created
+
 ```
 server/
 ├── types/product.ts          # Product type definitions
@@ -30,6 +33,7 @@ client/
 ## Key Features
 
 ### Backend Features
+
 1. **JSON File Database**: Products are stored in `server/database/products.json`
 2. **Auto-initialization**: Database is populated with default products on first run
 3. **CRUD Operations**: Full Create, Read, Update, Delete functionality
@@ -38,6 +42,7 @@ client/
 6. **Error Handling**: Comprehensive error responses
 
 ### Frontend Updates
+
 1. **API Integration**: ProductContext now uses backend API instead of localStorage
 2. **Async Operations**: All CRUD operations are now async with proper error handling
 3. **Loading States**: Added loading indicators while API calls are in progress
@@ -46,7 +51,9 @@ client/
 ## How It Works
 
 ### Adding Products
+
 When you add a product through the admin panel:
+
 1. Frontend sends POST request to `/api/products`
 2. Backend validates the data
 3. Product is saved to `products.json` file
@@ -55,9 +62,10 @@ When you add a product through the admin panel:
 6. Product is immediately available on the main website
 
 ### Product Persistence
+
 - **Before**: Products were stored in browser localStorage (temporary)
 - **After**: Products are stored in backend database (persistent)
-- **Benefits**: 
+- **Benefits**:
   - Data survives browser refresh/clear
   - Shared across all users
   - No storage size limitations
@@ -66,22 +74,27 @@ When you add a product through the admin panel:
 ## Development
 
 ### Starting the Server
+
 The backend runs alongside the frontend:
+
 ```bash
 npm run dev  # Starts both frontend and backend
 ```
 
 ### Environment Variables
+
 ```
 VITE_API_URL=http://localhost:5173/api
 ```
 
 ### Database Migration
+
 The system automatically migrates existing products to the backend database on first startup.
 
 ## API Usage Examples
 
 ### Create Product
+
 ```javascript
 const newProduct = await productApi.create({
   name: "New Product",
@@ -93,14 +106,16 @@ const newProduct = await productApi.create({
 ```
 
 ### Update Product
+
 ```javascript
 await productApi.update(productId, {
   name: "Updated Name",
-  basePrice: 2999
+  basePrice: 2999,
 });
 ```
 
 ### Delete Product
+
 ```javascript
 await productApi.delete(productId);
 ```
@@ -117,6 +132,7 @@ await productApi.delete(productId);
 ## Future Enhancements
 
 The current JSON file database can be easily upgraded to:
+
 - PostgreSQL with Prisma ORM
 - MongoDB with Mongoose
 - SQLite for simpler deployments

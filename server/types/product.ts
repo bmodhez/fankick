@@ -44,7 +44,7 @@ export interface ProductCreateRequest {
   category: "football" | "anime" | "pop-culture";
   subcategory: string;
   images: string[];
-  variants: Omit<ProductVariant, 'id'>[];
+  variants: Omit<ProductVariant, "id">[];
   basePrice: number;
   originalPrice: number;
   tags: string[];

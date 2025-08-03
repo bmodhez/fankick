@@ -13,7 +13,12 @@ interface ProductContextType {
   setProducts: (products: Product[]) => void;
   updateProduct: (product: Product) => Promise<void>;
   deleteProduct: (id: string) => Promise<void>;
-  addProduct: (product: Omit<Product, 'id' | 'rating' | 'reviews' | 'createdAt' | 'updatedAt'>) => Promise<Product>;
+  addProduct: (
+    product: Omit<
+      Product,
+      "id" | "rating" | "reviews" | "createdAt" | "updatedAt"
+    >,
+  ) => Promise<Product>;
   getProductById: (id: string) => Product | undefined;
   getProductsByCategory: (category: string) => Product[];
   getTrendingProducts: (limit?: number) => Product[];
@@ -41,7 +46,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
       const apiProducts = await productApi.getAll();
       setProducts(apiProducts);
     } catch (error) {
-      console.error('Error loading products from API:', error);
+      console.error("Error loading products from API:", error);
       // On error, we could fallback to cached products or show an error state
       setProducts([]);
     } finally {
@@ -66,7 +71,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
         ),
       );
     } catch (error) {
-      console.error('Error updating product:', error);
+      console.error("Error updating product:", error);
       throw error;
     }
   };
@@ -78,18 +83,23 @@ export function ProductProvider({ children }: ProductProviderProps) {
         prevProducts.filter((product) => product.id !== id),
       );
     } catch (error) {
-      console.error('Error deleting product:', error);
+      console.error("Error deleting product:", error);
       throw error;
     }
   };
 
-  const addProduct = async (newProduct: Omit<Product, 'id' | 'rating' | 'reviews' | 'createdAt' | 'updatedAt'>) => {
+  const addProduct = async (
+    newProduct: Omit<
+      Product,
+      "id" | "rating" | "reviews" | "createdAt" | "updatedAt"
+    >,
+  ) => {
     try {
       const createdProduct = await productApi.create(newProduct);
       setProducts((prevProducts) => [...prevProducts, createdProduct]);
       return createdProduct;
     } catch (error) {
-      console.error('Error adding product:', error);
+      console.error("Error adding product:", error);
       throw error;
     }
   };

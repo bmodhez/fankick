@@ -53,7 +53,9 @@ function ProductCard({
   const isLowStock = totalStock < 10;
 
   return (
-    <Card className={`bg-gray-800 border-gray-700 hover:border-primary/50 transition-colors ${isSelected ? 'ring-2 ring-primary' : ''}`}>
+    <Card
+      className={`bg-gray-800 border-gray-700 hover:border-primary/50 transition-colors ${isSelected ? "ring-2 ring-primary" : ""}`}
+    >
       <CardContent className="p-4">
         <div className="relative">
           <img
@@ -156,7 +158,9 @@ function ProductCard({
                     <span>Duplicate</span>
                   </button>
                   <button
-                    onClick={() => window.open(`/product/${product.id}`, '_blank')}
+                    onClick={() =>
+                      window.open(`/product/${product.id}`, "_blank")
+                    }
                     className="w-full text-left px-3 py-2 hover:bg-gray-600 flex items-center space-x-2 text-sm text-white"
                   >
                     <ExternalLink className="w-4 h-4" />
@@ -181,14 +185,22 @@ function ProductCard({
 }
 
 export function ProductManager() {
-  const { products, updateProduct, deleteProduct, addProduct, refreshProducts } = useProducts();
+  const {
+    products,
+    updateProduct,
+    deleteProduct,
+    addProduct,
+    refreshProducts,
+  } = useProducts();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("name");
   const [showProductForm, setShowProductForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [formMode, setFormMode] = useState<"create" | "edit">("create");
-  const [selectedProducts, setSelectedProducts] = useState<Set<string>>(new Set());
+  const [selectedProducts, setSelectedProducts] = useState<Set<string>>(
+    new Set(),
+  );
   const [lastSyncTime, setLastSyncTime] = useState<string>("");
 
   const categories = ["all", "football", "anime", "pop-culture"];
@@ -197,7 +209,9 @@ export function ProductManager() {
     const matchesSearch =
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+      product.tags.some((tag) =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase()),
+      );
     const matchesCategory =
       selectedCategory === "all" || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
@@ -240,35 +254,49 @@ export function ProductManager() {
       if (formMode === "create") {
         await addProduct(productData);
         setLastSyncTime(new Date().toISOString());
-        alert(`✅ Product "${productData.name}" has been created successfully!\n\nChanges are now saved to the backend and live on the main website.`);
+        alert(
+          `✅ Product "${productData.name}" has been created successfully!\n\nChanges are now saved to the backend and live on the main website.`,
+        );
       } else {
         await updateProduct(productData);
         setLastSyncTime(new Date().toISOString());
-        alert(`✅ Product "${productData.name}" has been updated successfully!\n\nChanges are now saved to the backend and live on the main website.`);
+        alert(
+          `✅ Product "${productData.name}" has been updated successfully!\n\nChanges are now saved to the backend and live on the main website.`,
+        );
       }
       setShowProductForm(false);
       setEditingProduct(null);
     } catch (error) {
-      console.error('Error saving product:', error);
-      alert(`❌ Error saving product: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      console.error("Error saving product:", error);
+      alert(
+        `❌ Error saving product: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
     }
   };
 
   const handleDeleteProduct = async (id: string) => {
-    const productToDelete = products.find(p => p.id === id);
-    if (confirm("Are you sure you want to delete this product? This action cannot be undone.")) {
+    const productToDelete = products.find((p) => p.id === id);
+    if (
+      confirm(
+        "Are you sure you want to delete this product? This action cannot be undone.",
+      )
+    ) {
       try {
         await deleteProduct(id);
-        setSelectedProducts(prev => {
+        setSelectedProducts((prev) => {
           const newSet = new Set(prev);
           newSet.delete(id);
           return newSet;
         });
         setLastSyncTime(new Date().toISOString());
-        alert(`✅ Product "${productToDelete?.name || 'Unknown'}" has been deleted successfully!\n\nChanges are now saved to the backend and live on the main website.`);
+        alert(
+          `✅ Product "${productToDelete?.name || "Unknown"}" has been deleted successfully!\n\nChanges are now saved to the backend and live on the main website.`,
+        );
       } catch (error) {
-        console.error('Error deleting product:', error);
-        alert(`❌ Error deleting product: ${error instanceof Error ? error.message : 'Unknown error'}`);
+        console.error("Error deleting product:", error);
+        alert(
+          `❌ Error deleting product: ${error instanceof Error ? error.message : "Unknown error"}`,
+        );
       }
     }
   };
@@ -278,7 +306,7 @@ export function ProductManager() {
       ...product,
       id: `${product.id}-copy-${Date.now()}`,
       name: `${product.name} (Copy)`,
-      variants: product.variants.map(variant => ({
+      variants: product.variants.map((variant) => ({
         ...variant,
         id: `${variant.id}-copy-${Date.now()}`,
         sku: `${variant.sku}-COPY`,
@@ -289,8 +317,12 @@ export function ProductManager() {
 
   const handleBulkDelete = () => {
     if (selectedProducts.size === 0) return;
-    if (confirm(`Are you sure you want to delete ${selectedProducts.size} products? This action cannot be undone.`)) {
-      selectedProducts.forEach(id => deleteProduct(id));
+    if (
+      confirm(
+        `Are you sure you want to delete ${selectedProducts.size} products? This action cannot be undone.`,
+      )
+    ) {
+      selectedProducts.forEach((id) => deleteProduct(id));
       setSelectedProducts(new Set());
     }
   };
@@ -309,15 +341,21 @@ export function ProductManager() {
     if (selectedProducts.size === sortedProducts.length) {
       setSelectedProducts(new Set());
     } else {
-      setSelectedProducts(new Set(sortedProducts.map(p => p.id)));
+      setSelectedProducts(new Set(sortedProducts.map((p) => p.id)));
     }
   };
 
   const handleResetProducts = () => {
-    if (confirm("⚠️ This will reset all products to their original state and remove all your changes.\n\nAre you sure you want to continue?")) {
+    if (
+      confirm(
+        "⚠️ This will reset all products to their original state and remove all your changes.\n\nAre you sure you want to continue?",
+      )
+    ) {
       refreshProducts();
       setSelectedProducts(new Set());
-      alert("✅ Products have been reset to original state.\n\nAll changes have been cleared.");
+      alert(
+        "✅ Products have been reset to original state.\n\nAll changes have been cleared.",
+      );
     }
   };
 
@@ -346,7 +384,8 @@ export function ProductManager() {
             <SyncStatus lastUpdated={lastSyncTime} />
           </div>
           <p className="text-gray-400">
-            Manage your inventory and product catalog • Changes sync to main website in real-time
+            Manage your inventory and product catalog • Changes sync to main
+            website in real-time
           </p>
         </div>
         <div className="flex items-center space-x-3">
@@ -461,7 +500,10 @@ export function ProductManager() {
               <label className="flex items-center space-x-2">
                 <input
                   type="checkbox"
-                  checked={selectedProducts.size === sortedProducts.length && sortedProducts.length > 0}
+                  checked={
+                    selectedProducts.size === sortedProducts.length &&
+                    sortedProducts.length > 0
+                  }
                   onChange={selectAllProducts}
                   className="w-4 h-4 text-primary bg-gray-700 border-gray-600 rounded focus:ring-primary focus:ring-2"
                 />
@@ -536,10 +578,12 @@ export function ProductManager() {
           <p className="text-gray-500 mb-4">
             {searchQuery || selectedCategory !== "all"
               ? "Try adjusting your search or filters"
-              : "Start by adding your first product to the catalog"
-            }
+              : "Start by adding your first product to the catalog"}
           </p>
-          <Button className="bg-primary text-black hover:bg-primary/90" onClick={handleAddProduct}>
+          <Button
+            className="bg-primary text-black hover:bg-primary/90"
+            onClick={handleAddProduct}
+          >
             <Plus className="w-4 h-4 mr-2" />
             Add Your First Product
           </Button>
