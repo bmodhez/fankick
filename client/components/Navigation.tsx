@@ -30,7 +30,7 @@ export function Navigation() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showCart, setShowCart] = useState(false);
   const { selectedCurrency, setCurrency } = useCurrency();
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout } = useAuth();
   const { totalItems } = useCart();
   const navigate = useNavigate();
 
@@ -193,10 +193,10 @@ export function Navigation() {
                   <div className="flex items-center space-x-2">
                     <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
                       <span className="text-black font-bold text-xs">
-                        {user.name.charAt(0).toUpperCase()}
+                        {(user.firstName || user.email).charAt(0).toUpperCase()}
                       </span>
                     </div>
-                    {user.isAdmin && <Crown className="w-3 h-3 text-primary" />}
+
                     <ChevronDown className="w-3 h-3" />
                   </div>
                 </Button>
@@ -204,14 +204,9 @@ export function Navigation() {
                 {showUserMenu && (
                   <div className="absolute right-0 mt-2 w-56 bg-background text-foreground rounded-lg shadow-lg border border-border z-50">
                     <div className="px-4 py-3 border-b border-border">
-                      <p className="font-medium">{user.name}</p>
+                      <p className="font-medium">{user.firstName || 'User'}</p>
                       <p className="text-sm text-muted-foreground">{user.email}</p>
-                      {user.isAdmin && (
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary text-black mt-1">
-                          <Crown className="w-3 h-3 mr-1" />
-                          Admin
-                        </span>
-                      )}
+
                     </div>
 
                     <Link
@@ -243,16 +238,14 @@ export function Navigation() {
                       Wishlist
                     </Link>
 
-                    {user.isAdmin && (
-                      <Link
-                        to="/admin"
-                        className="block px-4 py-2 hover:bg-gray-700 flex items-center border-t border-gray-700"
-                        onClick={() => setShowUserMenu(false)}
-                      >
-                        <Crown className="w-4 h-4 mr-2 text-primary" />
-                        Admin Panel
-                      </Link>
-                    )}
+                    <Link
+                      to="/admin"
+                      className="block px-4 py-2 hover:bg-gray-700 flex items-center border-t border-gray-700"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      <Crown className="w-4 h-4 mr-2 text-primary" />
+                      Admin Panel
+                    </Link>
 
                     <button
                       onClick={() => {
