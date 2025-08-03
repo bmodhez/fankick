@@ -69,10 +69,22 @@ export function ProductProvider({ children }: ProductProviderProps) {
   // Load products from API on mount
   useEffect(() => {
     const abortController = new AbortController();
-    loadProductsFromAPI(abortController.signal);
+
+    // Add a timeout to prevent hanging indefinitely
+    const timeoutId = setTimeout(() => {
+      console.warn('Product loading timeout, initializing with empty state');
+      setProducts([]);
+      setIsLoading(false);
+      setIsInitialized(true);
+    }, 10000); // 10 second timeout
+
+    loadProductsFromAPI(abortController.signal).finally(() => {
+      clearTimeout(timeoutId);
+    });
 
     return () => {
       abortController.abort();
+      clearTimeout(timeoutId);
     };
   }, []);
 
