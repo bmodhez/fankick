@@ -59,6 +59,17 @@ export function Navigation() {
     };
   }, []);
 
+  // Cleanup all modals on component unmount
+  useEffect(() => {
+    return () => {
+      setShowAuthModal(false);
+      setShowCart(false);
+      setShowCurrency(false);
+      setShowUserMenu(false);
+      setShowSearch(false);
+    };
+  }, []);
+
   const handleSearch = (query: string) => {
     if (query.trim()) {
       navigate(`/search?q=${encodeURIComponent(query.trim())}`);
