@@ -13,7 +13,7 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
     name: "Cash on Delivery",
     icon: "💰",
     description: "Pay when your order arrives",
-    countries: ["IN", "SA"],
+    countries: ["IN"], // COD only available in India
     codSupported: true,
   },
   {
