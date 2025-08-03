@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { PRODUCTS, Product } from "@/data/products";
+import { isStorageQuotaExceeded } from "@/utils/storage";
 
 interface ProductContextType {
   products: Product[];
