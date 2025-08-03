@@ -31,6 +31,7 @@ import {
   LogOut,
   Eye,
   Download,
+  X,
 } from "lucide-react";
 
 export default function UserProfile() {
