@@ -156,7 +156,7 @@ export default function Index() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all"
+                className="border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-purple-500 hover:text-white hover:scale-105 px-8 py-4 text-lg shadow-lg hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 backdrop-blur-sm"
               >
                 <TrendingUp className="w-5 h-5 mr-2" />
                 Trending Products
