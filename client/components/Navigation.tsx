@@ -130,11 +130,17 @@ export function Navigation() {
             {/* Currency Selector */}
             <div className="relative hidden sm:block" ref={currencyRef}>
               <Button
-                variant="ghost"
-                size="sm"
-                className="text-foreground hover:text-primary"
-                onClick={() => setShowCurrency(!showCurrency)}
-              >
+              variant="ghost"
+              size="sm"
+              className="text-foreground hover:text-primary cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("Currency button clicked");
+                setShowCurrency(!showCurrency);
+              }}
+              style={{ pointerEvents: 'auto' }}
+            >
                 <Globe className="h-4 w-4 mr-1" />
                 <span className="text-sm">
                   {selectedCurrency.flag} {selectedCurrency.symbol}
@@ -166,8 +172,13 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="hidden sm:flex text-foreground hover:text-primary"
-                onClick={handleQuickSearch}
+                className="hidden sm:flex text-foreground hover:text-primary cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleQuickSearch();
+                }}
+                style={{ pointerEvents: 'auto' }}
               >
                 <Search className="h-4 w-4" />
               </Button>
@@ -288,11 +299,14 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-foreground hover:text-primary"
-                onClick={() => {
+                className="text-foreground hover:text-primary cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   console.log("Login button clicked");
                   setShowAuthModal(true);
                 }}
+                style={{ pointerEvents: 'auto' }}
               >
                 <User className="w-4 h-4 mr-1" />
                 <span className="hidden sm:inline">Login</span>
@@ -301,11 +315,14 @@ export function Navigation() {
             <Button
               variant="ghost"
               size="sm"
-              className="relative text-foreground hover:text-primary"
-              onClick={() => {
+              className="relative text-foreground hover:text-primary cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 console.log("Cart button clicked");
                 setShowCart(true);
               }}
+              style={{ pointerEvents: 'auto' }}
             >
               <ShoppingCart className="h-4 w-4" />
               {totalItems > 0 && (
