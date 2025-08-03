@@ -362,8 +362,8 @@ export function Navigation() {
                         }}
                         className={`px-2 py-1 text-xs rounded ${
                           selectedCurrency.code === currency.code
-                            ? "bg-primary text-black"
-                            : "bg-gray-800 text-white hover:bg-gray-700"
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                         }`}
                       >
                         {currency.flag} {currency.code}
