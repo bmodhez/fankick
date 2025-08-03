@@ -122,7 +122,7 @@ export const productApi = {
     return apiRequest<Product>("/products", {
       method: "POST",
       body: JSON.stringify(productData),
-    });
+    }, 2); // Retry up to 2 times for create operations
   },
 
   // Update existing product
