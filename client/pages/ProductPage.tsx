@@ -227,7 +227,7 @@ export default function ProductPage() {
                       }`}
                     />
                   ))}
-                  <span className="ml-2 text-sm text-muted-foreground">
+                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
                     {product.rating} ({product.reviews} reviews)
                   </span>
                 </div>
@@ -243,7 +243,7 @@ export default function ProductPage() {
                 <span className="text-3xl font-bold text-primary">
                   {formatPrice(convertedPrice, selectedCurrency)}
                 </span>
-                <span className="text-xl text-gray-400 line-through">
+                <span className="text-xl text-gray-500 dark:text-gray-400 line-through">
                   {formatPrice(convertedOriginalPrice, selectedCurrency)}
                 </span>
                 <Badge className="bg-red-100 text-red-800">
@@ -305,7 +305,7 @@ export default function ProductPage() {
 
             {/* Quantity */}
             <div>
-              <h3 className="font-semibold mb-3">Quantity</h3>
+              <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Quantity</h3>
               <div className="flex items-center space-x-3">
                 <Button
                   variant="outline"
@@ -314,7 +314,7 @@ export default function ProductPage() {
                 >
                   <Minus className="w-4 h-4" />
                 </Button>
-                <span className="w-8 text-center font-medium">{quantity}</span>
+                <span className="w-8 text-center font-medium text-gray-900 dark:text-white">{quantity}</span>
                 <Button
                   variant="outline"
                   size="sm"
@@ -403,18 +403,18 @@ export default function ProductPage() {
             <div className="grid grid-cols-3 gap-4 py-6 border-t border-gray-200">
               <div className="text-center">
                 <Shield className="w-6 h-6 mx-auto mb-2 text-primary" />
-                <p className="text-sm font-medium">Authentic</p>
-                <p className="text-xs text-gray-500">100% genuine</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">Authentic</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">100% genuine</p>
               </div>
               <div className="text-center">
                 <RotateCcw className="w-6 h-6 mx-auto mb-2 text-primary" />
-                <p className="text-sm font-medium">Easy Returns</p>
-                <p className="text-xs text-gray-500">15 days policy</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">Easy Returns</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">15 days policy</p>
               </div>
               <div className="text-center">
                 <Clock className="w-6 h-6 mx-auto mb-2 text-primary" />
-                <p className="text-sm font-medium">Fast Shipping</p>
-                <p className="text-xs text-gray-500">
+                <p className="text-sm font-medium text-gray-900 dark:text-white">Fast Shipping</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
                   {product.shippingDays} days
                 </p>
               </div>
@@ -422,15 +422,15 @@ export default function ProductPage() {
 
             {/* Product Description */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Product Details</h3>
-              <p className="text-gray-600">{product.description}</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Product Details</h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{product.description}</p>
 
               {product.features && (
                 <div>
-                  <h4 className="font-medium mb-2">Features:</h4>
+                  <h4 className="font-medium mb-2 text-gray-900 dark:text-white">Features:</h4>
                   <ul className="space-y-2">
                     {product.features.map((feature, index) => (
-                      <li key={index} className="flex items-center text-sm">
+                      <li key={index} className="flex items-center text-sm text-gray-700 dark:text-gray-300">
                         <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
                         {feature}
                       </li>
@@ -441,8 +441,8 @@ export default function ProductPage() {
 
               {product.materials && (
                 <div>
-                  <h4 className="font-medium mb-2">Materials:</h4>
-                  <p className="text-sm text-muted-foreground">
+                  <h4 className="font-medium mb-2 text-gray-900 dark:text-white">Materials:</h4>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
                     {product.materials.join(", ")}
                   </p>
                 </div>
