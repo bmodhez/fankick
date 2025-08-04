@@ -82,7 +82,7 @@ const App = () => (
                                   </div>
 
                                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-                                    <Link to="/football" className="group">
+                                    <Link to="/category/football" className="group">
                                       <div className="bg-gradient-to-br from-green-600 to-blue-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
                                         <div className="text-6xl mb-4">⚽</div>
                                         <h2 className="text-2xl font-bold text-white mb-2">
