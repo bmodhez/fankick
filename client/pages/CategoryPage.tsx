@@ -20,11 +20,13 @@ import {
 export default function CategoryPage() {
   const { category } = useParams<{ category: string }>();
   const { selectedCurrency } = useCurrency();
-  const { getProductsByCategory, isLoading } = useProducts();
+  const { getProductsByCategory, isLoading, products } = useProducts();
   const [sortBy, setSortBy] = useState("trending");
   const [priceRange, setPriceRange] = useState("all");
 
-  const allProducts = getProductsByCategory(category || "");
+  // Normalize category to ensure it matches our data
+  const normalizedCategory = category?.toLowerCase().trim() || "";
+  const allProducts = getProductsByCategory(normalizedCategory);
 
   // Debug logging
   console.log('CategoryPage Debug:', {
