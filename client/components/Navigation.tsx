@@ -370,14 +370,14 @@ export function Navigation() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border">
               <Link
-                to="/football"
+                to="/category/football"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
                 ⚽ Football
               </Link>
               <Link
-                to="/anime"
+                to="/category/anime"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
