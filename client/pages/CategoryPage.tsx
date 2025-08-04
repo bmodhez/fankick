@@ -24,35 +24,25 @@ export default function CategoryPage() {
   const [sortBy, setSortBy] = useState("trending");
   const [priceRange, setPriceRange] = useState("all");
 
-  // Normalize category to ensure it matches our data
+  // Get products for the specific category
   const normalizedCategory = category?.toLowerCase().trim() || "";
-  let allProducts = getProductsByCategory(normalizedCategory);
+  let allProducts: Product[] = [];
 
-  // TEMPORARY DEBUG: Show all products if category filter returns empty
-  if (allProducts.length === 0 && products.length > 0) {
-    console.log('No category match found, showing all products for debugging');
-    allProducts = products; // Show all products temporarily
-  }
-
-  // If no products found with exact category match, try fallback logic
-  if (allProducts.length === 0 && normalizedCategory && products.length > 0) {
-    // Check if we have any products with similar category names
-    const similarProducts = products.filter(p =>
-      p.category.toLowerCase().includes(normalizedCategory) ||
-      normalizedCategory.includes(p.category.toLowerCase()) ||
-      p.subcategory.toLowerCase().includes(normalizedCategory) ||
-      p.tags.some(tag => tag.toLowerCase().includes(normalizedCategory))
+  if (normalizedCategory && products.length > 0) {
+    // Filter products by exact category match
+    allProducts = products.filter(product =>
+      product.category.toLowerCase() === normalizedCategory
     );
 
-    if (similarProducts.length > 0) {
-      allProducts = similarProducts;
-    } else if (normalizedCategory === 'football') {
-      // Special case for football - ensure we get football products
-      allProducts = products.filter(p => p.category === 'football');
-    } else if (['anime', 'pop-culture'].includes(normalizedCategory)) {
-      // Special cases for other main categories
-      allProducts = products.filter(p => p.category === normalizedCategory);
+    // If no exact match, try with original category name
+    if (allProducts.length === 0) {
+      allProducts = products.filter(product =>
+        product.category === category
+      );
     }
+  } else if (!normalizedCategory) {
+    // If no category specified, show all products
+    allProducts = products;
   }
 
   // Debug logging
