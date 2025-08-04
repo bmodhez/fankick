@@ -45,8 +45,16 @@ export default function CategoryPage() {
     allProducts = products;
   }
 
-  // Debug logging (simplified)
-  console.log(`CategoryPage: ${category} -> Found ${allProducts.length}/${products.length} products`);
+  // Debug logging (detailed)
+  console.log('=== CategoryPage Debug ===');
+  console.log('URL category param:', category);
+  console.log('Normalized category:', normalizedCategory);
+  console.log('Total products loaded:', products.length);
+  console.log('Filtered products for category:', allProducts.length);
+  console.log('Available categories in data:', [...new Set(products.map(p => p.category))]);
+  console.log('Products with anime category:', products.filter(p => p.category === 'anime').length);
+  console.log('Products with football category:', products.filter(p => p.category === 'football').length);
+  console.log('========================');
 
   // Show loading state while products are being loaded
   if (isLoading) {
