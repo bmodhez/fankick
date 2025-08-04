@@ -177,6 +177,13 @@ export default function CategoryPage() {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {getCategoryDescription(category || "")}
           </p>
+
+          {/* Temporary Debug Info */}
+          <div className="mt-4 p-3 bg-blue-100 dark:bg-blue-900 rounded text-sm">
+            <strong>Debug:</strong> URL Category = "{category}" | Normalized = "{normalizedCategory}" |
+            Found {allProducts.length} of {products.length} products |
+            Categories: {[...new Set(products.map(p => p.category))].join(', ')}
+          </div>
         </div>
 
         {/* Filters and Sort */}
