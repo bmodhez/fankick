@@ -172,12 +172,6 @@ export function ProductProvider({ children }: ProductProviderProps) {
   };
 
   const getProductsByCategory = (category: string): Product[] => {
-    console.log('getProductsByCategory Debug:', {
-      requestedCategory: category,
-      totalProducts: products.length,
-      availableCategories: [...new Set(products.map(p => p.category))],
-      matchingProducts: products.filter((product) => product.category === category).length
-    });
     return products.filter((product) => product.category === category);
   };
 
