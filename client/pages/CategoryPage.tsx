@@ -56,11 +56,18 @@ export default function CategoryPage() {
   }
 
   // Debug logging
-  console.log('CategoryPage:', {
-    category: `${category} -> ${normalizedCategory}`,
-    found: `${allProducts.length}/${products.length}`,
-    availableCategories: [...new Set(products.map(p => p.category))]
-  });
+  console.log('=== CategoryPage Debug ===');
+  console.log('Raw category:', category);
+  console.log('Normalized category:', normalizedCategory);
+  console.log('Products total:', products.length);
+  console.log('Products array:', products);
+  console.log('isLoading:', isLoading);
+  console.log('All products for category:', allProducts.length);
+  console.log('Available categories:', [...new Set(products.map(p => p.category))]);
+  if (products.length > 0) {
+    console.log('Sample product:', products[0]);
+  }
+  console.log('========================');
 
   // Show loading state while products are being loaded
   if (isLoading) {
