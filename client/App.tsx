@@ -56,25 +56,7 @@ const App = () => (
                           }
                         />
                         <Route
-                          path="/football"
-                          element={
-                            <>
-                              <Navigation />
-                              <CategoryPage />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/anime"
-                          element={
-                            <>
-                              <Navigation />
-                              <CategoryPage />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/pop-culture"
+                          path="/category/:category"
                           element={
                             <>
                               <Navigation />
