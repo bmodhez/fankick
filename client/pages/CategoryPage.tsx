@@ -26,6 +26,13 @@ export default function CategoryPage() {
 
   const allProducts = getProductsByCategory(category || "");
 
+  // Debug logging
+  console.log('CategoryPage Debug:', {
+    category,
+    allProductsCount: allProducts.length,
+    allProducts: allProducts.map(p => ({ id: p.id, name: p.name, category: p.category }))
+  });
+
   // If no products found and category is valid, it might be a loading issue
   if (
     allProducts.length === 0 &&
