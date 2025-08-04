@@ -101,19 +101,19 @@ export function Navigation() {
           <div className="hidden md:flex items-center space-x-6">
             <div className="flex items-center space-x-6">
               <Link
-                to="/football"
+                to="/category/football"
                 className="text-foreground hover:text-primary transition-colors font-medium"
               >
                 Football
               </Link>
               <Link
-                to="/anime"
+                to="/category/anime"
                 className="hover:text-primary transition-colors font-medium"
               >
                 Anime
               </Link>
               <Link
-                to="/pop-culture"
+                to="/category/pop-culture"
                 className="hover:text-primary transition-colors font-medium"
               >
                 Pop Culture
