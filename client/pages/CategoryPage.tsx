@@ -30,10 +30,14 @@ export default function CategoryPage() {
 
   // Debug logging
   console.log('CategoryPage Debug:', {
-    category,
+    rawCategory: category,
+    normalizedCategory,
     isLoading,
+    totalProductsInContext: products.length,
     allProductsCount: allProducts.length,
-    allProducts: allProducts.map(p => ({ id: p.id, name: p.name, category: p.category }))
+    availableCategories: [...new Set(products.map(p => p.category))],
+    allProducts: allProducts.map(p => ({ id: p.id, name: p.name, category: p.category })),
+    sampleProducts: products.slice(0, 3).map(p => ({ id: p.id, name: p.name, category: p.category }))
   });
 
   // Show loading state while products are being loaded
