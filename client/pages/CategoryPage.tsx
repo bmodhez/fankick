@@ -26,7 +26,28 @@ export default function CategoryPage() {
 
   // Normalize category to ensure it matches our data
   const normalizedCategory = category?.toLowerCase().trim() || "";
-  const allProducts = getProductsByCategory(normalizedCategory);
+  let allProducts = getProductsByCategory(normalizedCategory);
+
+  // If no products found with exact category match, try fallback logic
+  if (allProducts.length === 0 && normalizedCategory && products.length > 0) {
+    // Check if we have any products with similar category names
+    const similarProducts = products.filter(p =>
+      p.category.toLowerCase().includes(normalizedCategory) ||
+      normalizedCategory.includes(p.category.toLowerCase()) ||
+      p.subcategory.toLowerCase().includes(normalizedCategory) ||
+      p.tags.some(tag => tag.toLowerCase().includes(normalizedCategory))
+    );
+
+    if (similarProducts.length > 0) {
+      allProducts = similarProducts;
+    } else if (normalizedCategory === 'football') {
+      // Special case for football - ensure we get football products
+      allProducts = products.filter(p => p.category === 'football');
+    } else if (['anime', 'pop-culture'].includes(normalizedCategory)) {
+      // Special cases for other main categories
+      allProducts = products.filter(p => p.category === normalizedCategory);
+    }
+  }
 
   // Debug logging
   console.log('CategoryPage Debug:', {
