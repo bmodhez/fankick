@@ -64,6 +64,19 @@ const App = () => (
                             </>
                           }
                         />
+                        {/* Redirect old category URLs to new structure */}
+                        <Route
+                          path="/anime"
+                          element={<Navigate to="/category/anime" replace />}
+                        />
+                        <Route
+                          path="/football"
+                          element={<Navigate to="/category/football" replace />}
+                        />
+                        <Route
+                          path="/pop-culture"
+                          element={<Navigate to="/category/pop-culture" replace />}
+                        />
                         <Route
                           path="/collections"
                           element={
