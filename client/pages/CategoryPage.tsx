@@ -366,12 +366,12 @@ export default function CategoryPage() {
         </div>
 
         {/* Empty State */}
-        {filteredAndSortedProducts.length === 0 && (
+        {!isLoading && filteredAndSortedProducts.length === 0 && (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">😕</div>
-            <h3 className="text-xl font-semibold mb-2">No products found</h3>
-            <p className="text-muted-foreground mb-6">
-              Try adjusting your filters or browse other categories
+            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">No products found</h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              {category ? `No products available in ${category} category` : 'Try adjusting your filters or browse other categories'}
             </p>
             <Link to="/">
               <Button>Browse All Products</Button>
