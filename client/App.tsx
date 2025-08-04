@@ -116,7 +116,7 @@ const App = () => (
                                       </div>
                                     </Link>
 
-                                    <Link to="/pop-culture" className="group">
+                                    <Link to="/category/pop-culture" className="group">
                                       <div className="bg-gradient-to-br from-red-600 to-orange-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
                                         <div className="text-6xl mb-4">🎭</div>
                                         <h2 className="text-2xl font-bold text-white mb-2">
