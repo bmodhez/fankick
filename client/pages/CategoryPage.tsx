@@ -20,7 +20,7 @@ import {
 export default function CategoryPage() {
   const { category } = useParams<{ category: string }>();
   const { selectedCurrency } = useCurrency();
-  const { getProductsByCategory } = useProducts();
+  const { getProductsByCategory, isLoading } = useProducts();
   const [sortBy, setSortBy] = useState("trending");
   const [priceRange, setPriceRange] = useState("all");
 
@@ -29,22 +29,19 @@ export default function CategoryPage() {
   // Debug logging
   console.log('CategoryPage Debug:', {
     category,
+    isLoading,
     allProductsCount: allProducts.length,
     allProducts: allProducts.map(p => ({ id: p.id, name: p.name, category: p.category }))
   });
 
-  // If no products found and category is valid, it might be a loading issue
-  if (
-    allProducts.length === 0 &&
-    category &&
-    ["football", "anime", "pop-culture"].includes(category)
-  ) {
+  // Show loading state while products are being loaded
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center py-16">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Loading products...</p>
+            <p className="text-gray-600 dark:text-gray-400">Loading products...</p>
           </div>
         </div>
         <Footer />
