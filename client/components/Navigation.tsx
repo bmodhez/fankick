@@ -384,7 +384,7 @@ export function Navigation() {
                 🎌 Anime
               </Link>
               <Link
-                to="/pop-culture"
+                to="/category/pop-culture"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
