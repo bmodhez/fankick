@@ -140,7 +140,7 @@ const { success, error } = await useAuth().signup({
 
 ### Frontend Login
 ```typescript
-const { success, error } = await useAuth().login(
+const { error, error } = await useAuth().login(
   'user@example.com', 
   'securepassword'
 );
