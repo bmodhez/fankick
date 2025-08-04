@@ -169,18 +169,6 @@ export default function CategoryPage() {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {getCategoryDescription(category || "")}
           </p>
-
-          {/* Debug Info */}
-          <div className="mt-8 p-4 bg-yellow-100 dark:bg-yellow-900 rounded-lg max-w-2xl mx-auto">
-            <h3 className="font-bold text-yellow-800 dark:text-yellow-200 mb-2">Debug Info:</h3>
-            <div className="text-sm text-yellow-700 dark:text-yellow-300 space-y-1">
-              <p>Category: {category} → {normalizedCategory}</p>
-              <p>Products in context: {products.length}</p>
-              <p>Loading: {isLoading ? 'Yes' : 'No'}</p>
-              <p>Found products: {allProducts.length}</p>
-              <p>Available categories: {[...new Set(products.map(p => p.category))].join(', ') || 'None'}</p>
-            </div>
-          </div>
         </div>
 
         {/* Filters and Sort */}
