@@ -28,6 +28,12 @@ export default function CategoryPage() {
   const normalizedCategory = category?.toLowerCase().trim() || "";
   let allProducts = getProductsByCategory(normalizedCategory);
 
+  // TEMPORARY DEBUG: Show all products if category filter returns empty
+  if (allProducts.length === 0 && products.length > 0) {
+    console.log('No category match found, showing all products for debugging');
+    allProducts = products; // Show all products temporarily
+  }
+
   // If no products found with exact category match, try fallback logic
   if (allProducts.length === 0 && normalizedCategory && products.length > 0) {
     // Check if we have any products with similar category names
