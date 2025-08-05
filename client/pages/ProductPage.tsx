@@ -213,7 +213,7 @@ export default function ProductPage() {
           {/* Product Details */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-sport font-bold text-foreground mb-2">
+              <h1 className="text-3xl font-sport font-bold text-white mb-2 drop-shadow-lg">
                 {product.name}
               </h1>
 
@@ -225,11 +225,11 @@ export default function ProductPage() {
                       className={`w-4 h-4 ${
                         i < Math.floor(product.rating)
                           ? "text-yellow-400 fill-current"
-                          : "text-gray-300"
+                          : "text-gray-400"
                       }`}
                     />
                   ))}
-                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
+                  <span className="ml-2 text-sm text-white font-medium">
                     {product.rating} ({product.reviews} reviews)
                   </span>
                 </div>
