@@ -30,6 +30,7 @@ import Contact from "./pages/Contact";
 import TestPage from "./pages/TestPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Checkout from "./pages/Checkout";
 import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
