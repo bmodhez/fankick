@@ -186,23 +186,23 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         
                         {/* Quantity Controls */}
                         <div className="flex items-center justify-between mt-4">
-                          <div className="flex items-center bg-gray-700/70 rounded-xl p-1 border border-gray-600">
+                          <div className="flex items-center bg-gradient-to-r from-gray-700/80 to-gray-600/60 rounded-xl p-1 border border-gray-500/50 shadow-lg backdrop-blur-sm">
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="w-9 h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
+                              className="w-10 h-10 p-0 hover:bg-primary/30 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 hover:scale-110"
                             >
                               <Minus className="w-4 h-4" />
                             </Button>
-                            <span className="text-white font-bold w-12 text-center bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-lg mx-1 py-2 border border-primary/30">
+                            <span className="text-white font-bold w-14 text-center bg-gradient-to-r from-primary/25 to-purple-500/25 rounded-lg mx-1 py-2.5 border border-primary/40 shadow-inner text-lg">
                               {item.quantity}
                             </span>
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="w-9 h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
+                              className="w-10 h-10 p-0 hover:bg-primary/30 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 hover:scale-110"
                             >
                               <Plus className="w-4 h-4" />
                             </Button>
@@ -212,7 +212,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             variant="ghost"
                             size="sm"
                             onClick={() => removeFromCart(item.id)}
-                            className="text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl p-2 transition-all transform hover:scale-105"
+                            className="text-gray-400 hover:text-red-400 hover:bg-red-500/20 rounded-xl p-3 transition-all transform hover:scale-110 duration-300 shadow-lg border border-transparent hover:border-red-400/30"
                           >
                             <Trash2 className="w-5 h-5" />
                           </Button>
