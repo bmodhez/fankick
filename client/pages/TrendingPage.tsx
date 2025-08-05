@@ -127,7 +127,7 @@ export default function TrendingPage() {
         <div className="py-16 text-center">
           <div className="flex justify-center items-center space-x-3 mb-4">
             <Flame className="w-8 h-8 text-red-500 animate-pulse" />
-            <h1 className="text-4xl lg:text-6xl font-sport font-bold text-white">
+            <h1 className="text-4xl lg:text-6xl font-sport font-bold text-foreground">
               TRENDING
               <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
                 {" "}NOW
