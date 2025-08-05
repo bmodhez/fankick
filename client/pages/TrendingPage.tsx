@@ -409,7 +409,7 @@ export default function TrendingPage() {
                 return (
                   <Card
                     key={product.id}
-                    className="bg-gray-800 border-gray-700 hover:border-primary/50 transition-all duration-300 group"
+                    className="bg-card border-border hover:border-primary/50 transition-all duration-300 group"
                   >
                     <CardContent className="p-0">
                       <Link to={`/product/${product.id}`}>
