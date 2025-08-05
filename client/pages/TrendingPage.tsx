@@ -548,20 +548,12 @@ export default function TrendingPage() {
                               >
                                 <Eye className="w-4 h-4" />
                               </Button>
-                              <Button
+                              <LikeButton
+                                productId={product.id}
                                 variant="secondary"
                                 size="sm"
                                 className="bg-background/90 hover:bg-background"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                  console.log(
-                                    `Added ${product.name} to wishlist`,
-                                  );
-                                }}
-                              >
-                                <Heart className="w-4 h-4" />
-                              </Button>
+                              />
                             </div>
                           </div>
                         </div>
