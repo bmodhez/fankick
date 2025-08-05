@@ -228,7 +228,7 @@ export default function TrendingPage() {
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-white mb-2">
+                      <label className="block text-sm font-medium text-foreground mb-2">
                         Price Range ({selectedCurrency.code})
                       </label>
                       <select
@@ -257,7 +257,7 @@ export default function TrendingPage() {
                         <option value="rating">⭐ Highest Rated</option>
                         <option value="reviews">👥 Most Reviewed</option>
                         <option value="price-low">💰 Price: Low to High</option>
-                        <option value="price-high">��� Price: High to Low</option>
+                        <option value="price-high">💎 Price: High to Low</option>
                         <option value="newest">🆕 Newest First</option>
                       </select>
                     </div>
