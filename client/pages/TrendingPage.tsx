@@ -352,7 +352,7 @@ export default function TrendingPage() {
                                     className={`w-4 h-4 ${
                                       i < Math.floor(product.rating)
                                         ? "text-yellow-400 fill-current"
-                                        : "text-gray-600"
+                                        : "text-muted"
                                     }`}
                                   />
                                 ))}
