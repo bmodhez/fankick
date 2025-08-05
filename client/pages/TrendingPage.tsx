@@ -567,7 +567,7 @@ export default function TrendingPage() {
                       <p className="text-muted-foreground mb-4">
                         {categoryProducts.length} trending products
                       </p>
-                      <Button variant="outline" className="border-gray-600 text-gray-300 group-hover:border-primary group-hover:text-primary">
+                      <Button variant="outline" className="border-border text-muted-foreground group-hover:border-primary group-hover:text-primary">
                         Explore Category
                       </Button>
                     </div>
