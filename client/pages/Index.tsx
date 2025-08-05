@@ -25,9 +25,23 @@ import {
 
 export default function Index() {
   const { selectedCurrency } = useCurrency();
-  const { getTrendingProducts } = useProducts();
+  const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
   const trendingProducts = getTrendingProducts(4);
+
+  // Debug logging
+  console.log("Homepage Products Debug:");
+  console.log("Total products:", products.length);
+  console.log("Trending products:", trendingProducts.length);
+  if (trendingProducts.length > 0) {
+    console.log("First trending product image:", trendingProducts[0].images[0]);
+  }
+
+  // Force image override for all trending products
+  const forcedProducts = trendingProducts.map(product => ({
+    ...product,
+    images: ["https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800"]
+  }));
 
   // Scroll to top when component mounts
   useEffect(() => {
