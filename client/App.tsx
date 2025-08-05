@@ -28,6 +28,8 @@ import RefundPolicy from "./pages/RefundPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Contact from "./pages/Contact";
 import TestPage from "./pages/TestPage";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
