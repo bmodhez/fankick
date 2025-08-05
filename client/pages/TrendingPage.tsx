@@ -142,7 +142,7 @@ export default function TrendingPage() {
           {/* Stats */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
             {stats.map((stat, index) => (
-              <Card key={index} className="bg-gray-800 border-gray-700">
+              <Card key={index} className="bg-card border-border">
                 <CardContent className="p-4 text-center">
                   <stat.icon className={`w-6 h-6 ${stat.color} mx-auto mb-2`} />
                   <div className="text-2xl font-bold text-white">{stat.value}</div>
