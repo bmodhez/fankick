@@ -251,7 +251,7 @@ export default function TrendingPage() {
                       <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
+                        className="w-full px-3 py-2 bg-input border border-border rounded text-foreground"
                       >
                         <option value="trending">🔥 Most Trending</option>
                         <option value="rating">⭐ Highest Rated</option>
