@@ -322,7 +322,7 @@ export default function ProductPage() {
                 >
                   <Minus className="w-4 h-4" />
                 </Button>
-                <span className="w-8 text-center font-medium text-gray-900 dark:text-white">
+                <span className="w-8 text-center font-medium text-white">
                   {quantity}
                 </span>
                 <Button
