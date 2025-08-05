@@ -64,11 +64,7 @@ const App = () => (
                             </>
                           }
                         />
-<<<<<<< HEAD
-
-=======
                         {/* Redirect old category URLs to new structure */}
->>>>>>> origin/main
                         <Route
                           path="/anime"
                           element={<Navigate to="/category/anime" replace />}
