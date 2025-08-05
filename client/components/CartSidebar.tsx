@@ -340,22 +340,26 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             </div>
 
             {/* Checkout Button */}
-            <div className="relative">
+            <div className="relative group">
               <Button
                 onClick={handleCheckout}
-                className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/90 hover:via-green-400/90 hover:to-blue-400/90 font-bold py-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/30"
+                className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/95 hover:via-green-400/95 hover:to-blue-400/95 font-bold py-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/40 relative overflow-hidden"
               >
-                <div className="flex items-center justify-center">
-                  <CreditCard className="w-6 h-6 mr-3" />
+                {/* Animated shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+
+                <div className="relative flex items-center justify-center">
+                  <CreditCard className="w-6 h-6 mr-3 animate-pulse" />
                   <div className="text-center">
-                    <div className="text-lg">Proceed to Checkout</div>
-                    <div className="text-sm opacity-90">{formatPrice(finalTotal, selectedCurrency)}</div>
+                    <div className="text-lg font-extrabold">Proceed to Checkout</div>
+                    <div className="text-sm opacity-90 font-semibold">{formatPrice(finalTotal, selectedCurrency)}</div>
                   </div>
                 </div>
               </Button>
 
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-green-400/20 rounded-2xl blur-xl -z-10"></div>
+              {/* Enhanced glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-green-400/30 rounded-2xl blur-xl -z-10 group-hover:blur-2xl transition-all duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-blue-400/10 rounded-2xl blur-2xl -z-20 animate-pulse"></div>
             </div>
             
             <div className="text-center space-y-2">
