@@ -145,7 +145,7 @@ export default function TrendingPage() {
               <Card key={index} className="bg-card border-border">
                 <CardContent className="p-4 text-center">
                   <stat.icon className={`w-6 h-6 ${stat.color} mx-auto mb-2`} />
-                  <div className="text-2xl font-bold text-white">{stat.value}</div>
+                  <div className="text-2xl font-bold text-foreground">{stat.value}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </CardContent>
               </Card>
