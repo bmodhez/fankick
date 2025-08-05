@@ -212,7 +212,7 @@ export default function TrendingPage() {
                 <div className="mt-6 pt-6 border-t border-border">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-white mb-2">
+                      <label className="block text-sm font-medium text-foreground mb-2">
                         Category
                       </label>
                       <select
