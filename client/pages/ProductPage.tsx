@@ -79,12 +79,12 @@ export default function ProductPage() {
   const convertedPrice = convertPrice(
     currentVariant.price,
     selectedCurrency.code,
-    "INR"
+    "INR",
   );
   const convertedOriginalPrice = convertPrice(
     currentVariant.originalPrice,
     selectedCurrency.code,
-    "INR"
+    "INR",
   );
 
   const paymentMethods = getAvailablePaymentMethods(
@@ -131,7 +131,6 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen bg-background">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
@@ -259,7 +258,9 @@ export default function ProductPage() {
             {/* Variant Selection */}
             {product.variants.some((v) => v.size) && (
               <div>
-                <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Size</h3>
+                <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
+                  Size
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {product.variants
                     .filter((v) => v.size)
@@ -282,7 +283,9 @@ export default function ProductPage() {
 
             {product.variants.some((v) => v.color) && (
               <div>
-                <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Color</h3>
+                <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
+                  Color
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {product.variants
                     .filter((v) => v.color)
@@ -305,7 +308,9 @@ export default function ProductPage() {
 
             {/* Quantity */}
             <div>
-              <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Quantity</h3>
+              <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
+                Quantity
+              </h3>
               <div className="flex items-center space-x-3">
                 <Button
                   variant="outline"
@@ -314,7 +319,9 @@ export default function ProductPage() {
                 >
                   <Minus className="w-4 h-4" />
                 </Button>
-                <span className="w-8 text-center font-medium text-gray-900 dark:text-white">{quantity}</span>
+                <span className="w-8 text-center font-medium text-gray-900 dark:text-white">
+                  {quantity}
+                </span>
                 <Button
                   variant="outline"
                   size="sm"
@@ -403,17 +410,27 @@ export default function ProductPage() {
             <div className="grid grid-cols-3 gap-4 py-6 border-t border-gray-200">
               <div className="text-center">
                 <Shield className="w-6 h-6 mx-auto mb-2 text-primary" />
-                <p className="text-sm font-medium text-gray-900 dark:text-white">Authentic</p>
-                <p className="text-xs text-gray-600 dark:text-gray-400">100% genuine</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  Authentic
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  100% genuine
+                </p>
               </div>
               <div className="text-center">
                 <RotateCcw className="w-6 h-6 mx-auto mb-2 text-primary" />
-                <p className="text-sm font-medium text-gray-900 dark:text-white">Easy Returns</p>
-                <p className="text-xs text-gray-600 dark:text-gray-400">15 days policy</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  Easy Returns
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  15 days policy
+                </p>
               </div>
               <div className="text-center">
                 <Clock className="w-6 h-6 mx-auto mb-2 text-primary" />
-                <p className="text-sm font-medium text-gray-900 dark:text-white">Fast Shipping</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  Fast Shipping
+                </p>
                 <p className="text-xs text-gray-600 dark:text-gray-400">
                   {product.shippingDays} days
                 </p>
@@ -422,15 +439,24 @@ export default function ProductPage() {
 
             {/* Product Description */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Product Details</h3>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{product.description}</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Product Details
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                {product.description}
+              </p>
 
               {product.features && (
                 <div>
-                  <h4 className="font-medium mb-2 text-gray-900 dark:text-white">Features:</h4>
+                  <h4 className="font-medium mb-2 text-gray-900 dark:text-white">
+                    Features:
+                  </h4>
                   <ul className="space-y-2">
                     {product.features.map((feature, index) => (
-                      <li key={index} className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                      <li
+                        key={index}
+                        className="flex items-center text-sm text-gray-700 dark:text-gray-300"
+                      >
                         <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
                         {feature}
                       </li>
@@ -441,7 +467,9 @@ export default function ProductPage() {
 
               {product.materials && (
                 <div>
-                  <h4 className="font-medium mb-2 text-gray-900 dark:text-white">Materials:</h4>
+                  <h4 className="font-medium mb-2 text-gray-900 dark:text-white">
+                    Materials:
+                  </h4>
                   <p className="text-sm text-gray-700 dark:text-gray-300">
                     {product.materials.join(", ")}
                   </p>
@@ -454,7 +482,9 @@ export default function ProductPage() {
         {/* Reviews Section */}
         <div className="mt-16">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-sport font-bold text-gray-900 dark:text-white">Customer Reviews</h2>
+            <h2 className="text-2xl font-sport font-bold text-gray-900 dark:text-white">
+              Customer Reviews
+            </h2>
             <Button variant="outline">Write a Review</Button>
           </div>
 
@@ -491,7 +521,9 @@ export default function ProductPage() {
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <div className="flex items-center space-x-2 mb-1">
-                          <span className="font-medium text-gray-900 dark:text-white">{review.name}</span>
+                          <span className="font-medium text-gray-900 dark:text-white">
+                            {review.name}
+                          </span>
                           {review.verified && (
                             <Badge variant="outline" className="text-xs">
                               Verified Purchase
@@ -517,7 +549,9 @@ export default function ProductPage() {
                         </div>
                       </div>
                     </div>
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{review.comment}</p>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                      {review.comment}
+                    </p>
                   </CardContent>
                 </Card>
               ))}
@@ -535,12 +569,12 @@ export default function ProductPage() {
               const relatedConvertedPrice = convertPrice(
                 relatedProduct.basePrice,
                 selectedCurrency.code,
-                "INR"
+                "INR",
               );
               const relatedConvertedOriginalPrice = convertPrice(
                 relatedProduct.originalPrice,
                 selectedCurrency.code,
-                "INR"
+                "INR",
               );
 
               return (

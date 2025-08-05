@@ -25,7 +25,7 @@ export default function SearchResults() {
   const query = searchParams.get("q") || "";
   const { selectedCurrency } = useCurrency();
   const { searchProducts, products } = useProducts();
-  
+
   const [searchQuery, setSearchQuery] = useState(query);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [priceRange, setPriceRange] = useState("all");
@@ -40,18 +40,24 @@ export default function SearchResults() {
   // Search results
   const searchResults = useMemo(() => {
     if (!query) return [];
-    
+
     let results = searchProducts(query);
-    
+
     // Filter by category
     if (selectedCategory !== "all") {
-      results = results.filter(product => product.category === selectedCategory);
+      results = results.filter(
+        (product) => product.category === selectedCategory,
+      );
     }
-    
+
     // Filter by price range
     if (priceRange !== "all") {
-      results = results.filter(product => {
-        const price = convertPrice(product.basePrice, selectedCurrency.code, "INR");
+      results = results.filter((product) => {
+        const price = convertPrice(
+          product.basePrice,
+          selectedCurrency.code,
+          "INR",
+        );
         switch (priceRange) {
           case "under-1000":
             return price < 1000;
@@ -66,7 +72,7 @@ export default function SearchResults() {
         }
       });
     }
-    
+
     // Sort results
     switch (sortBy) {
       case "price-low":
@@ -80,26 +86,43 @@ export default function SearchResults() {
       default:
         return results;
     }
-  }, [query, searchProducts, selectedCategory, priceRange, sortBy, selectedCurrency]);
+  }, [
+    query,
+    searchProducts,
+    selectedCategory,
+    priceRange,
+    sortBy,
+    selectedCurrency,
+  ]);
 
   // Popular searches
   const popularSearches = [
-    "Naruto", "Messi", "Football Jersey", "Anime Hoodie", "Taylor Swift", 
-    "BTS", "Marvel", "Akatsuki", "Ronaldo", "One Piece"
+    "Naruto",
+    "Messi",
+    "Football Jersey",
+    "Anime Hoodie",
+    "Taylor Swift",
+    "BTS",
+    "Marvel",
+    "Akatsuki",
+    "Ronaldo",
+    "One Piece",
   ];
 
   // Search suggestions
   const searchSuggestions = useMemo(() => {
     if (!searchQuery || searchQuery.length < 2) return [];
-    
-    const allTerms = products.flatMap(product => [
-      product.name,
-      ...product.tags,
-      product.category,
-      product.subcategory,
-      product.brand || ""
-    ]).filter(term => term.toLowerCase().includes(searchQuery.toLowerCase()));
-    
+
+    const allTerms = products
+      .flatMap((product) => [
+        product.name,
+        ...product.tags,
+        product.category,
+        product.subcategory,
+        product.brand || "",
+      ])
+      .filter((term) => term.toLowerCase().includes(searchQuery.toLowerCase()));
+
     return [...new Set(allTerms)].slice(0, 8);
   }, [searchQuery, products]);
 
@@ -118,7 +141,6 @@ export default function SearchResults() {
 
   return (
     <div className="min-h-screen bg-gray-900">
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         {/* Search Header */}
         <div className="mb-8">
@@ -147,7 +169,7 @@ export default function SearchResults() {
                   Search
                 </Button>
               </div>
-              
+
               {/* Search Suggestions */}
               {searchSuggestions.length > 0 && searchQuery !== query && (
                 <div className="absolute top-full left-0 right-0 bg-gray-800 border border-gray-700 rounded-lg mt-1 z-10 max-h-60 overflow-y-auto">
@@ -164,7 +186,7 @@ export default function SearchResults() {
                 </div>
               )}
             </div>
-            
+
             {/* Filter Toggle */}
             <Button
               variant="outline"
@@ -175,12 +197,15 @@ export default function SearchResults() {
               Filters
               {(selectedCategory !== "all" || priceRange !== "all") && (
                 <Badge className="ml-2 bg-primary text-black">
-                  {[selectedCategory !== "all" ? 1 : 0, priceRange !== "all" ? 1 : 0].reduce((a, b) => a + b)}
+                  {[
+                    selectedCategory !== "all" ? 1 : 0,
+                    priceRange !== "all" ? 1 : 0,
+                  ].reduce((a, b) => a + b)}
                 </Badge>
               )}
             </Button>
           </div>
-          
+
           {/* Results Info */}
           <div className="mt-4">
             {query ? (
@@ -188,16 +213,25 @@ export default function SearchResults() {
                 <p className="text-muted-foreground">
                   {searchResults.length > 0 ? (
                     <>
-                      Showing <span className="text-white font-medium">{searchResults.length}</span> results for{" "}
-                      <span className="text-primary font-medium">"{query}"</span>
+                      Showing{" "}
+                      <span className="text-white font-medium">
+                        {searchResults.length}
+                      </span>{" "}
+                      results for{" "}
+                      <span className="text-primary font-medium">
+                        "{query}"
+                      </span>
                     </>
                   ) : (
                     <>
-                      No results found for <span className="text-primary font-medium">"{query}"</span>
+                      No results found for{" "}
+                      <span className="text-primary font-medium">
+                        "{query}"
+                      </span>
                     </>
                   )}
                 </p>
-                
+
                 {searchResults.length > 0 && (
                   <select
                     value={sortBy}
@@ -219,12 +253,15 @@ export default function SearchResults() {
                   Search FanKick Products
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  Find your favorite anime, football, and pop culture merchandise
+                  Find your favorite anime, football, and pop culture
+                  merchandise
                 </p>
-                
+
                 {/* Popular Searches */}
                 <div className="max-w-2xl mx-auto">
-                  <p className="text-sm text-muted-foreground mb-3">Popular searches:</p>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Popular searches:
+                  </p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     {popularSearches.map((term, index) => (
                       <Button
@@ -262,7 +299,7 @@ export default function SearchResults() {
                   </Button>
                 )}
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Category Filter */}
                 <div>
@@ -280,7 +317,7 @@ export default function SearchResults() {
                     <option value="pop-culture">🎭 Pop Culture</option>
                   </select>
                 </div>
-                
+
                 {/* Price Range Filter */}
                 <div>
                   <label className="block text-sm font-medium text-white mb-2">
@@ -292,10 +329,20 @@ export default function SearchResults() {
                     className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
                   >
                     <option value="all">All Prices</option>
-                    <option value="under-1000">Under {formatPrice(1000, selectedCurrency)}</option>
-                    <option value="1000-3000">{formatPrice(1000, selectedCurrency)} - {formatPrice(3000, selectedCurrency)}</option>
-                    <option value="3000-5000">{formatPrice(3000, selectedCurrency)} - {formatPrice(5000, selectedCurrency)}</option>
-                    <option value="over-5000">Over {formatPrice(5000, selectedCurrency)}</option>
+                    <option value="under-1000">
+                      Under {formatPrice(1000, selectedCurrency)}
+                    </option>
+                    <option value="1000-3000">
+                      {formatPrice(1000, selectedCurrency)} -{" "}
+                      {formatPrice(3000, selectedCurrency)}
+                    </option>
+                    <option value="3000-5000">
+                      {formatPrice(3000, selectedCurrency)} -{" "}
+                      {formatPrice(5000, selectedCurrency)}
+                    </option>
+                    <option value="over-5000">
+                      Over {formatPrice(5000, selectedCurrency)}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -310,12 +357,12 @@ export default function SearchResults() {
               const convertedPrice = convertPrice(
                 product.basePrice,
                 selectedCurrency.code,
-                "INR"
+                "INR",
               );
               const convertedOriginalPrice = convertPrice(
                 product.originalPrice,
                 selectedCurrency.code,
-                "INR"
+                "INR",
               );
 
               return (
@@ -330,7 +377,7 @@ export default function SearchResults() {
                         alt={product.name}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       />
-                      
+
                       {/* Badges */}
                       <div className="absolute top-3 left-3 flex flex-col gap-1">
                         {product.isTrending && (
@@ -345,7 +392,7 @@ export default function SearchResults() {
                           </Badge>
                         )}
                       </div>
-                      
+
                       {/* Actions */}
                       <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
                         <Button
@@ -389,7 +436,10 @@ export default function SearchResults() {
                             {formatPrice(convertedPrice, selectedCurrency)}
                           </span>
                           <span className="text-sm text-muted-foreground line-through ml-2">
-                            {formatPrice(convertedOriginalPrice, selectedCurrency)}
+                            {formatPrice(
+                              convertedOriginalPrice,
+                              selectedCurrency,
+                            )}
                           </span>
                         </div>
                       </div>
@@ -400,7 +450,10 @@ export default function SearchResults() {
                           {product.shippingDays} days delivery
                         </span>
                         {product.codAvailable && (
-                          <Badge variant="outline" className="text-xs border-border text-muted-foreground">
+                          <Badge
+                            variant="outline"
+                            className="text-xs border-border text-muted-foreground"
+                          >
                             COD Available
                           </Badge>
                         )}
@@ -426,9 +479,10 @@ export default function SearchResults() {
               No results found for "{query}"
             </h2>
             <p className="text-muted-foreground mb-6">
-              Try searching with different keywords or check out our popular products
+              Try searching with different keywords or check out our popular
+              products
             </p>
-            
+
             <div className="flex flex-wrap gap-2 justify-center mb-8">
               {popularSearches.slice(0, 5).map((term, index) => (
                 <Button
@@ -442,8 +496,8 @@ export default function SearchResults() {
                 </Button>
               ))}
             </div>
-            
-            <Button 
+
+            <Button
               onClick={clearFilters}
               className="bg-primary text-black hover:bg-primary/90"
             >

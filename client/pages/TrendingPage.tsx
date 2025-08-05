@@ -31,7 +31,7 @@ export default function TrendingPage() {
   const { selectedCurrency } = useCurrency();
   const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
-  
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [priceRange, setPriceRange] = useState("all");
@@ -46,25 +46,34 @@ export default function TrendingPage() {
 
   // Get trending products and all products for filtering
   const trendingProducts = useMemo(() => {
-    let filtered = products.filter(product => product.isTrending);
-    
+    let filtered = products.filter((product) => product.isTrending);
+
     // Apply search filter
     if (searchQuery) {
-      filtered = filtered.filter(product =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      filtered = filtered.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          product.tags.some((tag) =>
+            tag.toLowerCase().includes(searchQuery.toLowerCase()),
+          ),
       );
     }
-    
+
     // Apply category filter
     if (selectedCategory !== "all") {
-      filtered = filtered.filter(product => product.category === selectedCategory);
+      filtered = filtered.filter(
+        (product) => product.category === selectedCategory,
+      );
     }
-    
+
     // Apply price range filter
     if (priceRange !== "all") {
-      filtered = filtered.filter(product => {
-        const price = convertPrice(product.basePrice, selectedCurrency.code, "INR");
+      filtered = filtered.filter((product) => {
+        const price = convertPrice(
+          product.basePrice,
+          selectedCurrency.code,
+          "INR",
+        );
         switch (priceRange) {
           case "under-25":
             return price < 25;
@@ -79,7 +88,7 @@ export default function TrendingPage() {
         }
       });
     }
-    
+
     // Apply sorting
     switch (sortBy) {
       case "price-low":
@@ -95,7 +104,14 @@ export default function TrendingPage() {
       default:
         return filtered.sort((a, b) => b.reviews - a.reviews); // Trending by reviews
     }
-  }, [products, searchQuery, selectedCategory, priceRange, sortBy, selectedCurrency]);
+  }, [
+    products,
+    searchQuery,
+    selectedCategory,
+    priceRange,
+    sortBy,
+    selectedCurrency,
+  ]);
 
   const clearFilters = () => {
     setSearchQuery("");
@@ -113,15 +129,39 @@ export default function TrendingPage() {
   };
 
   const stats = [
-    { label: "Trending Products", value: trendingProducts.length, icon: TrendingUp, color: "text-red-400" },
-    { label: "Categories", value: new Set(trendingProducts.map(p => p.category)).size, icon: Grid, color: "text-blue-400" },
-    { label: "Avg Rating", value: (trendingProducts.reduce((sum, p) => sum + p.rating, 0) / trendingProducts.length || 0).toFixed(1), icon: Star, color: "text-yellow-400" },
-    { label: "Total Reviews", value: trendingProducts.reduce((sum, p) => sum + p.reviews, 0).toLocaleString(), icon: Eye, color: "text-green-400" },
+    {
+      label: "Trending Products",
+      value: trendingProducts.length,
+      icon: TrendingUp,
+      color: "text-red-400",
+    },
+    {
+      label: "Categories",
+      value: new Set(trendingProducts.map((p) => p.category)).size,
+      icon: Grid,
+      color: "text-blue-400",
+    },
+    {
+      label: "Avg Rating",
+      value: (
+        trendingProducts.reduce((sum, p) => sum + p.rating, 0) /
+          trendingProducts.length || 0
+      ).toFixed(1),
+      icon: Star,
+      color: "text-yellow-400",
+    },
+    {
+      label: "Total Reviews",
+      value: trendingProducts
+        .reduce((sum, p) => sum + p.reviews, 0)
+        .toLocaleString(),
+      icon: Eye,
+      color: "text-green-400",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-background">
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="py-16 text-center">
@@ -130,23 +170,29 @@ export default function TrendingPage() {
             <h1 className="text-4xl lg:text-6xl font-sport font-bold text-foreground">
               TRENDING
               <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-                {" "}NOW
+                {" "}
+                NOW
               </span>
             </h1>
             <TrendingUp className="w-8 h-8 text-primary animate-bounce" />
           </div>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Discover the hottest products in football, anime, and pop culture that fans are obsessing over right now!
+            Discover the hottest products in football, anime, and pop culture
+            that fans are obsessing over right now!
           </p>
-          
+
           {/* Stats */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
             {stats.map((stat, index) => (
               <Card key={index} className="bg-card border-border">
                 <CardContent className="p-4 text-center">
                   <stat.icon className={`w-6 h-6 ${stat.color} mx-auto mb-2`} />
-                  <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className="text-2xl font-bold text-foreground">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {stat.label}
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -169,7 +215,7 @@ export default function TrendingPage() {
                     className="pl-10 bg-input border-border text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
-                
+
                 {/* Quick Filters */}
                 <div className="flex items-center space-x-3">
                   <Button
@@ -181,11 +227,14 @@ export default function TrendingPage() {
                     Filters
                     {(selectedCategory !== "all" || priceRange !== "all") && (
                       <Badge className="ml-2 bg-primary text-black">
-                        {[selectedCategory !== "all" ? 1 : 0, priceRange !== "all" ? 1 : 0].reduce((a, b) => a + b)}
+                        {[
+                          selectedCategory !== "all" ? 1 : 0,
+                          priceRange !== "all" ? 1 : 0,
+                        ].reduce((a, b) => a + b)}
                       </Badge>
                     )}
                   </Button>
-                  
+
                   <div className="flex border border-border rounded-lg">
                     <Button
                       variant={viewMode === "grid" ? "default" : "ghost"}
@@ -226,7 +275,7 @@ export default function TrendingPage() {
                         <option value="pop-culture">�� Pop Culture</option>
                       </select>
                     </div>
-                    
+
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-2">
                         Price Range ({selectedCurrency.code})
@@ -237,13 +286,45 @@ export default function TrendingPage() {
                         className="w-full px-3 py-2 bg-input border border-border rounded text-foreground"
                       >
                         <option value="all">All Prices</option>
-                        <option value="under-25">Under {formatPrice(convertPrice(25, selectedCurrency.code), selectedCurrency)}</option>
-                        <option value="25-50">{formatPrice(convertPrice(25, selectedCurrency.code), selectedCurrency)} - {formatPrice(convertPrice(50, selectedCurrency.code), selectedCurrency)}</option>
-                        <option value="50-100">{formatPrice(convertPrice(50, selectedCurrency.code), selectedCurrency)} - {formatPrice(convertPrice(100, selectedCurrency.code), selectedCurrency)}</option>
-                        <option value="over-100">Over {formatPrice(convertPrice(100, selectedCurrency.code), selectedCurrency)}</option>
+                        <option value="under-25">
+                          Under{" "}
+                          {formatPrice(
+                            convertPrice(25, selectedCurrency.code),
+                            selectedCurrency,
+                          )}
+                        </option>
+                        <option value="25-50">
+                          {formatPrice(
+                            convertPrice(25, selectedCurrency.code),
+                            selectedCurrency,
+                          )}{" "}
+                          -{" "}
+                          {formatPrice(
+                            convertPrice(50, selectedCurrency.code),
+                            selectedCurrency,
+                          )}
+                        </option>
+                        <option value="50-100">
+                          {formatPrice(
+                            convertPrice(50, selectedCurrency.code),
+                            selectedCurrency,
+                          )}{" "}
+                          -{" "}
+                          {formatPrice(
+                            convertPrice(100, selectedCurrency.code),
+                            selectedCurrency,
+                          )}
+                        </option>
+                        <option value="over-100">
+                          Over{" "}
+                          {formatPrice(
+                            convertPrice(100, selectedCurrency.code),
+                            selectedCurrency,
+                          )}
+                        </option>
                       </select>
                     </div>
-                    
+
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-2">
                         Sort By
@@ -257,12 +338,14 @@ export default function TrendingPage() {
                         <option value="rating">⭐ Highest Rated</option>
                         <option value="reviews">👥 Most Reviewed</option>
                         <option value="price-low">💰 Price: Low to High</option>
-                        <option value="price-high">💎 Price: High to Low</option>
+                        <option value="price-high">
+                          💎 Price: High to Low
+                        </option>
                         <option value="newest">🆕 Newest First</option>
                       </select>
                     </div>
                   </div>
-                  
+
                   <div className="mt-4 flex justify-between items-center">
                     <p className="text-sm text-muted-foreground">
                       Showing {trendingProducts.length} trending products
@@ -293,33 +376,44 @@ export default function TrendingPage() {
               <p className="text-muted-foreground mb-6">
                 Try adjusting your filters or search terms
               </p>
-              <Button onClick={clearFilters} className="bg-primary text-black hover:bg-primary/90">
+              <Button
+                onClick={clearFilters}
+                className="bg-primary text-black hover:bg-primary/90"
+              >
                 Clear Filters
               </Button>
             </div>
           ) : (
-            <div className={
-              viewMode === "grid" 
-                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-                : "space-y-4"
-            }>
+            <div
+              className={
+                viewMode === "grid"
+                  ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                  : "space-y-4"
+              }
+            >
               {trendingProducts.map((product) => {
                 const convertedPrice = convertPrice(
                   product.basePrice,
                   selectedCurrency.code,
-                  "INR"
+                  "INR",
                 );
                 const convertedOriginalPrice = convertPrice(
                   product.originalPrice,
                   selectedCurrency.code,
-                  "INR"
+                  "INR",
                 );
 
                 if (viewMode === "list") {
                   return (
-                    <Card key={product.id} className="bg-card border-border hover:border-primary/50 transition-all">
+                    <Card
+                      key={product.id}
+                      className="bg-card border-border hover:border-primary/50 transition-all"
+                    >
                       <CardContent className="p-4">
-                        <Link to={`/product/${product.id}`} className="flex space-x-4">
+                        <Link
+                          to={`/product/${product.id}`}
+                          className="flex space-x-4"
+                        >
                           <img
                             src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2F4081c4ae39a24ffbbaf62dab017528d2?format=webp&width=800"
                             alt={product.name}
@@ -343,7 +437,7 @@ export default function TrendingPage() {
                                 )}
                               </div>
                             </div>
-                            
+
                             <div className="flex items-center space-x-4 mb-3">
                               <div className="flex items-center">
                                 {[...Array(5)].map((_, i) => (
@@ -357,26 +451,33 @@ export default function TrendingPage() {
                                   />
                                 ))}
                                 <span className="text-sm text-muted-foreground ml-2">
-                                  {product.rating} ({product.reviews.toLocaleString()})
+                                  {product.rating} (
+                                  {product.reviews.toLocaleString()})
                                 </span>
                               </div>
-                              
+
                               <div className="flex items-center text-sm text-muted-foreground">
                                 <Clock className="w-4 h-4 mr-1" />
                                 {product.shippingDays} days delivery
                               </div>
                             </div>
-                            
+
                             <div className="flex items-center justify-between">
                               <div>
                                 <span className="text-2xl font-bold text-primary">
-                                  {formatPrice(convertedPrice, selectedCurrency)}
+                                  {formatPrice(
+                                    convertedPrice,
+                                    selectedCurrency,
+                                  )}
                                 </span>
                                 <span className="text-muted-foreground line-through text-lg ml-2">
-                                  {formatPrice(convertedOriginalPrice, selectedCurrency)}
+                                  {formatPrice(
+                                    convertedOriginalPrice,
+                                    selectedCurrency,
+                                  )}
                                 </span>
                               </div>
-                              
+
                               <div className="flex items-center space-x-2">
                                 <Button
                                   variant="outline"
@@ -385,12 +486,14 @@ export default function TrendingPage() {
                                   onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    console.log(`Added ${product.name} to wishlist`);
+                                    console.log(
+                                      `Added ${product.name} to wishlist`,
+                                    );
                                   }}
                                 >
                                   <Heart className="w-4 h-4" />
                                 </Button>
-                                <Button 
+                                <Button
                                   onClick={(e) => handleAddToCart(product, e)}
                                   className="bg-primary text-black hover:bg-primary/90"
                                 >
@@ -419,15 +522,15 @@ export default function TrendingPage() {
                             alt={product.name}
                             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                           />
-                          
+
                           {/* Trending Badge */}
                           <div className="absolute top-3 left-3">
-            <Badge className="bg-red-500 text-white animate-pulse">
+                            <Badge className="bg-red-500 text-white animate-pulse">
                               <Flame className="w-3 h-3 mr-1" />
                               Trending
                             </Badge>
                           </div>
-                          
+
                           {/* Additional Badges */}
                           <div className="absolute top-3 right-3 flex flex-col gap-1">
                             {product.isExclusive && (
@@ -437,7 +540,7 @@ export default function TrendingPage() {
                               </Badge>
                             )}
                           </div>
-                          
+
                           {/* Actions */}
                           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <div className="flex space-x-2">
@@ -460,7 +563,9 @@ export default function TrendingPage() {
                                 onClick={(e) => {
                                   e.preventDefault();
                                   e.stopPropagation();
-                                  console.log(`Added ${product.name} to wishlist`);
+                                  console.log(
+                                    `Added ${product.name} to wishlist`,
+                                  );
                                 }}
                               >
                                 <Heart className="w-4 h-4" />
@@ -501,7 +606,10 @@ export default function TrendingPage() {
                               {formatPrice(convertedPrice, selectedCurrency)}
                             </span>
                             <span className="text-sm text-muted-foreground line-through ml-2">
-                              {formatPrice(convertedOriginalPrice, selectedCurrency)}
+                              {formatPrice(
+                                convertedOriginalPrice,
+                                selectedCurrency,
+                              )}
                             </span>
                           </div>
                           <Badge className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs">
@@ -520,13 +628,16 @@ export default function TrendingPage() {
                             {product.shippingDays} days
                           </span>
                           {product.codAvailable && (
-                            <Badge variant="outline" className="text-xs border-border text-muted-foreground">
+                            <Badge
+                              variant="outline"
+                              className="text-xs border-border text-muted-foreground"
+                            >
                               COD
                             </Badge>
                           )}
                         </div>
 
-                        <Button 
+                        <Button
                           onClick={(e) => handleAddToCart(product, e)}
                           className="w-full bg-primary text-black hover:bg-primary/90"
                         >
@@ -550,9 +661,16 @@ export default function TrendingPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {["football", "anime", "pop-culture"].map((category) => {
-                const categoryProducts = trendingProducts.filter(p => p.category === category);
-                const categoryIcon = category === "football" ? "⚽" : category === "anime" ? "🎌" : "���";
-                
+                const categoryProducts = trendingProducts.filter(
+                  (p) => p.category === category,
+                );
+                const categoryIcon =
+                  category === "football"
+                    ? "⚽"
+                    : category === "anime"
+                      ? "🎌"
+                      : "���";
+
                 return (
                   <Link
                     key={category}
@@ -567,7 +685,10 @@ export default function TrendingPage() {
                       <p className="text-muted-foreground mb-4">
                         {categoryProducts.length} trending products
                       </p>
-                      <Button variant="outline" className="border-border text-muted-foreground group-hover:border-primary group-hover:text-primary">
+                      <Button
+                        variant="outline"
+                        className="border-border text-muted-foreground group-hover:border-primary group-hover:text-primary"
+                      >
                         Explore Category
                       </Button>
                     </div>

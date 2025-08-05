@@ -38,10 +38,16 @@ export default function Index() {
   }
 
   // Force image override for all trending products
-  const builderImageUrl = "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
-  const forcedProducts = trendingProducts.map(product => ({
+  const builderImageUrl =
+    "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
+  const forcedProducts = trendingProducts.map((product) => ({
     ...product,
-    images: [builderImageUrl, builderImageUrl, builderImageUrl, builderImageUrl]
+    images: [
+      builderImageUrl,
+      builderImageUrl,
+      builderImageUrl,
+      builderImageUrl,
+    ],
   }));
 
   // Add global debug function
@@ -161,7 +167,9 @@ export default function Index() {
                   <div className="text-2xl font-bold text-primary">
                     {item.metric}
                   </div>
-                  <div className="text-sm text-muted-foreground">{item.label}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {item.label}
+                  </div>
                 </div>
               ))}
             </div>
@@ -237,12 +245,12 @@ export default function Index() {
               const convertedPrice = convertPrice(
                 product.basePrice,
                 selectedCurrency.code,
-                "INR"
+                "INR",
               ); // Convert from INR base
               const convertedOriginalPrice = convertPrice(
                 product.originalPrice,
                 selectedCurrency.code,
-                "INR"
+                "INR",
               );
 
               return (

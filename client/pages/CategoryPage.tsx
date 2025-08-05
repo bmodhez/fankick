@@ -30,15 +30,13 @@ export default function CategoryPage() {
 
   if (normalizedCategory && products.length > 0) {
     // Filter products by exact category match
-    allProducts = products.filter(product =>
-      product.category.toLowerCase() === normalizedCategory
+    allProducts = products.filter(
+      (product) => product.category.toLowerCase() === normalizedCategory,
     );
 
     // If no exact match, try with original category name
     if (allProducts.length === 0) {
-      allProducts = products.filter(product =>
-        product.category === category
-      );
+      allProducts = products.filter((product) => product.category === category);
     }
   } else if (!normalizedCategory) {
     // If no category specified, show all products
@@ -46,7 +44,9 @@ export default function CategoryPage() {
   }
 
   // Debug logging
-  console.log(`CategoryPage: ${category} -> Found ${allProducts.length}/${products.length} products`);
+  console.log(
+    `CategoryPage: ${category} -> Found ${allProducts.length}/${products.length} products`,
+  );
 
   // Show loading state while products are being loaded
   if (isLoading) {
@@ -55,7 +55,9 @@ export default function CategoryPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center py-16">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400">Loading products...</p>
+            <p className="text-gray-600 dark:text-gray-400">
+              Loading products...
+            </p>
           </div>
         </div>
         <Footer />
@@ -369,9 +371,13 @@ export default function CategoryPage() {
         {!isLoading && filteredAndSortedProducts.length === 0 && (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">😕</div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">No products found</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+              No products found
+            </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              {category ? `No products available in ${category} category` : 'Try adjusting your filters or browse other categories'}
+              {category
+                ? `No products available in ${category} category`
+                : "Try adjusting your filters or browse other categories"}
             </p>
             <Link to="/">
               <Button>Browse All Products</Button>

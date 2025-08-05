@@ -70,11 +70,13 @@ async function apiRequest<T>(
         }
 
         // Handle network/fetch failures more gracefully
-        if (error.message.includes("Failed to fetch") ||
-            error.message.includes("NetworkError") ||
-            error.message.includes("ERR_NETWORK") ||
-            error.message.includes("fetch is not defined") ||
-            error.name === "TypeError") {
+        if (
+          error.message.includes("Failed to fetch") ||
+          error.message.includes("NetworkError") ||
+          error.message.includes("ERR_NETWORK") ||
+          error.message.includes("fetch is not defined") ||
+          error.name === "TypeError"
+        ) {
           // Don't retry on network errors, fail fast
           throw new Error("Network error. Using local data instead.");
         }

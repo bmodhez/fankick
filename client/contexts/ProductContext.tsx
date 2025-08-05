@@ -35,7 +35,8 @@ interface ProductProviderProps {
 }
 
 export function ProductProvider({ children }: ProductProviderProps) {
-  const builderImageUrl = "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
+  const builderImageUrl =
+    "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
   const [products, setProducts] = useState<Product[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -47,9 +48,14 @@ export function ProductProvider({ children }: ProductProviderProps) {
         const { PRODUCTS } = await import("@/data/products");
 
         // Immediately update all product images to Builder.io image
-        const updatedProducts = PRODUCTS.map(product => ({
+        const updatedProducts = PRODUCTS.map((product) => ({
           ...product,
-          images: [builderImageUrl, builderImageUrl, builderImageUrl, builderImageUrl]
+          images: [
+            builderImageUrl,
+            builderImageUrl,
+            builderImageUrl,
+            builderImageUrl,
+          ],
         }));
 
         console.log("FORCING PRODUCT IMAGES UPDATE:");
@@ -77,16 +83,16 @@ export function ProductProvider({ children }: ProductProviderProps) {
     try {
       // Try to load from API with a shorter timeout for faster fallback
       const timeoutController = new AbortController();
-      const combinedSignal = signal ? (
-        // Create a combined signal that aborts when either signal aborts
-        (() => {
-          const combined = new AbortController();
-          const abort = () => combined.abort();
-          signal.addEventListener('abort', abort);
-          timeoutController.signal.addEventListener('abort', abort);
-          return combined.signal;
-        })()
-      ) : timeoutController.signal;
+      const combinedSignal = signal
+        ? // Create a combined signal that aborts when either signal aborts
+          (() => {
+            const combined = new AbortController();
+            const abort = () => combined.abort();
+            signal.addEventListener("abort", abort);
+            timeoutController.signal.addEventListener("abort", abort);
+            return combined.signal;
+          })()
+        : timeoutController.signal;
 
       const apiTimeout = setTimeout(() => timeoutController.abort(), 3000); // 3 second timeout
 
@@ -105,7 +111,10 @@ export function ProductProvider({ children }: ProductProviderProps) {
         !error.message.includes("cancelled") &&
         !signal?.aborted
       ) {
-        console.warn("API failed, falling back to local products data:", error.message);
+        console.warn(
+          "API failed, falling back to local products data:",
+          error.message,
+        );
 
         // Always fall back to local data on any API failure
         try {
@@ -135,7 +144,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
       loadProductsFromAPI(abortController.signal)
         .catch(() => {
           // API failed, but we already have local data loaded
-          console.log('API enhancement failed, continuing with local data');
+          console.log("API enhancement failed, continuing with local data");
         })
         .finally(() => {
           if (!abortController.signal.aborted) {
@@ -232,11 +241,17 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   const refreshProducts = async () => {
     // Force immediate refresh with Builder.io images
-    const builderImageUrl = "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
+    const builderImageUrl =
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
     const { PRODUCTS } = await import("@/data/products");
-    const updatedProducts = PRODUCTS.map(product => ({
+    const updatedProducts = PRODUCTS.map((product) => ({
       ...product,
-      images: [builderImageUrl, builderImageUrl, builderImageUrl, builderImageUrl]
+      images: [
+        builderImageUrl,
+        builderImageUrl,
+        builderImageUrl,
+        builderImageUrl,
+      ],
     }));
 
     setProducts(updatedProducts);

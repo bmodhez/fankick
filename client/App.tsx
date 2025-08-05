@@ -75,7 +75,9 @@ const App = () => (
                         />
                         <Route
                           path="/pop-culture"
-                          element={<Navigate to="/category/pop-culture" replace />}
+                          element={
+                            <Navigate to="/category/pop-culture" replace />
+                          }
                         />
                         <Route
                           path="/collections"
@@ -95,7 +97,10 @@ const App = () => (
                                   </div>
 
                                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-                                    <Link to="/category/football" className="group">
+                                    <Link
+                                      to="/category/football"
+                                      className="group"
+                                    >
                                       <div className="bg-gradient-to-br from-green-600 to-blue-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
                                         <div className="text-6xl mb-4">⚽</div>
                                         <h2 className="text-2xl font-bold text-white mb-2">
@@ -112,7 +117,10 @@ const App = () => (
                                       </div>
                                     </Link>
 
-                                    <Link to="/category/anime" className="group">
+                                    <Link
+                                      to="/category/anime"
+                                      className="group"
+                                    >
                                       <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
                                         <div className="text-6xl mb-4">🎌</div>
                                         <h2 className="text-2xl font-bold text-white mb-2">
@@ -129,7 +137,10 @@ const App = () => (
                                       </div>
                                     </Link>
 
-                                    <Link to="/category/pop-culture" className="group">
+                                    <Link
+                                      to="/category/pop-culture"
+                                      className="group"
+                                    >
                                       <div className="bg-gradient-to-br from-red-600 to-orange-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
                                         <div className="text-6xl mb-4">🎭</div>
                                         <h2 className="text-2xl font-bold text-white mb-2">
