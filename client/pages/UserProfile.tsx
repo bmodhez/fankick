@@ -224,9 +224,9 @@ export default function UserProfile() {
                   </div>
                   <div className="text-center">
                     <div className="text-xl font-bold text-primary">
-                      {wishlist.length}
+                      {userWishlist.length}
                     </div>
-                    <div className="text-gray-400">Wishlist</div>
+                    <div className="text-gray-400">Liked Products</div>
                   </div>
                   <div className="text-center">
                     <div className="text-xl font-bold text-primary">
