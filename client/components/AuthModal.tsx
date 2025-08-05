@@ -338,13 +338,13 @@ export function AuthModal({
                 <span className="text-sm text-gray-600">
                   Already have an account?{" "}
                 </span>
-                <button
-                  type="button"
-                  onClick={() => setMode("login")}
+                <Link
+                  to="/login"
+                  onClick={onClose}
                   className="text-sm text-primary font-semibold hover:text-purple-600 transition-colors duration-200 hover:scale-105 inline-block"
                 >
                   Sign in
-                </button>
+                </Link>
               </div>
             </form>
           )}
