@@ -145,17 +145,18 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   <div key={item.id} className="relative bg-gradient-to-r from-gray-800/80 to-gray-700/60 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/60 hover:shadow-2xl transition-all duration-300 backdrop-blur-md group overflow-hidden">
                     {/* Hover effect background */}
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                    <div className="flex space-x-3">
+                    <div className="relative flex space-x-4">
                       {/* Product Image */}
-                      <div className="relative">
+                      <div className="relative group">
                         <img
                           src={item.product.images[0]}
                           alt={item.product.name}
-                          className="w-20 h-20 object-cover rounded-xl border-2 border-gray-600"
+                          className="w-20 h-20 object-cover rounded-xl border-2 border-gray-600/70 group-hover:border-primary/50 transition-all duration-300 shadow-lg"
                         />
-                        <div className="absolute -top-2 -left-2 bg-primary text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
+                        <div className="absolute -top-2 -left-2 bg-gradient-to-r from-primary to-yellow-400 text-black text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center shadow-lg border-2 border-white/20 animate-pulse">
                           {item.quantity}
                         </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
                       
                       {/* Product Details */}
