@@ -317,7 +317,7 @@ export default function TrendingPage() {
 
                 if (viewMode === "list") {
                   return (
-                    <Card key={product.id} className="bg-gray-800 border-gray-700 hover:border-primary/50 transition-all">
+                    <Card key={product.id} className="bg-card border-border hover:border-primary/50 transition-all">
                       <CardContent className="p-4">
                         <Link to={`/product/${product.id}`} className="flex space-x-4">
                           <img
