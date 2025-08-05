@@ -276,7 +276,7 @@ export default function SearchResults() {
                   >
                     <option value="all">All Categories</option>
                     <option value="football">⚽ Football</option>
-                    <option value="anime">🎌 Anime</option>
+                    <option value="anime">�� Anime</option>
                     <option value="pop-culture">🎭 Pop Culture</option>
                   </select>
                 </div>
@@ -326,7 +326,7 @@ export default function SearchResults() {
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden">
                       <img
-                        src={product.images[0]}
+                        src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2F5edc0315c5a84834949807dbf25594d9?format=webp&width=800"
                         alt={product.name}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       />
