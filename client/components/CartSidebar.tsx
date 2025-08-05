@@ -81,12 +81,12 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         {/* Header */}
         <div className="relative flex items-center justify-between p-6 border-b-2 border-gray-600/30 bg-gradient-to-r from-primary/20 via-purple-500/15 to-blue-500/20 backdrop-blur-md shadow-lg">
           <div className="absolute inset-0 bg-white/5 rounded-b-xl"></div>
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-primary/20 rounded-full">
-              <ShoppingBag className="w-6 h-6 text-primary" />
+          <div className="relative flex items-center space-x-3">
+            <div className="p-3 bg-gradient-to-br from-primary/30 to-purple-500/30 rounded-xl border border-primary/40 shadow-lg">
+              <ShoppingBag className="w-6 h-6 text-primary drop-shadow-lg" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">
+              <h2 className="text-xl font-bold text-white drop-shadow-lg">
                 Shopping Cart
               </h2>
               {totalItems > 0 && (
@@ -96,7 +96,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               )}
             </div>
             {totalItems > 0 && (
-              <Badge className="bg-primary text-black font-bold px-3 py-1">
+              <Badge className="bg-gradient-to-r from-primary to-yellow-400 text-black font-bold px-3 py-1 shadow-lg animate-pulse">
                 {totalItems}
               </Badge>
             )}
@@ -105,7 +105,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="text-gray-400 hover:text-white hover:bg-gray-700 rounded-full p-2"
+            className="relative text-gray-400 hover:text-white hover:bg-gray-700/50 rounded-full p-2 transition-all duration-300 hover:scale-110"
           >
             <X className="w-6 h-6" />
           </Button>
