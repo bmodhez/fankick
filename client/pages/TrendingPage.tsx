@@ -543,7 +543,7 @@ export default function TrendingPage() {
         </div>
 
         {/* Trending Categories */}
-        <Card className="bg-gray-800 border-gray-700 mb-16">
+        <Card className="bg-card border-border mb-16">
           <CardContent className="p-8">
             <h2 className="text-2xl font-bold text-white mb-6 text-center">
               🔥 Trending by Category
