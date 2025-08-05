@@ -18,10 +18,10 @@ import {
   Clock,
   Users,
   Globe,
-  Heart,
   Eye,
   Timer,
 } from "lucide-react";
+import { LikeButton } from "@/components/LikeButton";
 
 export default function Index() {
   const { selectedCurrency } = useCurrency();
