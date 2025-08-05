@@ -479,20 +479,12 @@ export default function TrendingPage() {
                               </div>
 
                               <div className="flex items-center space-x-2">
-                                <Button
+                                <LikeButton
+                                  productId={product.id}
                                   variant="outline"
                                   size="sm"
                                   className="border-border text-muted-foreground hover:text-foreground"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    console.log(
-                                      `Added ${product.name} to wishlist`,
-                                    );
-                                  }}
-                                >
-                                  <Heart className="w-4 h-4" />
-                                </Button>
+                                />
                                 <Button
                                   onClick={(e) => handleAddToCart(product, e)}
                                   className="bg-primary text-black hover:bg-primary/90"
