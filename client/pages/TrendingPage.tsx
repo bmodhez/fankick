@@ -14,7 +14,6 @@ import {
   Filter,
   Search,
   Star,
-  Heart,
   ShoppingCart,
   Clock,
   Flame,
@@ -25,6 +24,7 @@ import {
   List,
   ArrowUpDown,
 } from "lucide-react";
+import { LikeButton } from "@/components/LikeButton";
 
 export default function TrendingPage() {
   const navigate = useNavigate();
