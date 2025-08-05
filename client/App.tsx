@@ -31,6 +31,7 @@ import TestPage from "./pages/TestPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Checkout from "./pages/Checkout";
+import OrderSuccess from "./pages/OrderSuccess";
 import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
