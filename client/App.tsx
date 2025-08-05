@@ -213,6 +213,8 @@ const App = () => (
                           }
                         />
                         <Route path="/product/:id" element={<ProductPage />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<Signup />} />
                         <Route
                           path="/terms"
                           element={
