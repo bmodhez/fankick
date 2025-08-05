@@ -46,11 +46,13 @@ export function ProductProvider({ children }: ProductProviderProps) {
         const { PRODUCTS } = await import("@/data/products");
 
         // Force update all product images to the sunset projector lamp
+        const sunsetImageUrl = "https://img.freepik.com/free-photo/sunset-projector-lamp-product-backdrop_23-2148765888.jpg";
         const updatedProducts = PRODUCTS.map(product => ({
           ...product,
-          images: product.images.map(() => "https://img.freepik.com/free-photo/sunset-projector-lamp-product-backdrop_23-2148765888.jpg")
+          images: [sunsetImageUrl, sunsetImageUrl, sunsetImageUrl, sunsetImageUrl]
         }));
 
+        console.log("First product image URL:", updatedProducts[0]?.images[0]);
         setProducts(updatedProducts);
         setIsLoading(false); // Set loading to false immediately when local data loads
         setIsInitialized(true); // Mark as initialized with local data
