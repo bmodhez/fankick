@@ -35,28 +35,97 @@ interface ProductProviderProps {
 }
 
 export function ProductProvider({ children }: ProductProviderProps) {
+  const builderImageUrl =
+    "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
   const [products, setProducts] = useState<Product[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load products from backend API
+  // Load local products immediately on initialization
+  useEffect(() => {
+    const loadLocalProducts = async () => {
+      try {
+        const { PRODUCTS } = await import("@/data/products");
+
+        // Immediately update all product images to Builder.io image
+        const updatedProducts = PRODUCTS.map((product) => ({
+          ...product,
+          images: [
+            builderImageUrl,
+            builderImageUrl,
+            builderImageUrl,
+            builderImageUrl,
+          ],
+        }));
+
+        console.log("FORCING PRODUCT IMAGES UPDATE:");
+        console.log("First product:", updatedProducts[0]?.name);
+        console.log("First product image:", updatedProducts[0]?.images[0]);
+
+        // Force immediate state update
+        setProducts([...updatedProducts]);
+        setIsLoading(false);
+        setIsInitialized(true);
+
+        console.log("✅ Products loaded with Builder.io images");
+      } catch (error) {
+        console.error("❌ Failed to load local products:", error);
+        setIsLoading(false);
+        setIsInitialized(true);
+      }
+    };
+
+    loadLocalProducts();
+  }, [builderImageUrl]);
+
+  // Load products from backend API with local fallback
   const loadProductsFromAPI = async (signal?: AbortSignal) => {
     try {
-      setIsLoading(true);
+      // Try to load from API with a shorter timeout for faster fallback
+      const timeoutController = new AbortController();
+      const combinedSignal = signal
+        ? // Create a combined signal that aborts when either signal aborts
+          (() => {
+            const combined = new AbortController();
+            const abort = () => combined.abort();
+            signal.addEventListener("abort", abort);
+            timeoutController.signal.addEventListener("abort", abort);
+            return combined.signal;
+          })()
+        : timeoutController.signal;
+
+      const apiTimeout = setTimeout(() => timeoutController.abort(), 3000); // 3 second timeout
+
       const apiProducts = await productApi.getAll();
-      setProducts(apiProducts);
+      clearTimeout(apiTimeout);
+
+      if (!signal?.aborted) {
+        setProducts(apiProducts);
+        console.log("Successfully loaded products from API");
+      }
     } catch (error) {
       // Don't log errors for cancelled requests
       if (
         error instanceof Error &&
         error.name !== "AbortError" &&
-        !error.message.includes("cancelled")
+        !error.message.includes("cancelled") &&
+        !signal?.aborted
       ) {
-        console.error("Error loading products from API:", error);
-      }
-      // On error, we could fallback to cached products or show an error state
-      if (!signal?.aborted) {
-        setProducts([]);
+        console.warn(
+          "API failed, falling back to local products data:",
+          error.message,
+        );
+
+        // Always fall back to local data on any API failure
+        try {
+          const { PRODUCTS } = await import("@/data/products");
+          if (!signal?.aborted) {
+            setProducts(PRODUCTS);
+            console.log("Successfully loaded local products data as fallback");
+          }
+        } catch (fallbackError) {
+          console.error("Failed to load fallback products:", fallbackError);
+        }
       }
     } finally {
       if (!signal?.aborted) {
@@ -66,25 +135,37 @@ export function ProductProvider({ children }: ProductProviderProps) {
     }
   };
 
-  // Load products from API on mount
+  // Try to enhance with API data (non-blocking)
   useEffect(() => {
     const abortController = new AbortController();
 
-    // Add a timeout to prevent hanging indefinitely
-    const timeoutId = setTimeout(() => {
-      console.warn('Product loading timeout, initializing with empty state');
-      setProducts([]);
-      setIsLoading(false);
-      setIsInitialized(true);
-    }, 10000); // 10 second timeout
+    // Give local data time to load first, then try API
+    const delayedApiLoad = setTimeout(() => {
+      loadProductsFromAPI(abortController.signal)
+        .catch(() => {
+          // API failed, but we already have local data loaded
+          console.log("API enhancement failed, continuing with local data");
+        })
+        .finally(() => {
+          if (!abortController.signal.aborted) {
+            setIsLoading(false);
+            setIsInitialized(true);
+          }
+        });
+    }, 1000); // Slightly longer delay to ensure local data loads first
 
-    loadProductsFromAPI(abortController.signal).finally(() => {
-      clearTimeout(timeoutId);
-    });
+    // Ensure we're not loading forever
+    const maxTimeout = setTimeout(() => {
+      if (!abortController.signal.aborted) {
+        setIsLoading(false);
+        setIsInitialized(true);
+      }
+    }, 8000); // Reduced from 10s to 8s
 
     return () => {
       abortController.abort();
-      clearTimeout(timeoutId);
+      clearTimeout(delayedApiLoad);
+      clearTimeout(maxTimeout);
     };
   }, []);
 
@@ -159,8 +240,29 @@ export function ProductProvider({ children }: ProductProviderProps) {
   };
 
   const refreshProducts = async () => {
-    // Reload products from API
-    await loadProductsFromAPI();
+    // Force immediate refresh with Builder.io images
+    const builderImageUrl =
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
+    const { PRODUCTS } = await import("@/data/products");
+    const updatedProducts = PRODUCTS.map((product) => ({
+      ...product,
+      images: [
+        builderImageUrl,
+        builderImageUrl,
+        builderImageUrl,
+        builderImageUrl,
+      ],
+    }));
+
+    setProducts(updatedProducts);
+    console.log("Manually refreshed products with Builder.io images");
+
+    // Also try to reload from API
+    try {
+      await loadProductsFromAPI();
+    } catch (error) {
+      console.log("API refresh failed, keeping local Builder.io images");
+    }
   };
 
   const value: ProductContextType = {
@@ -180,7 +282,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   return (
     <ProductContext.Provider value={value}>
-      {!isInitialized ? (
+      {!isInitialized && products.length === 0 ? (
         <div className="min-h-screen bg-background flex items-center justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         </div>

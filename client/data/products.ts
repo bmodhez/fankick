@@ -46,10 +46,10 @@ export const PRODUCTS: Product[] = [
     category: "football",
     subcategory: "jerseys",
     images: [
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
     ],
     variants: [
       {
@@ -134,7 +134,11 @@ export const PRODUCTS: Product[] = [
       "Official Cristiano Ronaldo Al Nassr jersey featuring the iconic CR7 branding. Premium quality with official Saudi Pro League badges and Ronaldo's legendary number 7.",
     category: "football",
     subcategory: "jerseys",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "ronaldo-s",
@@ -195,10 +199,10 @@ export const PRODUCTS: Product[] = [
     category: "football",
     subcategory: "boots",
     images: [
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
-      "/placeholder.svg",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
     ],
     variants: [
       {
@@ -270,7 +274,11 @@ export const PRODUCTS: Product[] = [
       "Complete set of 10 official Akatsuki rings from Naruto series. High-quality metal construction with authentic engravings. Perfect for cosplay and collectors.",
     category: "anime",
     subcategory: "rings",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "akatsuki-full",
@@ -315,7 +323,11 @@ export const PRODUCTS: Product[] = [
       "Premium quality Chainsaw Man hoodie featuring Denji artwork. Ultra-soft cotton blend with kangaroo pocket and adjustable hood. Perfect for anime fans and streetwear enthusiasts.",
     category: "anime",
     subcategory: "hoodies",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "chainsaw-s-black",
@@ -407,7 +419,10 @@ export const PRODUCTS: Product[] = [
       "Beautiful Demon Slayer inspired necklace featuring Tanjiro's iconic Hanafuda earrings design. Hypoallergenic materials with adjustable chain length.",
     category: "anime",
     subcategory: "necklaces",
-    images: ["/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "tanjiro-necklace",
@@ -442,7 +457,11 @@ export const PRODUCTS: Product[] = [
       "Official Naruto Akatsuki organization hoodie featuring the iconic red clouds pattern. Premium heavyweight cotton with embroidered logo and kangaroo pocket.",
     category: "anime",
     subcategory: "hoodies",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "akatsuki-s-black",
@@ -533,7 +552,11 @@ export const PRODUCTS: Product[] = [
       "Premium Demon Slayer hoodie featuring Tanjiro's iconic checkered pattern and water breathing technique artwork. Soft fleece interior with vibrant colors.",
     category: "anime",
     subcategory: "hoodies",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "tanjiro-s-green",
@@ -615,7 +638,11 @@ export const PRODUCTS: Product[] = [
       "Official Survey Corps hoodie featuring the iconic Wings of Freedom emblem. Military-inspired design with regiment patches and premium construction.",
     category: "anime",
     subcategory: "hoodies",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "aot-s-khaki",
@@ -698,7 +725,11 @@ export const PRODUCTS: Product[] = [
       "Join Luffy's crew with this premium Straw Hat Pirates hoodie featuring the iconic skull logo and crew member signatures. Adventure awaits!",
     category: "anime",
     subcategory: "hoodies",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "onepiece-s-navy",
@@ -780,7 +811,11 @@ export const PRODUCTS: Product[] = [
       "Premium Jujutsu Kaisen hoodie featuring Gojo's Infinity technique and Six Eyes design. Mysterious and powerful, just like the strongest sorcerer.",
     category: "anime",
     subcategory: "hoodies",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "gojo-s-white",
@@ -865,7 +900,11 @@ export const PRODUCTS: Product[] = [
       "Official Taylor Swift Eras Tour hoodie featuring iconic tour artwork. Premium cotton blend with embroidered details and tour dates on the back.",
     category: "pop-culture",
     subcategory: "hoodies",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "eras-s-lavender",
@@ -954,7 +993,10 @@ export const PRODUCTS: Product[] = [
       "Official BTS Dynamite era t-shirt featuring colorful artwork and member signatures. Comfortable cotton fabric with vibrant print that won't fade.",
     category: "pop-culture",
     subcategory: "tshirts",
-    images: ["/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "bts-s",
@@ -1014,7 +1056,11 @@ export const PRODUCTS: Product[] = [
       "Official Marvel Spider-Man No Way Home hoodie featuring the three Spider-Men. Premium quality with detailed graphics and comfortable fit for superhero fans.",
     category: "pop-culture",
     subcategory: "hoodies",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+    ],
     variants: [
       {
         id: "spidey-s-red",

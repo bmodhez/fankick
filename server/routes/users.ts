@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { userService } from '../services/userService.js';
+import { userService } from '../services/userServiceJson.js';
 import { UserCreateRequest, UserLoginRequest, AuthResponse, UserResponse } from '../types/user.js';
 
 // POST /api/auth/register - Register new user
@@ -69,37 +69,36 @@ export async function registerUser(req: Request, res: Response) {
 export async function loginUser(req: Request, res: Response) {
   try {
     const loginData: UserLoginRequest = req.body;
-    
+    console.log('Login attempt for email:', loginData.email);
+
     // Basic validation
     if (!loginData.email || !loginData.password) {
+      console.log('Login failed: Missing email or password');
       const response: AuthResponse = {
         success: false,
         error: 'Email and password are required'
       };
       return res.status(400).json(response);
     }
-    
-    const { user, session } = await userService.loginUser(loginData);
-    
+
+    const authData = await userService.loginUser(loginData);
+    console.log('Login successful for:', loginData.email);
+
     const response: AuthResponse = {
       success: true,
-      data: {
-        user,
-        sessionToken: session.sessionToken,
-        expiresAt: session.expiresAt
-      },
+      data: authData,
       message: 'Login successful'
     };
     
     res.json(response);
   } catch (error) {
-    console.error('Error logging in user:', error);
-    
+    console.error('Login error for user:', error.message);
+
     const response: AuthResponse = {
       success: false,
       error: error instanceof Error ? error.message : 'Login failed'
     };
-    
+
     res.status(401).json(response);
   }
 }
@@ -117,7 +116,7 @@ export async function logoutUser(req: Request, res: Response) {
       return res.status(400).json(response);
     }
     
-    await userService.logoutUser(sessionToken);
+    await userService.logout(sessionToken);
     
     const response: AuthResponse = {
       success: true,
@@ -150,7 +149,7 @@ export async function getCurrentUser(req: Request, res: Response) {
       return res.status(401).json(response);
     }
     
-    const user = await userService.verifySession(sessionToken);
+    const user = await userService.getUserFromSession(sessionToken);
     
     if (!user) {
       const response: UserResponse = {
@@ -191,8 +190,8 @@ export async function updateUserProfile(req: Request, res: Response) {
       return res.status(401).json(response);
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
-    
+    const currentUser = await userService.getUserFromSession(sessionToken);
+
     if (!currentUser) {
       const response: UserResponse = {
         success: false,
@@ -200,7 +199,7 @@ export async function updateUserProfile(req: Request, res: Response) {
       };
       return res.status(401).json(response);
     }
-    
+
     const updateData = req.body;
     const updatedUser = await userService.updateUser(currentUser.id, updateData);
     
@@ -243,7 +242,7 @@ export async function getUserAddresses(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -280,7 +279,7 @@ export async function addUserAddress(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -328,7 +327,7 @@ export async function getUserCart(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -365,7 +364,7 @@ export async function addToCart(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -412,7 +411,7 @@ export async function removeFromCart(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -457,7 +456,7 @@ export async function getUserWishlist(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -494,7 +493,7 @@ export async function addToWishlist(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({
@@ -541,7 +540,7 @@ export async function removeFromWishlist(req: Request, res: Response) {
       });
     }
     
-    const currentUser = await userService.verifySession(sessionToken);
+    const currentUser = await userService.getUserFromSession(sessionToken);
     
     if (!currentUser) {
       return res.status(401).json({

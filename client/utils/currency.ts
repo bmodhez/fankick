@@ -61,11 +61,25 @@ export function formatPrice(
   price: number,
   currency: string | Currency,
 ): string {
-  const currencyCode = typeof currency === "string" ? currency : currency.code;
+  // Validate inputs
+  if (typeof price !== 'number' || isNaN(price)) {
+    console.warn('formatPrice: Invalid price value:', price);
+    price = 0;
+  }
+
+  if (!currency) {
+    console.warn('formatPrice: Currency is undefined, using USD as fallback');
+    return `$${price.toFixed(2)}`;
+  }
+
+  const currencyCode = typeof currency === "string" ? currency : currency?.code;
   const currencyData =
     typeof currency === "string" ? CURRENCIES[currency] : currency;
 
-  if (!currencyData) return `$${price}`;
+  if (!currencyData || !currencyCode) {
+    console.warn('formatPrice: Invalid currency data, using fallback');
+    return `$${price.toFixed(2)}`;
+  }
 
   // Special formatting for different currencies
   switch (currencyCode) {

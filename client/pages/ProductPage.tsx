@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { PaymentModal } from "@/components/PaymentModal";
 import { useCurrency } from "@/contexts/CurrencyContext";
@@ -58,7 +57,6 @@ export default function ProductPage() {
   if (!product) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
           <h1 className="text-3xl font-bold text-foreground mb-4">
             Product Not Found
@@ -81,12 +79,12 @@ export default function ProductPage() {
   const convertedPrice = convertPrice(
     currentVariant.price,
     selectedCurrency.code,
-    "INR"
+    "INR",
   );
   const convertedOriginalPrice = convertPrice(
     currentVariant.originalPrice,
     selectedCurrency.code,
-    "INR"
+    "INR",
   );
 
   const paymentMethods = getAvailablePaymentMethods(
@@ -133,8 +131,6 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
@@ -157,7 +153,7 @@ export default function ProductPage() {
           <div className="space-y-4">
             <div className="relative aspect-square bg-muted rounded-lg overflow-hidden">
               <img
-                src={product.images[selectedImage]}
+                src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2F4081c4ae39a24ffbbaf62dab017528d2?format=webp&width=800"
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
@@ -202,7 +198,7 @@ export default function ProductPage() {
                   }`}
                 >
                   <img
-                    src={image}
+                    src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2F4081c4ae39a24ffbbaf62dab017528d2?format=webp&width=800"
                     alt={`View ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
@@ -230,7 +226,7 @@ export default function ProductPage() {
                       }`}
                     />
                   ))}
-                  <span className="ml-2 text-sm text-muted-foreground">
+                  <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
                     {product.rating} ({product.reviews} reviews)
                   </span>
                 </div>
@@ -246,7 +242,7 @@ export default function ProductPage() {
                 <span className="text-3xl font-bold text-primary">
                   {formatPrice(convertedPrice, selectedCurrency)}
                 </span>
-                <span className="text-xl text-gray-400 line-through">
+                <span className="text-xl text-gray-500 dark:text-gray-400 line-through">
                   {formatPrice(convertedOriginalPrice, selectedCurrency)}
                 </span>
                 <Badge className="bg-red-100 text-red-800">
@@ -262,7 +258,9 @@ export default function ProductPage() {
             {/* Variant Selection */}
             {product.variants.some((v) => v.size) && (
               <div>
-                <h3 className="font-semibold mb-3">Size</h3>
+                <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
+                  Size
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {product.variants
                     .filter((v) => v.size)
@@ -270,10 +268,10 @@ export default function ProductPage() {
                       <button
                         key={variant.id}
                         onClick={() => setSelectedVariant(variant.id)}
-                        className={`px-4 py-2 border rounded-lg font-medium ${
+                        className={`px-4 py-2 border rounded-lg font-medium transition-colors ${
                           selectedVariant === variant.id
                             ? "border-primary bg-primary text-black"
-                            : "border-gray-300 hover:border-gray-400"
+                            : "border-gray-300 hover:border-gray-400 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                         }`}
                       >
                         {variant.size}
@@ -285,7 +283,9 @@ export default function ProductPage() {
 
             {product.variants.some((v) => v.color) && (
               <div>
-                <h3 className="font-semibold mb-3">Color</h3>
+                <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
+                  Color
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {product.variants
                     .filter((v) => v.color)
@@ -293,10 +293,10 @@ export default function ProductPage() {
                       <button
                         key={variant.id}
                         onClick={() => setSelectedVariant(variant.id)}
-                        className={`px-4 py-2 border rounded-lg font-medium ${
+                        className={`px-4 py-2 border rounded-lg font-medium transition-colors ${
                           selectedVariant === variant.id
                             ? "border-primary bg-primary text-black"
-                            : "border-gray-300 hover:border-gray-400"
+                            : "border-gray-300 hover:border-gray-400 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                         }`}
                       >
                         {variant.color}
@@ -308,7 +308,9 @@ export default function ProductPage() {
 
             {/* Quantity */}
             <div>
-              <h3 className="font-semibold mb-3">Quantity</h3>
+              <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
+                Quantity
+              </h3>
               <div className="flex items-center space-x-3">
                 <Button
                   variant="outline"
@@ -317,7 +319,9 @@ export default function ProductPage() {
                 >
                   <Minus className="w-4 h-4" />
                 </Button>
-                <span className="w-8 text-center font-medium">{quantity}</span>
+                <span className="w-8 text-center font-medium text-gray-900 dark:text-white">
+                  {quantity}
+                </span>
                 <Button
                   variant="outline"
                   size="sm"
@@ -406,18 +410,28 @@ export default function ProductPage() {
             <div className="grid grid-cols-3 gap-4 py-6 border-t border-gray-200">
               <div className="text-center">
                 <Shield className="w-6 h-6 mx-auto mb-2 text-primary" />
-                <p className="text-sm font-medium">Authentic</p>
-                <p className="text-xs text-gray-500">100% genuine</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  Authentic
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  100% genuine
+                </p>
               </div>
               <div className="text-center">
                 <RotateCcw className="w-6 h-6 mx-auto mb-2 text-primary" />
-                <p className="text-sm font-medium">Easy Returns</p>
-                <p className="text-xs text-gray-500">15 days policy</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  Easy Returns
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  15 days policy
+                </p>
               </div>
               <div className="text-center">
                 <Clock className="w-6 h-6 mx-auto mb-2 text-primary" />
-                <p className="text-sm font-medium">Fast Shipping</p>
-                <p className="text-xs text-gray-500">
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                  Fast Shipping
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
                   {product.shippingDays} days
                 </p>
               </div>
@@ -425,15 +439,24 @@ export default function ProductPage() {
 
             {/* Product Description */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Product Details</h3>
-              <p className="text-gray-600">{product.description}</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Product Details
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                {product.description}
+              </p>
 
               {product.features && (
                 <div>
-                  <h4 className="font-medium mb-2">Features:</h4>
+                  <h4 className="font-medium mb-2 text-gray-900 dark:text-white">
+                    Features:
+                  </h4>
                   <ul className="space-y-2">
                     {product.features.map((feature, index) => (
-                      <li key={index} className="flex items-center text-sm">
+                      <li
+                        key={index}
+                        className="flex items-center text-sm text-gray-700 dark:text-gray-300"
+                      >
                         <span className="w-2 h-2 bg-primary rounded-full mr-3"></span>
                         {feature}
                       </li>
@@ -444,8 +467,10 @@ export default function ProductPage() {
 
               {product.materials && (
                 <div>
-                  <h4 className="font-medium mb-2">Materials:</h4>
-                  <p className="text-sm text-muted-foreground">
+                  <h4 className="font-medium mb-2 text-gray-900 dark:text-white">
+                    Materials:
+                  </h4>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
                     {product.materials.join(", ")}
                   </p>
                 </div>
@@ -457,7 +482,9 @@ export default function ProductPage() {
         {/* Reviews Section */}
         <div className="mt-16">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-sport font-bold">Customer Reviews</h2>
+            <h2 className="text-2xl font-sport font-bold text-gray-900 dark:text-white">
+              Customer Reviews
+            </h2>
             <Button variant="outline">Write a Review</Button>
           </div>
 
@@ -480,7 +507,7 @@ export default function ProductPage() {
                       />
                     ))}
                   </div>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
                     {product.reviews} total reviews
                   </p>
                 </CardContent>
@@ -494,7 +521,9 @@ export default function ProductPage() {
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <div className="flex items-center space-x-2 mb-1">
-                          <span className="font-medium">{review.name}</span>
+                          <span className="font-medium text-gray-900 dark:text-white">
+                            {review.name}
+                          </span>
                           {review.verified && (
                             <Badge variant="outline" className="text-xs">
                               Verified Purchase
@@ -514,13 +543,15 @@ export default function ProductPage() {
                               />
                             ))}
                           </div>
-                          <span className="text-sm text-gray-500">
+                          <span className="text-sm text-gray-600 dark:text-gray-400">
                             {review.date}
                           </span>
                         </div>
                       </div>
                     </div>
-                    <p className="text-muted-foreground">{review.comment}</p>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                      {review.comment}
+                    </p>
                   </CardContent>
                 </Card>
               ))}
@@ -538,12 +569,12 @@ export default function ProductPage() {
               const relatedConvertedPrice = convertPrice(
                 relatedProduct.basePrice,
                 selectedCurrency.code,
-                "INR"
+                "INR",
               );
               const relatedConvertedOriginalPrice = convertPrice(
                 relatedProduct.originalPrice,
                 selectedCurrency.code,
-                "INR"
+                "INR",
               );
 
               return (

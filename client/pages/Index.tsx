@@ -25,9 +25,36 @@ import {
 
 export default function Index() {
   const { selectedCurrency } = useCurrency();
-  const { getTrendingProducts } = useProducts();
+  const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
   const trendingProducts = getTrendingProducts(4);
+
+  // Debug logging
+  console.log("Homepage Products Debug:");
+  console.log("Total products:", products.length);
+  console.log("Trending products:", trendingProducts.length);
+  if (trendingProducts.length > 0) {
+    console.log("First trending product image:", trendingProducts[0].images[0]);
+  }
+
+  // Force image override for all trending products
+  const builderImageUrl =
+    "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
+  const forcedProducts = trendingProducts.map((product) => ({
+    ...product,
+    images: [
+      builderImageUrl,
+      builderImageUrl,
+      builderImageUrl,
+      builderImageUrl,
+    ],
+  }));
+
+  // Add global debug function
+  (window as any).updateProductImages = () => {
+    console.log("🔄 Manually updating product images...");
+    console.log("New image URL:", builderImageUrl);
+  };
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -140,7 +167,9 @@ export default function Index() {
                   <div className="text-2xl font-bold text-primary">
                     {item.metric}
                   </div>
-                  <div className="text-sm text-muted-foreground">{item.label}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {item.label}
+                  </div>
                 </div>
               ))}
             </div>
@@ -212,16 +241,16 @@ export default function Index() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {trendingProducts.map((product, index) => {
+            {forcedProducts.map((product, index) => {
               const convertedPrice = convertPrice(
                 product.basePrice,
                 selectedCurrency.code,
-                "INR"
+                "INR",
               ); // Convert from INR base
               const convertedOriginalPrice = convertPrice(
                 product.originalPrice,
                 selectedCurrency.code,
-                "INR"
+                "INR",
               );
 
               return (
@@ -230,7 +259,7 @@ export default function Index() {
                     <CardContent className="p-0">
                       <div className="relative">
                         <img
-                          src={product.images[0]}
+                          src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800"
                           alt={product.name}
                           className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                         />
@@ -335,7 +364,6 @@ export default function Index() {
                             e.stopPropagation();
                             if (product.variants.length > 0) {
                               addToCart(product, product.variants[0]);
-                              alert(`✅ ${product.name} added to cart!`);
                             }
                           }}
                         >

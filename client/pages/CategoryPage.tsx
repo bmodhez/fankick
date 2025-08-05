@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Footer } from "@/components/Footer";
-import { Navigation } from "@/components/Navigation";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { Product } from "@/data/products";
@@ -21,25 +20,44 @@ import {
 export default function CategoryPage() {
   const { category } = useParams<{ category: string }>();
   const { selectedCurrency } = useCurrency();
-  const { getProductsByCategory } = useProducts();
+  const { getProductsByCategory, isLoading, products } = useProducts();
   const [sortBy, setSortBy] = useState("trending");
   const [priceRange, setPriceRange] = useState("all");
 
-  const allProducts = getProductsByCategory(category || "");
+  // Get products for the specific category
+  const normalizedCategory = category?.toLowerCase().trim() || "";
+  let allProducts: Product[] = [];
 
-  // If no products found and category is valid, it might be a loading issue
-  if (
-    allProducts.length === 0 &&
-    category &&
-    ["football", "anime", "pop-culture"].includes(category)
-  ) {
+  if (normalizedCategory && products.length > 0) {
+    // Filter products by exact category match
+    allProducts = products.filter(
+      (product) => product.category.toLowerCase() === normalizedCategory,
+    );
+
+    // If no exact match, try with original category name
+    if (allProducts.length === 0) {
+      allProducts = products.filter((product) => product.category === category);
+    }
+  } else if (!normalizedCategory) {
+    // If no category specified, show all products
+    allProducts = products;
+  }
+
+  // Debug logging
+  console.log(
+    `CategoryPage: ${category} -> Found ${allProducts.length}/${products.length} products`,
+  );
+
+  // Show loading state while products are being loaded
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
-        <Navigation />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center py-16">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Loading products...</p>
+            <p className="text-gray-600 dark:text-gray-400">
+              Loading products...
+            </p>
           </div>
         </div>
         <Footer />
@@ -241,7 +259,7 @@ export default function CategoryPage() {
                   <CardContent className="p-0">
                     <div className="relative">
                       <img
-                        src={product.images[0]}
+                        src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2F4081c4ae39a24ffbbaf62dab017528d2?format=webp&width=800"
                         alt={product.name}
                         className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
@@ -350,12 +368,16 @@ export default function CategoryPage() {
         </div>
 
         {/* Empty State */}
-        {filteredAndSortedProducts.length === 0 && (
+        {!isLoading && filteredAndSortedProducts.length === 0 && (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">😕</div>
-            <h3 className="text-xl font-semibold mb-2">No products found</h3>
-            <p className="text-muted-foreground mb-6">
-              Try adjusting your filters or browse other categories
+            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+              No products found
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              {category
+                ? `No products available in ${category} category`
+                : "Try adjusting your filters or browse other categories"}
             </p>
             <Link to="/">
               <Button>Browse All Products</Button>

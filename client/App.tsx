@@ -5,7 +5,7 @@ import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -27,6 +27,7 @@ import ShippingPolicy from "./pages/ShippingPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Contact from "./pages/Contact";
+import TestPage from "./pages/TestPage";
 import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
@@ -55,7 +56,7 @@ const App = () => (
                           }
                         />
                         <Route
-                          path="/football"
+                          path="/category/:category"
                           element={
                             <>
                               <Navigation />
@@ -63,23 +64,23 @@ const App = () => (
                             </>
                           }
                         />
+<<<<<<< HEAD
 
+=======
+                        {/* Redirect old category URLs to new structure */}
+>>>>>>> origin/main
                         <Route
                           path="/anime"
-                          element={
-                            <>
-                              <Navigation />
-                              <CategoryPage />
-                            </>
-                          }
+                          element={<Navigate to="/category/anime" replace />}
+                        />
+                        <Route
+                          path="/football"
+                          element={<Navigate to="/category/football" replace />}
                         />
                         <Route
                           path="/pop-culture"
                           element={
-                            <>
-                              <Navigation />
-                              <CategoryPage />
-                            </>
+                            <Navigate to="/category/pop-culture" replace />
                           }
                         />
                         <Route
@@ -100,7 +101,10 @@ const App = () => (
                                   </div>
 
                                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-                                    <Link to="/football" className="group">
+                                    <Link
+                                      to="/category/football"
+                                      className="group"
+                                    >
                                       <div className="bg-gradient-to-br from-green-600 to-blue-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
                                         <div className="text-6xl mb-4">⚽</div>
                                         <h2 className="text-2xl font-bold text-white mb-2">
@@ -117,7 +121,10 @@ const App = () => (
                                       </div>
                                     </Link>
 
-                                    <Link to="/anime" className="group">
+                                    <Link
+                                      to="/category/anime"
+                                      className="group"
+                                    >
                                       <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
                                         <div className="text-6xl mb-4">🎌</div>
                                         <h2 className="text-2xl font-bold text-white mb-2">
@@ -134,7 +141,10 @@ const App = () => (
                                       </div>
                                     </Link>
 
-                                    <Link to="/pop-culture" className="group">
+                                    <Link
+                                      to="/category/pop-culture"
+                                      className="group"
+                                    >
                                       <div className="bg-gradient-to-br from-red-600 to-orange-600 rounded-xl p-8 text-center hover:scale-105 transition-transform">
                                         <div className="text-6xl mb-4">🎭</div>
                                         <h2 className="text-2xl font-bold text-white mb-2">
@@ -159,7 +169,15 @@ const App = () => (
                         />
                         <Route path="/search" element={<SearchResults />} />
                         <Route path="/profile" element={<UserProfile />} />
-                        <Route path="/trending" element={<TrendingPage />} />
+                        <Route
+                          path="/trending"
+                          element={
+                            <>
+                              <Navigation />
+                              <TrendingPage />
+                            </>
+                          }
+                        />
                         <Route
                           path="/football/:category"
                           element={
@@ -272,6 +290,7 @@ const App = () => (
                           element={<AdminPanel />}
                         />
                         <Route path="/admin/test" element={<AdminPanel />} />
+                        <Route path="/test" element={<TestPage />} />
                         <Route path="*" element={<NotFound />} />
                       </Routes>
                     </div>

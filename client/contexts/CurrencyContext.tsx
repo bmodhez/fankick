@@ -24,20 +24,33 @@ interface CurrencyProviderProps {
 export function CurrencyProvider({ children }: CurrencyProviderProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCurrency, setSelectedCurrency] = useState<Currency>(
-    CURRENCIES.USD,
+    CURRENCIES.USD || { code: "USD", symbol: "$", flag: "🇺🇸", rate: 1 },
   );
 
   useEffect(() => {
-    // Check if currency is stored in localStorage
-    const storedCurrency = localStorage.getItem("fankick-currency");
+    try {
+      // Check if currency is stored in localStorage
+      const storedCurrency = localStorage.getItem("fankick-currency");
 
-    if (storedCurrency && CURRENCIES[storedCurrency]) {
-      setSelectedCurrency(CURRENCIES[storedCurrency]);
-    } else {
-      // Auto-detect user currency
-      const detectedCurrency = detectUserCurrency();
-      setSelectedCurrency(CURRENCIES[detectedCurrency]);
-      localStorage.setItem("fankick-currency", detectedCurrency);
+      if (storedCurrency && CURRENCIES[storedCurrency]) {
+        setSelectedCurrency(CURRENCIES[storedCurrency]);
+      } else {
+        // Auto-detect user currency
+        const detectedCurrency = detectUserCurrency();
+        if (CURRENCIES[detectedCurrency]) {
+          setSelectedCurrency(CURRENCIES[detectedCurrency]);
+          localStorage.setItem("fankick-currency", detectedCurrency);
+        } else {
+          // Fallback to USD if detection fails
+          console.warn('Currency detection failed, using USD as fallback');
+          setSelectedCurrency(CURRENCIES.USD);
+          localStorage.setItem("fankick-currency", "USD");
+        }
+      }
+    } catch (error) {
+      console.error('Error initializing currency:', error);
+      // Fallback to USD if anything fails
+      setSelectedCurrency(CURRENCIES.USD);
     }
 
     setIsLoading(false);
@@ -53,7 +66,7 @@ export function CurrencyProvider({ children }: CurrencyProviderProps) {
   return (
     <CurrencyContext.Provider
       value={{
-        selectedCurrency,
+        selectedCurrency: selectedCurrency || CURRENCIES.USD,
         setCurrency,
         isLoading,
       }}

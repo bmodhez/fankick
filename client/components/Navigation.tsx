@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Menu,
@@ -30,11 +30,45 @@ export function Navigation() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showCart, setShowCart] = useState(false);
   const { selectedCurrency, setCurrency } = useCurrency();
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout } = useAuth();
   const { totalItems } = useCart();
   const navigate = useNavigate();
+  const currencyRef = useRef<HTMLDivElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   const currencies = Object.values(CURRENCIES);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (currencyRef.current && !currencyRef.current.contains(event.target as Node)) {
+        setShowCurrency(false);
+      }
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setShowUserMenu(false);
+      }
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSearch(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Cleanup all modals on component unmount
+  useEffect(() => {
+    return () => {
+      setShowAuthModal(false);
+      setShowCart(false);
+      setShowCurrency(false);
+      setShowUserMenu(false);
+      setShowSearch(false);
+    };
+  }, []);
 
   const handleSearch = (query: string) => {
     if (query.trim()) {
@@ -45,11 +79,12 @@ export function Navigation() {
   };
 
   const handleQuickSearch = () => {
+    console.log("Search button clicked");
     setShowSearch(!showSearch);
   };
 
   return (
-    <nav className="bg-background/80 border-border sticky top-0 z-50 border-b backdrop-blur-xl shadow-lg shadow-primary/5 before:absolute before:inset-0 before:bg-gradient-to-r before:from-primary/5 before:via-transparent before:to-purple-500/5">
+    <nav className="bg-background/95 border-border sticky top-0 z-50 border-b backdrop-blur-xl shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -66,19 +101,19 @@ export function Navigation() {
           <div className="hidden md:flex items-center space-x-6">
             <div className="flex items-center space-x-6">
               <Link
-                to="/football"
+                to="/category/football"
                 className="text-foreground hover:text-primary transition-colors font-medium"
               >
                 Football
               </Link>
               <Link
-                to="/anime"
+                to="/category/anime"
                 className="hover:text-primary transition-colors font-medium"
               >
                 Anime
               </Link>
               <Link
-                to="/pop-culture"
+                to="/category/pop-culture"
                 className="hover:text-primary transition-colors font-medium"
               >
                 Pop Culture
@@ -104,13 +139,19 @@ export function Navigation() {
           {/* Right side icons */}
           <div className="flex items-center space-x-3">
             {/* Currency Selector */}
-            <div className="relative hidden sm:block">
+            <div className="relative hidden sm:block" ref={currencyRef}>
               <Button
-                variant="ghost"
-                size="sm"
-                className="text-foreground hover:text-primary"
-                onClick={() => setShowCurrency(!showCurrency)}
-              >
+              variant="ghost"
+              size="sm"
+              className="text-foreground hover:text-primary cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("Currency button clicked");
+                setShowCurrency(!showCurrency);
+              }}
+              style={{ pointerEvents: 'auto' }}
+            >
                 <Globe className="h-4 w-4 mr-1" />
                 <span className="text-sm">
                   {selectedCurrency.flag} {selectedCurrency.symbol}
@@ -138,12 +179,17 @@ export function Navigation() {
               )}
             </div>
 
-            <div className="relative">
+            <div className="relative" ref={searchRef}>
               <Button
                 variant="ghost"
                 size="sm"
-                className="hidden sm:flex text-foreground hover:text-primary"
-                onClick={handleQuickSearch}
+                className="hidden sm:flex text-foreground hover:text-primary cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleQuickSearch();
+                }}
+                style={{ pointerEvents: 'auto' }}
               >
                 <Search className="h-4 w-4" />
               </Button>
@@ -183,7 +229,7 @@ export function Navigation() {
 
             {/* User Authentication */}
             {user ? (
-              <div className="relative">
+              <div className="relative" ref={userMenuRef}>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -193,10 +239,10 @@ export function Navigation() {
                   <div className="flex items-center space-x-2">
                     <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
                       <span className="text-black font-bold text-xs">
-                        {user.name.charAt(0).toUpperCase()}
+                        {(user.firstName || user.email).charAt(0).toUpperCase()}
                       </span>
                     </div>
-                    {user.isAdmin && <Crown className="w-3 h-3 text-primary" />}
+
                     <ChevronDown className="w-3 h-3" />
                   </div>
                 </Button>
@@ -204,14 +250,9 @@ export function Navigation() {
                 {showUserMenu && (
                   <div className="absolute right-0 mt-2 w-56 bg-background text-foreground rounded-lg shadow-lg border border-border z-50">
                     <div className="px-4 py-3 border-b border-border">
-                      <p className="font-medium">{user.name}</p>
+                      <p className="font-medium">{user.firstName || 'User'}</p>
                       <p className="text-sm text-muted-foreground">{user.email}</p>
-                      {user.isAdmin && (
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary text-black mt-1">
-                          <Crown className="w-3 h-3 mr-1" />
-                          Admin
-                        </span>
-                      )}
+
                     </div>
 
                     <Link
@@ -243,16 +284,14 @@ export function Navigation() {
                       Wishlist
                     </Link>
 
-                    {user.isAdmin && (
-                      <Link
-                        to="/admin"
-                        className="block px-4 py-2 hover:bg-gray-700 flex items-center border-t border-gray-700"
-                        onClick={() => setShowUserMenu(false)}
-                      >
-                        <Crown className="w-4 h-4 mr-2 text-primary" />
-                        Admin Panel
-                      </Link>
-                    )}
+                    <Link
+                      to="/admin"
+                      className="block px-4 py-2 hover:bg-gray-700 flex items-center border-t border-gray-700"
+                      onClick={() => setShowUserMenu(false)}
+                    >
+                      <Crown className="w-4 h-4 mr-2 text-primary" />
+                      Admin Panel
+                    </Link>
 
                     <button
                       onClick={() => {
@@ -271,8 +310,14 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-foreground hover:text-primary"
-                onClick={() => setShowAuthModal(true)}
+                className="text-foreground hover:text-primary cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log("Login button clicked");
+                  setShowAuthModal(true);
+                }}
+                style={{ pointerEvents: 'auto' }}
               >
                 <User className="w-4 h-4 mr-1" />
                 <span className="hidden sm:inline">Login</span>
@@ -281,8 +326,14 @@ export function Navigation() {
             <Button
               variant="ghost"
               size="sm"
-              className="relative text-foreground hover:text-primary"
-              onClick={() => setShowCart(true)}
+              className="relative text-foreground hover:text-primary cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("Cart button clicked");
+                setShowCart(true);
+              }}
+              style={{ pointerEvents: 'auto' }}
             >
               <ShoppingCart className="h-4 w-4" />
               {totalItems > 0 && (
@@ -296,8 +347,14 @@ export function Navigation() {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden text-foreground"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden text-foreground cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log("Mobile menu button clicked");
+                setIsMenuOpen(!isMenuOpen);
+              }}
+              style={{ pointerEvents: 'auto' }}
             >
               {isMenuOpen ? (
                 <X className="h-4 w-4" />
@@ -313,21 +370,21 @@ export function Navigation() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border">
               <Link
-                to="/football"
+                to="/category/football"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
                 ⚽ Football
               </Link>
               <Link
-                to="/anime"
+                to="/category/anime"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
                 🎌 Anime
               </Link>
               <Link
-                to="/pop-culture"
+                to="/category/pop-culture"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -374,6 +431,10 @@ export function Navigation() {
                 <Button
                   variant="ghost"
                   className="w-full justify-start text-foreground hover:text-primary"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    navigate('/search');
+                  }}
                 >
                   <Search className="h-4 w-4 mr-2" />
                   Search Products

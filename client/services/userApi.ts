@@ -111,14 +111,32 @@ async function userApiRequest<T>(
       
       const response = await fetch(url, { ...defaultOptions, ...options });
 
-      if (!response.ok) {
+      let result: ApiResponse<T>;
+      try {
+        result = await response.json();
+      } catch (jsonError) {
+        // If JSON parsing fails, throw a generic error
         throw new UserApiError(
           response.status,
           `HTTP error! status: ${response.status}`,
         );
       }
 
-      const result: ApiResponse<T> = await response.json();
+      if (!response.ok) {
+        // Use the server's error message if available, otherwise use user-friendly message
+        let errorMessage = result.error || `HTTP error! status: ${response.status}`;
+
+        // Provide user-friendly messages for common HTTP status codes
+        if (response.status === 401) {
+          errorMessage = result.error || "Invalid email or password";
+        } else if (response.status === 400) {
+          errorMessage = result.error || "Invalid request data";
+        } else if (response.status === 500) {
+          errorMessage = result.error || "Server error. Please try again later";
+        }
+
+        throw new UserApiError(response.status, errorMessage);
+      }
 
       if (!result.success) {
         throw new Error(result.error || "API request failed");
@@ -133,7 +151,13 @@ async function userApiRequest<T>(
         throw new Error('Request was cancelled or timed out');
       }
 
+      // Don't retry client errors (4xx) or if it's a JSON parsing issue
       if (error instanceof UserApiError && error.status >= 400 && error.status < 500) {
+        throw error;
+      }
+
+      // Don't retry JSON parsing errors or abort errors
+      if (error instanceof Error && (error.message.includes('JSON') || error.name === "AbortError")) {
         throw error;
       }
 
