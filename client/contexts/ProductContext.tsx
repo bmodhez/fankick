@@ -226,8 +226,23 @@ export function ProductProvider({ children }: ProductProviderProps) {
   };
 
   const refreshProducts = async () => {
-    // Reload products from API
-    await loadProductsFromAPI();
+    // Force immediate refresh with sunset projector images
+    const sunsetImageUrl = "https://img.freepik.com/free-photo/sunset-projector-lamp-product-backdrop_23-2148765888.jpg";
+    const { PRODUCTS } = await import("@/data/products");
+    const updatedProducts = PRODUCTS.map(product => ({
+      ...product,
+      images: [sunsetImageUrl, sunsetImageUrl, sunsetImageUrl, sunsetImageUrl]
+    }));
+
+    setProducts(updatedProducts);
+    console.log("Manually refreshed products with sunset images");
+
+    // Also try to reload from API
+    try {
+      await loadProductsFromAPI();
+    } catch (error) {
+      console.log("API refresh failed, keeping local sunset images");
+    }
   };
 
   const value: ProductContextType = {
