@@ -57,6 +57,15 @@ export function ProductProvider({ children }: ProductProviderProps) {
         setIsLoading(false); // Set loading to false immediately when local data loads
         setIsInitialized(true); // Mark as initialized with local data
         console.log("Loaded local products with updated sunset projector images");
+
+        // Force another update after a short delay to ensure state is updated
+        setTimeout(() => {
+          setProducts(prevProducts => prevProducts.map(product => ({
+            ...product,
+            images: [sunsetImageUrl, sunsetImageUrl, sunsetImageUrl, sunsetImageUrl]
+          })));
+          console.log("Force updated product images again");
+        }, 100);
       } catch (error) {
         console.error("Failed to load local products:", error);
         setIsLoading(false);
