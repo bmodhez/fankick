@@ -153,7 +153,7 @@ export default function ProductPage() {
           <div className="space-y-4">
             <div className="relative aspect-square bg-muted rounded-lg overflow-hidden">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2F4081c4ae39a24ffbbaf62dab017528d2?format=webp&width=800"
+                src="https://cdn.builder.io/api/v1/image/assets%2F2d9a6554584f4d3ea64314477a873f8e%2Ff89fc9194a2941a5b71d7367f2510517?format=webp&width=800"
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
