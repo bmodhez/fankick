@@ -218,7 +218,7 @@ export default function TrendingPage() {
                       <select
                         value={selectedCategory}
                         onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
+                        className="w-full px-3 py-2 bg-input border border-border rounded text-foreground"
                       >
                         <option value="all">All Categories</option>
                         <option value="football">⚽ Football</option>
@@ -257,7 +257,7 @@ export default function TrendingPage() {
                         <option value="rating">⭐ Highest Rated</option>
                         <option value="reviews">👥 Most Reviewed</option>
                         <option value="price-low">💰 Price: Low to High</option>
-                        <option value="price-high">💎 Price: High to Low</option>
+                        <option value="price-high">��� Price: High to Low</option>
                         <option value="newest">🆕 Newest First</option>
                       </select>
                     </div>
