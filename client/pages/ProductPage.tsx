@@ -16,7 +16,6 @@ import {
 import {
   Star,
   ShoppingCart,
-  Heart,
   Share2,
   Truck,
   Shield,
@@ -30,6 +29,7 @@ import {
   CreditCard,
   Banknote,
 } from "lucide-react";
+import { LikeButton } from "@/components/LikeButton";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
@@ -176,9 +176,12 @@ export default function ProductPage() {
               </div>
 
               <div className="absolute top-4 right-4 space-y-2">
-                <Button size="sm" variant="outline" className="bg-background">
-                  <Heart className="w-4 h-4" />
-                </Button>
+                <LikeButton
+                  productId={product.id}
+                  size="sm"
+                  variant="outline"
+                  className="bg-background"
+                />
                 <Button size="sm" variant="outline" className="bg-background">
                   <Share2 className="w-4 h-4" />
                 </Button>
