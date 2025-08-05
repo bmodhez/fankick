@@ -112,21 +112,22 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         </div>
 
         {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+        <div className="relative flex-1 overflow-y-auto p-6 custom-scrollbar">
           {items.length === 0 ? (
-            <div className="text-center py-20">
-              <div className="w-24 h-24 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-6">
-                <ShoppingBag className="w-12 h-12 text-gray-500" />
+            <div className="text-center py-20 animate-fade-in">
+              <div className="relative w-28 h-28 bg-gradient-to-br from-gray-700/50 to-gray-600/30 rounded-full flex items-center justify-center mx-auto mb-6 border border-gray-600/50 shadow-xl">
+                <ShoppingBag className="w-14 h-14 text-gray-400 animate-bounce" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-purple-500/10 rounded-full blur-xl"></div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">
+              <h3 className="text-2xl font-bold text-white mb-4 drop-shadow-lg">
                 Your cart is empty
               </h3>
-              <p className="text-gray-400 mb-8 leading-relaxed px-4">
+              <p className="text-gray-400 mb-8 leading-relaxed px-4 text-lg">
                 Add some amazing products to get started with your shopping journey!
               </p>
               <Button
                 onClick={onClose}
-                className="bg-primary text-black hover:bg-primary/90 px-8 py-3 rounded-xl font-semibold shadow-lg transform hover:scale-105 transition-all"
+                className="bg-gradient-to-r from-primary to-yellow-400 text-black hover:from-primary/90 hover:to-yellow-400/90 px-10 py-4 rounded-xl font-semibold shadow-xl transform hover:scale-105 transition-all duration-300 border border-primary/30"
               >
                 Continue Shopping
               </Button>
