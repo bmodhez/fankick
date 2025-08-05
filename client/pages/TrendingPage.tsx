@@ -245,7 +245,7 @@ export default function TrendingPage() {
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-white mb-2">
+                      <label className="block text-sm font-medium text-foreground mb-2">
                         Sort By
                       </label>
                       <select
