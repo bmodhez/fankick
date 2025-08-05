@@ -209,7 +209,7 @@ export default function TrendingPage() {
 
               {/* Extended Filters */}
               {showFilters && (
-                <div className="mt-6 pt-6 border-t border-gray-700">
+                <div className="mt-6 pt-6 border-t border-border">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-white mb-2">
