@@ -210,7 +210,7 @@ export default function UserProfile() {
                       Admin
                     </Badge>
                   )}
-                  <Badge className="bg-green-500 text-white">��� Verified</Badge>
+                  <Badge className="bg-green-500 text-white">✓ Verified</Badge>
                 </div>
 
                 <p className="text-gray-400 mb-3">{user.email}</p>
@@ -510,54 +510,91 @@ export default function UserProfile() {
 
           {/* Wishlist Tab */}
           {activeTab === "wishlist" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {wishlist.map((item) => (
-                <Card key={item.id} className="bg-gray-800 border-gray-700">
-                  <CardContent className="p-4">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-32 object-cover rounded-lg mb-4"
-                    />
-                    <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2">
-                      {item.name}
-                    </h3>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-lg font-bold text-primary">
-                        {formatPrice(
-                          convertPrice(item.price, selectedCurrency.code),
-                          selectedCurrency,
-                        )}
-                      </span>
-                      <Badge
-                        className={
-                          item.inStock
-                            ? "bg-green-500 text-white"
-                            : "bg-red-500 text-white"
-                        }
-                      >
-                        {item.inStock ? "In Stock" : "Out of Stock"}
-                      </Badge>
-                    </div>
-                    <div className="flex space-x-2">
-                      <Button
-                        disabled={!item.inStock}
-                        className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
-                      >
-                        <ShoppingCart className="w-4 h-4 mr-2" />
-                        Add to Cart
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-gray-600 text-red-400"
-                      >
-                        <X className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            <div>
+              {wishlistLoading ? (
+                <div className="text-center py-8">
+                  <div className="text-gray-400">Loading liked products...</div>
+                </div>
+              ) : userWishlist.length === 0 ? (
+                <div className="text-center py-8">
+                  <Heart className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-gray-400 mb-2">
+                    No liked products yet
+                  </h3>
+                  <p className="text-gray-500 mb-6">
+                    Start liking products to see them here!
+                  </p>
+                  <Link to="/">
+                    <Button className="bg-primary text-black hover:bg-primary/90">
+                      Explore Products
+                    </Button>
+                  </Link>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {userWishlist.map((wishlistItem) => {
+                    const product = products.find(p => p.id === wishlistItem.productId);
+                    if (!product) return null;
+
+                    return (
+                      <Card key={wishlistItem.id} className="bg-gray-800 border-gray-700">
+                        <CardContent className="p-4">
+                          <Link to={`/product/${product.id}`}>
+                            <img
+                              src={product.images[0]}
+                              alt={product.name}
+                              className="w-full h-32 object-cover rounded-lg mb-4 hover:scale-105 transition-transform"
+                            />
+                          </Link>
+                          <Link to={`/product/${product.id}`}>
+                            <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2 hover:text-primary transition-colors">
+                              {product.name}
+                            </h3>
+                          </Link>
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="text-lg font-bold text-primary">
+                              {formatPrice(
+                                convertPrice(product.variants[0]?.price || product.price, selectedCurrency.code, "INR"),
+                                selectedCurrency,
+                              )}
+                            </span>
+                            <Badge
+                              className={
+                                product.stockQuantity > 0
+                                  ? "bg-green-500 text-white"
+                                  : "bg-red-500 text-white"
+                              }
+                            >
+                              {product.stockQuantity > 0 ? "In Stock" : "Out of Stock"}
+                            </Badge>
+                          </div>
+                          <div className="flex space-x-2">
+                            <Button
+                              disabled={product.stockQuantity === 0}
+                              className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
+                              onClick={() => {
+                                // Add to cart logic here
+                                console.log('Add to cart:', product.id);
+                              }}
+                            >
+                              <ShoppingCart className="w-4 h-4 mr-2" />
+                              Add to Cart
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-gray-600 text-red-400 hover:bg-red-500 hover:text-white"
+                              onClick={() => removeFromWishlist(product.id)}
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           )}
 
