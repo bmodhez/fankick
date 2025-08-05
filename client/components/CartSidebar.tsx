@@ -79,7 +79,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b-2 border-gray-600/50 bg-gradient-to-r from-primary/15 via-purple-500/10 to-blue-500/15 backdrop-blur-sm">
+        <div className="relative flex items-center justify-between p-6 border-b-2 border-gray-600/30 bg-gradient-to-r from-primary/20 via-purple-500/15 to-blue-500/20 backdrop-blur-md shadow-lg">
+          <div className="absolute inset-0 bg-white/5 rounded-b-xl"></div>
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-primary/20 rounded-full">
               <ShoppingBag className="w-6 h-6 text-primary" />
