@@ -366,16 +366,6 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         )}
       </div>
 
-      {/* Payment Modal */}
-      {showPaymentModal && (
-        <PaymentModal
-          isOpen={showPaymentModal}
-          onClose={() => setShowPaymentModal(false)}
-          amount={finalTotal}
-          currency={selectedCurrency}
-          items={items}
-        />
-      )}
     </>
   );
 }
