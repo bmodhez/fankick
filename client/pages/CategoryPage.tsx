@@ -12,10 +12,10 @@ import {
   Star,
   Filter,
   SlidersHorizontal,
-  Heart,
   Eye,
   TrendingUp,
 } from "lucide-react";
+import { LikeButton } from "@/components/LikeButton";
 
 export default function CategoryPage() {
   const { category } = useParams<{ category: string }>();
@@ -288,13 +288,12 @@ export default function CategoryPage() {
                       </div>
 
                       <div className="absolute top-2 right-2">
-                        <Button
+                        <LikeButton
+                          productId={product.id}
                           variant="ghost"
                           size="sm"
                           className="bg-background/90 hover:bg-background"
-                        >
-                          <Heart className="w-4 h-4" />
-                        </Button>
+                        />
                       </div>
 
                       <div className="absolute bottom-2 left-2">
