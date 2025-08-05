@@ -490,7 +490,7 @@ export default function TrendingPage() {
                         </div>
 
                         <Link to={`/product/${product.id}`}>
-                          <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2 hover:text-primary transition-colors">
+                          <h3 className="font-semibold text-foreground text-sm mb-2 line-clamp-2 hover:text-primary transition-colors">
                             {product.name}
                           </h3>
                         </Link>
