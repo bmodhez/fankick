@@ -9,6 +9,8 @@ import { Footer } from "@/components/Footer";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useCurrency } from "@/contexts/CurrencyContext";
+import { useProducts } from "@/contexts/ProductContext";
+import { userApi, WishlistItem } from "@/services/userApi";
 import { formatPrice, convertPrice } from "@/utils/currency";
 import {
   User,
