@@ -61,7 +61,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
     if (items.length === 0) {
       return;
     }
-    setShowPaymentModal(true);
+    onClose(); // Close the cart sidebar
+    navigate('/checkout'); // Navigate to checkout page
   };
 
   return (
