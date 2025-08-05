@@ -186,7 +186,7 @@ export default function TrendingPage() {
                     )}
                   </Button>
                   
-                  <div className="flex border border-gray-600 rounded-lg">
+                  <div className="flex border border-border rounded-lg">
                     <Button
                       variant={viewMode === "grid" ? "default" : "ghost"}
                       size="sm"
