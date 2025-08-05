@@ -327,7 +327,7 @@ export default function TrendingPage() {
                           />
                           <div className="flex-1">
                             <div className="flex items-start justify-between mb-2">
-                              <h3 className="font-semibold text-white text-lg line-clamp-2">
+                              <h3 className="font-semibold text-foreground text-lg line-clamp-2">
                                 {product.name}
                               </h3>
                               <div className="flex items-center space-x-2">
