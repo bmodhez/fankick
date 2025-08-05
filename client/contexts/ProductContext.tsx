@@ -45,26 +45,27 @@ export function ProductProvider({ children }: ProductProviderProps) {
       try {
         const { PRODUCTS } = await import("@/data/products");
 
-        // Force update all product images to the sunset projector lamp
-        const sunsetImageUrl = "https://img.freepik.com/free-photo/sunset-projector-lamp-product-backdrop_23-2148765888.jpg";
+        // Force update all product images to the new Builder.io image
+        const builderImageUrl = "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
         const updatedProducts = PRODUCTS.map(product => ({
           ...product,
-          images: [sunsetImageUrl, sunsetImageUrl, sunsetImageUrl, sunsetImageUrl]
+          images: [builderImageUrl, builderImageUrl, builderImageUrl, builderImageUrl]
         }));
 
         console.log("First product image URL:", updatedProducts[0]?.images[0]);
         setProducts(updatedProducts);
         setIsLoading(false); // Set loading to false immediately when local data loads
         setIsInitialized(true); // Mark as initialized with local data
-        console.log("Loaded local products with updated sunset projector images");
+        console.log("Loaded local products with updated Builder.io images");
 
         // Force another update after a short delay to ensure state is updated
         setTimeout(() => {
+          const newBuilderImageUrl = "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
           setProducts(prevProducts => prevProducts.map(product => ({
             ...product,
-            images: [sunsetImageUrl, sunsetImageUrl, sunsetImageUrl, sunsetImageUrl]
+            images: [newBuilderImageUrl, newBuilderImageUrl, newBuilderImageUrl, newBuilderImageUrl]
           })));
-          console.log("Force updated product images again");
+          console.log("Force updated product images with Builder.io URL");
         }, 100);
       } catch (error) {
         console.error("Failed to load local products:", error);
