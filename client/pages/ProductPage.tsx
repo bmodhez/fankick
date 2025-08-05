@@ -261,9 +261,7 @@ export default function ProductPage() {
             {/* Variant Selection */}
             {product.variants.some((v) => v.size) && (
               <div>
-                <h3 className="font-semibold mb-3 text-white">
-                  Size
-                </h3>
+                <h3 className="font-semibold mb-3 text-white">Size</h3>
                 <div className="flex flex-wrap gap-2">
                   {product.variants
                     .filter((v) => v.size)
@@ -286,9 +284,7 @@ export default function ProductPage() {
 
             {product.variants.some((v) => v.color) && (
               <div>
-                <h3 className="font-semibold mb-3 text-white">
-                  Color
-                </h3>
+                <h3 className="font-semibold mb-3 text-white">Color</h3>
                 <div className="flex flex-wrap gap-2">
                   {product.variants
                     .filter((v) => v.color)
@@ -311,9 +307,7 @@ export default function ProductPage() {
 
             {/* Quantity */}
             <div>
-              <h3 className="font-semibold mb-3 text-white">
-                Quantity
-              </h3>
+              <h3 className="font-semibold mb-3 text-white">Quantity</h3>
               <div className="flex items-center space-x-3">
                 <Button
                   variant="outline"
@@ -389,7 +383,9 @@ export default function ProductPage() {
               <div className="flex items-center space-x-3">
                 <MapPin className="w-5 h-5 text-primary" />
                 <div>
-                  <p className="font-medium text-white">Global Shipping Available</p>
+                  <p className="font-medium text-white">
+                    Global Shipping Available
+                  </p>
                   <p className="text-sm text-gray-300">
                     Ships to 150+ countries
                   </p>
