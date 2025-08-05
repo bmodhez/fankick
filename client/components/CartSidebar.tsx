@@ -180,7 +180,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         </div>
 
                         {/* Price */}
-                        <p className="font-bold text-lg text-primary bg-primary/10 px-3 py-1 rounded-lg inline-block">
+                        <p className="font-bold text-lg text-primary bg-gradient-to-r from-primary/15 to-yellow-400/15 px-4 py-2 rounded-xl inline-block border border-primary/30 shadow-lg">
                           {formatPrice(convertedPrice, selectedCurrency)}
                         </p>
                         
