@@ -311,7 +311,7 @@ export default function ProductPage() {
 
             {/* Quantity */}
             <div>
-              <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
+              <h3 className="font-semibold mb-3 text-white">
                 Quantity
               </h3>
               <div className="flex items-center space-x-3">
