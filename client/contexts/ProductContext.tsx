@@ -43,9 +43,8 @@ export function ProductProvider({ children }: ProductProviderProps) {
   useEffect(() => {
     const loadLocalProducts = async () => {
       try {
-        // Force fresh import to get updated product data
-        delete require.cache[require.resolve("@/data/products")];
-        const { PRODUCTS } = await import("@/data/products");
+        // Force fresh import to get updated product data with timestamp
+        const { PRODUCTS } = await import(`@/data/products?t=${Date.now()}`);
         setProducts(PRODUCTS);
         setIsLoading(false); // Set loading to false immediately when local data loads
         setIsInitialized(true); // Mark as initialized with local data
