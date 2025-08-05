@@ -283,13 +283,12 @@ export default function Index() {
                         </div>
 
                         <div className="absolute top-2 right-2">
-                          <Button
+                          <LikeButton
+                            productId={product.id}
                             variant="ghost"
                             size="sm"
                             className="bg-white/90 hover:bg-white"
-                          >
-                            <Heart className="w-4 h-4" />
-                          </Button>
+                          />
                         </div>
 
                         <div className="absolute bottom-2 left-2">
