@@ -13,12 +13,12 @@ import {
   Filter,
   SlidersHorizontal,
   Star,
-  Heart,
   ShoppingCart,
   TrendingUp,
   Clock,
   X,
 } from "lucide-react";
+import { LikeButton } from "@/components/LikeButton";
 
 export default function SearchResults() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -395,13 +395,12 @@ export default function SearchResults() {
 
                       {/* Actions */}
                       <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button
+                        <LikeButton
+                          productId={product.id}
                           size="sm"
                           variant="secondary"
                           className="bg-background/90 hover:bg-background"
-                        >
-                          <Heart className="w-4 h-4" />
-                        </Button>
+                        />
                       </div>
                     </div>
 
