@@ -142,7 +142,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 );
 
                 return (
-                  <div key={item.id} className="bg-gradient-to-r from-gray-800/60 to-gray-700/40 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/40 hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+                  <div key={item.id} className="relative bg-gradient-to-r from-gray-800/80 to-gray-700/60 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/60 hover:shadow-2xl transition-all duration-300 backdrop-blur-md group overflow-hidden">
+                    {/* Hover effect background */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
                     <div className="flex space-x-3">
                       {/* Product Image */}
                       <div className="relative">
