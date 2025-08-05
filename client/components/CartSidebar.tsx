@@ -160,8 +160,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       </div>
                       
                       {/* Product Details */}
-                      <div className="flex-1 space-y-3">
-                        <h4 className="font-semibold text-white text-base line-clamp-2 leading-tight">
+                      <div className="relative flex-1 space-y-3">
+                        <h4 className="font-semibold text-white text-base line-clamp-2 leading-tight group-hover:text-primary transition-colors duration-300">
                           {item.product.name}
                         </h4>
                         
