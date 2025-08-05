@@ -257,7 +257,7 @@ export default function CategoryPage() {
                   <CardContent className="p-0">
                     <div className="relative">
                       <img
-                        src={product.images[0]}
+                        src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2F5edc0315c5a84834949807dbf25594d9?format=webp&width=800"
                         alt={product.name}
                         className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
