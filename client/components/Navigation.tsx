@@ -307,21 +307,13 @@ export function Navigation() {
                 )}
               </div>
             ) : (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-foreground hover:text-primary cursor-pointer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  console.log("Login button clicked");
-                  setShowAuthModal(true);
-                }}
-                style={{ pointerEvents: 'auto' }}
+              <Link
+                to="/login"
+                className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 <User className="w-4 h-4 mr-1" />
                 <span className="hidden sm:inline">Login</span>
-              </Button>
+              </Link>
             )}
             <Button
               variant="ghost"
