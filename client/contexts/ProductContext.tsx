@@ -238,7 +238,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   return (
     <ProductContext.Provider value={value}>
-      {!isInitialized ? (
+      {!isInitialized && products.length === 0 ? (
         <div className="min-h-screen bg-background flex items-center justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         </div>
