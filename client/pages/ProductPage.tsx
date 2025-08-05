@@ -242,10 +242,10 @@ export default function ProductPage() {
               </div>
 
               <div className="flex items-center space-x-3 mb-6">
-                <span className="text-3xl font-bold text-primary">
+                <span className="text-3xl font-bold text-primary drop-shadow-lg">
                   {formatPrice(convertedPrice, selectedCurrency)}
                 </span>
-                <span className="text-xl text-gray-500 dark:text-gray-400 line-through">
+                <span className="text-xl text-gray-400 line-through">
                   {formatPrice(convertedOriginalPrice, selectedCurrency)}
                 </span>
                 <Badge className="bg-red-100 text-red-800">
