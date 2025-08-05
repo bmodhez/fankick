@@ -166,7 +166,7 @@ export default function TrendingPage() {
                     placeholder="Search trending products..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 bg-gray-700 border-gray-600 text-white"
+                    className="pl-10 bg-input border-border text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
                 
