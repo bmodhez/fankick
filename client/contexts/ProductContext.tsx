@@ -43,12 +43,18 @@ export function ProductProvider({ children }: ProductProviderProps) {
   useEffect(() => {
     const loadLocalProducts = async () => {
       try {
-        // Force fresh import to get updated product data with timestamp
-        const { PRODUCTS } = await import(`@/data/products?t=${Date.now()}`);
-        setProducts(PRODUCTS);
+        const { PRODUCTS } = await import("@/data/products");
+
+        // Force update all product images to the sunset projector lamp
+        const updatedProducts = PRODUCTS.map(product => ({
+          ...product,
+          images: product.images.map(() => "https://img.freepik.com/free-photo/sunset-projector-lamp-product-backdrop_23-2148765888.jpg")
+        }));
+
+        setProducts(updatedProducts);
         setIsLoading(false); // Set loading to false immediately when local data loads
         setIsInitialized(true); // Mark as initialized with local data
-        console.log("Loaded local products with updated images");
+        console.log("Loaded local products with updated sunset projector images");
       } catch (error) {
         console.error("Failed to load local products:", error);
         setIsLoading(false);
