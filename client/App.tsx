@@ -154,7 +154,15 @@ const App = () => (
                         />
                         <Route path="/search" element={<SearchResults />} />
                         <Route path="/profile" element={<UserProfile />} />
-                        <Route path="/trending" element={<TrendingPage />} />
+                        <Route
+                          path="/trending"
+                          element={
+                            <>
+                              <Navigation />
+                              <TrendingPage />
+                            </>
+                          }
+                        />
                         <Route
                           path="/football/:category"
                           element={
