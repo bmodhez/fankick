@@ -181,7 +181,7 @@ export default function UserProfile() {
   const tabs = [
     { id: "profile", label: "Profile", icon: User, count: null },
     { id: "orders", label: "Orders", icon: Package, count: orders.length },
-    { id: "wishlist", label: "Wishlist", icon: Heart, count: wishlist.length },
+    { id: "wishlist", label: "Wishlist", icon: Heart, count: userWishlist.length },
     { id: "cart", label: "Cart", icon: ShoppingCart, count: cartItems.length },
   ];
 
