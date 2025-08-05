@@ -236,22 +236,22 @@ export function ProductProvider({ children }: ProductProviderProps) {
   };
 
   const refreshProducts = async () => {
-    // Force immediate refresh with sunset projector images
-    const sunsetImageUrl = "https://img.freepik.com/free-photo/sunset-projector-lamp-product-backdrop_23-2148765888.jpg";
+    // Force immediate refresh with Builder.io images
+    const builderImageUrl = "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
     const { PRODUCTS } = await import("@/data/products");
     const updatedProducts = PRODUCTS.map(product => ({
       ...product,
-      images: [sunsetImageUrl, sunsetImageUrl, sunsetImageUrl, sunsetImageUrl]
+      images: [builderImageUrl, builderImageUrl, builderImageUrl, builderImageUrl]
     }));
 
     setProducts(updatedProducts);
-    console.log("Manually refreshed products with sunset images");
+    console.log("Manually refreshed products with Builder.io images");
 
     // Also try to reload from API
     try {
       await loadProductsFromAPI();
     } catch (error) {
-      console.log("API refresh failed, keeping local sunset images");
+      console.log("API refresh failed, keeping local Builder.io images");
     }
   };
 
