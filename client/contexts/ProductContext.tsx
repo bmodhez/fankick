@@ -35,6 +35,7 @@ interface ProductProviderProps {
 }
 
 export function ProductProvider({ children }: ProductProviderProps) {
+  const builderImageUrl = "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
   const [products, setProducts] = useState<Product[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
