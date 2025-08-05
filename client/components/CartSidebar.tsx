@@ -168,12 +168,12 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         {/* Variant Info */}
                         <div className="flex items-center gap-3 text-xs">
                           {item.variant.size && (
-                            <span className="bg-gray-600/50 px-2 py-1 rounded-full text-gray-300">
+                            <span className="bg-gradient-to-r from-gray-600/60 to-gray-500/40 px-3 py-1.5 rounded-full text-gray-300 border border-gray-500/30 shadow-sm">
                               Size: {item.variant.size}
                             </span>
                           )}
                           {item.variant.color && (
-                            <span className="bg-gray-600/50 px-2 py-1 rounded-full text-gray-300">
+                            <span className="bg-gradient-to-r from-gray-600/60 to-gray-500/40 px-3 py-1.5 rounded-full text-gray-300 border border-gray-500/30 shadow-sm">
                               {item.variant.color}
                             </span>
                           )}
