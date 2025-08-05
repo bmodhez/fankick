@@ -43,11 +43,13 @@ export function ProductProvider({ children }: ProductProviderProps) {
   useEffect(() => {
     const loadLocalProducts = async () => {
       try {
+        // Force fresh import to get updated product data
+        delete require.cache[require.resolve("@/data/products")];
         const { PRODUCTS } = await import("@/data/products");
         setProducts(PRODUCTS);
         setIsLoading(false); // Set loading to false immediately when local data loads
         setIsInitialized(true); // Mark as initialized with local data
-        console.log("Loaded local products as initial data");
+        console.log("Loaded local products with updated images");
       } catch (error) {
         console.error("Failed to load local products:", error);
         setIsLoading(false);
