@@ -45,9 +45,13 @@ export function ProductProvider({ children }: ProductProviderProps) {
       try {
         const { PRODUCTS } = await import("@/data/products");
         setProducts(PRODUCTS);
+        setIsLoading(false); // Set loading to false immediately when local data loads
+        setIsInitialized(true); // Mark as initialized with local data
         console.log("Loaded local products as initial data");
       } catch (error) {
         console.error("Failed to load local products:", error);
+        setIsLoading(false);
+        setIsInitialized(true);
       }
     };
 
@@ -57,30 +61,45 @@ export function ProductProvider({ children }: ProductProviderProps) {
   // Load products from backend API with local fallback
   const loadProductsFromAPI = async (signal?: AbortSignal) => {
     try {
-      setIsLoading(true);
-
       // Try to load from API with a shorter timeout for faster fallback
       const timeoutController = new AbortController();
-      const apiTimeout = setTimeout(() => timeoutController.abort(), 5000); // 5 second timeout
+      const combinedSignal = signal ? (
+        // Create a combined signal that aborts when either signal aborts
+        (() => {
+          const combined = new AbortController();
+          const abort = () => combined.abort();
+          signal.addEventListener('abort', abort);
+          timeoutController.signal.addEventListener('abort', abort);
+          return combined.signal;
+        })()
+      ) : timeoutController.signal;
+
+      const apiTimeout = setTimeout(() => timeoutController.abort(), 3000); // 3 second timeout
 
       const apiProducts = await productApi.getAll();
       clearTimeout(apiTimeout);
-      setProducts(apiProducts);
+
+      if (!signal?.aborted) {
+        setProducts(apiProducts);
+        console.log("Successfully loaded products from API");
+      }
     } catch (error) {
       // Don't log errors for cancelled requests
       if (
         error instanceof Error &&
         error.name !== "AbortError" &&
-        !error.message.includes("cancelled")
+        !error.message.includes("cancelled") &&
+        !signal?.aborted
       ) {
         console.warn("API failed, falling back to local products data:", error.message);
 
         // Always fall back to local data on any API failure
         try {
           const { PRODUCTS } = await import("@/data/products");
-          setProducts(PRODUCTS);
-          console.log("Successfully loaded local products data as fallback");
-          return; // Exit early since we have data
+          if (!signal?.aborted) {
+            setProducts(PRODUCTS);
+            console.log("Successfully loaded local products data as fallback");
+          }
         } catch (fallbackError) {
           console.error("Failed to load fallback products:", fallbackError);
         }
@@ -105,16 +124,20 @@ export function ProductProvider({ children }: ProductProviderProps) {
           console.log('API enhancement failed, continuing with local data');
         })
         .finally(() => {
-          setIsLoading(false);
-          setIsInitialized(true);
+          if (!abortController.signal.aborted) {
+            setIsLoading(false);
+            setIsInitialized(true);
+          }
         });
-    }, 500); // Short delay to let local data load
+    }, 1000); // Slightly longer delay to ensure local data loads first
 
     // Ensure we're not loading forever
     const maxTimeout = setTimeout(() => {
-      setIsLoading(false);
-      setIsInitialized(true);
-    }, 10000);
+      if (!abortController.signal.aborted) {
+        setIsLoading(false);
+        setIsInitialized(true);
+      }
+    }, 8000); // Reduced from 10s to 8s
 
     return () => {
       abortController.abort();
