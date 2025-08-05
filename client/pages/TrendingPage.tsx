@@ -557,7 +557,7 @@ export default function TrendingPage() {
                   <Link
                     key={category}
                     to={`/${category}`}
-                    className="bg-gray-700 rounded-lg p-6 hover:bg-gray-600 transition-colors group"
+                    className="bg-muted rounded-lg p-6 hover:bg-muted/80 transition-colors group"
                   >
                     <div className="text-center">
                       <div className="text-4xl mb-4">{categoryIcon}</div>
