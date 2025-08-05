@@ -561,7 +561,7 @@ export default function TrendingPage() {
                   >
                     <div className="text-center">
                       <div className="text-4xl mb-4">{categoryIcon}</div>
-                      <h3 className="text-xl font-semibold text-white mb-2 capitalize group-hover:text-primary transition-colors">
+                      <h3 className="text-xl font-semibold text-foreground mb-2 capitalize group-hover:text-primary transition-colors">
                         {category === "pop-culture" ? "Pop Culture" : category}
                       </h3>
                       <p className="text-muted-foreground mb-4">
