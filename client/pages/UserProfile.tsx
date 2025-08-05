@@ -36,17 +36,49 @@ import {
 } from "lucide-react";
 
 export default function UserProfile() {
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout, isAdmin, isAuthenticated } = useAuth();
   const { items: cartItems, totalPrice } = useCart();
   const { selectedCurrency } = useCurrency();
+  const { products } = useProducts();
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("profile");
+  const [userWishlist, setUserWishlist] = useState<WishlistItem[]>([]);
+  const [wishlistLoading, setWishlistLoading] = useState(false);
 
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Load user wishlist when component mounts or user changes
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      loadWishlist();
+    }
+  }, [isAuthenticated, user]);
+
+  const loadWishlist = async () => {
+    try {
+      setWishlistLoading(true);
+      const wishlistData = await userApi.getWishlist();
+      setUserWishlist(wishlistData);
+    } catch (error) {
+      console.error('Error loading wishlist:', error);
+    } finally {
+      setWishlistLoading(false);
+    }
+  };
+
+  const removeFromWishlist = async (productId: string) => {
+    try {
+      await userApi.removeFromWishlist(productId);
+      setUserWishlist(prev => prev.filter(item => item.productId !== productId));
+    } catch (error) {
+      console.error('Error removing from wishlist:', error);
+    }
+  };
+
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({
     name: user?.name || "",
@@ -178,7 +210,7 @@ export default function UserProfile() {
                       Admin
                     </Badge>
                   )}
-                  <Badge className="bg-green-500 text-white">✓ Verified</Badge>
+                  <Badge className="bg-green-500 text-white">��� Verified</Badge>
                 </div>
 
                 <p className="text-gray-400 mb-3">{user.email}</p>
