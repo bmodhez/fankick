@@ -175,7 +175,7 @@ export default function TrendingPage() {
                   <Button
                     variant="outline"
                     onClick={() => setShowFilters(!showFilters)}
-                    className="border-gray-600 text-gray-300"
+                    className="border-border text-muted-foreground hover:text-foreground"
                   >
                     <SlidersHorizontal className="w-4 h-4 mr-2" />
                     Filters
