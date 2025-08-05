@@ -222,7 +222,7 @@ export default function TrendingPage() {
                       >
                         <option value="all">All Categories</option>
                         <option value="football">⚽ Football</option>
-                        <option value="anime">🎌 Anime</option>
+                        <option value="anime">���� Anime</option>
                         <option value="pop-culture">�� Pop Culture</option>
                       </select>
                     </div>
@@ -504,7 +504,7 @@ export default function TrendingPage() {
                               {formatPrice(convertedOriginalPrice, selectedCurrency)}
                             </span>
                           </div>
-                          <Badge className="bg-green-100 text-green-800 text-xs">
+                          <Badge className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs">
                             {Math.round(
                               ((convertedOriginalPrice - convertedPrice) /
                                 convertedOriginalPrice) *
