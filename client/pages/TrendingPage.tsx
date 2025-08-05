@@ -234,7 +234,7 @@ export default function TrendingPage() {
                       <select
                         value={priceRange}
                         onChange={(e) => setPriceRange(e.target.value)}
-                        className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white"
+                        className="w-full px-3 py-2 bg-input border border-border rounded text-foreground"
                       >
                         <option value="all">All Prices</option>
                         <option value="under-25">Under {formatPrice(convertPrice(25, selectedCurrency.code), selectedCurrency)}</option>
