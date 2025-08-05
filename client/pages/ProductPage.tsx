@@ -286,7 +286,7 @@ export default function ProductPage() {
 
             {product.variants.some((v) => v.color) && (
               <div>
-                <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
+                <h3 className="font-semibold mb-3 text-white">
                   Color
                 </h3>
                 <div className="flex flex-wrap gap-2">
