@@ -381,7 +381,7 @@ export default function TrendingPage() {
                                 <Button
                                   variant="outline"
                                   size="sm"
-                                  className="border-gray-600 text-gray-300"
+                                  className="border-border text-muted-foreground hover:text-foreground"
                                   onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
