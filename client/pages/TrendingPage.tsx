@@ -155,7 +155,7 @@ export default function TrendingPage() {
 
         {/* Filters & Search */}
         <div className="mb-8">
-          <Card className="bg-gray-800 border-gray-700">
+          <Card className="bg-card border-border">
             <CardContent className="p-6">
               <div className="flex flex-col lg:flex-row gap-4">
                 {/* Search */}
