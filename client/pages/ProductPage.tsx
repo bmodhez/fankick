@@ -199,7 +199,7 @@ export default function ProductPage() {
                   }`}
                 >
                   <img
-                    src={image}
+                    src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2F5edc0315c5a84834949807dbf25594d9?format=webp&width=800"
                     alt={`View ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
