@@ -48,12 +48,19 @@ export function PaymentModal({
   codAvailable = false,
 }: PaymentModalProps) {
   const { user } = useAuth();
+  const { selectedCurrency } = useCurrency();
   const [selectedPayment, setSelectedPayment] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
   const [orderDetails, setOrderDetails] = useState<any>(null);
 
-  const country = currency === "INR" ? "IN" : "US";
+  // Safety check for currency
+  if (!selectedCurrency || !selectedCurrency.code) {
+    console.warn('PaymentModal: selectedCurrency is invalid:', selectedCurrency);
+    return null;
+  }
+
+  const country = selectedCurrency.code === "INR" ? "IN" : "US";
   const paymentMethods = getAvailablePaymentMethods(country);
 
   const subtotal = amount;

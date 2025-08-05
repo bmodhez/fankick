@@ -31,8 +31,8 @@ async function apiRequest<T>(
       "Content-Type": "application/json",
       ...options.headers,
     },
-    // Add default timeout to prevent hanging requests
-    signal: options.signal || AbortSignal.timeout(30000), // 30 second timeout
+    // Add shorter timeout to fail fast on network issues
+    signal: options.signal || AbortSignal.timeout(10000), // 10 second timeout
   };
 
   let lastError: Error;
@@ -63,9 +63,23 @@ async function apiRequest<T>(
     } catch (error) {
       lastError = error as Error;
 
-      // Handle AbortError more gracefully
-      if (error instanceof Error && error.name === "AbortError") {
-        throw new Error("Request was cancelled or timed out");
+      // Handle specific fetch errors
+      if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          throw new Error("Request was cancelled or timed out");
+        }
+
+        // Handle network/fetch failures more gracefully
+        if (
+          error.message.includes("Failed to fetch") ||
+          error.message.includes("NetworkError") ||
+          error.message.includes("ERR_NETWORK") ||
+          error.message.includes("fetch is not defined") ||
+          error.name === "TypeError"
+        ) {
+          // Don't retry on network errors, fail fast
+          throw new Error("Network error. Using local data instead.");
+        }
       }
 
       // Don't retry on client errors (4xx) or if it's the last attempt
@@ -78,15 +92,15 @@ async function apiRequest<T>(
       }
 
       if (attempt === retries) {
-        console.error(
-          `API Request failed after ${retries + 1} attempts:`,
-          error,
+        console.warn(
+          `API Request failed after ${retries + 1} attempts, falling back to local data:`,
+          error.message,
         );
         throw error;
       }
 
-      // Wait before retrying (exponential backoff)
-      const delay = Math.min(1000 * Math.pow(2, attempt), 5000);
+      // For server errors, wait before retrying (exponential backoff)
+      const delay = Math.min(1000 * Math.pow(2, attempt), 3000); // Reduced max delay
       console.log(`API Request failed, retrying in ${delay}ms...`);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
