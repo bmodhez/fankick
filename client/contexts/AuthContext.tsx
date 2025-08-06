@@ -192,7 +192,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const isAdmin = (): boolean => {
     if (!user) return false;
 
-    const adminEmail = 'modhbhavin05@gmail.com';
+    const adminEmail = 'modhbhavin5@gmail.com';
     const adminPhone = '9322667822';
 
     return user.email === adminEmail && user.phone === adminPhone;
