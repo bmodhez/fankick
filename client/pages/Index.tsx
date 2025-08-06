@@ -28,6 +28,7 @@ export default function Index() {
   const { selectedCurrency } = useCurrency();
   const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
+  const { toggleLike, isLiked } = useLike();
   const trendingProducts = getTrendingProducts(4);
 
   // Debug logging
@@ -81,7 +82,7 @@ export default function Index() {
     },
     {
       title: "Pop Culture",
-      subtitle: "Taylor Swift • K-pop • Marvel",
+      subtitle: "Taylor Swift �� K-pop • Marvel",
       image: "/placeholder.svg",
       cta: "Discover More",
       link: "/pop-culture",
