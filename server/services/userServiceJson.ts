@@ -93,10 +93,18 @@ export class UserServiceJson {
   async registerUser(userData: UserCreateRequest): Promise<User> {
     const users = await loadUsers();
     
-    // Check if user already exists
-    const existingUser = users.find(u => u.email === userData.email);
-    if (existingUser) {
+    // Check if user already exists by email
+    const existingUserByEmail = users.find(u => u.email === userData.email);
+    if (existingUserByEmail) {
       throw new Error('User with this email already exists');
+    }
+
+    // Check if user already exists by phone (if phone is provided)
+    if (userData.phone) {
+      const existingUserByPhone = users.find(u => u.phone === userData.phone);
+      if (existingUserByPhone) {
+        throw new Error('User with this phone number already exists');
+      }
     }
     
     // Hash password
