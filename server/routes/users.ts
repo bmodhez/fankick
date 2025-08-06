@@ -50,8 +50,8 @@ export async function registerUser(req: Request, res: Response) {
     
     let errorMessage = 'Failed to register user';
     if (error instanceof Error) {
-      if (error.message.includes('already exists')) {
-        errorMessage = 'User with this email already exists';
+      if (error.message.includes('already registered')) {
+        errorMessage = error.message; // Use the detailed message from service
       } else {
         errorMessage = error.message;
       }
