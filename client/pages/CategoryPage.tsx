@@ -6,6 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Footer } from "@/components/Footer";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
+import { useLike } from "@/contexts/LikeContext";
+import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { Product } from "@/data/products";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
@@ -21,12 +23,19 @@ export default function CategoryPage() {
   const { category } = useParams<{ category: string }>();
   const { selectedCurrency } = useCurrency();
   const { getProductsByCategory, isLoading, products } = useProducts();
+  const { toggleLike, isLiked } = useLike();
+  const { requireAuth, AuthModalComponent } = useAuthRequired();
   const [sortBy, setSortBy] = useState("trending");
   const [priceRange, setPriceRange] = useState("all");
 
   // Get products for the specific category
   const normalizedCategory = category?.toLowerCase().trim() || "";
   let allProducts: Product[] = [];
+
+  // Scroll to top when category changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [category]);
 
   if (normalizedCategory && products.length > 0) {
     // Filter products by exact category match
@@ -291,9 +300,24 @@ export default function CategoryPage() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="bg-background/90 hover:bg-background"
+                          className={`bg-background/90 hover:bg-background transition-all duration-300 hover:scale-110 ${
+                            isLiked(product.id)
+                              ? "shadow-lg shadow-red-500/25"
+                              : ""
+                          }`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            requireAuth(() => toggleLike(product.id));
+                          }}
                         >
-                          <Heart className="w-4 h-4" />
+                          <Heart
+                            className={`w-4 h-4 transition-all duration-300 ${
+                              isLiked(product.id)
+                                ? "fill-red-500 text-red-500 scale-110"
+                                : "text-muted-foreground hover:text-red-500"
+                            }`}
+                          />
                         </Button>
                       </div>
 
@@ -387,6 +411,7 @@ export default function CategoryPage() {
       </div>
 
       <Footer />
+      <AuthModalComponent />
     </div>
   );
 }

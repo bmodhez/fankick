@@ -8,6 +8,8 @@ import { QuickAdminAccess } from "@/components/admin/QuickAdminAccess";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useCart } from "@/contexts/CartContext";
+import { useLike } from "@/contexts/LikeContext";
+import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   Star,
@@ -27,6 +29,8 @@ export default function Index() {
   const { selectedCurrency } = useCurrency();
   const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
+  const { toggleLike, isLiked } = useLike();
+  const { requireAuth, AuthModalComponent } = useAuthRequired();
   const trendingProducts = getTrendingProducts(4);
 
   // Debug logging
@@ -37,18 +41,7 @@ export default function Index() {
     console.log("First trending product image:", trendingProducts[0].images[0]);
   }
 
-  // Force image override for all trending products
-  const builderImageUrl =
-    "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
-  const forcedProducts = trendingProducts.map((product) => ({
-    ...product,
-    images: [
-      builderImageUrl,
-      builderImageUrl,
-      builderImageUrl,
-      builderImageUrl,
-    ],
-  }));
+  // Use original product images without override
 
   // Add global debug function
   (window as any).updateProductImages = () => {
@@ -92,30 +85,34 @@ export default function Index() {
     {
       name: "Football Jerseys",
       items: 350,
-      image: "/placeholder.svg",
+      image:
+        "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F8bebf119965a4b5ba2f2d45b556c0cb2?format=webp&width=800",
       description: "Official jerseys from Messi, Ronaldo & more",
-      link: "/football/jerseys",
+      link: "/collections/football",
     },
     {
       name: "Anime Rings",
       items: 180,
-      image: "/placeholder.svg",
+      image:
+        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80",
       description: "Exclusive rings from Naruto, One Piece & more",
-      link: "/anime/rings",
+      link: "/collections/anime",
     },
     {
       name: "K-pop Merch",
       items: 240,
-      image: "/placeholder.svg",
+      image:
+        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
       description: "BTS, Blackpink, Stray Kids official items",
-      link: "/pop-culture/kpop",
+      link: "/collections/pop-culture",
     },
     {
       name: "Marvel Collection",
       items: 420,
-      image: "/placeholder.svg",
+      image:
+        "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80",
       description: "Superhero gear for true Marvel fans",
-      link: "/pop-culture/marvel",
+      link: "/collections/pop-culture",
     },
   ];
 
@@ -241,7 +238,7 @@ export default function Index() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {forcedProducts.map((product, index) => {
+            {trendingProducts.map((product, index) => {
               const convertedPrice = convertPrice(
                 product.basePrice,
                 selectedCurrency.code,
@@ -286,9 +283,24 @@ export default function Index() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="bg-white/90 hover:bg-white"
+                            className={`bg-white/90 hover:bg-white transition-all duration-300 hover:scale-110 ${
+                              isLiked(product.id)
+                                ? "shadow-lg shadow-red-500/25"
+                                : ""
+                            }`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              requireAuth(() => toggleLike(product.id));
+                            }}
                           >
-                            <Heart className="w-4 h-4" />
+                            <Heart
+                              className={`w-4 h-4 transition-all duration-300 ${
+                                isLiked(product.id)
+                                  ? "fill-red-500 text-red-500 scale-110"
+                                  : "text-gray-600 hover:text-red-500"
+                              }`}
+                            />
                           </Button>
                         </div>
 
@@ -516,8 +528,8 @@ export default function Index() {
         </div>
       </section>
 
-
       <Footer />
+      <AuthModalComponent />
     </div>
   );
 }
