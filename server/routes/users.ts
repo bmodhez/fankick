@@ -36,8 +36,10 @@ export async function registerUser(req: Request, res: Response) {
       };
       return res.status(400).json(response);
     }
-    
+
+    console.log('Calling userService.registerUser with:', userData);
     const user = await userService.registerUser(userData);
+    console.log('User registration successful:', user.id);
     
     const response: UserResponse = {
       success: true,
