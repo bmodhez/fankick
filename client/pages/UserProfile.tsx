@@ -60,6 +60,19 @@ export default function UserProfile() {
   // Real user wishlist (empty for new users)
   const [wishlist] = useState([]);
 
+  // Update form when user data changes
+  useEffect(() => {
+    if (user) {
+      setEditForm({
+        name: user.firstName || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        address: "",
+        bio: "",
+      });
+    }
+  }, [user]);
+
   useEffect(() => {
     if (!user) {
       navigate("/");
