@@ -9,6 +9,7 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useCart } from "@/contexts/CartContext";
 import { useLike } from "@/contexts/LikeContext";
+import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   TrendingUp,
@@ -33,6 +34,7 @@ export default function TrendingPage() {
   const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
   const { toggleLike, isLiked } = useLike();
+  const { requireAuth, AuthModalComponent } = useAuthRequired();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
