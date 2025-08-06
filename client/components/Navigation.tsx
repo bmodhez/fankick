@@ -284,14 +284,16 @@ export function Navigation() {
                       Wishlist
                     </Link>
 
-                    <Link
-                      to="/admin"
-                      className="block px-4 py-2 hover:bg-gray-700 flex items-center border-t border-gray-700"
-                      onClick={() => setShowUserMenu(false)}
-                    >
-                      <Crown className="w-4 h-4 mr-2 text-primary" />
-                      Admin Panel
-                    </Link>
+                    {isAdmin() && (
+                      <Link
+                        to="/admin"
+                        className="block px-4 py-2 hover:bg-gray-700 flex items-center border-t border-gray-700"
+                        onClick={() => setShowUserMenu(false)}
+                      >
+                        <Crown className="w-4 h-4 mr-2 text-primary" />
+                        Admin Panel
+                      </Link>
+                    )}
 
                     <button
                       onClick={() => {
