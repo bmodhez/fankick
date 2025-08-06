@@ -30,7 +30,7 @@ export function Navigation() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showCart, setShowCart] = useState(false);
   const { selectedCurrency, setCurrency } = useCurrency();
-  const { user, logout } = useAuth();
+  const { user, logout, isAdmin } = useAuth();
   const { totalItems } = useCart();
   const navigate = useNavigate();
   const currencyRef = useRef<HTMLDivElement>(null);
