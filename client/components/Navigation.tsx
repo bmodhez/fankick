@@ -94,14 +94,14 @@ export function Navigation() {
 
   return (
     <nav className="bg-background/95 border-border sticky top-0 z-50 border-b backdrop-blur-xl shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-primary via-cyan-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg shadow-primary/25 animate-pulse">
-              <span className="text-white font-bold text-lg">⚡</span>
+          <Link to="/" className="flex items-center space-x-2 min-w-0 flex-shrink-0">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-primary via-cyan-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg shadow-primary/25 animate-pulse">
+              <span className="text-white font-bold text-sm sm:text-lg">⚡</span>
             </div>
-            <span className="font-sport font-bold text-xl tracking-wide text-foreground">
+            <span className="font-sport font-bold text-lg sm:text-xl tracking-wide text-foreground">
               FAN<span className="text-primary">KICK</span>
             </span>
           </Link>
@@ -146,9 +146,9 @@ export function Navigation() {
           </div>
 
           {/* Right side icons */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-1 sm:space-x-3">
             {/* Currency Selector */}
-            <div className="relative hidden sm:block" ref={currencyRef}>
+            <div className="relative hidden md:block" ref={currencyRef}>
               <Button
                 variant="ghost"
                 size="sm"
@@ -192,7 +192,7 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="hidden sm:flex text-foreground hover:text-primary cursor-pointer"
+                className="hidden md:flex text-foreground hover:text-primary cursor-pointer p-2"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -321,16 +321,16 @@ export function Navigation() {
             ) : (
               <Link
                 to="/login"
-                className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                className="inline-flex items-center px-2 sm:px-3 py-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
-                <User className="w-4 h-4 mr-1" />
+                <User className="w-4 h-4 sm:mr-1" />
                 <span className="hidden sm:inline">Login</span>
               </Link>
             )}
             <Button
               variant="ghost"
               size="sm"
-              className="relative text-foreground hover:text-primary cursor-pointer"
+              className="relative text-foreground hover:text-primary cursor-pointer p-2"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -351,7 +351,7 @@ export function Navigation() {
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden text-foreground cursor-pointer"
+              className="md:hidden text-foreground cursor-pointer p-2 ml-1"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -361,9 +361,9 @@ export function Navigation() {
               style={{ pointerEvents: "auto" }}
             >
               {isMenuOpen ? (
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
               ) : (
-                <Menu className="h-4 w-4" />
+                <Menu className="h-5 w-5" />
               )}
             </Button>
           </div>
@@ -371,8 +371,8 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-border">
+          <div className="md:hidden bg-background/98 backdrop-blur-xl">
+            <div className="px-3 pt-3 pb-4 space-y-2 border-t border-border shadow-lg">
               <Link
                 to="/category/football"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
