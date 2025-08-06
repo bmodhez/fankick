@@ -160,11 +160,7 @@ export default function UserProfile() {
           <CardContent className="p-6">
             <div className="flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 lg:space-x-6">
               <div className="w-20 h-20 bg-gradient-to-r from-primary to-purple-500 rounded-full flex items-center justify-center">
-                {isAdmin() ? (
-                  <Crown className="w-10 h-10 text-black" />
-                ) : (
-                  <User className="w-10 h-10 text-black" />
-                )}
+                <User className="w-10 h-10 text-black" />
               </div>
 
               <div className="flex-1">
