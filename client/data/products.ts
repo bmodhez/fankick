@@ -639,9 +639,9 @@ export const PRODUCTS: Product[] = [
     category: "anime",
     subcategory: "hoodies",
     images: [
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=800&q=80",
+      "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=80",
+      "https://images.unsplash.com/photo-1525845859779-54d477ff291f?w=800&q=80",
     ],
     variants: [
       {
