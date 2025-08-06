@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useLike } from "@/contexts/LikeContext";
+import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { Product } from "@/data/products";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
@@ -23,6 +24,7 @@ export default function CategoryPage() {
   const { selectedCurrency } = useCurrency();
   const { getProductsByCategory, isLoading, products } = useProducts();
   const { toggleLike, isLiked } = useLike();
+  const { requireAuth, AuthModalComponent } = useAuthRequired();
   const [sortBy, setSortBy] = useState("trending");
   const [priceRange, setPriceRange] = useState("all");
 
@@ -301,7 +303,7 @@ export default function CategoryPage() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            toggleLike(product.id);
+                            requireAuth(() => toggleLike(product.id));
                           }}
                         >
                           <Heart
