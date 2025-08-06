@@ -33,6 +33,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
+import CollectionsPage from "./pages/CollectionsPage";
 import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
