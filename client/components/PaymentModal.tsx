@@ -67,6 +67,8 @@ export function PaymentModal({
   if (product) {
     console.log('PaymentModal product data:', product);
     console.log('Product image URL:', product.image);
+    console.log('Product name:', product.name);
+    console.log('Image exists check:', !!product.image);
   }
 
   const subtotal = product ? product.price * product.quantity : amount;
