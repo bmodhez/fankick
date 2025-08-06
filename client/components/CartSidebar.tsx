@@ -63,6 +63,16 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
     if (items.length === 0) {
       return;
     }
+
+    if (!user) {
+      // If not logged in, redirect to login with checkout redirect
+      onClose(); // Close the cart sidebar
+      navigate('/login', {
+        state: { from: { pathname: '/checkout' } }
+      });
+      return;
+    }
+
     onClose(); // Close the cart sidebar
     navigate('/checkout'); // Navigate to checkout page
   };
