@@ -202,6 +202,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     user,
     isLoading,
     isAuthenticated,
+    isAdmin,
     login,
     signup,
     logout,
