@@ -82,7 +82,7 @@ export default function Index() {
     },
     {
       title: "Pop Culture",
-      subtitle: "Taylor Swift �� K-pop • Marvel",
+      subtitle: "Taylor Swift • K-pop • Marvel",
       image: "/placeholder.svg",
       cta: "Discover More",
       link: "/pop-culture",
@@ -288,9 +288,24 @@ export default function Index() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="bg-white/90 hover:bg-white"
+                            className={`bg-white/90 hover:bg-white transition-all duration-300 hover:scale-110 ${
+                              isLiked(product.id)
+                                ? 'shadow-lg shadow-red-500/25'
+                                : ''
+                            }`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              toggleLike(product.id);
+                            }}
                           >
-                            <Heart className="w-4 h-4" />
+                            <Heart
+                              className={`w-4 h-4 transition-all duration-300 ${
+                                isLiked(product.id)
+                                  ? 'fill-red-500 text-red-500 scale-110'
+                                  : 'text-gray-600 hover:text-red-500'
+                              }`}
+                            />
                           </Button>
                         </div>
 
