@@ -11,26 +11,42 @@ const LikeContext = createContext<LikeContextType | undefined>(undefined);
 
 export function LikeProvider({ children }: { children: React.ReactNode }) {
   const [likedProducts, setLikedProducts] = useState<Set<string>>(new Set());
+  const { isAuthenticated, user } = useAuth();
 
-  // Load liked products from localStorage on mount
+  // Load liked products from localStorage on mount (only for authenticated users)
   useEffect(() => {
-    const stored = localStorage.getItem("likedProducts");
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        setLikedProducts(new Set(parsed));
-      } catch (error) {
-        console.error("Error loading liked products:", error);
+    if (isAuthenticated && user) {
+      const stored = localStorage.getItem(`likedProducts_${user.id}`);
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          setLikedProducts(new Set(parsed));
+        } catch (error) {
+          console.error("Error loading liked products:", error);
+        }
       }
+    } else {
+      // Clear likes when user logs out
+      setLikedProducts(new Set());
     }
-  }, []);
+  }, [isAuthenticated, user]);
 
-  // Save to localStorage whenever liked products change
+  // Save to localStorage whenever liked products change (only for authenticated users)
   useEffect(() => {
-    localStorage.setItem("likedProducts", JSON.stringify([...likedProducts]));
-  }, [likedProducts]);
+    if (isAuthenticated && user) {
+      localStorage.setItem(`likedProducts_${user.id}`, JSON.stringify([...likedProducts]));
+    }
+  }, [likedProducts, isAuthenticated, user]);
 
-  const toggleLike = (productId: string) => {
+  const toggleLike = (productId: string, onAuthRequired?: () => void) => {
+    if (!isAuthenticated) {
+      // Call the callback to show auth modal or redirect
+      if (onAuthRequired) {
+        onAuthRequired();
+      }
+      return;
+    }
+
     setLikedProducts(prev => {
       const newSet = new Set(prev);
       if (newSet.has(productId)) {
