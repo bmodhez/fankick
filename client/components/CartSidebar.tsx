@@ -110,15 +110,15 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       />
 
       {/* Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-lg bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 z-[61] shadow-2xl border-l-2 border-primary/20 flex flex-col backdrop-blur-sm transform transition-transform duration-300 ease-out animate-slide-in">
+      <div className="fixed right-0 top-0 h-full w-full sm:max-w-lg bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 z-[61] shadow-2xl border-l-2 border-primary/20 flex flex-col backdrop-blur-sm transform transition-transform duration-300 ease-out animate-slide-in">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b-2 border-gray-600/50 bg-gradient-to-r from-primary/15 via-purple-500/10 to-blue-500/15 backdrop-blur-sm">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b-2 border-gray-600/50 bg-gradient-to-r from-primary/15 via-purple-500/10 to-blue-500/15 backdrop-blur-sm">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-primary/20 rounded-full">
               <ShoppingBag className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">Shopping Cart</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-white">Shopping Cart</h2>
               {totalItems > 0 && (
                 <p className="text-sm text-gray-300">
                   {totalItems} item{totalItems > 1 ? "s" : ""} in cart
@@ -142,28 +142,28 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         </div>
 
         {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 custom-scrollbar">
           {items.length === 0 ? (
-            <div className="text-center py-20">
-              <div className="w-24 h-24 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-6">
-                <ShoppingBag className="w-12 h-12 text-gray-500" />
+            <div className="text-center py-12 sm:py-20">
+              <div className="w-20 sm:w-24 h-20 sm:h-24 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <ShoppingBag className="w-10 sm:w-12 h-10 sm:h-12 text-gray-500" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-3">
                 Your cart is empty
               </h3>
-              <p className="text-gray-400 mb-8 leading-relaxed px-4">
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed px-4 text-sm sm:text-base">
                 Add some amazing products to get started with your shopping
                 journey!
               </p>
               <Button
                 onClick={onClose}
-                className="bg-primary text-black hover:bg-primary/90 px-8 py-3 rounded-xl font-semibold shadow-lg transform hover:scale-105 transition-all"
+                className="bg-primary text-black hover:bg-primary/90 px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-semibold shadow-lg transform hover:scale-105 transition-all text-sm sm:text-base"
               >
                 Continue Shopping
               </Button>
             </div>
           ) : (
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {items.map((item) => {
                 const convertedPrice = convertPrice(
                   item.variant.price,
@@ -174,7 +174,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 return (
                   <div
                     key={item.id}
-                    className="bg-gradient-to-r from-gray-800/60 to-gray-700/40 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/40 hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
+                    className="bg-gradient-to-r from-gray-800/60 to-gray-700/40 rounded-2xl p-3 sm:p-5 border border-gray-600/50 hover:border-primary/40 hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
                   >
                     <div className="flex space-x-3">
                       {/* Product Image */}
@@ -182,21 +182,21 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         <img
                           src={item.product.images[0]}
                           alt={item.product.name}
-                          className="w-20 h-20 object-cover rounded-xl border-2 border-gray-600"
+                          className="w-16 sm:w-20 h-16 sm:h-20 object-cover rounded-xl border-2 border-gray-600"
                         />
-                        <div className="absolute -top-2 -left-2 bg-primary text-black text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
+                        <div className="absolute -top-1 sm:-top-2 -left-1 sm:-left-2 bg-primary text-black text-xs font-bold rounded-full w-5 sm:w-6 h-5 sm:h-6 flex items-center justify-center">
                           {item.quantity}
                         </div>
                       </div>
 
                       {/* Product Details */}
-                      <div className="flex-1 space-y-3">
-                        <h4 className="font-semibold text-white text-base line-clamp-2 leading-tight">
+                      <div className="flex-1 space-y-2 sm:space-y-3">
+                        <h4 className="font-semibold text-white text-sm sm:text-base line-clamp-2 leading-tight">
                           {item.product.name}
                         </h4>
 
                         {/* Variant Info */}
-                        <div className="flex items-center gap-3 text-xs">
+                        <div className="flex items-center gap-2 sm:gap-3 text-xs">
                           {item.variant.size && (
                             <span className="bg-gray-600/50 px-2 py-1 rounded-full text-gray-300">
                               Size: {item.variant.size}
@@ -210,12 +210,12 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         </div>
 
                         {/* Price */}
-                        <p className="font-bold text-lg text-primary bg-primary/10 px-3 py-1 rounded-lg inline-block">
+                        <p className="font-bold text-sm sm:text-lg text-primary bg-primary/10 px-2 sm:px-3 py-1 rounded-lg inline-block">
                           {formatPrice(convertedPrice, selectedCurrency)}
                         </p>
 
                         {/* Quantity Controls */}
-                        <div className="flex items-center justify-between mt-4">
+                        <div className="flex items-center justify-between mt-3 sm:mt-4">
                           <div className="flex items-center bg-gray-700/70 rounded-xl p-1 border border-gray-600">
                             <Button
                               variant="ghost"
@@ -223,11 +223,11 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                               onClick={() =>
                                 updateQuantity(item.id, item.quantity - 1)
                               }
-                              className="w-9 h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
+                              className="w-8 sm:w-9 h-8 sm:h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
                             >
-                              <Minus className="w-4 h-4" />
+                              <Minus className="w-3 sm:w-4 h-3 sm:h-4" />
                             </Button>
-                            <span className="text-white font-bold w-12 text-center bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-lg mx-1 py-2 border border-primary/30">
+                            <span className="text-white font-bold w-10 sm:w-12 text-center bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-lg mx-1 py-1.5 sm:py-2 border border-primary/30 text-sm">
                               {item.quantity}
                             </span>
                             <Button
@@ -236,9 +236,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                               onClick={() =>
                                 updateQuantity(item.id, item.quantity + 1)
                               }
-                              className="w-9 h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
+                              className="w-8 sm:w-9 h-8 sm:h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
                             >
-                              <Plus className="w-4 h-4" />
+                              <Plus className="w-3 sm:w-4 h-3 sm:h-4" />
                             </Button>
                           </div>
 
@@ -246,9 +246,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             variant="ghost"
                             size="sm"
                             onClick={() => removeFromCart(item.id)}
-                            className="text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl p-2 transition-all transform hover:scale-105"
+                            className="text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl p-1.5 sm:p-2 transition-all transform hover:scale-105"
                           >
-                            <Trash2 className="w-5 h-5" />
+                            <Trash2 className="w-4 sm:w-5 h-4 sm:h-5" />
                           </Button>
                         </div>
                       </div>
