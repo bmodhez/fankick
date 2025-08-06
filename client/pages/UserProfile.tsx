@@ -34,7 +34,7 @@ import {
 } from "lucide-react";
 
 export default function UserProfile() {
-  const { user, logout } = useAuth();
+  const { user, logout, isAdmin } = useAuth();
   const { items: cartItems, totalPrice } = useCart();
   const { selectedCurrency } = useCurrency();
   const navigate = useNavigate();
