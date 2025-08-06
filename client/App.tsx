@@ -34,6 +34,7 @@ import Signup from "./pages/Signup";
 import Checkout from "./pages/Checkout";
 import OrderSuccess from "./pages/OrderSuccess";
 import CollectionsPage from "./pages/CollectionsPage";
+import ScrollToTop from "./components/ScrollToTop";
 import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
