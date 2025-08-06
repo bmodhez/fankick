@@ -50,6 +50,8 @@ export function PaymentModal({
 }: PaymentModalProps) {
   const { user } = useAuth();
   const { selectedCurrency } = useCurrency();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [selectedPayment, setSelectedPayment] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
