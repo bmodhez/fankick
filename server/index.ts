@@ -25,7 +25,7 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "./routes/users";
-import "./database/init.js"; // Initialize database on startup
+// import "./database/init.js"; // Initialize database on startup - disabled until PostgreSQL is configured
 
 export function createServer() {
   const app = express();

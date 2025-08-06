@@ -225,7 +225,11 @@
     "description": "Complete set of 10 official Akatsuki rings from Naruto series. High-quality metal construction with authentic engravings. Perfect for cosplay and collectors.",
     "category": "anime",
     "subcategory": "rings",
-    "images": ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    "images": [
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800"
+    ],
     "variants": [
       {
         "id": "akatsuki-full",

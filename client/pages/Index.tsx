@@ -515,22 +515,6 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Admin Access Section - For Testing */}
-      <section className="py-12 bg-secondary/50 dark:bg-gray-900 border-t border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-foreground mb-2">
-              🔧 Admin Panel Access
-            </h2>
-            <p className="text-muted-foreground">
-              Test all product management features with full admin access
-            </p>
-          </div>
-          <div className="flex justify-center">
-            <QuickAdminAccess />
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>

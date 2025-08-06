@@ -81,71 +81,31 @@ export default function UserProfile() {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({
-    name: user?.name || "",
+    name: user?.firstName || "",
     email: user?.email || "",
     phone: user?.phone || "",
-    address: "123 Main St, City, Country",
-    bio: "FanKick enthusiast since 2024",
+    address: "",
+    bio: "",
   });
 
-  // Mock data for orders and wishlist
-  const [orders] = useState([
-    {
-      id: "ORD-001",
-      date: "2024-01-15",
-      status: "delivered",
-      total: 89.99,
-      items: 3,
-      image: "/placeholder.svg",
-      products: [
-        "Naruto Akatsuki Hoodie",
-        "Messi Jersey",
-        "Taylor Swift T-Shirt",
-      ],
-    },
-    {
-      id: "ORD-002",
-      date: "2024-01-10",
-      status: "shipped",
-      total: 159.99,
-      items: 2,
-      image: "/placeholder.svg",
-      products: ["Attack on Titan Hoodie", "BTS Merchandise"],
-    },
-    {
-      id: "ORD-003",
-      date: "2024-01-05",
-      status: "processing",
-      total: 45.99,
-      items: 1,
-      image: "/placeholder.svg",
-      products: ["One Piece Straw Hat"],
-    },
-  ]);
+  // Real user orders (empty for new users)
+  const [orders] = useState([]);
 
-  const [wishlist] = useState([
-    {
-      id: "wish-1",
-      name: "Demon Slayer Tanjiro Hoodie",
-      price: 69.99,
-      image: "/placeholder.svg",
-      inStock: true,
-    },
-    {
-      id: "wish-2",
-      name: "Cristiano Ronaldo Jersey",
-      price: 89.99,
-      image: "/placeholder.svg",
-      inStock: false,
-    },
-    {
-      id: "wish-3",
-      name: "Marvel Spider-Man Hoodie",
-      price: 79.99,
-      image: "/placeholder.svg",
-      inStock: true,
-    },
-  ]);
+  // Real user wishlist (empty for new users)
+  const [wishlist] = useState([]);
+
+  // Update form when user data changes
+  useEffect(() => {
+    if (user) {
+      setEditForm({
+        name: user.firstName || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        address: "",
+        bio: "",
+      });
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!user) {
@@ -187,7 +147,6 @@ export default function UserProfile() {
 
   return (
     <div className="min-h-screen bg-gray-900">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* User Header */}
         <Card className="bg-gray-800 border-gray-700 mb-8">
@@ -203,14 +162,24 @@ export default function UserProfile() {
 
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
-                  <h1 className="text-2xl font-bold text-white">{user.name}</h1>
+                  <h1 className="text-2xl font-bold text-white">
+                    {user.firstName || "User"}
+                  </h1>
                   {isAdmin() && (
                     <Badge className="bg-gradient-to-r from-primary to-purple-500 text-black">
                       <Crown className="w-3 h-3 mr-1" />
                       Admin
                     </Badge>
                   )}
-                  <Badge className="bg-green-500 text-white">✓ Verified</Badge>
+                  {user.isVerified ? (
+                    <Badge className="bg-green-500 text-white">
+                      ✓ Verified
+                    </Badge>
+                  ) : (
+                    <Badge className="bg-yellow-500 text-black">
+                      ⚠ Unverified
+                    </Badge>
+                  )}
                 </div>
 
                 <p className="text-gray-400 mb-3">{user.email}</p>
@@ -413,26 +382,40 @@ export default function UserProfile() {
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Calendar className="w-8 h-8 text-primary mx-auto mb-2" />
                       <div className="text-lg font-bold text-white">
-                        Jan 2024
+                        {user.createdAt
+                          ? new Date(user.createdAt).toLocaleDateString(
+                              "en-US",
+                              { month: "short", year: "numeric" },
+                            )
+                          : "New User"}
                       </div>
                       <div className="text-sm text-gray-400">Member Since</div>
                     </div>
 
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Star className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
-                      <div className="text-lg font-bold text-white">Gold</div>
+                      <div className="text-lg font-bold text-white">
+                        {orders.length >= 5 ? "Gold" : "Silver"}
+                      </div>
                       <div className="text-sm text-gray-400">Member Tier</div>
                     </div>
 
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Gift className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-                      <div className="text-lg font-bold text-white">3</div>
+                      <div className="text-lg font-bold text-white">
+                        {Math.floor(orders.length / 2)}
+                      </div>
                       <div className="text-sm text-gray-400">Rewards</div>
                     </div>
 
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Truck className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                      <div className="text-lg font-bold text-white">15</div>
+                      <div className="text-lg font-bold text-white">
+                        {
+                          orders.filter((order) => order.status === "delivered")
+                            .length
+                        }
+                      </div>
                       <div className="text-sm text-gray-400">Deliveries</div>
                     </div>
                   </div>
@@ -444,72 +427,97 @@ export default function UserProfile() {
           {/* Orders Tab */}
           {activeTab === "orders" && (
             <div className="space-y-4">
-              {orders.map((order) => (
-                <Card key={order.id} className="bg-gray-800 border-gray-700">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-4 lg:space-y-0">
-                      <div className="flex items-center space-x-4">
-                        <img
-                          src={order.image}
-                          alt="Order"
-                          className="w-16 h-16 object-cover rounded-lg"
-                        />
-                        <div>
-                          <div className="flex items-center space-x-3 mb-2">
-                            <h3 className="font-semibold text-white">
-                              Order #{order.id}
-                            </h3>
-                            <Badge className={getStatusColor(order.status)}>
-                              {order.status.charAt(0).toUpperCase() +
-                                order.status.slice(1)}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-gray-400 mb-1">
-                            {order.products.join(", ")}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {order.items} items • {order.date}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center space-x-4">
-                        <div className="text-right">
-                          <div className="text-lg font-bold text-primary">
-                            {formatPrice(
-                              convertPrice(order.total, selectedCurrency.code),
-                              selectedCurrency,
-                            )}
-                          </div>
-                        </div>
-                        <div className="flex space-x-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="border-gray-600 text-gray-300"
-                          >
-                            <Eye className="w-4 h-4 mr-2" />
-                            View
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="border-gray-600 text-gray-300"
-                          >
-                            <Download className="w-4 h-4 mr-2" />
-                            Invoice
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
+              {orders.length === 0 ? (
+                <Card className="bg-gray-800 border-gray-700">
+                  <CardContent className="p-12 text-center">
+                    <Package className="w-20 h-20 text-gray-600 mx-auto mb-6" />
+                    <h3 className="text-2xl font-semibold text-white mb-4">
+                      No orders yet
+                    </h3>
+                    <p className="text-gray-400 mb-6 max-w-md mx-auto">
+                      When you place orders, they'll appear here. Start shopping
+                      to see your order history!
+                    </p>
+                    <Link to="/">
+                      <Button className="bg-primary text-black hover:bg-primary/90">
+                        <ShoppingCart className="w-4 h-4 mr-2" />
+                        Start Shopping
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
-              ))}
+              ) : (
+                orders.map((order) => (
+                  <Card key={order.id} className="bg-gray-800 border-gray-700">
+                    <CardContent className="p-6">
+                      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-4 lg:space-y-0">
+                        <div className="flex items-center space-x-4">
+                          <img
+                            src={order.image}
+                            alt="Order"
+                            className="w-16 h-16 object-cover rounded-lg"
+                          />
+                          <div>
+                            <div className="flex items-center space-x-3 mb-2">
+                              <h3 className="font-semibold text-white">
+                                Order #{order.id}
+                              </h3>
+                              <Badge className={getStatusColor(order.status)}>
+                                {order.status.charAt(0).toUpperCase() +
+                                  order.status.slice(1)}
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-gray-400 mb-1">
+                              {order.products.join(", ")}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {order.items} items • {order.date}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center space-x-4">
+                          <div className="text-right">
+                            <div className="text-lg font-bold text-primary">
+                              {formatPrice(
+                                convertPrice(
+                                  order.total,
+                                  selectedCurrency.code,
+                                ),
+                                selectedCurrency,
+                              )}
+                            </div>
+                          </div>
+                          <div className="flex space-x-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-gray-600 text-gray-300"
+                            >
+                              <Eye className="w-4 h-4 mr-2" />
+                              View
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-gray-600 text-gray-300"
+                            >
+                              <Download className="w-4 h-4 mr-2" />
+                              Invoice
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))
+              )}
             </div>
           )}
 
           {/* Wishlist Tab */}
           {activeTab === "wishlist" && (
+<<<<<<< HEAD
             <div>
               {wishlistLoading ? (
                 <div className="text-center py-8">
@@ -593,6 +601,77 @@ export default function UserProfile() {
                       </Card>
                     );
                   })}
+=======
+            <div className="space-y-6">
+              {wishlist.length === 0 ? (
+                <Card className="bg-gray-800 border-gray-700">
+                  <CardContent className="p-12 text-center">
+                    <Heart className="w-20 h-20 text-gray-600 mx-auto mb-6" />
+                    <h3 className="text-2xl font-semibold text-white mb-4">
+                      Your wishlist is empty
+                    </h3>
+                    <p className="text-gray-400 mb-6 max-w-md mx-auto">
+                      Save items you love to your wishlist. Simply click the
+                      heart icon on any product!
+                    </p>
+                    <Link to="/">
+                      <Button className="bg-primary text-black hover:bg-primary/90">
+                        <Heart className="w-4 h-4 mr-2" />
+                        Explore Products
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {wishlist.map((item) => (
+                    <Card key={item.id} className="bg-gray-800 border-gray-700">
+                      <CardContent className="p-4">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-32 object-cover rounded-lg mb-4"
+                        />
+                        <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2">
+                          {item.name}
+                        </h3>
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-lg font-bold text-primary">
+                            {formatPrice(
+                              convertPrice(item.price, selectedCurrency.code),
+                              selectedCurrency,
+                            )}
+                          </span>
+                          <Badge
+                            className={
+                              item.inStock
+                                ? "bg-green-500 text-white"
+                                : "bg-red-500 text-white"
+                            }
+                          >
+                            {item.inStock ? "In Stock" : "Out of Stock"}
+                          </Badge>
+                        </div>
+                        <div className="flex space-x-2">
+                          <Button
+                            disabled={!item.inStock}
+                            className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
+                          >
+                            <ShoppingCart className="w-4 h-4 mr-2" />
+                            Add to Cart
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-gray-600 text-red-400"
+                          >
+                            <X className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+>>>>>>> origin/main
                 </div>
               )}
             </div>
