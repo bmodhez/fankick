@@ -41,18 +41,7 @@ export default function Index() {
     console.log("First trending product image:", trendingProducts[0].images[0]);
   }
 
-  // Force image override for all trending products
-  const builderImageUrl =
-    "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800";
-  const forcedProducts = trendingProducts.map((product) => ({
-    ...product,
-    images: [
-      builderImageUrl,
-      builderImageUrl,
-      builderImageUrl,
-      builderImageUrl,
-    ],
-  }));
+  // Use original product images without override
 
   // Add global debug function
   (window as any).updateProductImages = () => {
