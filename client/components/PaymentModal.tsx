@@ -207,9 +207,13 @@ export function PaymentModal({
             {product && (
               <div className="flex items-center space-x-3 mb-4">
                 <img
-                  src={product.image}
+                  src={product.image || "/placeholder.svg"}
                   alt={product.name}
-                  className="w-16 h-16 object-cover rounded"
+                  className="w-16 h-16 object-cover rounded border border-gray-200 dark:border-gray-600"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "/placeholder.svg";
+                  }}
                 />
                 <div className="flex-1">
                   <h4 className="font-medium text-sm text-gray-900 dark:text-white">{product.name}</h4>
