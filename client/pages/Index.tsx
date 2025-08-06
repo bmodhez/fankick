@@ -234,7 +234,7 @@ export default function Index() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {forcedProducts.map((product, index) => {
+            {trendingProducts.map((product, index) => {
               const convertedPrice = convertPrice(
                 product.basePrice,
                 selectedCurrency.code,
