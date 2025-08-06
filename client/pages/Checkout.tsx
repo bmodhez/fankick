@@ -68,6 +68,18 @@ export default function Checkout() {
     }
   }, [user, navigate, location]);
 
+  // Show loading or redirect if not authenticated
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">Redirecting to login...</p>
+        </div>
+      </div>
+    );
+  }
+
   // Price calculations
   const convertedTotal = convertPrice(totalPrice, selectedCurrency.code, "INR");
   const freeShippingThreshold = convertPrice(4200, selectedCurrency.code, "INR");
