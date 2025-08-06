@@ -351,7 +351,11 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/90 hover:via-green-400/90 hover:to-blue-400/90 font-bold py-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/30"
               >
                 <div className="flex items-center justify-center">
-                  <CreditCard className="w-6 h-6 mr-3" />
+                  {user ? (
+                    <CreditCard className="w-6 h-6 mr-3" />
+                  ) : (
+                    <User className="w-6 h-6 mr-3" />
+                  )}
                   <div className="text-center">
                     <div className="text-lg">
                       {user ? "Proceed to Checkout" : "Login to Checkout"}
