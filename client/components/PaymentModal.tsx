@@ -218,7 +218,11 @@ export function PaymentModal({
                   src={product.image || "/placeholder.svg"}
                   alt={product.name}
                   className="w-16 h-16 object-cover rounded border border-gray-200 dark:border-gray-600"
+                  onLoad={() => {
+                    console.log('Image loaded successfully:', product.image);
+                  }}
                   onError={(e) => {
+                    console.log('Image failed to load:', product.image);
                     const target = e.target as HTMLImageElement;
                     target.src = "/placeholder.svg";
                   }}
