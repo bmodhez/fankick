@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useLike } from "@/contexts/LikeContext";
+import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   Search,
@@ -27,6 +28,7 @@ export default function SearchResults() {
   const { selectedCurrency } = useCurrency();
   const { searchProducts, products } = useProducts();
   const { toggleLike, isLiked } = useLike();
+  const { requireAuth, AuthModalComponent } = useAuthRequired();
 
   const [searchQuery, setSearchQuery] = useState(query);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -408,7 +410,7 @@ export default function SearchResults() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            toggleLike(product.id);
+                            requireAuth(() => toggleLike(product.id));
                           }}
                         >
                           <Heart
