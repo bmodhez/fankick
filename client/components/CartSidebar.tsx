@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +7,7 @@ import { useCart } from "@/contexts/CartContext";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { convertPrice, formatPrice } from "@/utils/currency";
+import { PaymentModal } from "@/components/PaymentModal";
 import {
   X,
   Plus,
@@ -18,6 +19,7 @@ import {
   ShieldCheck,
   Gift,
   User,
+  MapPin,
 } from "lucide-react";
 
 interface CartSidebarProps {
@@ -37,6 +39,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const { selectedCurrency } = useCurrency();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState<{
     code: string;
@@ -115,6 +118,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-blue-500/5 opacity-80"></div>
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
+
         {/* Header */}
         <div className="relative flex items-center justify-between p-6 border-b-2 border-gray-600/30 bg-gradient-to-r from-primary/20 via-purple-500/15 to-blue-500/20 backdrop-blur-md shadow-lg">
           <div className="absolute inset-0 bg-white/5 rounded-b-xl"></div>
@@ -123,13 +127,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               <ShoppingBag className="w-6 h-6 text-primary drop-shadow-lg" />
             </div>
             <div>
-<<<<<<< HEAD
               <h2 className="text-xl font-bold text-white drop-shadow-lg">
                 Shopping Cart
               </h2>
-=======
-              <h2 className="text-xl font-bold text-white">Shopping Cart</h2>
->>>>>>> origin/main
               {totalItems > 0 && (
                 <p className="text-sm text-gray-300">
                   {totalItems} item{totalItems > 1 ? "s" : ""} in cart
@@ -163,14 +163,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               <h3 className="text-2xl font-bold text-white mb-4 drop-shadow-lg">
                 Your cart is empty
               </h3>
-<<<<<<< HEAD
               <p className="text-gray-400 mb-8 leading-relaxed px-4 text-lg">
-                Add some amazing products to get started with your shopping journey!
-=======
-              <p className="text-gray-400 mb-8 leading-relaxed px-4">
                 Add some amazing products to get started with your shopping
                 journey!
->>>>>>> origin/main
               </p>
               <Button
                 onClick={onClose}
@@ -189,18 +184,13 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 );
 
                 return (
-<<<<<<< HEAD
-                  <div key={item.id} className="relative bg-gradient-to-r from-gray-800/80 to-gray-700/60 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/60 hover:shadow-2xl transition-all duration-300 backdrop-blur-md group overflow-hidden">
+                  <div
+                    key={item.id}
+                    className="relative bg-gradient-to-r from-gray-800/80 to-gray-700/60 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/60 hover:shadow-2xl transition-all duration-300 backdrop-blur-md group overflow-hidden"
+                  >
                     {/* Hover effect background */}
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
                     <div className="relative flex space-x-4">
-=======
-                  <div
-                    key={item.id}
-                    className="bg-gradient-to-r from-gray-800/60 to-gray-700/40 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/40 hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
-                  >
-                    <div className="flex space-x-3">
->>>>>>> origin/main
                       {/* Product Image */}
                       <div className="relative group">
                         <img
@@ -245,15 +235,10 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             <Button
                               variant="ghost"
                               size="sm"
-<<<<<<< HEAD
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                              className="w-10 h-10 p-0 hover:bg-primary/30 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 hover:scale-110"
-=======
                               onClick={() =>
                                 updateQuantity(item.id, item.quantity - 1)
                               }
-                              className="w-9 h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
->>>>>>> origin/main
+                              className="w-10 h-10 p-0 hover:bg-primary/30 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 hover:scale-110"
                             >
                               <Minus className="w-4 h-4" />
                             </Button>
@@ -263,15 +248,10 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             <Button
                               variant="ghost"
                               size="sm"
-<<<<<<< HEAD
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                              className="w-10 h-10 p-0 hover:bg-primary/30 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 hover:scale-110"
-=======
                               onClick={() =>
                                 updateQuantity(item.id, item.quantity + 1)
                               }
-                              className="w-9 h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
->>>>>>> origin/main
+                              className="w-10 h-10 p-0 hover:bg-primary/30 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 hover:scale-110"
                             >
                               <Plus className="w-4 h-4" />
                             </Button>
@@ -425,32 +405,18 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 onClick={handleCheckout}
                 className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/95 hover:via-green-400/95 hover:to-blue-400/95 font-bold py-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/40 relative overflow-hidden"
               >
-<<<<<<< HEAD
                 {/* Animated shine effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
 
                 <div className="relative flex items-center justify-center">
                   <CreditCard className="w-6 h-6 mr-3 animate-pulse" />
                   <div className="text-center">
-                    <div className="text-lg font-extrabold">Proceed to Checkout</div>
-                    <div className="text-sm opacity-90 font-semibold">{formatPrice(finalTotal, selectedCurrency)}</div>
-=======
-                <div className="flex items-center justify-center">
-                  {user ? (
-                    <CreditCard className="w-6 h-6 mr-3" />
-                  ) : (
-                    <User className="w-6 h-6 mr-3" />
-                  )}
-                  <div className="text-center">
-                    <div className="text-lg">
-                      {user ? "Proceed to Checkout" : "Login to Checkout"}
+                    <div className="text-lg font-extrabold">
+                      Proceed to Checkout
                     </div>
-                    <div className="text-sm opacity-90">
-                      {user
-                        ? formatPrice(finalTotal, selectedCurrency)
-                        : "Sign in required"}
+                    <div className="text-sm opacity-90 font-semibold">
+                      {formatPrice(finalTotal, selectedCurrency)}
                     </div>
->>>>>>> origin/main
                   </div>
                 </div>
               </Button>
@@ -475,6 +441,17 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
           </div>
         )}
       </div>
+
+      {/* Payment Modal */}
+      {showPaymentModal && (
+        <PaymentModal
+          isOpen={showPaymentModal}
+          onClose={() => setShowPaymentModal(false)}
+          amount={finalTotal}
+          currency={selectedCurrency}
+          items={items}
+        />
+      )}
     </>
   );
 }
