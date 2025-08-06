@@ -9,6 +9,7 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useCart } from "@/contexts/CartContext";
 import { useLike } from "@/contexts/LikeContext";
+import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   Star,
@@ -29,6 +30,7 @@ export default function Index() {
   const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
   const { toggleLike, isLiked } = useLike();
+  const { requireAuth, AuthModalComponent } = useAuthRequired();
   const trendingProducts = getTrendingProducts(4);
 
   // Debug logging
@@ -296,7 +298,7 @@ export default function Index() {
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
-                              toggleLike(product.id);
+                              requireAuth(() => toggleLike(product.id));
                             }}
                           >
                             <Heart
