@@ -406,6 +406,7 @@ export default function CategoryPage() {
       </div>
 
       <Footer />
+      <AuthModalComponent />
     </div>
   );
 }
