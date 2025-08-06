@@ -517,7 +517,6 @@ export default function UserProfile() {
 
           {/* Wishlist Tab */}
           {activeTab === "wishlist" && (
-<<<<<<< HEAD
             <div>
               {wishlistLoading ? (
                 <div className="text-center py-8">
@@ -601,77 +600,6 @@ export default function UserProfile() {
                       </Card>
                     );
                   })}
-=======
-            <div className="space-y-6">
-              {wishlist.length === 0 ? (
-                <Card className="bg-gray-800 border-gray-700">
-                  <CardContent className="p-12 text-center">
-                    <Heart className="w-20 h-20 text-gray-600 mx-auto mb-6" />
-                    <h3 className="text-2xl font-semibold text-white mb-4">
-                      Your wishlist is empty
-                    </h3>
-                    <p className="text-gray-400 mb-6 max-w-md mx-auto">
-                      Save items you love to your wishlist. Simply click the
-                      heart icon on any product!
-                    </p>
-                    <Link to="/">
-                      <Button className="bg-primary text-black hover:bg-primary/90">
-                        <Heart className="w-4 h-4 mr-2" />
-                        Explore Products
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {wishlist.map((item) => (
-                    <Card key={item.id} className="bg-gray-800 border-gray-700">
-                      <CardContent className="p-4">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-32 object-cover rounded-lg mb-4"
-                        />
-                        <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2">
-                          {item.name}
-                        </h3>
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="text-lg font-bold text-primary">
-                            {formatPrice(
-                              convertPrice(item.price, selectedCurrency.code),
-                              selectedCurrency,
-                            )}
-                          </span>
-                          <Badge
-                            className={
-                              item.inStock
-                                ? "bg-green-500 text-white"
-                                : "bg-red-500 text-white"
-                            }
-                          >
-                            {item.inStock ? "In Stock" : "Out of Stock"}
-                          </Badge>
-                        </div>
-                        <div className="flex space-x-2">
-                          <Button
-                            disabled={!item.inStock}
-                            className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
-                          >
-                            <ShoppingCart className="w-4 h-4 mr-2" />
-                            Add to Cart
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="border-gray-600 text-red-400"
-                          >
-                            <X className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
->>>>>>> origin/main
                 </div>
               )}
             </div>
