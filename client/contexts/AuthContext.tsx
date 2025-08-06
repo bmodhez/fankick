@@ -5,6 +5,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  isAdmin: () => boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signup: (userData: UserCreateRequest) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
