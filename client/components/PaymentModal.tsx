@@ -273,7 +273,7 @@ export function PaymentModal({
 
           {/* Payment Methods */}
           <div>
-            <h3 className="font-semibold mb-4">Choose Payment Method</h3>
+            <h3 className="font-semibold mb-4 text-gray-900 dark:text-white">Choose Payment Method</h3>
             <div className="space-y-3">
               {/* COD Option */}
               {codAvailable && (
