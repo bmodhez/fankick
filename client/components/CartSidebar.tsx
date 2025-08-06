@@ -17,6 +17,7 @@ import {
   Truck,
   ShieldCheck,
   Gift,
+  User,
 } from "lucide-react";
 
 interface CartSidebarProps {
