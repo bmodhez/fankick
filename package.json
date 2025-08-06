@@ -19,7 +19,8 @@
     "test": "vitest --run",
     "format.fix": "prettier --write .",
     "typecheck": "tsc",
-    "migrate:users": "tsx server/scripts/migrateUsersToDatabase.ts"
+    "migrate:users": "tsx server/scripts/migrateUsersToDatabase.ts",
+    "test:db": "tsx server/scripts/testDatabaseConnection.ts"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",
