@@ -174,9 +174,9 @@ export function PaymentModal({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-center z-50 p-4">
-      <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-800">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-xl font-bold">Quick Checkout</CardTitle>
+          <CardTitle className="text-xl font-bold text-gray-900 dark:text-white">Quick Checkout</CardTitle>
           <Button variant="ghost" size="sm" onClick={onClose}>
             <X className="w-4 h-4" />
           </Button>
