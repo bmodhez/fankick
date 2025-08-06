@@ -165,6 +165,11 @@ export default function CollectionsPage() {
 
   const subcategories = getSubcategories();
 
+  // Scroll to top when component mounts or collection changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [collection]);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
