@@ -8,6 +8,7 @@ import { PaymentModal } from "@/components/PaymentModal";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useLike } from "@/contexts/LikeContext";
+import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   getAvailablePaymentMethods,
@@ -37,6 +38,7 @@ export default function ProductPage() {
   const { selectedCurrency } = useCurrency();
   const { getProductById, getTrendingProducts } = useProducts();
   const { toggleLike, isLiked } = useLike();
+  const { requireAuth, AuthModalComponent } = useAuthRequired();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -189,7 +191,7 @@ export default function ProductPage() {
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    toggleLike(product.id);
+                    requireAuth(() => toggleLike(product.id));
                   }}
                 >
                   <Heart
