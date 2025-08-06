@@ -1,6 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
+import dotenv from "dotenv";
 import { pool } from "../database/connection.js";
+
+// Load environment variables
+dotenv.config();
 
 const USERS_JSON_PATH = path.join(process.cwd(), "server/database/users.json");
 
