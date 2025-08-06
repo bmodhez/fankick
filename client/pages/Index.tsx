@@ -370,7 +370,7 @@ export default function Index() {
                         </div>
 
                         <Button
-                          className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/80 font-semibold"
+                          className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/80 font-semibold text-xs sm:text-sm py-2 sm:py-2.5"
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
