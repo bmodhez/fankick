@@ -7,7 +7,7 @@ dotenv.config();
 export async function testDatabaseConnection() {
   try {
     console.log("Testing database connection...");
-    
+
     if (!process.env.DATABASE_URL) {
       throw new Error("DATABASE_URL environment variable is not set");
     }
@@ -15,8 +15,10 @@ export async function testDatabaseConnection() {
     console.log("DATABASE_URL found, attempting connection...");
 
     // Test the connection
-    const result = await pool.query("SELECT NOW() as current_time, version() as postgres_version");
-    
+    const result = await pool.query(
+      "SELECT NOW() as current_time, version() as postgres_version",
+    );
+
     console.log("✅ Database connection successful!");
     console.log("Current time:", result.rows[0].current_time);
     console.log("PostgreSQL version:", result.rows[0].postgres_version);
@@ -30,12 +32,14 @@ export async function testDatabaseConnection() {
 
     if (tableCheck.rows.length > 0) {
       console.log("✅ Users table exists");
-      
+
       // Count existing users
       const userCount = await pool.query("SELECT COUNT(*) as count FROM users");
       console.log(`📊 Current users in database: ${userCount.rows[0].count}`);
     } else {
-      console.log("⚠️  Users table does not exist - database schema may need to be initialized");
+      console.log(
+        "⚠️  Users table does not exist - database schema may need to be initialized",
+      );
     }
 
     return true;

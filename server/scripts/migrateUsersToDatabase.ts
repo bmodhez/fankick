@@ -60,11 +60,13 @@ export async function migrateUsersFromJsonToDatabase() {
           // Check if user already exists in database
           const existingUser = await client.query(
             "SELECT id FROM users WHERE email = $1",
-            [user.email.toLowerCase()]
+            [user.email.toLowerCase()],
           );
 
           if (existingUser.rows.length > 0) {
-            console.log(`User ${user.email} already exists in database, skipping...`);
+            console.log(
+              `User ${user.email} already exists in database, skipping...`,
+            );
             skippedCount++;
             continue;
           }
@@ -92,7 +94,7 @@ export async function migrateUsersFromJsonToDatabase() {
               user.isActive,
               user.createdAt,
               user.updatedAt,
-            ]
+            ],
           );
 
           const newUserId = result.rows[0].id;
@@ -100,7 +102,7 @@ export async function migrateUsersFromJsonToDatabase() {
           // Create default user preferences
           await client.query(
             "INSERT INTO user_preferences (user_id) VALUES ($1)",
-            [newUserId]
+            [newUserId],
           );
 
           console.log(`Migrated user: ${user.email} (ID: ${newUserId})`);
