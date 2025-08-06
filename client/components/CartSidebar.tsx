@@ -26,32 +26,55 @@ interface CartSidebarProps {
 }
 
 export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
-  const { items, totalItems, totalPrice, updateQuantity, removeFromCart, clearCart } = useCart();
+  const {
+    items,
+    totalItems,
+    totalPrice,
+    updateQuantity,
+    removeFromCart,
+    clearCart,
+  } = useCart();
   const { selectedCurrency } = useCurrency();
   const { user } = useAuth();
   const navigate = useNavigate();
   const [couponCode, setCouponCode] = useState("");
-  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number } | null>(null);
+  const [appliedCoupon, setAppliedCoupon] = useState<{
+    code: string;
+    discount: number;
+  } | null>(null);
 
   if (!isOpen) return null;
 
   const convertedTotal = convertPrice(totalPrice, selectedCurrency.code, "INR");
   // Set free shipping threshold based on currency (4200 INR = ~50 USD equivalent)
-  const freeShippingThreshold = convertPrice(4200, selectedCurrency.code, "INR");
-  const shippingCost = convertedTotal >= freeShippingThreshold ? 0 : convertPrice(420, selectedCurrency.code, "INR"); // 420 INR = ~5 USD
-  const discount = appliedCoupon ? (convertedTotal * appliedCoupon.discount) / 100 : 0;
+  const freeShippingThreshold = convertPrice(
+    4200,
+    selectedCurrency.code,
+    "INR",
+  );
+  const shippingCost =
+    convertedTotal >= freeShippingThreshold
+      ? 0
+      : convertPrice(420, selectedCurrency.code, "INR"); // 420 INR = ~5 USD
+  const discount = appliedCoupon
+    ? (convertedTotal * appliedCoupon.discount) / 100
+    : 0;
   const finalTotal = convertedTotal + shippingCost - discount;
 
   const applyCoupon = () => {
     const validCoupons = {
-      "WELCOME10": { discount: 10, description: "10% off for new customers" },
-      "SAVE20": { discount: 20, description: "20% off on orders above $100" },
-      "FANKICK15": { discount: 15, description: "15% off sitewide" },
+      WELCOME10: { discount: 10, description: "10% off for new customers" },
+      SAVE20: { discount: 20, description: "20% off on orders above $100" },
+      FANKICK15: { discount: 15, description: "15% off sitewide" },
     };
 
-    const coupon = validCoupons[couponCode.toUpperCase() as keyof typeof validCoupons];
+    const coupon =
+      validCoupons[couponCode.toUpperCase() as keyof typeof validCoupons];
     if (coupon) {
-      setAppliedCoupon({ code: couponCode.toUpperCase(), discount: coupon.discount });
+      setAppliedCoupon({
+        code: couponCode.toUpperCase(),
+        discount: coupon.discount,
+      });
       setCouponCode("");
     }
   };
@@ -68,14 +91,14 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
     if (!user) {
       // If not logged in, redirect to login with checkout redirect
       onClose(); // Close the cart sidebar
-      navigate('/login', {
-        state: { from: { pathname: '/checkout' } }
+      navigate("/login", {
+        state: { from: { pathname: "/checkout" } },
       });
       return;
     }
 
     onClose(); // Close the cart sidebar
-    navigate('/checkout'); // Navigate to checkout page
+    navigate("/checkout"); // Navigate to checkout page
   };
 
   return (
@@ -95,12 +118,10 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               <ShoppingBag className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">
-                Shopping Cart
-              </h2>
+              <h2 className="text-xl font-bold text-white">Shopping Cart</h2>
               {totalItems > 0 && (
                 <p className="text-sm text-gray-300">
-                  {totalItems} item{totalItems > 1 ? 's' : ''} in cart
+                  {totalItems} item{totalItems > 1 ? "s" : ""} in cart
                 </p>
               )}
             </div>
@@ -131,7 +152,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 Your cart is empty
               </h3>
               <p className="text-gray-400 mb-8 leading-relaxed px-4">
-                Add some amazing products to get started with your shopping journey!
+                Add some amazing products to get started with your shopping
+                journey!
               </p>
               <Button
                 onClick={onClose}
@@ -146,11 +168,14 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 const convertedPrice = convertPrice(
                   item.variant.price,
                   selectedCurrency.code,
-                  "INR"
+                  "INR",
                 );
 
                 return (
-                  <div key={item.id} className="bg-gradient-to-r from-gray-800/60 to-gray-700/40 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/40 hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
+                  <div
+                    key={item.id}
+                    className="bg-gradient-to-r from-gray-800/60 to-gray-700/40 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/40 hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
+                  >
                     <div className="flex space-x-3">
                       {/* Product Image */}
                       <div className="relative">
@@ -163,13 +188,13 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                           {item.quantity}
                         </div>
                       </div>
-                      
+
                       {/* Product Details */}
                       <div className="flex-1 space-y-3">
                         <h4 className="font-semibold text-white text-base line-clamp-2 leading-tight">
                           {item.product.name}
                         </h4>
-                        
+
                         {/* Variant Info */}
                         <div className="flex items-center gap-3 text-xs">
                           {item.variant.size && (
@@ -188,14 +213,16 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         <p className="font-bold text-lg text-primary bg-primary/10 px-3 py-1 rounded-lg inline-block">
                           {formatPrice(convertedPrice, selectedCurrency)}
                         </p>
-                        
+
                         {/* Quantity Controls */}
                         <div className="flex items-center justify-between mt-4">
                           <div className="flex items-center bg-gray-700/70 rounded-xl p-1 border border-gray-600">
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity - 1)
+                              }
                               className="w-9 h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
                             >
                               <Minus className="w-4 h-4" />
@@ -206,7 +233,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity + 1)
+                              }
                               className="w-9 h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
                             >
                               <Plus className="w-4 h-4" />
@@ -227,7 +256,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   </div>
                 );
               })}
-              
+
               {/* Clear Cart */}
               {items.length > 0 && (
                 <Button
@@ -268,7 +297,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   Apply
                 </Button>
               </div>
-              
+
               {appliedCoupon && (
                 <div className="flex items-center justify-between bg-green-500/20 border border-green-500 rounded p-2">
                   <span className="text-green-400 text-sm">
@@ -292,7 +321,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 <span>Subtotal ({totalItems} items)</span>
                 <span>{formatPrice(convertedTotal, selectedCurrency)}</span>
               </div>
-              
+
               <div className="flex justify-between text-gray-300">
                 <span>Shipping</span>
                 <span>
@@ -303,14 +332,14 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   )}
                 </span>
               </div>
-              
+
               {appliedCoupon && (
                 <div className="flex justify-between text-green-400">
                   <span>Discount ({appliedCoupon.discount}%)</span>
                   <span>-{formatPrice(discount, selectedCurrency)}</span>
                 </div>
               )}
-              
+
               <div className="border-t-2 border-gray-600/70 pt-3 flex justify-between font-bold text-lg">
                 <span className="text-white">Total Amount</span>
                 <span className="text-primary bg-primary/10 px-3 py-1 rounded-lg">
@@ -326,7 +355,14 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   <Truck className="w-5 h-5 mr-3 text-blue-400" />
                   <div>
                     <div className="font-semibold">Almost there!</div>
-                    <div>Add {formatPrice(freeShippingThreshold - convertedTotal, selectedCurrency)} more for FREE shipping!</div>
+                    <div>
+                      Add{" "}
+                      {formatPrice(
+                        freeShippingThreshold - convertedTotal,
+                        selectedCurrency,
+                      )}{" "}
+                      more for FREE shipping!
+                    </div>
                   </div>
                 </div>
               </div>
@@ -336,11 +372,15 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div className="flex items-center bg-green-500/10 border border-green-500/30 rounded-lg p-2">
                 <ShieldCheck className="w-4 h-4 mr-2 text-green-400" />
-                <span className="text-green-300 font-medium">Secure Payment</span>
+                <span className="text-green-300 font-medium">
+                  Secure Payment
+                </span>
               </div>
               <div className="flex items-center bg-purple-500/10 border border-purple-500/30 rounded-lg p-2">
                 <Gift className="w-4 h-4 mr-2 text-purple-400" />
-                <span className="text-purple-300 font-medium">Gift Options</span>
+                <span className="text-purple-300 font-medium">
+                  Gift Options
+                </span>
               </div>
             </div>
 
@@ -361,7 +401,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       {user ? "Proceed to Checkout" : "Login to Checkout"}
                     </div>
                     <div className="text-sm opacity-90">
-                      {user ? formatPrice(finalTotal, selectedCurrency) : "Sign in required"}
+                      {user
+                        ? formatPrice(finalTotal, selectedCurrency)
+                        : "Sign in required"}
                     </div>
                   </div>
                 </div>
@@ -370,7 +412,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               {/* Glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-green-400/20 rounded-2xl blur-xl -z-10"></div>
             </div>
-            
+
             <div className="text-center space-y-2">
               <p className="text-xs text-gray-400 flex items-center justify-center">
                 <ShieldCheck className="w-3 h-3 mr-1 text-green-400" />
@@ -386,7 +428,6 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
           </div>
         )}
       </div>
-
     </>
   );
 }

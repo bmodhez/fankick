@@ -21,7 +21,7 @@ import {
   Clock,
   Gift,
   Star,
-  Lock
+  Lock,
 } from "lucide-react";
 
 export default function Checkout() {
@@ -30,7 +30,7 @@ export default function Checkout() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // State management
   const [activeStep, setActiveStep] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -47,7 +47,7 @@ export default function Checkout() {
     city: "",
     state: "",
     zipCode: "",
-    country: "India"
+    country: "India",
   });
 
   const [paymentForm, setPaymentForm] = useState({
@@ -55,15 +55,15 @@ export default function Checkout() {
     expiryDate: "",
     cvv: "",
     cardholderName: "",
-    upiId: ""
+    upiId: "",
   });
 
   // Redirect to login if not authenticated
   useEffect(() => {
     if (!user) {
-      navigate('/login', {
+      navigate("/login", {
         state: { from: location },
-        replace: true
+        replace: true,
       });
     }
   }, [user, navigate, location]);
@@ -74,7 +74,9 @@ export default function Checkout() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Redirecting to login...</p>
+          <p className="text-gray-600 dark:text-gray-400">
+            Redirecting to login...
+          </p>
         </div>
       </div>
     );
@@ -82,8 +84,15 @@ export default function Checkout() {
 
   // Price calculations
   const convertedTotal = convertPrice(totalPrice, selectedCurrency.code, "INR");
-  const freeShippingThreshold = convertPrice(4200, selectedCurrency.code, "INR");
-  const shippingCost = convertedTotal >= freeShippingThreshold ? 0 : convertPrice(420, selectedCurrency.code, "INR");
+  const freeShippingThreshold = convertPrice(
+    4200,
+    selectedCurrency.code,
+    "INR",
+  );
+  const shippingCost =
+    convertedTotal >= freeShippingThreshold
+      ? 0
+      : convertPrice(420, selectedCurrency.code, "INR");
   const tax = Math.round(convertedTotal * 0.18); // 18% GST
   const finalTotal = convertedTotal + shippingCost + tax;
 
@@ -116,7 +125,7 @@ export default function Checkout() {
   const steps = [
     { id: 1, name: "Shipping", completed: activeStep > 1 },
     { id: 2, name: "Payment", completed: activeStep > 2 },
-    { id: 3, name: "Review", completed: false }
+    { id: 3, name: "Review", completed: false },
   ];
 
   const handleStepNext = () => {
@@ -133,10 +142,10 @@ export default function Checkout() {
 
   const handlePlaceOrder = async () => {
     setIsProcessing(true);
-    
+
     // Simulate order processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     // Clear cart and redirect
     clearCart();
     navigate("/order-success");
@@ -146,7 +155,7 @@ export default function Checkout() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <SimpleNav />
-      
+
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -173,8 +182,8 @@ export default function Checkout() {
                       step.completed
                         ? "bg-green-500 text-white"
                         : activeStep === step.id
-                        ? "bg-primary text-black"
-                        : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                          ? "bg-primary text-black"
+                          : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
                     }`}
                   >
                     {step.completed ? (
@@ -215,25 +224,37 @@ export default function Checkout() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   {/* Saved Addresses */}
-                  <RadioGroup value={selectedAddress} onValueChange={setSelectedAddress}>
+                  <RadioGroup
+                    value={selectedAddress}
+                    onValueChange={setSelectedAddress}
+                  >
                     <div className="space-y-4">
                       <div className="flex items-start space-x-3 p-4 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
-                        <RadioGroupItem value="saved" id="saved" className="mt-1" />
+                        <RadioGroupItem
+                          value="saved"
+                          id="saved"
+                          className="mt-1"
+                        />
                         <div className="flex-1">
                           <Label htmlFor="saved" className="cursor-pointer">
                             <div className="font-medium">John Doe</div>
                             <div className="text-sm text-gray-600 dark:text-gray-400">
-                              123 Main Street, Apartment 4B<br />
-                              New York, NY 10001<br />
+                              123 Main Street, Apartment 4B
+                              <br />
+                              New York, NY 10001
+                              <br />
                               Phone: +1 (555) 123-4567
                             </div>
                           </Label>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-start space-x-3 p-4 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer">
                         <RadioGroupItem value="new" id="new" className="mt-1" />
-                        <Label htmlFor="new" className="cursor-pointer font-medium">
+                        <Label
+                          htmlFor="new"
+                          className="cursor-pointer font-medium"
+                        >
                           Add new address
                         </Label>
                       </div>
@@ -248,7 +269,12 @@ export default function Checkout() {
                         <Input
                           id="firstName"
                           value={shippingForm.firstName}
-                          onChange={(e) => setShippingForm(prev => ({ ...prev, firstName: e.target.value }))}
+                          onChange={(e) =>
+                            setShippingForm((prev) => ({
+                              ...prev,
+                              firstName: e.target.value,
+                            }))
+                          }
                           className="mt-1"
                         />
                       </div>
@@ -257,7 +283,12 @@ export default function Checkout() {
                         <Input
                           id="lastName"
                           value={shippingForm.lastName}
-                          onChange={(e) => setShippingForm(prev => ({ ...prev, lastName: e.target.value }))}
+                          onChange={(e) =>
+                            setShippingForm((prev) => ({
+                              ...prev,
+                              lastName: e.target.value,
+                            }))
+                          }
                           className="mt-1"
                         />
                       </div>
@@ -267,7 +298,12 @@ export default function Checkout() {
                           id="email"
                           type="email"
                           value={shippingForm.email}
-                          onChange={(e) => setShippingForm(prev => ({ ...prev, email: e.target.value }))}
+                          onChange={(e) =>
+                            setShippingForm((prev) => ({
+                              ...prev,
+                              email: e.target.value,
+                            }))
+                          }
                           className="mt-1"
                         />
                       </div>
@@ -277,7 +313,12 @@ export default function Checkout() {
                           id="phone"
                           type="tel"
                           value={shippingForm.phone}
-                          onChange={(e) => setShippingForm(prev => ({ ...prev, phone: e.target.value }))}
+                          onChange={(e) =>
+                            setShippingForm((prev) => ({
+                              ...prev,
+                              phone: e.target.value,
+                            }))
+                          }
                           className="mt-1"
                         />
                       </div>
@@ -286,7 +327,12 @@ export default function Checkout() {
                         <Input
                           id="address"
                           value={shippingForm.address}
-                          onChange={(e) => setShippingForm(prev => ({ ...prev, address: e.target.value }))}
+                          onChange={(e) =>
+                            setShippingForm((prev) => ({
+                              ...prev,
+                              address: e.target.value,
+                            }))
+                          }
                           className="mt-1"
                         />
                       </div>
@@ -295,7 +341,12 @@ export default function Checkout() {
                         <Input
                           id="city"
                           value={shippingForm.city}
-                          onChange={(e) => setShippingForm(prev => ({ ...prev, city: e.target.value }))}
+                          onChange={(e) =>
+                            setShippingForm((prev) => ({
+                              ...prev,
+                              city: e.target.value,
+                            }))
+                          }
                           className="mt-1"
                         />
                       </div>
@@ -304,7 +355,12 @@ export default function Checkout() {
                         <Input
                           id="state"
                           value={shippingForm.state}
-                          onChange={(e) => setShippingForm(prev => ({ ...prev, state: e.target.value }))}
+                          onChange={(e) =>
+                            setShippingForm((prev) => ({
+                              ...prev,
+                              state: e.target.value,
+                            }))
+                          }
                           className="mt-1"
                         />
                       </div>
@@ -313,7 +369,12 @@ export default function Checkout() {
                         <Input
                           id="zipCode"
                           value={shippingForm.zipCode}
-                          onChange={(e) => setShippingForm(prev => ({ ...prev, zipCode: e.target.value }))}
+                          onChange={(e) =>
+                            setShippingForm((prev) => ({
+                              ...prev,
+                              zipCode: e.target.value,
+                            }))
+                          }
                           className="mt-1"
                         />
                       </div>
@@ -321,7 +382,10 @@ export default function Checkout() {
                   )}
 
                   <div className="flex justify-end">
-                    <Button onClick={handleStepNext} className="bg-primary text-black hover:bg-primary/90">
+                    <Button
+                      onClick={handleStepNext}
+                      className="bg-primary text-black hover:bg-primary/90"
+                    >
                       Continue to Payment
                     </Button>
                   </div>
@@ -339,22 +403,40 @@ export default function Checkout() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <RadioGroup value={selectedPayment} onValueChange={setSelectedPayment}>
+                  <RadioGroup
+                    value={selectedPayment}
+                    onValueChange={setSelectedPayment}
+                  >
                     <div className="space-y-4">
                       {/* Credit/Debit Card */}
                       <div className="border rounded-lg p-4">
                         <div className="flex items-center space-x-3 mb-4">
                           <RadioGroupItem value="card" id="card" />
-                          <Label htmlFor="card" className="cursor-pointer font-medium">
+                          <Label
+                            htmlFor="card"
+                            className="cursor-pointer font-medium"
+                          >
                             Credit/Debit Card
                           </Label>
                           <div className="flex space-x-2">
-                            <img src="/api/placeholder/40/25" alt="Visa" className="h-6" />
-                            <img src="/api/placeholder/40/25" alt="Mastercard" className="h-6" />
-                            <img src="/api/placeholder/40/25" alt="American Express" className="h-6" />
+                            <img
+                              src="/api/placeholder/40/25"
+                              alt="Visa"
+                              className="h-6"
+                            />
+                            <img
+                              src="/api/placeholder/40/25"
+                              alt="Mastercard"
+                              className="h-6"
+                            />
+                            <img
+                              src="/api/placeholder/40/25"
+                              alt="American Express"
+                              className="h-6"
+                            />
                           </div>
                         </div>
-                        
+
                         {selectedPayment === "card" && (
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="md:col-span-2">
@@ -363,17 +445,29 @@ export default function Checkout() {
                                 id="cardNumber"
                                 placeholder="1234 5678 9012 3456"
                                 value={paymentForm.cardNumber}
-                                onChange={(e) => setPaymentForm(prev => ({ ...prev, cardNumber: e.target.value }))}
+                                onChange={(e) =>
+                                  setPaymentForm((prev) => ({
+                                    ...prev,
+                                    cardNumber: e.target.value,
+                                  }))
+                                }
                                 className="mt-1"
                               />
                             </div>
                             <div className="md:col-span-2">
-                              <Label htmlFor="cardholderName">Cardholder Name *</Label>
+                              <Label htmlFor="cardholderName">
+                                Cardholder Name *
+                              </Label>
                               <Input
                                 id="cardholderName"
                                 placeholder="John Doe"
                                 value={paymentForm.cardholderName}
-                                onChange={(e) => setPaymentForm(prev => ({ ...prev, cardholderName: e.target.value }))}
+                                onChange={(e) =>
+                                  setPaymentForm((prev) => ({
+                                    ...prev,
+                                    cardholderName: e.target.value,
+                                  }))
+                                }
                                 className="mt-1"
                               />
                             </div>
@@ -383,7 +477,12 @@ export default function Checkout() {
                                 id="expiryDate"
                                 placeholder="MM/YY"
                                 value={paymentForm.expiryDate}
-                                onChange={(e) => setPaymentForm(prev => ({ ...prev, expiryDate: e.target.value }))}
+                                onChange={(e) =>
+                                  setPaymentForm((prev) => ({
+                                    ...prev,
+                                    expiryDate: e.target.value,
+                                  }))
+                                }
                                 className="mt-1"
                               />
                             </div>
@@ -393,7 +492,12 @@ export default function Checkout() {
                                 id="cvv"
                                 placeholder="123"
                                 value={paymentForm.cvv}
-                                onChange={(e) => setPaymentForm(prev => ({ ...prev, cvv: e.target.value }))}
+                                onChange={(e) =>
+                                  setPaymentForm((prev) => ({
+                                    ...prev,
+                                    cvv: e.target.value,
+                                  }))
+                                }
                                 className="mt-1"
                               />
                             </div>
@@ -405,16 +509,31 @@ export default function Checkout() {
                       <div className="border rounded-lg p-4">
                         <div className="flex items-center space-x-3 mb-4">
                           <RadioGroupItem value="upi" id="upi" />
-                          <Label htmlFor="upi" className="cursor-pointer font-medium">
+                          <Label
+                            htmlFor="upi"
+                            className="cursor-pointer font-medium"
+                          >
                             UPI Payment
                           </Label>
                           <div className="flex space-x-2">
-                            <img src="/api/placeholder/40/25" alt="Google Pay" className="h-6" />
-                            <img src="/api/placeholder/40/25" alt="PhonePe" className="h-6" />
-                            <img src="/api/placeholder/40/25" alt="Paytm" className="h-6" />
+                            <img
+                              src="/api/placeholder/40/25"
+                              alt="Google Pay"
+                              className="h-6"
+                            />
+                            <img
+                              src="/api/placeholder/40/25"
+                              alt="PhonePe"
+                              className="h-6"
+                            />
+                            <img
+                              src="/api/placeholder/40/25"
+                              alt="Paytm"
+                              className="h-6"
+                            />
                           </div>
                         </div>
-                        
+
                         {selectedPayment === "upi" && (
                           <div>
                             <Label htmlFor="upiId">UPI ID *</Label>
@@ -422,7 +541,12 @@ export default function Checkout() {
                               id="upiId"
                               placeholder="yourname@upi"
                               value={paymentForm.upiId}
-                              onChange={(e) => setPaymentForm(prev => ({ ...prev, upiId: e.target.value }))}
+                              onChange={(e) =>
+                                setPaymentForm((prev) => ({
+                                  ...prev,
+                                  upiId: e.target.value,
+                                }))
+                              }
                               className="mt-1"
                             />
                           </div>
@@ -433,7 +557,10 @@ export default function Checkout() {
                       <div className="border rounded-lg p-4">
                         <div className="flex items-center space-x-3">
                           <RadioGroupItem value="cod" id="cod" />
-                          <Label htmlFor="cod" className="cursor-pointer font-medium">
+                          <Label
+                            htmlFor="cod"
+                            className="cursor-pointer font-medium"
+                          >
                             Cash on Delivery
                           </Label>
                           <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
@@ -448,7 +575,10 @@ export default function Checkout() {
                     <Button variant="outline" onClick={handleStepBack}>
                       Back to Shipping
                     </Button>
-                    <Button onClick={handleStepNext} className="bg-primary text-black hover:bg-primary/90">
+                    <Button
+                      onClick={handleStepNext}
+                      className="bg-primary text-black hover:bg-primary/90"
+                    >
                       Review Order
                     </Button>
                   </div>
@@ -466,9 +596,16 @@ export default function Checkout() {
                   {/* Order Items */}
                   <div className="space-y-4">
                     {items.map((item) => {
-                      const convertedPrice = convertPrice(item.variant.price, selectedCurrency.code, "INR");
+                      const convertedPrice = convertPrice(
+                        item.variant.price,
+                        selectedCurrency.code,
+                        "INR",
+                      );
                       return (
-                        <div key={item.id} className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                        <div
+                          key={item.id}
+                          className="flex items-center space-x-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                        >
                           <img
                             src={item.product.images[0]}
                             alt={item.product.name}
@@ -479,16 +616,22 @@ export default function Checkout() {
                               {item.product.name}
                             </h4>
                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                              {item.variant.size && `Size: ${item.variant.size}`}
-                              {item.variant.color && ` • Color: ${item.variant.color}`}
+                              {item.variant.size &&
+                                `Size: ${item.variant.size}`}
+                              {item.variant.color &&
+                                ` • Color: ${item.variant.color}`}
                             </p>
                             <p className="text-sm font-medium">
-                              Qty: {item.quantity} × {formatPrice(convertedPrice, selectedCurrency)}
+                              Qty: {item.quantity} ×{" "}
+                              {formatPrice(convertedPrice, selectedCurrency)}
                             </p>
                           </div>
                           <div className="text-right">
                             <p className="font-bold text-primary">
-                              {formatPrice(convertedPrice * item.quantity, selectedCurrency)}
+                              {formatPrice(
+                                convertedPrice * item.quantity,
+                                selectedCurrency,
+                              )}
                             </p>
                           </div>
                         </div>
@@ -503,9 +646,12 @@ export default function Checkout() {
                     <div>
                       <h4 className="font-medium mb-2">Delivery Address</h4>
                       <div className="text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
-                        John Doe<br />
-                        123 Main Street, Apartment 4B<br />
-                        New York, NY 10001<br />
+                        John Doe
+                        <br />
+                        123 Main Street, Apartment 4B
+                        <br />
+                        New York, NY 10001
+                        <br />
                         Phone: +1 (555) 123-4567
                       </div>
                     </div>
@@ -523,8 +669,8 @@ export default function Checkout() {
                     <Button variant="outline" onClick={handleStepBack}>
                       Back to Payment
                     </Button>
-                    <Button 
-                      onClick={handlePlaceOrder} 
+                    <Button
+                      onClick={handlePlaceOrder}
                       disabled={isProcessing}
                       className="bg-primary text-black hover:bg-primary/90"
                     >
@@ -556,7 +702,10 @@ export default function Checkout() {
                 {/* Quick Items Preview */}
                 <div className="space-y-2">
                   {items.slice(0, 3).map((item) => (
-                    <div key={item.id} className="flex items-center space-x-2 text-sm">
+                    <div
+                      key={item.id}
+                      className="flex items-center space-x-2 text-sm"
+                    >
                       <img
                         src={item.product.images[0]}
                         alt={item.product.name}
@@ -585,8 +734,12 @@ export default function Checkout() {
                   </div>
                   <div className="flex justify-between">
                     <span>Shipping</span>
-                    <span className={shippingCost === 0 ? "text-green-600" : ""}>
-                      {shippingCost === 0 ? "FREE" : formatPrice(shippingCost, selectedCurrency)}
+                    <span
+                      className={shippingCost === 0 ? "text-green-600" : ""}
+                    >
+                      {shippingCost === 0
+                        ? "FREE"
+                        : formatPrice(shippingCost, selectedCurrency)}
                     </span>
                   </div>
                   <div className="flex justify-between">
@@ -596,7 +749,9 @@ export default function Checkout() {
                   <Separator />
                   <div className="flex justify-between font-bold text-lg">
                     <span>Total</span>
-                    <span className="text-primary">{formatPrice(finalTotal, selectedCurrency)}</span>
+                    <span className="text-primary">
+                      {formatPrice(finalTotal, selectedCurrency)}
+                    </span>
                   </div>
                 </div>
 
@@ -604,7 +759,10 @@ export default function Checkout() {
                 <div className="mt-6 space-y-3">
                   <div className="flex items-center space-x-2 text-sm text-green-600">
                     <Truck className="w-4 h-4" />
-                    <span>Free delivery on orders above {formatPrice(freeShippingThreshold, selectedCurrency)}</span>
+                    <span>
+                      Free delivery on orders above{" "}
+                      {formatPrice(freeShippingThreshold, selectedCurrency)}
+                    </span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm text-blue-600">
                     <Clock className="w-4 h-4" />

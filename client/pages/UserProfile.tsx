@@ -153,7 +153,6 @@ export default function UserProfile() {
 
   return (
     <div className="min-h-screen bg-gray-900">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* User Header */}
         <Card className="bg-gray-800 border-gray-700 mb-8">

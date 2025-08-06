@@ -42,20 +42,29 @@ export function Navigation() {
   // Close dropdowns when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (currencyRef.current && !currencyRef.current.contains(event.target as Node)) {
+      if (
+        currencyRef.current &&
+        !currencyRef.current.contains(event.target as Node)
+      ) {
         setShowCurrency(false);
       }
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+      if (
+        userMenuRef.current &&
+        !userMenuRef.current.contains(event.target as Node)
+      ) {
         setShowUserMenu(false);
       }
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
         setShowSearch(false);
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -141,17 +150,17 @@ export function Navigation() {
             {/* Currency Selector */}
             <div className="relative hidden sm:block" ref={currencyRef}>
               <Button
-              variant="ghost"
-              size="sm"
-              className="text-foreground hover:text-primary cursor-pointer"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log("Currency button clicked");
-                setShowCurrency(!showCurrency);
-              }}
-              style={{ pointerEvents: 'auto' }}
-            >
+                variant="ghost"
+                size="sm"
+                className="text-foreground hover:text-primary cursor-pointer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log("Currency button clicked");
+                  setShowCurrency(!showCurrency);
+                }}
+                style={{ pointerEvents: "auto" }}
+              >
                 <Globe className="h-4 w-4 mr-1" />
                 <span className="text-sm">
                   {selectedCurrency.flag} {selectedCurrency.symbol}
@@ -189,7 +198,7 @@ export function Navigation() {
                   e.stopPropagation();
                   handleQuickSearch();
                 }}
-                style={{ pointerEvents: 'auto' }}
+                style={{ pointerEvents: "auto" }}
               >
                 <Search className="h-4 w-4" />
               </Button>
@@ -250,9 +259,10 @@ export function Navigation() {
                 {showUserMenu && (
                   <div className="absolute right-0 mt-2 w-56 bg-background text-foreground rounded-lg shadow-lg border border-border z-50">
                     <div className="px-4 py-3 border-b border-border">
-                      <p className="font-medium">{user.firstName || 'User'}</p>
-                      <p className="text-sm text-muted-foreground">{user.email}</p>
-
+                      <p className="font-medium">{user.firstName || "User"}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {user.email}
+                      </p>
                     </div>
 
                     <Link
@@ -327,7 +337,7 @@ export function Navigation() {
                 console.log("Cart button clicked");
                 setShowCart(true);
               }}
-              style={{ pointerEvents: 'auto' }}
+              style={{ pointerEvents: "auto" }}
             >
               <ShoppingCart className="h-4 w-4" />
               {totalItems > 0 && (
@@ -348,7 +358,7 @@ export function Navigation() {
                 console.log("Mobile menu button clicked");
                 setIsMenuOpen(!isMenuOpen);
               }}
-              style={{ pointerEvents: 'auto' }}
+              style={{ pointerEvents: "auto" }}
             >
               {isMenuOpen ? (
                 <X className="h-4 w-4" />
@@ -402,7 +412,9 @@ export function Navigation() {
               {/* Mobile Currency Selector */}
               <div className="pt-4 pb-3 border-t border-gray-800">
                 <div className="px-3 py-2">
-                  <span className="text-sm text-muted-foreground">Currency</span>
+                  <span className="text-sm text-muted-foreground">
+                    Currency
+                  </span>
                   <div className="grid grid-cols-3 gap-2 mt-2">
                     {currencies.map((currency) => (
                       <button
@@ -427,7 +439,7 @@ export function Navigation() {
                   className="w-full justify-start text-foreground hover:text-primary"
                   onClick={() => {
                     setIsMenuOpen(false);
-                    navigate('/search');
+                    navigate("/search");
                   }}
                 >
                   <Search className="h-4 w-4 mr-2" />
@@ -455,10 +467,7 @@ export function Navigation() {
       />
 
       {/* Cart Sidebar */}
-      <CartSidebar
-        isOpen={showCart}
-        onClose={() => setShowCart(false)}
-      />
+      <CartSidebar isOpen={showCart} onClose={() => setShowCart(false)} />
     </nav>
   );
 }

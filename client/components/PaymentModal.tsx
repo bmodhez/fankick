@@ -61,7 +61,10 @@ export function PaymentModal({
 
   // Safety check for currency
   if (!selectedCurrency || !selectedCurrency.code) {
-    console.warn('PaymentModal: selectedCurrency is invalid:', selectedCurrency);
+    console.warn(
+      "PaymentModal: selectedCurrency is invalid:",
+      selectedCurrency,
+    );
     return null;
   }
 
@@ -70,10 +73,10 @@ export function PaymentModal({
 
   // Debug logging for product image
   if (product) {
-    console.log('PaymentModal product data:', product);
-    console.log('Product image URL:', product.image);
-    console.log('Product name:', product.name);
-    console.log('Image exists check:', !!product.image);
+    console.log("PaymentModal product data:", product);
+    console.log("Product image URL:", product.image);
+    console.log("Product name:", product.name);
+    console.log("Image exists check:", !!product.image);
   }
 
   const subtotal = product ? product.price * product.quantity : amount;
@@ -84,23 +87,26 @@ export function PaymentModal({
   const handleLoginRedirect = () => {
     // Store the current product data temporarily for after login
     if (product) {
-      sessionStorage.setItem('pendingCheckoutProduct', JSON.stringify({
-        product,
-        amount,
-        shippingCost,
-        codAvailable
-      }));
+      sessionStorage.setItem(
+        "pendingCheckoutProduct",
+        JSON.stringify({
+          product,
+          amount,
+          shippingCost,
+          codAvailable,
+        }),
+      );
     }
 
     // Close the modal first
     onClose();
 
     // Navigate to login with current page as return destination
-    navigate('/login', {
+    navigate("/login", {
       state: {
         from: location,
-        returnToPurchase: true
-      }
+        returnToPurchase: true,
+      },
     });
   };
 
@@ -212,7 +218,9 @@ export function PaymentModal({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-center z-50 p-4">
       <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-800">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-xl font-bold text-gray-900 dark:text-white">Quick Checkout</CardTitle>
+          <CardTitle className="text-xl font-bold text-gray-900 dark:text-white">
+            Quick Checkout
+          </CardTitle>
           <Button variant="ghost" size="sm" onClick={onClose}>
             <X className="w-4 h-4" />
           </Button>
@@ -229,7 +237,8 @@ export function PaymentModal({
                 Login Required
               </div>
               <p className="text-blue-700 dark:text-blue-400 text-sm mb-4">
-                Please sign in to your account to complete this purchase securely. Your items will be saved.
+                Please sign in to your account to complete this purchase
+                securely. Your items will be saved.
               </p>
               <Button
                 className="bg-primary text-black hover:bg-primary/90 font-semibold px-6 py-2"
@@ -240,14 +249,17 @@ export function PaymentModal({
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
               <p className="text-xs text-blue-600 dark:text-blue-400 mt-3">
-                Don't have an account? You'll be able to create one after clicking login.
+                Don't have an account? You'll be able to create one after
+                clicking login.
               </p>
             </div>
           )}
 
           {/* Order Summary */}
           <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-            <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">Order Summary</h3>
+            <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
+              Order Summary
+            </h3>
             {product && (
               <div className="flex items-center space-x-3 mb-4">
                 <img
@@ -255,16 +267,18 @@ export function PaymentModal({
                   alt={product.name}
                   className="w-16 h-16 object-cover rounded border border-gray-200 dark:border-gray-600"
                   onLoad={() => {
-                    console.log('Image loaded successfully:', product.image);
+                    console.log("Image loaded successfully:", product.image);
                   }}
                   onError={(e) => {
-                    console.log('Image failed to load:', product.image);
+                    console.log("Image failed to load:", product.image);
                     const target = e.target as HTMLImageElement;
                     target.src = "/placeholder.svg";
                   }}
                 />
                 <div className="flex-1">
-                  <h4 className="font-medium text-sm text-gray-900 dark:text-white">{product.name}</h4>
+                  <h4 className="font-medium text-sm text-gray-900 dark:text-white">
+                    {product.name}
+                  </h4>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
                     Quantity: {product.quantity}
                   </p>
@@ -291,7 +305,9 @@ export function PaymentModal({
                       }}
                     />
                     <div className="flex-1">
-                      <h4 className="font-medium text-sm text-gray-900 dark:text-white">{item.name}</h4>
+                      <h4 className="font-medium text-sm text-gray-900 dark:text-white">
+                        {item.name}
+                      </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         Quantity: {item.quantity}
                       </p>
@@ -329,7 +345,9 @@ export function PaymentModal({
 
           {/* Payment Methods */}
           <div>
-            <h3 className="font-semibold mb-4 text-gray-900 dark:text-white">Choose Payment Method</h3>
+            <h3 className="font-semibold mb-4 text-gray-900 dark:text-white">
+              Choose Payment Method
+            </h3>
             <div className="space-y-3">
               {/* COD Option */}
               {codAvailable && (
@@ -346,7 +364,9 @@ export function PaymentModal({
                       <Banknote className="w-5 h-5 text-green-600 dark:text-green-400" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">Cash on Delivery</h4>
+                      <h4 className="font-medium text-gray-900 dark:text-white">
+                        Cash on Delivery
+                      </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         Pay when your order arrives
                       </p>
@@ -373,7 +393,9 @@ export function PaymentModal({
                       <Smartphone className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">Razorpay</h4>
+                      <h4 className="font-medium text-gray-900 dark:text-white">
+                        Razorpay
+                      </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         UPI, Cards, Net Banking, Wallets
                       </p>

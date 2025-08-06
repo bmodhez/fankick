@@ -3,14 +3,14 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext";
-import { 
-  Mail, 
-  Lock, 
-  Eye, 
-  EyeOff, 
-  Smartphone, 
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  Smartphone,
   ChevronRight,
-  ArrowLeft 
+  ArrowLeft,
 } from "lucide-react";
 
 export default function Login() {
@@ -20,7 +20,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [loginMode, setLoginMode] = useState<"email" | "phone">("email");
-  
+
   const { login, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -53,7 +53,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
       {/* Back to home button */}
-      <Link 
+      <Link
         to="/"
         className="absolute top-6 left-6 flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
       >
@@ -122,7 +122,9 @@ export default function Login() {
                 {/* Error Message - Above Email Field */}
                 {error && (
                   <div className="mb-3 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-                    <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                    <p className="text-sm text-red-600 dark:text-red-400">
+                      {error}
+                    </p>
                   </div>
                 )}
                 <div className="relative">
@@ -139,8 +141,8 @@ export default function Login() {
                     onChange={(e) => setEmail(e.target.value)}
                     className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
                     placeholder={
-                      loginMode === "email" 
-                        ? "Enter your email address" 
+                      loginMode === "email"
+                        ? "Enter your email address"
                         : "Enter your phone number"
                     }
                     required
@@ -181,8 +183,8 @@ export default function Login() {
 
               {/* Forgot Password Link */}
               <div className="text-right">
-                <Link 
-                  to="/forgot-password" 
+                <Link
+                  to="/forgot-password"
                   className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
                 >
                   Forgot password?
