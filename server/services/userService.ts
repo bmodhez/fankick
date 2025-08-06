@@ -128,26 +128,41 @@ export class UserService {
   }
 
   // Login user
-  async loginUser(loginData: UserLoginRequest): Promise<{ user: User; session: UserSession }> {
+  async loginUser(loginData: UserLoginRequest): Promise<{ user: User; sessionToken: string; expiresAt: string }> {
     const client = await pool.connect();
-    
+
     try {
-      // Find user by email
-      const userResult = await client.query(
-        'SELECT * FROM users WHERE email = $1 AND is_active = true',
-        [loginData.email.toLowerCase()]
-      );
-      
-      if (userResult.rows.length === 0) {
-        throw new Error('Invalid email or password');
+      // Check if it's a phone number or email
+      const isPhoneNumber = /^\d{10,15}$/.test(loginData.email.replace(/[^\d]/g, ''));
+
+      // Find user by email or phone
+      let userResult;
+      if (isPhoneNumber) {
+        userResult = await client.query(
+          'SELECT * FROM users WHERE phone = $1 AND is_active = true',
+          [loginData.email]
+        );
+      } else {
+        userResult = await client.query(
+          'SELECT * FROM users WHERE email = $1 AND is_active = true',
+          [loginData.email.toLowerCase()]
+        );
       }
-      
+
+      if (userResult.rows.length === 0) {
+        if (isPhoneNumber) {
+          throw new Error('Phone number not registered. Please sign up first.');
+        } else {
+          throw new Error('Email not registered. Please sign up first.');
+        }
+      }
+
       const user = userResult.rows[0];
-      
+
       // Verify password
       const isValidPassword = await this.verifyPassword(loginData.password, user.password_hash);
       if (!isValidPassword) {
-        throw new Error('Invalid email or password');
+        throw new Error('Incorrect password. Please try again.');
       }
       
       // Create session
