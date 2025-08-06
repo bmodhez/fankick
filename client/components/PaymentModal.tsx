@@ -185,11 +185,11 @@ export function PaymentModal({
         <CardContent className="space-y-6">
           {/* Login Required Notice */}
           {!user && (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
-              <div className="text-blue-800 font-medium mb-2">
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 text-center">
+              <div className="text-blue-800 dark:text-blue-300 font-medium mb-2">
                 Login Required
               </div>
-              <p className="text-blue-700 text-sm mb-3">
+              <p className="text-blue-700 dark:text-blue-400 text-sm mb-3">
                 Please log in to complete your purchase
               </p>
               <Button
