@@ -666,6 +666,7 @@ export default function ProductPage() {
       />
 
       <Footer />
+      <AuthModalComponent />
     </div>
   );
 }
