@@ -494,7 +494,7 @@ export default function TrendingPage() {
                                   onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    toggleLike(product.id);
+                                    requireAuth(() => toggleLike(product.id));
                                   }}
                                 >
                                   <Heart
@@ -579,7 +579,7 @@ export default function TrendingPage() {
                                 onClick={(e) => {
                                   e.preventDefault();
                                   e.stopPropagation();
-                                  toggleLike(product.id);
+                                  requireAuth(() => toggleLike(product.id));
                                 }}
                               >
                                 <Heart
