@@ -212,12 +212,12 @@ export function PaymentModal({
                   className="w-16 h-16 object-cover rounded"
                 />
                 <div className="flex-1">
-                  <h4 className="font-medium text-sm">{product.name}</h4>
-                  <p className="text-sm text-gray-600">
+                  <h4 className="font-medium text-sm text-gray-900 dark:text-white">{product.name}</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
                     Quantity: {product.quantity}
                   </p>
                 </div>
-                <span className="font-bold">
+                <span className="font-bold text-gray-900 dark:text-white">
                   {formatPrice(
                     product.price * product.quantity,
                     selectedCurrency,
