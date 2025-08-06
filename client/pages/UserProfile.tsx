@@ -122,7 +122,11 @@ export default function UserProfile() {
                       Admin
                     </Badge>
                   )}
-                  <Badge className="bg-green-500 text-white">✓ Verified</Badge>
+                  {user.isVerified ? (
+                    <Badge className="bg-green-500 text-white">✓ Verified</Badge>
+                  ) : (
+                    <Badge className="bg-yellow-500 text-black">⚠ Unverified</Badge>
+                  )}
                 </div>
 
                 <p className="text-gray-400 mb-3">{user.email}</p>
@@ -356,120 +360,162 @@ export default function UserProfile() {
           {/* Orders Tab */}
           {activeTab === "orders" && (
             <div className="space-y-4">
-              {orders.map((order) => (
-                <Card key={order.id} className="bg-gray-800 border-gray-700">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-4 lg:space-y-0">
-                      <div className="flex items-center space-x-4">
-                        <img
-                          src={order.image}
-                          alt="Order"
-                          className="w-16 h-16 object-cover rounded-lg"
-                        />
-                        <div>
-                          <div className="flex items-center space-x-3 mb-2">
-                            <h3 className="font-semibold text-white">
-                              Order #{order.id}
-                            </h3>
-                            <Badge className={getStatusColor(order.status)}>
-                              {order.status.charAt(0).toUpperCase() +
-                                order.status.slice(1)}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-gray-400 mb-1">
-                            {order.products.join(", ")}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {order.items} items • {order.date}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center space-x-4">
-                        <div className="text-right">
-                          <div className="text-lg font-bold text-primary">
-                            {formatPrice(
-                              convertPrice(order.total, selectedCurrency.code),
-                              selectedCurrency,
-                            )}
-                          </div>
-                        </div>
-                        <div className="flex space-x-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="border-gray-600 text-gray-300"
-                          >
-                            <Eye className="w-4 h-4 mr-2" />
-                            View
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="border-gray-600 text-gray-300"
-                          >
-                            <Download className="w-4 h-4 mr-2" />
-                            Invoice
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
+              {orders.length === 0 ? (
+                <Card className="bg-gray-800 border-gray-700">
+                  <CardContent className="p-12 text-center">
+                    <Package className="w-20 h-20 text-gray-600 mx-auto mb-6" />
+                    <h3 className="text-2xl font-semibold text-white mb-4">
+                      No orders yet
+                    </h3>
+                    <p className="text-gray-400 mb-6 max-w-md mx-auto">
+                      When you place orders, they'll appear here. Start shopping to see your order history!
+                    </p>
+                    <Link to="/">
+                      <Button className="bg-primary text-black hover:bg-primary/90">
+                        <ShoppingCart className="w-4 h-4 mr-2" />
+                        Start Shopping
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
-              ))}
+              ) : (
+                orders.map((order) => (
+                  <Card key={order.id} className="bg-gray-800 border-gray-700">
+                    <CardContent className="p-6">
+                      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-4 lg:space-y-0">
+                        <div className="flex items-center space-x-4">
+                          <img
+                            src={order.image}
+                            alt="Order"
+                            className="w-16 h-16 object-cover rounded-lg"
+                          />
+                          <div>
+                            <div className="flex items-center space-x-3 mb-2">
+                              <h3 className="font-semibold text-white">
+                                Order #{order.id}
+                              </h3>
+                              <Badge className={getStatusColor(order.status)}>
+                                {order.status.charAt(0).toUpperCase() +
+                                  order.status.slice(1)}
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-gray-400 mb-1">
+                              {order.products.join(", ")}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {order.items} items • {order.date}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center space-x-4">
+                          <div className="text-right">
+                            <div className="text-lg font-bold text-primary">
+                              {formatPrice(
+                                convertPrice(order.total, selectedCurrency.code),
+                                selectedCurrency,
+                              )}
+                            </div>
+                          </div>
+                          <div className="flex space-x-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-gray-600 text-gray-300"
+                            >
+                              <Eye className="w-4 h-4 mr-2" />
+                              View
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-gray-600 text-gray-300"
+                            >
+                              <Download className="w-4 h-4 mr-2" />
+                              Invoice
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))
+              )}
             </div>
           )}
 
           {/* Wishlist Tab */}
           {activeTab === "wishlist" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {wishlist.map((item) => (
-                <Card key={item.id} className="bg-gray-800 border-gray-700">
-                  <CardContent className="p-4">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-32 object-cover rounded-lg mb-4"
-                    />
-                    <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2">
-                      {item.name}
+            <div className="space-y-6">
+              {wishlist.length === 0 ? (
+                <Card className="bg-gray-800 border-gray-700">
+                  <CardContent className="p-12 text-center">
+                    <Heart className="w-20 h-20 text-gray-600 mx-auto mb-6" />
+                    <h3 className="text-2xl font-semibold text-white mb-4">
+                      Your wishlist is empty
                     </h3>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-lg font-bold text-primary">
-                        {formatPrice(
-                          convertPrice(item.price, selectedCurrency.code),
-                          selectedCurrency,
-                        )}
-                      </span>
-                      <Badge
-                        className={
-                          item.inStock
-                            ? "bg-green-500 text-white"
-                            : "bg-red-500 text-white"
-                        }
-                      >
-                        {item.inStock ? "In Stock" : "Out of Stock"}
-                      </Badge>
-                    </div>
-                    <div className="flex space-x-2">
-                      <Button
-                        disabled={!item.inStock}
-                        className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
-                      >
-                        <ShoppingCart className="w-4 h-4 mr-2" />
-                        Add to Cart
+                    <p className="text-gray-400 mb-6 max-w-md mx-auto">
+                      Save items you love to your wishlist. Simply click the heart icon on any product!
+                    </p>
+                    <Link to="/">
+                      <Button className="bg-primary text-black hover:bg-primary/90">
+                        <Heart className="w-4 h-4 mr-2" />
+                        Explore Products
                       </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-gray-600 text-red-400"
-                      >
-                        <X className="w-4 h-4" />
-                      </Button>
-                    </div>
+                    </Link>
                   </CardContent>
                 </Card>
-              ))}
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {wishlist.map((item) => (
+                    <Card key={item.id} className="bg-gray-800 border-gray-700">
+                      <CardContent className="p-4">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-32 object-cover rounded-lg mb-4"
+                        />
+                        <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2">
+                          {item.name}
+                        </h3>
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-lg font-bold text-primary">
+                            {formatPrice(
+                              convertPrice(item.price, selectedCurrency.code),
+                              selectedCurrency,
+                            )}
+                          </span>
+                          <Badge
+                            className={
+                              item.inStock
+                                ? "bg-green-500 text-white"
+                                : "bg-red-500 text-white"
+                            }
+                          >
+                            {item.inStock ? "In Stock" : "Out of Stock"}
+                          </Badge>
+                        </div>
+                        <div className="flex space-x-2">
+                          <Button
+                            disabled={!item.inStock}
+                            className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
+                          >
+                            <ShoppingCart className="w-4 h-4 mr-2" />
+                            Add to Cart
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-gray-600 text-red-400"
+                          >
+                            <X className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
