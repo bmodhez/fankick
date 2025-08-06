@@ -32,6 +32,11 @@ export default function CategoryPage() {
   const normalizedCategory = category?.toLowerCase().trim() || "";
   let allProducts: Product[] = [];
 
+  // Scroll to top when category changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [category]);
+
   if (normalizedCategory && products.length > 0) {
     // Filter products by exact category match
     allProducts = products.filter(
