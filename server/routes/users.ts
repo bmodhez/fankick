@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { Request, Response } from "express";
-import { userService } from "../services/userServiceJson.js";
+import { userService } from "../services/userService.js";
 import {
   UserCreateRequest,
   UserLoginRequest,
