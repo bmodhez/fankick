@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Footer } from "@/components/Footer";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
+import { useLike } from "@/contexts/LikeContext";
 import { Product } from "@/data/products";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
@@ -21,6 +22,7 @@ export default function CategoryPage() {
   const { category } = useParams<{ category: string }>();
   const { selectedCurrency } = useCurrency();
   const { getProductsByCategory, isLoading, products } = useProducts();
+  const { toggleLike, isLiked } = useLike();
   const [sortBy, setSortBy] = useState("trending");
   const [priceRange, setPriceRange] = useState("all");
 
