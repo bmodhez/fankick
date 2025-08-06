@@ -236,7 +236,11 @@ export function PaymentModal({
                     <img
                       src={item.image || "/placeholder.svg"}
                       alt={item.name}
-                      className="w-12 h-12 object-cover rounded"
+                      className="w-12 h-12 object-cover rounded border border-gray-200 dark:border-gray-600"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "/placeholder.svg";
+                      }}
                     />
                     <div className="flex-1">
                       <h4 className="font-medium text-sm text-gray-900 dark:text-white">{item.name}</h4>
