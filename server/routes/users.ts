@@ -7,7 +7,6 @@ import { UserCreateRequest, UserLoginRequest, AuthResponse, UserResponse } from 
 export async function registerUser(req: Request, res: Response) {
   try {
     const userData: UserCreateRequest = req.body;
-    console.log('Registration attempt with data:', userData);
 
     // Basic validation
     if (!userData.email || !userData.password) {
