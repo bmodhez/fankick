@@ -403,18 +403,18 @@ export default function Index() {
       </section>
 
       {/* Product Categories */}
-      <section className="py-16 bg-background">
+      <section className="py-8 sm:py-12 lg:py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-foreground mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sport font-bold text-foreground mb-3 sm:mb-4">
               SHOP BY PASSION
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
               Discover curated collections that speak to your soul
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {categories.map((category, index) => (
               <Link key={index} to={category.link}>
                 <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 h-full border border-border/50 hover:border-primary/20 bg-card">
@@ -423,25 +423,25 @@ export default function Index() {
                       <img
                         src={category.image}
                         alt={category.name}
-                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-32 sm:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute bottom-4 left-4 text-white">
-                        <h3 className="font-bold text-lg mb-1">
+                      <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-white">
+                        <h3 className="font-bold text-sm sm:text-lg mb-1">
                           {category.name}
                         </h3>
-                        <p className="text-sm text-white/80">
+                        <p className="text-xs sm:text-sm text-white/80">
                           {category.items} products
                         </p>
                       </div>
                     </div>
-                    <div className="p-4">
-                      <p className="text-muted-foreground text-sm mb-4">
+                    <div className="p-3 sm:p-4">
+                      <p className="text-muted-foreground text-xs sm:text-sm mb-3 sm:mb-4">
                         {category.description}
                       </p>
                       <Button
                         variant="outline"
-                        className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all"
+                        className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all text-xs sm:text-sm py-2"
                       >
                         Explore Collection
                       </Button>
@@ -455,20 +455,20 @@ export default function Index() {
       </section>
 
       {/* Global Shipping Banner */}
-      <section className="py-12 bg-gradient-to-r from-primary to-purple-500">
+      <section className="py-8 sm:py-12 bg-gradient-to-r from-primary to-purple-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-foreground">
             <div className="flex items-center justify-center mb-4">
-              <Globe className="w-8 h-8 mr-3" />
-              <h2 className="text-2xl font-sport font-bold">
+              <Globe className="w-6 sm:w-8 h-6 sm:h-8 mr-2 sm:mr-3" />
+              <h2 className="text-xl sm:text-2xl font-sport font-bold">
                 WORLDWIDE SHIPPING
               </h2>
             </div>
-            <p className="text-lg mb-6">
+            <p className="text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 px-4">
               Free shipping to 150+ countries • Express delivery • Track your
               order in real-time
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm font-medium">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm font-medium">
               <span className="bg-black/10 px-4 py-2 rounded-full">
                 🇺🇸 USA: 5-7 days
               </span>
@@ -493,13 +493,13 @@ export default function Index() {
       </section>
 
       {/* Instagram Feed */}
-      <section className="py-16 bg-slate-50/50 dark:bg-muted border-y border-border/20">
+      <section className="py-8 sm:py-12 lg:py-16 bg-slate-50/50 dark:bg-muted border-y border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-foreground mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sport font-bold text-foreground mb-3 sm:mb-4">
               FANKICK COMMUNITY
             </h2>
-            <p className="text-muted-foreground text-lg mb-6">
+            <p className="text-muted-foreground text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 px-4">
               See how fans worldwide rock their FanKick gear
             </p>
             <Button className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:opacity-90 font-semibold">
@@ -508,7 +508,7 @@ export default function Index() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
             {Array.from({ length: 12 }, (_, i) => (
               <div
                 key={i}
