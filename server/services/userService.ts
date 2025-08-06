@@ -178,15 +178,8 @@ export class UserService {
       
       return {
         user: this.dbRowToUser(user),
-        session: {
-          id: sessionResult.rows[0].id,
-          userId: sessionResult.rows[0].user_id,
-          sessionToken: sessionResult.rows[0].session_token,
-          expiresAt: sessionResult.rows[0].expires_at,
-          userAgent: sessionResult.rows[0].user_agent,
-          ipAddress: sessionResult.rows[0].ip_address,
-          createdAt: sessionResult.rows[0].created_at
-        }
+        sessionToken: sessionResult.rows[0].session_token,
+        expiresAt: sessionResult.rows[0].expires_at
       };
     } finally {
       client.release();
