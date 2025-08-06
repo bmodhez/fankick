@@ -188,6 +188,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
+  // Check if current user is admin based on specific email and phone
+  const isAdmin = (): boolean => {
+    if (!user) return false;
+
+    const adminEmail = 'modhbhavin05@gmail.com';
+    const adminPhone = '9322667822';
+
+    return user.email === adminEmail && user.phone === adminPhone;
+  };
+
   const value: AuthContextType = {
     user,
     isLoading,
