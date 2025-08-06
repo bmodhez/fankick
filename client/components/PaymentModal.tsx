@@ -215,7 +215,7 @@ export function PaymentModal({
               </p>
               <Button
                 className="bg-primary text-black hover:bg-primary/90"
-                onClick={onClose}
+                onClick={handleLoginRedirect}
               >
                 Login to Continue
               </Button>
