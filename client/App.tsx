@@ -28,6 +28,10 @@ import RefundPolicy from "./pages/RefundPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Contact from "./pages/Contact";
 import TestPage from "./pages/TestPage";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Checkout from "./pages/Checkout";
+import OrderSuccess from "./pages/OrderSuccess";
 import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
@@ -211,6 +215,10 @@ const App = () => (
                           }
                         />
                         <Route path="/product/:id" element={<ProductPage />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<Signup />} />
+                        <Route path="/checkout" element={<Checkout />} />
+                        <Route path="/order-success" element={<OrderSuccess />} />
                         <Route
                           path="/terms"
                           element={
