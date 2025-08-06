@@ -221,19 +221,27 @@ export function PaymentModal({
         <CardContent className="space-y-6">
           {/* Login Required Notice */}
           {!user && (
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 text-center">
-              <div className="text-blue-800 dark:text-blue-300 font-medium mb-2">
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-full flex items-center justify-center mx-auto mb-3">
+                <User className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div className="text-blue-800 dark:text-blue-300 font-semibold text-lg mb-2">
                 Login Required
               </div>
-              <p className="text-blue-700 dark:text-blue-400 text-sm mb-3">
-                Please log in to complete your purchase
+              <p className="text-blue-700 dark:text-blue-400 text-sm mb-4">
+                Please sign in to your account to complete this purchase securely. Your items will be saved.
               </p>
               <Button
-                className="bg-primary text-black hover:bg-primary/90"
+                className="bg-primary text-black hover:bg-primary/90 font-semibold px-6 py-2"
                 onClick={handleLoginRedirect}
               >
+                <User className="w-4 h-4 mr-2" />
                 Login to Continue
+                <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
+              <p className="text-xs text-blue-600 dark:text-blue-400 mt-3">
+                Don't have an account? You'll be able to create one after clicking login.
+              </p>
             </div>
           )}
 
