@@ -185,8 +185,8 @@ export default function ProductPage() {
                   variant="outline"
                   className={`bg-background transition-all duration-300 hover:scale-110 ${
                     isLiked(product.id)
-                      ? 'border-red-500 shadow-lg shadow-red-500/25'
-                      : 'hover:border-red-500'
+                      ? "border-red-500 shadow-lg shadow-red-500/25"
+                      : "hover:border-red-500"
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
@@ -197,8 +197,8 @@ export default function ProductPage() {
                   <Heart
                     className={`w-4 h-4 transition-all duration-300 ${
                       isLiked(product.id)
-                        ? 'fill-red-500 text-red-500 scale-110'
-                        : 'text-muted-foreground hover:text-red-500'
+                        ? "fill-red-500 text-red-500 scale-110"
+                        : "text-muted-foreground hover:text-red-500"
                     }`}
                   />
                 </Button>

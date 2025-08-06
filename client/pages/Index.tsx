@@ -85,28 +85,32 @@ export default function Index() {
     {
       name: "Football Jerseys",
       items: 350,
-      image: "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F8bebf119965a4b5ba2f2d45b556c0cb2?format=webp&width=800",
+      image:
+        "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F8bebf119965a4b5ba2f2d45b556c0cb2?format=webp&width=800",
       description: "Official jerseys from Messi, Ronaldo & more",
       link: "/collections/football",
     },
     {
       name: "Anime Rings",
       items: 180,
-      image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80",
       description: "Exclusive rings from Naruto, One Piece & more",
       link: "/collections/anime",
     },
     {
       name: "K-pop Merch",
       items: 240,
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
       description: "BTS, Blackpink, Stray Kids official items",
       link: "/collections/pop-culture",
     },
     {
       name: "Marvel Collection",
       items: 420,
-      image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80",
       description: "Superhero gear for true Marvel fans",
       link: "/collections/pop-culture",
     },
@@ -281,8 +285,8 @@ export default function Index() {
                             size="sm"
                             className={`bg-white/90 hover:bg-white transition-all duration-300 hover:scale-110 ${
                               isLiked(product.id)
-                                ? 'shadow-lg shadow-red-500/25'
-                                : ''
+                                ? "shadow-lg shadow-red-500/25"
+                                : ""
                             }`}
                             onClick={(e) => {
                               e.preventDefault();
@@ -293,8 +297,8 @@ export default function Index() {
                             <Heart
                               className={`w-4 h-4 transition-all duration-300 ${
                                 isLiked(product.id)
-                                  ? 'fill-red-500 text-red-500 scale-110'
-                                  : 'text-gray-600 hover:text-red-500'
+                                  ? "fill-red-500 text-red-500 scale-110"
+                                  : "text-gray-600 hover:text-red-500"
                               }`}
                             />
                           </Button>
@@ -523,7 +527,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
 
       <Footer />
       <AuthModalComponent />

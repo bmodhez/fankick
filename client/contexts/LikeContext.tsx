@@ -34,7 +34,10 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
   // Save to localStorage whenever liked products change (only for authenticated users)
   useEffect(() => {
     if (isAuthenticated && user) {
-      localStorage.setItem(`likedProducts_${user.id}`, JSON.stringify([...likedProducts]));
+      localStorage.setItem(
+        `likedProducts_${user.id}`,
+        JSON.stringify([...likedProducts]),
+      );
     }
   }, [likedProducts, isAuthenticated, user]);
 
@@ -47,7 +50,7 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    setLikedProducts(prev => {
+    setLikedProducts((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(productId)) {
         newSet.delete(productId);

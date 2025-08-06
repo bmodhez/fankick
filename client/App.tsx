@@ -49,195 +49,215 @@ const App = () => (
               <CartProvider>
                 <LikeProvider>
                   <TooltipProvider>
-                  <Toaster />
-                  <Sonner />
-                  <BrowserRouter>
-                    <ScrollToTop />
-                    <div className="min-h-screen">
-                      <Routes>
-                        <Route
-                          path="/"
-                          element={
-                            <>
-                              <Navigation />
-                              <Index />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/category/:category"
-                          element={
-                            <>
-                              <Navigation />
-                              <CategoryPage />
-                            </>
-                          }
-                        />
-                        {/* Redirect old category URLs to new structure */}
-                        <Route
-                          path="/anime"
-                          element={<Navigate to="/category/anime" replace />}
-                        />
-                        <Route
-                          path="/football"
-                          element={<Navigate to="/category/football" replace />}
-                        />
-                        <Route
-                          path="/pop-culture"
-                          element={
-                            <Navigate to="/category/pop-culture" replace />
-                          }
-                        />
-                        <Route
-                          path="/collections"
-                          element={
-                            <>
-                              <Navigation />
-                              <CollectionsPage />
-                            </>
-                          }
-                        />
-                        <Route path="/search" element={<SearchResults />} />
-                        <Route path="/profile" element={<UserProfile />} />
-                        <Route
-                          path="/trending"
-                          element={
-                            <>
-                              <Navigation />
-                              <TrendingPage />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/collections"
-                          element={
-                            <>
-                              <Navigation />
-                              <CollectionsPage />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/collections/:collection"
-                          element={
-                            <>
-                              <Navigation />
-                              <CollectionsPage />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/football/:category"
-                          element={
-                            <>
-                              <Navigation />
-                              <CollectionsPage />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/anime/:category"
-                          element={
-                            <>
-                              <Navigation />
-                              <CollectionsPage />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/pop-culture/:category"
-                          element={
-                            <>
-                              <Navigation />
-                              <CollectionsPage />
-                            </>
-                          }
-                        />
-                        <Route path="/product/:id" element={<ProductPage />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/signup" element={<Signup />} />
-                        <Route path="/checkout" element={<Checkout />} />
-                        <Route path="/order-success" element={<OrderSuccess />} />
-                        <Route
-                          path="/terms"
-                          element={
-                            <>
-                              <Navigation />
-                              <TermsConditions />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/shipping"
-                          element={
-                            <>
-                              <Navigation />
-                              <ShippingPolicy />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/refunds"
-                          element={
-                            <>
-                              <Navigation />
-                              <RefundPolicy />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/privacy"
-                          element={
-                            <>
-                              <Navigation />
-                              <PrivacyPolicy />
-                            </>
-                          }
-                        />
-                        <Route
-                          path="/contact"
-                          element={
-                            <>
-                              <Navigation />
-                              <Contact />
-                            </>
-                          }
-                        />
-                        <Route path="/admin" element={<AdminPanel />} />
-                        <Route
-                          path="/admin/products"
-                          element={<AdminPanel />}
-                        />
-                        <Route path="/admin/orders" element={<AdminPanel />} />
-                        <Route
-                          path="/admin/customers"
-                          element={<AdminPanel />}
-                        />
-                        <Route
-                          path="/admin/categories"
-                          element={<AdminPanel />}
-                        />
-                        <Route path="/admin/images" element={<AdminPanel />} />
-                        <Route
-                          path="/admin/analytics"
-                          element={<AdminPanel />}
-                        />
-                        <Route path="/admin/content" element={<AdminPanel />} />
-                        <Route
-                          path="/admin/marketing"
-                          element={<AdminPanel />}
-                        />
-                        <Route path="/admin/chatbot" element={<AdminPanel />} />
-                        <Route
-                          path="/admin/settings"
-                          element={<AdminPanel />}
-                        />
-                        <Route path="/admin/test" element={<AdminPanel />} />
-                        <Route path="/test" element={<TestPage />} />
-                        <Route path="*" element={<NotFound />} />
-                      </Routes>
-                    </div>
-                  </BrowserRouter>
+                    <Toaster />
+                    <Sonner />
+                    <BrowserRouter>
+                      <ScrollToTop />
+                      <div className="min-h-screen">
+                        <Routes>
+                          <Route
+                            path="/"
+                            element={
+                              <>
+                                <Navigation />
+                                <Index />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/category/:category"
+                            element={
+                              <>
+                                <Navigation />
+                                <CategoryPage />
+                              </>
+                            }
+                          />
+                          {/* Redirect old category URLs to new structure */}
+                          <Route
+                            path="/anime"
+                            element={<Navigate to="/category/anime" replace />}
+                          />
+                          <Route
+                            path="/football"
+                            element={
+                              <Navigate to="/category/football" replace />
+                            }
+                          />
+                          <Route
+                            path="/pop-culture"
+                            element={
+                              <Navigate to="/category/pop-culture" replace />
+                            }
+                          />
+                          <Route
+                            path="/collections"
+                            element={
+                              <>
+                                <Navigation />
+                                <CollectionsPage />
+                              </>
+                            }
+                          />
+                          <Route path="/search" element={<SearchResults />} />
+                          <Route path="/profile" element={<UserProfile />} />
+                          <Route
+                            path="/trending"
+                            element={
+                              <>
+                                <Navigation />
+                                <TrendingPage />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/collections"
+                            element={
+                              <>
+                                <Navigation />
+                                <CollectionsPage />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/collections/:collection"
+                            element={
+                              <>
+                                <Navigation />
+                                <CollectionsPage />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/football/:category"
+                            element={
+                              <>
+                                <Navigation />
+                                <CollectionsPage />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/anime/:category"
+                            element={
+                              <>
+                                <Navigation />
+                                <CollectionsPage />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/pop-culture/:category"
+                            element={
+                              <>
+                                <Navigation />
+                                <CollectionsPage />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/product/:id"
+                            element={<ProductPage />}
+                          />
+                          <Route path="/login" element={<Login />} />
+                          <Route path="/signup" element={<Signup />} />
+                          <Route path="/checkout" element={<Checkout />} />
+                          <Route
+                            path="/order-success"
+                            element={<OrderSuccess />}
+                          />
+                          <Route
+                            path="/terms"
+                            element={
+                              <>
+                                <Navigation />
+                                <TermsConditions />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/shipping"
+                            element={
+                              <>
+                                <Navigation />
+                                <ShippingPolicy />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/refunds"
+                            element={
+                              <>
+                                <Navigation />
+                                <RefundPolicy />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/privacy"
+                            element={
+                              <>
+                                <Navigation />
+                                <PrivacyPolicy />
+                              </>
+                            }
+                          />
+                          <Route
+                            path="/contact"
+                            element={
+                              <>
+                                <Navigation />
+                                <Contact />
+                              </>
+                            }
+                          />
+                          <Route path="/admin" element={<AdminPanel />} />
+                          <Route
+                            path="/admin/products"
+                            element={<AdminPanel />}
+                          />
+                          <Route
+                            path="/admin/orders"
+                            element={<AdminPanel />}
+                          />
+                          <Route
+                            path="/admin/customers"
+                            element={<AdminPanel />}
+                          />
+                          <Route
+                            path="/admin/categories"
+                            element={<AdminPanel />}
+                          />
+                          <Route
+                            path="/admin/images"
+                            element={<AdminPanel />}
+                          />
+                          <Route
+                            path="/admin/analytics"
+                            element={<AdminPanel />}
+                          />
+                          <Route
+                            path="/admin/content"
+                            element={<AdminPanel />}
+                          />
+                          <Route
+                            path="/admin/marketing"
+                            element={<AdminPanel />}
+                          />
+                          <Route
+                            path="/admin/chatbot"
+                            element={<AdminPanel />}
+                          />
+                          <Route
+                            path="/admin/settings"
+                            element={<AdminPanel />}
+                          />
+                          <Route path="/admin/test" element={<AdminPanel />} />
+                          <Route path="/test" element={<TestPage />} />
+                          <Route path="*" element={<NotFound />} />
+                        </Routes>
+                      </div>
+                    </BrowserRouter>
                   </TooltipProvider>
                 </LikeProvider>
               </CartProvider>

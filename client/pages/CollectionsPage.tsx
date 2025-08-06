@@ -51,8 +51,10 @@ export default function CollectionsPage() {
   const collectionConfigs = {
     football: {
       title: "Football Legends Collection",
-      subtitle: "Official jerseys, boots & gear from the world's greatest players",
-      description: "Discover authentic merchandise from Messi, Ronaldo, Mbappé and other football legends. Premium quality jerseys, professional boots, and exclusive fan gear.",
+      subtitle:
+        "Official jerseys, boots & gear from the world's greatest players",
+      description:
+        "Discover authentic merchandise from Messi, Ronaldo, Mbappé and other football legends. Premium quality jerseys, professional boots, and exclusive fan gear.",
       categories: ["jerseys", "boots", "accessories"],
       hero: "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F8bebf119965a4b5ba2f2d45b556c0cb2?format=webp&width=800",
       color: "from-green-600 to-blue-600",
@@ -61,7 +63,8 @@ export default function CollectionsPage() {
     anime: {
       title: "Anime Universe Collection",
       subtitle: "Premium anime merchandise from your favorite series",
-      description: "Explore official anime hoodies, rings, necklaces and collectibles from Naruto, Demon Slayer, Attack on Titan, and more beloved series.",
+      description:
+        "Explore official anime hoodies, rings, necklaces and collectibles from Naruto, Demon Slayer, Attack on Titan, and more beloved series.",
       categories: ["hoodies", "rings", "necklaces", "accessories"],
       hero: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&q=80",
       color: "from-purple-600 to-pink-600",
@@ -70,7 +73,8 @@ export default function CollectionsPage() {
     "pop-culture": {
       title: "Pop Culture Collection",
       subtitle: "Trending merchandise from music, movies & celebrities",
-      description: "Official merchandise from Taylor Swift, BTS, Marvel, and the hottest pop culture phenomena. Limited edition items and exclusive releases.",
+      description:
+        "Official merchandise from Taylor Swift, BTS, Marvel, and the hottest pop culture phenomena. Limited edition items and exclusive releases.",
       categories: ["hoodies", "tshirts", "accessories"],
       hero: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80",
       color: "from-red-600 to-orange-600",
@@ -79,15 +83,25 @@ export default function CollectionsPage() {
     all: {
       title: "All Collections",
       subtitle: "Discover our complete range of premium merchandise",
-      description: "Browse through our entire collection of football legends, anime universe, and pop culture items. Find exactly what you're looking for.",
-      categories: ["jerseys", "hoodies", "rings", "boots", "tshirts", "accessories"],
+      description:
+        "Browse through our entire collection of football legends, anime universe, and pop culture items. Find exactly what you're looking for.",
+      categories: [
+        "jerseys",
+        "hoodies",
+        "rings",
+        "boots",
+        "tshirts",
+        "accessories",
+      ],
       hero: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80",
       color: "from-indigo-600 to-purple-600",
       icon: "✨",
     },
   };
 
-  const currentCollection = collectionConfigs[collection as keyof typeof collectionConfigs] || collectionConfigs.all;
+  const currentCollection =
+    collectionConfigs[collection as keyof typeof collectionConfigs] ||
+    collectionConfigs.all;
 
   // Filter products based on collection
   const getFilteredProducts = () => {
@@ -95,21 +109,24 @@ export default function CollectionsPage() {
 
     // Filter by collection/category
     if (collection && collection !== "all") {
-      filtered = filtered.filter(product => product.category === collection);
+      filtered = filtered.filter((product) => product.category === collection);
     }
 
     // Filter by subcategory
     if (selectedSubcategory !== "all") {
-      filtered = filtered.filter(product => product.subcategory === selectedSubcategory);
+      filtered = filtered.filter(
+        (product) => product.subcategory === selectedSubcategory,
+      );
     }
 
     // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(product =>
-        product.name.toLowerCase().includes(query) ||
-        product.description.toLowerCase().includes(query) ||
-        product.tags.some(tag => tag.toLowerCase().includes(query))
+      filtered = filtered.filter(
+        (product) =>
+          product.name.toLowerCase().includes(query) ||
+          product.description.toLowerCase().includes(query) ||
+          product.tags.some((tag) => tag.toLowerCase().includes(query)),
       );
     }
 
@@ -121,8 +138,13 @@ export default function CollectionsPage() {
         "3000-5000": [3000, 5000],
         "above-5000": [5000, Infinity],
       };
-      const [min, max] = ranges[priceRange as keyof typeof ranges] || [0, Infinity];
-      filtered = filtered.filter(product => product.basePrice >= min && product.basePrice <= max);
+      const [min, max] = ranges[priceRange as keyof typeof ranges] || [
+        0,
+        Infinity,
+      ];
+      filtered = filtered.filter(
+        (product) => product.basePrice >= min && product.basePrice <= max,
+      );
     }
 
     // Sort products
@@ -138,7 +160,9 @@ export default function CollectionsPage() {
         break;
       case "trending":
       default:
-        filtered.sort((a, b) => (b.isTrending ? 1 : 0) - (a.isTrending ? 1 : 0));
+        filtered.sort(
+          (a, b) => (b.isTrending ? 1 : 0) - (a.isTrending ? 1 : 0),
+        );
         break;
     }
 
@@ -158,9 +182,9 @@ export default function CollectionsPage() {
   const getSubcategories = () => {
     let collectionProducts = products;
     if (collection && collection !== "all") {
-      collectionProducts = products.filter(p => p.category === collection);
+      collectionProducts = products.filter((p) => p.category === collection);
     }
-    return [...new Set(collectionProducts.map(p => p.subcategory))];
+    return [...new Set(collectionProducts.map((p) => p.subcategory))];
   };
 
   const subcategories = getSubcategories();
@@ -173,13 +197,15 @@ export default function CollectionsPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className={`relative bg-gradient-to-br ${currentCollection.color} py-20 overflow-hidden`}>
+      <section
+        className={`relative bg-gradient-to-br ${currentCollection.color} py-20 overflow-hidden`}
+      >
         <div className="absolute inset-0 bg-black/40"></div>
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{ backgroundImage: `url(${currentCollection.hero})` }}
         ></div>
-        
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <div className="text-6xl mb-4">{currentCollection.icon}</div>
           <h1 className="text-4xl lg:text-6xl font-sport font-bold mb-4">
@@ -191,7 +217,7 @@ export default function CollectionsPage() {
           <p className="text-lg mb-8 max-w-4xl mx-auto opacity-80">
             {currentCollection.description}
           </p>
-          
+
           <div className="flex flex-wrap gap-4 justify-center">
             <Badge className="bg-white/20 text-white px-4 py-2 text-sm backdrop-blur-sm">
               <Truck className="w-4 h-4 mr-2" />
@@ -233,7 +259,7 @@ export default function CollectionsPage() {
                 className="px-3 py-2 border border-border rounded-md bg-background text-foreground"
               >
                 <option value="all">All Categories</option>
-                {subcategories.map(sub => (
+                {subcategories.map((sub) => (
                   <option key={sub} value={sub} className="capitalize">
                     {sub.charAt(0).toUpperCase() + sub.slice(1)}
                   </option>
@@ -303,37 +329,47 @@ export default function CollectionsPage() {
               <p className="text-muted-foreground mb-8 max-w-md mx-auto">
                 Try adjusting your search criteria or browse our full collection
               </p>
-              <Button onClick={() => {
-                setSearchQuery("");
-                setSelectedSubcategory("all");
-                setPriceRange("all");
-              }}>
+              <Button
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedSubcategory("all");
+                  setPriceRange("all");
+                }}
+              >
                 Clear Filters
               </Button>
             </div>
           ) : (
-            <div className={`grid gap-6 ${
-              viewMode === "grid" 
-                ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
-                : "grid-cols-1"
-            }`}>
+            <div
+              className={`grid gap-6 ${
+                viewMode === "grid"
+                  ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                  : "grid-cols-1"
+              }`}
+            >
               {filteredProducts.map((product) => {
                 const convertedPrice = convertPrice(
                   product.basePrice,
                   selectedCurrency.code,
-                  "INR"
+                  "INR",
                 );
                 const convertedOriginalPrice = convertPrice(
                   product.originalPrice,
                   selectedCurrency.code,
-                  "INR"
+                  "INR",
                 );
 
                 if (viewMode === "list") {
                   return (
-                    <Card key={product.id} className="hover:shadow-lg transition-all duration-300 group">
+                    <Card
+                      key={product.id}
+                      className="hover:shadow-lg transition-all duration-300 group"
+                    >
                       <CardContent className="p-0">
-                        <Link to={`/product/${product.id}`} className="flex gap-6 p-6">
+                        <Link
+                          to={`/product/${product.id}`}
+                          className="flex gap-6 p-6"
+                        >
                           <div className="relative w-48 h-48 flex-shrink-0">
                             <img
                               src={product.images[0]}
@@ -351,7 +387,9 @@ export default function CollectionsPage() {
                                 variant="ghost"
                                 size="sm"
                                 className={`bg-white/90 hover:bg-white transition-all duration-300 hover:scale-110 ${
-                                  isLiked(product.id) ? 'shadow-lg shadow-red-500/25' : ''
+                                  isLiked(product.id)
+                                    ? "shadow-lg shadow-red-500/25"
+                                    : ""
                                 }`}
                                 onClick={(e) => {
                                   e.preventDefault();
@@ -359,30 +397,35 @@ export default function CollectionsPage() {
                                   requireAuth(() => toggleLike(product.id));
                                 }}
                               >
-                                <Heart 
+                                <Heart
                                   className={`w-4 h-4 transition-all duration-300 ${
                                     isLiked(product.id)
-                                      ? 'fill-red-500 text-red-500 scale-110'
-                                      : 'text-gray-600 hover:text-red-500'
+                                      ? "fill-red-500 text-red-500 scale-110"
+                                      : "text-gray-600 hover:text-red-500"
                                   }`}
                                 />
                               </Button>
                             </div>
                           </div>
-                          
+
                           <div className="flex-1">
                             <div className="flex gap-2 mb-2">
-                              {product.badges.slice(0, 2).map((badge, index) => (
-                                <Badge key={index} className="bg-primary/10 text-primary text-xs">
-                                  {badge}
-                                </Badge>
-                              ))}
+                              {product.badges
+                                .slice(0, 2)
+                                .map((badge, index) => (
+                                  <Badge
+                                    key={index}
+                                    className="bg-primary/10 text-primary text-xs"
+                                  >
+                                    {badge}
+                                  </Badge>
+                                ))}
                             </div>
-                            
+
                             <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                               {product.name}
                             </h3>
-                            
+
                             <p className="text-muted-foreground mb-4 line-clamp-2">
                               {product.description}
                             </p>
@@ -400,7 +443,8 @@ export default function CollectionsPage() {
                                   />
                                 ))}
                                 <span className="text-sm text-muted-foreground ml-2">
-                                  {product.rating} ({product.reviews.toLocaleString()})
+                                  {product.rating} (
+                                  {product.reviews.toLocaleString()})
                                 </span>
                               </div>
                             </div>
@@ -408,10 +452,16 @@ export default function CollectionsPage() {
                             <div className="flex items-center justify-between">
                               <div>
                                 <span className="text-2xl font-bold text-primary">
-                                  {formatPrice(convertedPrice, selectedCurrency)}
+                                  {formatPrice(
+                                    convertedPrice,
+                                    selectedCurrency,
+                                  )}
                                 </span>
                                 <span className="text-muted-foreground line-through text-lg ml-2">
-                                  {formatPrice(convertedOriginalPrice, selectedCurrency)}
+                                  {formatPrice(
+                                    convertedOriginalPrice,
+                                    selectedCurrency,
+                                  )}
                                 </span>
                               </div>
 
@@ -432,7 +482,10 @@ export default function CollectionsPage() {
 
                 // Grid view
                 return (
-                  <Card key={product.id} className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/10 hover:scale-105 transition-all duration-500 overflow-hidden border border-border/50 hover:border-primary/30 bg-card/80 backdrop-blur-sm">
+                  <Card
+                    key={product.id}
+                    className="group cursor-pointer hover:shadow-2xl hover:shadow-primary/10 hover:scale-105 transition-all duration-500 overflow-hidden border border-border/50 hover:border-primary/30 bg-card/80 backdrop-blur-sm"
+                  >
                     <CardContent className="p-0">
                       <Link to={`/product/${product.id}`}>
                         <div className="relative">
@@ -449,14 +502,16 @@ export default function CollectionsPage() {
                                 TRENDING
                               </Badge>
                             )}
-                            {product.badges.slice(0, 2).map((badge, badgeIndex) => (
-                              <Badge
-                                key={badgeIndex}
-                                className="bg-black/80 text-white text-xs block"
-                              >
-                                {badge}
-                              </Badge>
-                            ))}
+                            {product.badges
+                              .slice(0, 2)
+                              .map((badge, badgeIndex) => (
+                                <Badge
+                                  key={badgeIndex}
+                                  className="bg-black/80 text-white text-xs block"
+                                >
+                                  {badge}
+                                </Badge>
+                              ))}
                           </div>
 
                           <div className="absolute top-2 right-2">
@@ -464,7 +519,9 @@ export default function CollectionsPage() {
                               variant="ghost"
                               size="sm"
                               className={`bg-white/90 hover:bg-white transition-all duration-300 hover:scale-110 ${
-                                isLiked(product.id) ? 'shadow-lg shadow-red-500/25' : ''
+                                isLiked(product.id)
+                                  ? "shadow-lg shadow-red-500/25"
+                                  : ""
                               }`}
                               onClick={(e) => {
                                 e.preventDefault();
@@ -472,11 +529,11 @@ export default function CollectionsPage() {
                                 requireAuth(() => toggleLike(product.id));
                               }}
                             >
-                              <Heart 
+                              <Heart
                                 className={`w-4 h-4 transition-all duration-300 ${
                                   isLiked(product.id)
-                                    ? 'fill-red-500 text-red-500 scale-110'
-                                    : 'text-gray-600 hover:text-red-500'
+                                    ? "fill-red-500 text-red-500 scale-110"
+                                    : "text-gray-600 hover:text-red-500"
                                 }`}
                               />
                             </Button>
@@ -519,7 +576,10 @@ export default function CollectionsPage() {
                                 {formatPrice(convertedPrice, selectedCurrency)}
                               </span>
                               <span className="text-muted-foreground line-through text-sm ml-2">
-                                {formatPrice(convertedOriginalPrice, selectedCurrency)}
+                                {formatPrice(
+                                  convertedOriginalPrice,
+                                  selectedCurrency,
+                                )}
                               </span>
                             </div>
                           </div>
