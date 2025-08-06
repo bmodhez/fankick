@@ -223,21 +223,21 @@ export default function Index() {
       {/* Trending Products */}
       <section className="py-16 bg-slate-50/50 dark:bg-muted border-y border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <Badge className="mb-4 bg-red-100 text-red-800 font-semibold px-4 py-2">
               <Timer className="w-4 h-4 mr-2" />
               Trending Now
             </Badge>
-            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-foreground mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sport font-bold text-foreground mb-3 sm:mb-4">
               WHAT'S HOT RIGHT NOW
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
               Join millions of fans worldwide who are rocking these trending
               items
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {trendingProducts.map((product, index) => {
               const convertedPrice = convertPrice(
                 product.basePrice,
@@ -258,7 +258,7 @@ export default function Index() {
                         <img
                           src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800"
                           alt={product.name}
-                          className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="w-full h-40 sm:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                         />
 
                         {/* Overlays */}
@@ -320,8 +320,8 @@ export default function Index() {
                         </div>
                       </div>
 
-                      <div className="p-4">
-                        <h3 className="font-semibold mb-2 text-sm line-clamp-2">
+                      <div className="p-3 sm:p-4">
+                        <h3 className="font-semibold mb-2 text-xs sm:text-sm line-clamp-2">
                           {product.name}
                         </h3>
 
@@ -338,7 +338,7 @@ export default function Index() {
                               />
                             ))}
                           </div>
-                          <span className="text-xs text-muted-foreground ml-2">
+                          <span className="text-xs text-muted-foreground ml-1 sm:ml-2 hidden sm:inline">
                             {product.rating} ({product.reviews.toLocaleString()}
                             )
                           </span>
@@ -346,13 +346,13 @@ export default function Index() {
 
                         <div className="flex items-center justify-between mb-3">
                           <div>
-                            <span className="font-bold text-primary text-lg">
+                            <span className="font-bold text-primary text-sm sm:text-lg">
                               {formatPrice(
                                 convertedPrice,
                                 selectedCurrency.code,
                               )}
                             </span>
-                            <span className="text-muted-foreground line-through text-sm ml-2">
+                            <span className="text-muted-foreground line-through text-xs sm:text-sm ml-1 sm:ml-2">
                               {formatPrice(
                                 convertedOriginalPrice,
                                 selectedCurrency.code,
