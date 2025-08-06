@@ -279,4 +279,72 @@
   .animate-glow {
     animation: glow 2s ease-in-out infinite;
   }
+
+  /* Mobile-specific utilities */
+  .touch-action-none {
+    touch-action: none;
+  }
+
+  .touch-action-pan-y {
+    touch-action: pan-y;
+  }
+
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Safe area insets for notched devices */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Responsive text utilities */
+  .text-responsive {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+  }
+
+  .text-responsive-lg {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+  }
+
+  .text-responsive-xl {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  /* Container query support fallback */
+  @supports not (container-type: inline-size) {
+    .mobile-container {
+      width: 100%;
+      max-width: 768px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+  }
+
+  /* Improved mobile viewport */
+  @media screen and (max-width: 767px) {
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* Prevent horizontal scroll on mobile */
+    * {
+      max-width: 100%;
+    }
+
+    img, video {
+      height: auto;
+      max-width: 100%;
+    }
+  }
 }
