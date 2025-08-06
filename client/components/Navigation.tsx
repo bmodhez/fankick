@@ -375,47 +375,50 @@ export function Navigation() {
             <div className="px-3 pt-3 pb-4 space-y-2 border-t border-border shadow-lg">
               <Link
                 to="/category/football"
-                className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
+                className="block px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-all active:scale-95"
                 onClick={() => setIsMenuOpen(false)}
               >
                 ⚽ Football
               </Link>
               <Link
                 to="/category/anime"
-                className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
+                className="block px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-all active:scale-95"
                 onClick={() => setIsMenuOpen(false)}
               >
                 🎌 Anime
               </Link>
               <Link
                 to="/category/pop-culture"
-                className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
+                className="block px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-all active:scale-95"
                 onClick={() => setIsMenuOpen(false)}
               >
                 🎭 Pop Culture
               </Link>
               <Link
                 to="/trending"
-                className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
+                className="block px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-all active:scale-95 relative"
                 onClick={() => setIsMenuOpen(false)}
               >
                 🔥 Trending
+                <span className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                  HOT
+                </span>
               </Link>
               <Link
                 to="/collections"
-                className="block px-3 py-2 text-base font-medium text-foreground hover:text-primary hover:bg-secondary rounded-md"
+                className="block px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-all active:scale-95"
                 onClick={() => setIsMenuOpen(false)}
               >
                 ✨ Collections
               </Link>
 
               {/* Mobile Currency Selector */}
-              <div className="pt-4 pb-3 border-t border-gray-800">
-                <div className="px-3 py-2">
-                  <span className="text-sm text-muted-foreground">
+              <div className="pt-4 pb-3 border-t border-border/50">
+                <div className="px-4 py-2">
+                  <span className="text-sm text-muted-foreground font-medium">
                     Currency
                   </span>
-                  <div className="grid grid-cols-3 gap-2 mt-2">
+                  <div className="grid grid-cols-3 gap-2 mt-3">
                     {currencies.map((currency) => (
                       <button
                         key={currency.code}
@@ -423,9 +426,9 @@ export function Navigation() {
                           setCurrency(currency.code);
                           setIsMenuOpen(false);
                         }}
-                        className={`px-2 py-1 text-xs rounded ${
+                        className={`px-3 py-2 text-xs rounded-lg transition-all active:scale-95 ${
                           selectedCurrency.code === currency.code
-                            ? "bg-primary text-primary-foreground"
+                            ? "bg-primary text-primary-foreground font-medium"
                             : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                         }`}
                       >
@@ -436,20 +439,20 @@ export function Navigation() {
                 </div>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-foreground hover:text-primary"
+                  className="w-full justify-start text-foreground hover:text-primary hover:bg-secondary/50 py-3 px-4 rounded-lg transition-all active:scale-95"
                   onClick={() => {
                     setIsMenuOpen(false);
                     navigate("/search");
                   }}
                 >
-                  <Search className="h-4 w-4 mr-2" />
+                  <Search className="h-4 w-4 mr-3" />
                   Search Products
                 </Button>
 
                 {/* Theme Toggle in Mobile Menu */}
-                <div className="px-3 py-2 border-t border-border mt-2 pt-4">
+                <div className="px-4 py-3 border-t border-border/50 mt-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Theme</span>
+                    <span className="text-sm text-muted-foreground font-medium">Theme</span>
                     <ThemeToggle />
                   </div>
                 </div>
