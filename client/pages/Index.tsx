@@ -8,6 +8,7 @@ import { QuickAdminAccess } from "@/components/admin/QuickAdminAccess";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useCart } from "@/contexts/CartContext";
+import { useLike } from "@/contexts/LikeContext";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   Star,
