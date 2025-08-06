@@ -182,14 +182,29 @@ const App = () => (
                           }
                         />
                         <Route
+                          path="/collections"
+                          element={
+                            <>
+                              <Navigation />
+                              <CollectionsPage />
+                            </>
+                          }
+                        />
+                        <Route
+                          path="/collections/:collection"
+                          element={
+                            <>
+                              <Navigation />
+                              <CollectionsPage />
+                            </>
+                          }
+                        />
+                        <Route
                           path="/football/:category"
                           element={
                             <>
                               <Navigation />
-                              <PlaceholderPage
-                                title="Football Category"
-                                description="Browse specific football merchandise categories."
-                              />
+                              <CollectionsPage />
                             </>
                           }
                         />
@@ -198,10 +213,7 @@ const App = () => (
                           element={
                             <>
                               <Navigation />
-                              <PlaceholderPage
-                                title="Anime Category"
-                                description="Browse specific anime merchandise categories."
-                              />
+                              <CollectionsPage />
                             </>
                           }
                         />
@@ -210,10 +222,7 @@ const App = () => (
                           element={
                             <>
                               <Navigation />
-                              <PlaceholderPage
-                                title="Pop Culture Category"
-                                description="Browse specific pop culture merchandise categories."
-                              />
+                              <CollectionsPage />
                             </>
                           }
                         />
