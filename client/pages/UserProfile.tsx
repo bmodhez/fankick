@@ -166,12 +166,6 @@ export default function UserProfile() {
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
                   <h1 className="text-2xl font-bold text-white">{user.name}</h1>
-                  {isAdmin() && (
-                    <Badge className="bg-gradient-to-r from-primary to-purple-500 text-black">
-                      <Crown className="w-3 h-3 mr-1" />
-                      Admin
-                    </Badge>
-                  )}
                   <Badge className="bg-green-500 text-white">✓ Verified</Badge>
                 </div>
 
