@@ -1,18 +1,7 @@
 import { Request, Response } from 'express';
 import { Request, Response } from "express";
-import { UserService } from '../services/userService.js';
-import { userService as jsonUserService } from '../services/userServiceJson.js';
+import { userService } from '../services/userServiceJson.js';
 import { UserCreateRequest, UserLoginRequest, AuthResponse, UserResponse } from '../types/user.js';
-
-// Try to use PostgreSQL service, fall back to JSON service if DB is not available
-let userService: any;
-try {
-  userService = new UserService();
-  console.log('Using PostgreSQL user service');
-} catch (error) {
-  console.log('PostgreSQL not available, falling back to JSON user service');
-  userService = jsonUserService;
-}
 
 // POST /api/auth/register - Register new user
 export async function registerUser(req: Request, res: Response) {
