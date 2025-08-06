@@ -27,7 +27,9 @@ import {
 export default function Checkout() {
   const { items, totalItems, totalPrice, clearCart } = useCart();
   const { selectedCurrency } = useCurrency();
+  const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   
   // State management
   const [activeStep, setActiveStep] = useState(1);
