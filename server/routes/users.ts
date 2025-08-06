@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
-import { userService } from '../services/userServiceJson.js';
+import { Request, Response } from "express";
+import { UserService } from '../services/userService.js';
 import { UserCreateRequest, UserLoginRequest, AuthResponse, UserResponse } from '../types/user.js';
+
+const userService = new UserService();
 
 // POST /api/auth/register - Register new user
 export async function registerUser(req: Request, res: Response) {
