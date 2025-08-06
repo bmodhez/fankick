@@ -721,6 +721,7 @@ export default function TrendingPage() {
       </div>
 
       <Footer />
+      <AuthModalComponent />
     </div>
   );
 }
