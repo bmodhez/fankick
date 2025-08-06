@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { PaymentModal } from "@/components/PaymentModal";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
+import { useLike } from "@/contexts/LikeContext";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   getAvailablePaymentMethods,
@@ -35,6 +36,7 @@ export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
   const { selectedCurrency } = useCurrency();
   const { getProductById, getTrendingProducts } = useProducts();
+  const { toggleLike, isLiked } = useLike();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState("");
   const [quantity, setQuantity] = useState(1);
