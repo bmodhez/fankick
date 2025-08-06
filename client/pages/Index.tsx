@@ -469,22 +469,22 @@ export default function Index() {
               order in real-time
             </p>
             <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm font-medium">
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇺🇸 USA: 5-7 days
               </span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇬🇧 UK: 7-10 days
               </span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇩🇪 Germany: 6-9 days
               </span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇨🇦 Canada: 8-12 days
               </span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇸🇦 Saudi: 5-8 days
               </span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇮🇳 India: 3-5 days
               </span>
             </div>
