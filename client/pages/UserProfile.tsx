@@ -213,6 +213,14 @@ export default function UserProfile() {
               </div>
 
               <div className="flex flex-col space-y-2">
+                {isAdmin() && (
+                  <Link to="/admin">
+                    <Button className="bg-gradient-to-r from-primary to-purple-500 text-black hover:opacity-90">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Admin Panel
+                    </Button>
+                  </Link>
+                )}
                 <Button
                   variant="outline"
                   onClick={logout}
