@@ -251,12 +251,12 @@ export function PaymentModal({
               </div>
             )}
 
-            <div className="space-y-2 text-sm border-t pt-3">
-              <div className="flex justify-between">
+            <div className="space-y-2 text-sm border-t border-gray-200 dark:border-gray-600 pt-3">
+              <div className="flex justify-between text-gray-900 dark:text-white">
                 <span>Subtotal:</span>
                 <span>{formatPrice(subtotal, selectedCurrency)}</span>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between text-gray-900 dark:text-white">
                 <span>Shipping:</span>
                 <span>
                   {shippingCost === 0
@@ -264,7 +264,7 @@ export function PaymentModal({
                     : formatPrice(shippingCost, selectedCurrency)}
                 </span>
               </div>
-              <div className="flex justify-between font-bold text-lg border-t pt-2">
+              <div className="flex justify-between font-bold text-lg border-t border-gray-200 dark:border-gray-600 pt-2 text-gray-900 dark:text-white">
                 <span>Total:</span>
                 <span>{formatPrice(total, selectedCurrency)}</span>
               </div>
