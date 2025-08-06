@@ -80,12 +80,25 @@ export function PaymentModal({
   if (!isOpen) return null;
 
   const handleLoginRedirect = () => {
+    // Store the current product data temporarily for after login
+    if (product) {
+      sessionStorage.setItem('pendingCheckoutProduct', JSON.stringify({
+        product,
+        amount,
+        shippingCost,
+        codAvailable
+      }));
+    }
+
     // Close the modal first
     onClose();
 
     // Navigate to login with current page as return destination
     navigate('/login', {
-      state: { from: location }
+      state: {
+        from: location,
+        returnToPurchase: true
+      }
     });
   };
 
