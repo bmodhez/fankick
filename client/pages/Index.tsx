@@ -537,6 +537,7 @@ export default function Index() {
 
 
       <Footer />
+      <AuthModalComponent />
     </div>
   );
 }
