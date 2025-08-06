@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useCart } from "@/contexts/CartContext";
+import { useLike } from "@/contexts/LikeContext";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   TrendingUp,
@@ -31,6 +32,7 @@ export default function TrendingPage() {
   const { selectedCurrency } = useCurrency();
   const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
+  const { toggleLike, isLiked } = useLike();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
