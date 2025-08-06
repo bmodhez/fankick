@@ -96,14 +96,14 @@ export class UserServiceJson {
     // Check if user already exists by email
     const existingUserByEmail = users.find(u => u.email === userData.email);
     if (existingUserByEmail) {
-      throw new Error('User with this email already exists');
+      throw new Error('User already registered with this email. Please login instead.');
     }
 
     // Check if user already exists by phone (if phone is provided)
     if (userData.phone) {
       const existingUserByPhone = users.find(u => u.phone === userData.phone);
       if (existingUserByPhone) {
-        throw new Error('User with this phone number already exists');
+        throw new Error('User already registered with this phone number. Please login instead.');
       }
     }
     
