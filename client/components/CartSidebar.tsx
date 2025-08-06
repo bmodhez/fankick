@@ -352,8 +352,12 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 <div className="flex items-center justify-center">
                   <CreditCard className="w-6 h-6 mr-3" />
                   <div className="text-center">
-                    <div className="text-lg">Proceed to Checkout</div>
-                    <div className="text-sm opacity-90">{formatPrice(finalTotal, selectedCurrency)}</div>
+                    <div className="text-lg">
+                      {user ? "Proceed to Checkout" : "Login to Checkout"}
+                    </div>
+                    <div className="text-sm opacity-90">
+                      {user ? formatPrice(finalTotal, selectedCurrency) : "Sign in required"}
+                    </div>
                   </div>
                 </div>
               </Button>
