@@ -135,9 +135,9 @@ export const PRODUCTS: Product[] = [
     category: "football",
     subcategory: "jerseys",
     images: [
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=800&q=80",
+      "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=800&q=80",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80",
     ],
     variants: [
       {
