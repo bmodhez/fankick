@@ -58,6 +58,16 @@ export default function Checkout() {
     upiId: ""
   });
 
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!user) {
+      navigate('/login', {
+        state: { from: location },
+        replace: true
+      });
+    }
+  }, [user, navigate, location]);
+
   // Price calculations
   const convertedTotal = convertPrice(totalPrice, selectedCurrency.code, "INR");
   const freeShippingThreshold = convertPrice(4200, selectedCurrency.code, "INR");
