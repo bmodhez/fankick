@@ -79,6 +79,16 @@ export function PaymentModal({
 
   if (!isOpen) return null;
 
+  const handleLoginRedirect = () => {
+    // Close the modal first
+    onClose();
+
+    // Navigate to login with current page as return destination
+    navigate('/login', {
+      state: { from: location }
+    });
+  };
+
   const handlePayment = async () => {
     setIsProcessing(true);
 
