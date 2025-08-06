@@ -58,7 +58,9 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-heading font-semibold text-base sm:text-lg mb-3 sm:mb-4">Shop</h3>
+            <h3 className="font-heading font-semibold text-base sm:text-lg mb-3 sm:mb-4">
+              Shop
+            </h3>
             <ul className="space-y-1.5 sm:space-y-2">
               <li>
                 <Link
@@ -97,7 +99,9 @@ export function Footer() {
 
           {/* Customer Support */}
           <div>
-            <h3 className="font-heading font-semibold text-base sm:text-lg mb-3 sm:mb-4">Support</h3>
+            <h3 className="font-heading font-semibold text-base sm:text-lg mb-3 sm:mb-4">
+              Support
+            </h3>
             <ul className="space-y-1.5 sm:space-y-2">
               <li>
                 <Link
@@ -144,7 +148,9 @@ export function Footer() {
 
           {/* Contact Info */}
           <div className="col-span-2 md:col-span-1">
-            <h3 className="font-heading font-semibold text-base sm:text-lg mb-3 sm:mb-4">Contact</h3>
+            <h3 className="font-heading font-semibold text-base sm:text-lg mb-3 sm:mb-4">
+              Contact
+            </h3>
             <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-300">
                 <Phone className="w-3 sm:w-4 h-3 sm:h-4 text-primary" />
@@ -162,7 +168,9 @@ export function Footer() {
 
             {/* Newsletter */}
             <div className="mt-4 sm:mt-6">
-              <h4 className="font-medium mb-2 text-sm sm:text-base">Stay Updated</h4>
+              <h4 className="font-medium mb-2 text-sm sm:text-base">
+                Stay Updated
+              </h4>
               <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                 <input
                   type="email"
@@ -184,7 +192,9 @@ export function Footer() {
         <div className="py-4 sm:py-6 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-3 sm:space-y-4 md:space-y-0">
             <div>
-              <h4 className="font-medium mb-2 text-sm sm:text-base">We Accept</h4>
+              <h4 className="font-medium mb-2 text-sm sm:text-base">
+                We Accept
+              </h4>
               <div className="flex items-center flex-wrap gap-2 sm:gap-4">
                 {selectedCurrency.code === "INR" && (
                   <>
@@ -220,7 +230,9 @@ export function Footer() {
                   </>
                 )}
                 <div className="bg-gray-700 rounded px-2 py-1">
-                  <span className="text-white text-xs sm:text-sm font-medium">Cards</span>
+                  <span className="text-white text-xs sm:text-sm font-medium">
+                    Cards
+                  </span>
                 </div>
               </div>
             </div>

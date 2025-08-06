@@ -97,9 +97,14 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 min-w-0 flex-shrink-0">
+          <Link
+            to="/"
+            className="flex items-center space-x-2 min-w-0 flex-shrink-0"
+          >
             <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-primary via-cyan-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg shadow-primary/25 animate-pulse">
-              <span className="text-white font-bold text-sm sm:text-lg">⚡</span>
+              <span className="text-white font-bold text-sm sm:text-lg">
+                ⚡
+              </span>
             </div>
             <span className="font-sport font-bold text-lg sm:text-xl tracking-wide text-foreground">
               FAN<span className="text-primary">KICK</span>
@@ -452,7 +457,9 @@ export function Navigation() {
                 {/* Theme Toggle in Mobile Menu */}
                 <div className="px-4 py-3 border-t border-border/50 mt-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground font-medium">Theme</span>
+                    <span className="text-sm text-muted-foreground font-medium">
+                      Theme
+                    </span>
                     <ThemeToggle />
                   </div>
                 </div>

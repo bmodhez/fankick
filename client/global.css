@@ -156,13 +156,17 @@
       font-size: 16px; /* Prevent iOS zoom */
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       font-size: 16px; /* Prevent iOS zoom */
       padding: 12px;
     }
 
     /* Improve tap targets */
-    a, button, [role="button"] {
+    a,
+    button,
+    [role="button"] {
       touch-action: manipulation;
       -webkit-tap-highlight-color: rgba(0, 255, 127, 0.2);
     }
@@ -178,7 +182,10 @@
     }
 
     /* Allow text selection in content areas */
-    p, span, div[class*="text"], .line-clamp {
+    p,
+    span,
+    div[class*="text"],
+    .line-clamp {
       -webkit-user-select: text;
       -moz-user-select: text;
       -ms-user-select: text;
@@ -187,13 +194,16 @@
   }
 
   /* Active states for better mobile feedback */
-  button:active, [role="button"]:active {
+  button:active,
+  [role="button"]:active {
     transform: scale(0.98);
     transition: transform 0.1s;
   }
 
   /* Better focus states for keyboard navigation */
-  button:focus-visible, a:focus-visible, [role="button"]:focus-visible {
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible {
     outline: 2px solid hsl(var(--primary));
     outline-offset: 2px;
   }
@@ -342,7 +352,8 @@
       max-width: 100%;
     }
 
-    img, video {
+    img,
+    video {
       height: auto;
       max-width: 100%;
     }

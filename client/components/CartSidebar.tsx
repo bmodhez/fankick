@@ -118,7 +118,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               <ShoppingBag className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h2 className="text-lg sm:text-xl font-bold text-white">Shopping Cart</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-white">
+                Shopping Cart
+              </h2>
               {totalItems > 0 && (
                 <p className="text-sm text-gray-300">
                   {totalItems} item{totalItems > 1 ? "s" : ""} in cart
