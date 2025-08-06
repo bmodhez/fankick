@@ -80,14 +80,26 @@ export class UserService {
     try {
       await client.query('BEGIN');
       
-      // Check if user already exists
-      const existingUser = await client.query(
+      // Check if user already exists by email
+      const existingUserByEmail = await client.query(
         'SELECT id FROM users WHERE email = $1',
         [userData.email.toLowerCase()]
       );
-      
-      if (existingUser.rows.length > 0) {
+
+      if (existingUserByEmail.rows.length > 0) {
         throw new Error('User with this email already exists');
+      }
+
+      // Check if user already exists by phone (if phone is provided)
+      if (userData.phone) {
+        const existingUserByPhone = await client.query(
+          'SELECT id FROM users WHERE phone = $1',
+          [userData.phone]
+        );
+
+        if (existingUserByPhone.rows.length > 0) {
+          throw new Error('User with this phone number already exists');
+        }
       }
       
       // Hash password
