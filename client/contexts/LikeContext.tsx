@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface LikeContextType {
   likedProducts: Set<string>;
-  toggleLike: (productId: string) => void;
+  toggleLike: (productId: string, onAuthRequired?: () => void) => void;
   isLiked: (productId: string) => boolean;
 }
 
