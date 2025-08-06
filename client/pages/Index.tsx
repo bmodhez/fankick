@@ -126,7 +126,7 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-16 lg:py-24 overflow-hidden border-b border-border/20">
+      <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-8 sm:py-12 lg:py-20 overflow-hidden border-b border-border/20">
         <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-5"></div>
 
         {/* Animated background elements */}
@@ -138,76 +138,76 @@ export default function Index() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge className="mb-6 bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white shadow-2xl shadow-primary/25 border border-white/20 backdrop-blur-sm font-bold px-6 py-3 text-lg animate-pulse">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <Badge className="mb-4 sm:mb-6 bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white shadow-2xl shadow-primary/25 border border-white/20 backdrop-blur-sm font-bold px-3 sm:px-6 py-2 sm:py-3 text-sm sm:text-lg animate-pulse">
               <Globe className="w-5 h-5 mr-2" />
               Global Dropshipping �� Free Worldwide Shipping
             </Badge>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-foreground mb-4 sm:mb-6 leading-tight">
               UNLEASH YOUR
               <span className="block bg-gradient-to-r from-primary via-cyan-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
                 FANDOM
               </span>
             </h1>
 
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
               From Messi's magic to Naruto's jutsu, Taylor's melodies to
               Marvel's heroes - get authentic merchandise that defines your
               passion. Trusted by 500K+ fans worldwide.
             </p>
 
             {/* Social Proof */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-2xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8 max-w-2xl mx-auto">
               {socialProof.map((item, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl font-bold text-primary">
+                  <div className="text-lg sm:text-2xl font-bold text-primary">
                     {item.metric}
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-xs sm:text-sm text-muted-foreground">
                     {item.label}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 font-bold px-8 py-4 text-lg transition-all duration-300 border border-white/20 backdrop-blur-sm"
+                className="bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg transition-all duration-300 border border-white/20 backdrop-blur-sm"
               >
-                <ShoppingBag className="w-5 h-5 mr-2" />
+                <ShoppingBag className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
                 Shop Now
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-purple-500 hover:text-white hover:scale-105 px-8 py-4 text-lg shadow-lg hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 backdrop-blur-sm"
+                className="border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-purple-500 hover:text-white hover:scale-105 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 backdrop-blur-sm"
               >
-                <TrendingUp className="w-5 h-5 mr-2" />
+                <TrendingUp className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
                 Trending Products
               </Button>
             </div>
           </div>
 
           {/* Hero Categories */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {heroCategories.map((category, index) => (
               <Link key={index} to={category.link}>
                 <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-secondary to-background border-border shadow-lg hover:shadow-xl">
                   <CardContent className="p-0">
                     <div
-                      className={`h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
+                      className={`h-40 sm:h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
                     >
                       <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300"></div>
-                      <div className="absolute bottom-6 left-6 text-white">
-                        <h3 className="font-sport font-bold text-2xl mb-1">
+                      <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white">
+                        <h3 className="font-sport font-bold text-lg sm:text-2xl mb-1">
                           {category.title}
                         </h3>
-                        <p className="text-white/80 text-sm mb-3">
+                        <p className="text-white/80 text-xs sm:text-sm mb-2 sm:mb-3">
                           {category.subtitle}
                         </p>
-                        <Button className="bg-white text-black hover:bg-gray-100 font-semibold">
+                        <Button className="bg-white text-black hover:bg-gray-100 font-semibold text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">
                           {category.cta}
                         </Button>
                       </div>
