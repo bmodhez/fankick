@@ -128,7 +128,9 @@ export default function UserProfile() {
 
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
-                  <h1 className="text-2xl font-bold text-white">{user.firstName || 'User'}</h1>
+                  <h1 className="text-2xl font-bold text-white">
+                    {user.firstName || "User"}
+                  </h1>
                   {isAdmin() && (
                     <Badge className="bg-gradient-to-r from-primary to-purple-500 text-black">
                       <Crown className="w-3 h-3 mr-1" />
@@ -136,9 +138,13 @@ export default function UserProfile() {
                     </Badge>
                   )}
                   {user.isVerified ? (
-                    <Badge className="bg-green-500 text-white">✓ Verified</Badge>
+                    <Badge className="bg-green-500 text-white">
+                      ✓ Verified
+                    </Badge>
                   ) : (
-                    <Badge className="bg-yellow-500 text-black">⚠ Unverified</Badge>
+                    <Badge className="bg-yellow-500 text-black">
+                      ⚠ Unverified
+                    </Badge>
                   )}
                 </div>
 
@@ -342,26 +348,40 @@ export default function UserProfile() {
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Calendar className="w-8 h-8 text-primary mx-auto mb-2" />
                       <div className="text-lg font-bold text-white">
-                        {user.createdAt ? new Date(user.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'New User'}
+                        {user.createdAt
+                          ? new Date(user.createdAt).toLocaleDateString(
+                              "en-US",
+                              { month: "short", year: "numeric" },
+                            )
+                          : "New User"}
                       </div>
                       <div className="text-sm text-gray-400">Member Since</div>
                     </div>
 
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Star className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
-                      <div className="text-lg font-bold text-white">{orders.length >= 5 ? 'Gold' : 'Silver'}</div>
+                      <div className="text-lg font-bold text-white">
+                        {orders.length >= 5 ? "Gold" : "Silver"}
+                      </div>
                       <div className="text-sm text-gray-400">Member Tier</div>
                     </div>
 
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Gift className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-                      <div className="text-lg font-bold text-white">{Math.floor(orders.length / 2)}</div>
+                      <div className="text-lg font-bold text-white">
+                        {Math.floor(orders.length / 2)}
+                      </div>
                       <div className="text-sm text-gray-400">Rewards</div>
                     </div>
 
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Truck className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                      <div className="text-lg font-bold text-white">{orders.filter(order => order.status === 'delivered').length}</div>
+                      <div className="text-lg font-bold text-white">
+                        {
+                          orders.filter((order) => order.status === "delivered")
+                            .length
+                        }
+                      </div>
                       <div className="text-sm text-gray-400">Deliveries</div>
                     </div>
                   </div>
@@ -381,7 +401,8 @@ export default function UserProfile() {
                       No orders yet
                     </h3>
                     <p className="text-gray-400 mb-6 max-w-md mx-auto">
-                      When you place orders, they'll appear here. Start shopping to see your order history!
+                      When you place orders, they'll appear here. Start shopping
+                      to see your order history!
                     </p>
                     <Link to="/">
                       <Button className="bg-primary text-black hover:bg-primary/90">
@@ -425,7 +446,10 @@ export default function UserProfile() {
                           <div className="text-right">
                             <div className="text-lg font-bold text-primary">
                               {formatPrice(
-                                convertPrice(order.total, selectedCurrency.code),
+                                convertPrice(
+                                  order.total,
+                                  selectedCurrency.code,
+                                ),
                                 selectedCurrency,
                               )}
                             </div>
@@ -468,7 +492,8 @@ export default function UserProfile() {
                       Your wishlist is empty
                     </h3>
                     <p className="text-gray-400 mb-6 max-w-md mx-auto">
-                      Save items you love to your wishlist. Simply click the heart icon on any product!
+                      Save items you love to your wishlist. Simply click the
+                      heart icon on any product!
                     </p>
                     <Link to="/">
                       <Button className="bg-primary text-black hover:bg-primary/90">
