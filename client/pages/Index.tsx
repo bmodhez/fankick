@@ -87,28 +87,28 @@ export default function Index() {
       items: 350,
       image: "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F8bebf119965a4b5ba2f2d45b556c0cb2?format=webp&width=800",
       description: "Official jerseys from Messi, Ronaldo & more",
-      link: "/football/jerseys",
+      link: "/collections/football",
     },
     {
       name: "Anime Rings",
       items: 180,
       image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80",
       description: "Exclusive rings from Naruto, One Piece & more",
-      link: "/anime/rings",
+      link: "/collections/anime",
     },
     {
       name: "K-pop Merch",
       items: 240,
       image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
       description: "BTS, Blackpink, Stray Kids official items",
-      link: "/pop-culture/kpop",
+      link: "/collections/pop-culture",
     },
     {
       name: "Marvel Collection",
       items: 420,
       image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80",
       description: "Superhero gear for true Marvel fans",
-      link: "/pop-culture/marvel",
+      link: "/collections/pop-culture",
     },
   ];
 
