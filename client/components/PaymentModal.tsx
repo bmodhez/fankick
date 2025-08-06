@@ -20,6 +20,8 @@ import {
   Shield,
   CheckCircle,
   Clock,
+  User,
+  ArrowRight,
 } from "lucide-react";
 
 interface PaymentModalProps {
