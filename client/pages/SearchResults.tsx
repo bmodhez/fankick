@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Footer } from "@/components/Footer";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
+import { useLike } from "@/contexts/LikeContext";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   Search,
@@ -25,6 +26,7 @@ export default function SearchResults() {
   const query = searchParams.get("q") || "";
   const { selectedCurrency } = useCurrency();
   const { searchProducts, products } = useProducts();
+  const { toggleLike, isLiked } = useLike();
 
   const [searchQuery, setSearchQuery] = useState(query);
   const [selectedCategory, setSelectedCategory] = useState("all");
