@@ -47,71 +47,18 @@ export default function UserProfile() {
   }, []);
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({
-    name: user?.name || "",
+    name: user?.firstName || "",
     email: user?.email || "",
     phone: user?.phone || "",
-    address: "123 Main St, City, Country",
-    bio: "FanKick enthusiast since 2024",
+    address: "",
+    bio: "",
   });
 
-  // Mock data for orders and wishlist
-  const [orders] = useState([
-    {
-      id: "ORD-001",
-      date: "2024-01-15",
-      status: "delivered",
-      total: 89.99,
-      items: 3,
-      image: "/placeholder.svg",
-      products: [
-        "Naruto Akatsuki Hoodie",
-        "Messi Jersey",
-        "Taylor Swift T-Shirt",
-      ],
-    },
-    {
-      id: "ORD-002",
-      date: "2024-01-10",
-      status: "shipped",
-      total: 159.99,
-      items: 2,
-      image: "/placeholder.svg",
-      products: ["Attack on Titan Hoodie", "BTS Merchandise"],
-    },
-    {
-      id: "ORD-003",
-      date: "2024-01-05",
-      status: "processing",
-      total: 45.99,
-      items: 1,
-      image: "/placeholder.svg",
-      products: ["One Piece Straw Hat"],
-    },
-  ]);
+  // Real user orders (empty for new users)
+  const [orders] = useState([]);
 
-  const [wishlist] = useState([
-    {
-      id: "wish-1",
-      name: "Demon Slayer Tanjiro Hoodie",
-      price: 69.99,
-      image: "/placeholder.svg",
-      inStock: true,
-    },
-    {
-      id: "wish-2",
-      name: "Cristiano Ronaldo Jersey",
-      price: 89.99,
-      image: "/placeholder.svg",
-      inStock: false,
-    },
-    {
-      id: "wish-3",
-      name: "Marvel Spider-Man Hoodie",
-      price: 79.99,
-      image: "/placeholder.svg",
-      inStock: true,
-    },
-  ]);
+  // Real user wishlist (empty for new users)
+  const [wishlist] = useState([]);
 
   useEffect(() => {
     if (!user) {
@@ -168,7 +115,7 @@ export default function UserProfile() {
 
               <div className="flex-1">
                 <div className="flex items-center space-x-3 mb-2">
-                  <h1 className="text-2xl font-bold text-white">{user.name}</h1>
+                  <h1 className="text-2xl font-bold text-white">{user.firstName || 'User'}</h1>
                   {isAdmin() && (
                     <Badge className="bg-gradient-to-r from-primary to-purple-500 text-black">
                       <Crown className="w-3 h-3 mr-1" />
@@ -378,26 +325,26 @@ export default function UserProfile() {
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Calendar className="w-8 h-8 text-primary mx-auto mb-2" />
                       <div className="text-lg font-bold text-white">
-                        Jan 2024
+                        {user.createdAt ? new Date(user.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : 'New User'}
                       </div>
                       <div className="text-sm text-gray-400">Member Since</div>
                     </div>
 
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Star className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
-                      <div className="text-lg font-bold text-white">Gold</div>
+                      <div className="text-lg font-bold text-white">{orders.length >= 5 ? 'Gold' : 'Silver'}</div>
                       <div className="text-sm text-gray-400">Member Tier</div>
                     </div>
 
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Gift className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-                      <div className="text-lg font-bold text-white">3</div>
+                      <div className="text-lg font-bold text-white">{Math.floor(orders.length / 2)}</div>
                       <div className="text-sm text-gray-400">Rewards</div>
                     </div>
 
                     <div className="text-center p-4 bg-gray-700 rounded-lg">
                       <Truck className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                      <div className="text-lg font-bold text-white">15</div>
+                      <div className="text-lg font-bold text-white">{orders.filter(order => order.status === 'delivered').length}</div>
                       <div className="text-sm text-gray-400">Deliveries</div>
                     </div>
                   </div>
