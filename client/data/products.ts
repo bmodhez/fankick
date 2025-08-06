@@ -275,9 +275,9 @@ export const PRODUCTS: Product[] = [
     category: "anime",
     subcategory: "rings",
     images: [
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80",
+      "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&q=80",
+      "https://images.unsplash.com/photo-1594736797933-d0bd64d8c9ba?w=800&q=80",
     ],
     variants: [
       {
