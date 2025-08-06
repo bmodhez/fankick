@@ -127,17 +127,31 @@ export class UserServiceJson {
 
   async loginUser(loginData: UserLoginRequest): Promise<AuthData> {
     const users = await loadUsers();
-    
-    // Find user by email
-    const user = users.find(u => u.email === loginData.email);
+
+    // Check if it's a phone number or email
+    const isPhoneNumber = /^\d{10,15}$/.test(loginData.email.replace(/[^\d]/g, ''));
+
+    // Find user by email or phone
+    const user = users.find(u => {
+      if (isPhoneNumber) {
+        return u.phone === loginData.email;
+      } else {
+        return u.email === loginData.email;
+      }
+    });
+
     if (!user) {
-      throw new Error('Invalid email or password');
+      if (isPhoneNumber) {
+        throw new Error('Phone number not registered. Please sign up first.');
+      } else {
+        throw new Error('Email not registered. Please sign up first.');
+      }
     }
-    
+
     // Verify password
     const isValidPassword = await bcrypt.compare(loginData.password, user.passwordHash);
     if (!isValidPassword) {
-      throw new Error('Invalid email or password');
+      throw new Error('Incorrect password. Please try again.');
     }
     
     // Generate session token
