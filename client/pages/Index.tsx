@@ -126,7 +126,7 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-16 lg:py-24 overflow-hidden border-b border-border/20">
+      <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-8 sm:py-12 lg:py-20 overflow-hidden border-b border-border/20">
         <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-5"></div>
 
         {/* Animated background elements */}
@@ -138,76 +138,76 @@ export default function Index() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge className="mb-6 bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white shadow-2xl shadow-primary/25 border border-white/20 backdrop-blur-sm font-bold px-6 py-3 text-lg animate-pulse">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <Badge className="mb-4 sm:mb-6 bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white shadow-2xl shadow-primary/25 border border-white/20 backdrop-blur-sm font-bold px-3 sm:px-6 py-2 sm:py-3 text-sm sm:text-lg animate-pulse">
               <Globe className="w-5 h-5 mr-2" />
               Global Dropshipping �� Free Worldwide Shipping
             </Badge>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-sport font-bold text-foreground mb-4 sm:mb-6 leading-tight">
               UNLEASH YOUR
               <span className="block bg-gradient-to-r from-primary via-cyan-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
                 FANDOM
               </span>
             </h1>
 
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
               From Messi's magic to Naruto's jutsu, Taylor's melodies to
               Marvel's heroes - get authentic merchandise that defines your
               passion. Trusted by 500K+ fans worldwide.
             </p>
 
             {/* Social Proof */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-2xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8 max-w-2xl mx-auto">
               {socialProof.map((item, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl font-bold text-primary">
+                  <div className="text-lg sm:text-2xl font-bold text-primary">
                     {item.metric}
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-xs sm:text-sm text-muted-foreground">
                     {item.label}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 font-bold px-8 py-4 text-lg transition-all duration-300 border border-white/20 backdrop-blur-sm"
+                className="bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg transition-all duration-300 border border-white/20 backdrop-blur-sm"
               >
-                <ShoppingBag className="w-5 h-5 mr-2" />
+                <ShoppingBag className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
                 Shop Now
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-purple-500 hover:text-white hover:scale-105 px-8 py-4 text-lg shadow-lg hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 backdrop-blur-sm"
+                className="border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-purple-500 hover:text-white hover:scale-105 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 backdrop-blur-sm"
               >
-                <TrendingUp className="w-5 h-5 mr-2" />
+                <TrendingUp className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
                 Trending Products
               </Button>
             </div>
           </div>
 
           {/* Hero Categories */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {heroCategories.map((category, index) => (
               <Link key={index} to={category.link}>
                 <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-secondary to-background border-border shadow-lg hover:shadow-xl">
                   <CardContent className="p-0">
                     <div
-                      className={`h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
+                      className={`h-40 sm:h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
                     >
                       <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300"></div>
-                      <div className="absolute bottom-6 left-6 text-white">
-                        <h3 className="font-sport font-bold text-2xl mb-1">
+                      <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white">
+                        <h3 className="font-sport font-bold text-lg sm:text-2xl mb-1">
                           {category.title}
                         </h3>
-                        <p className="text-white/80 text-sm mb-3">
+                        <p className="text-white/80 text-xs sm:text-sm mb-2 sm:mb-3">
                           {category.subtitle}
                         </p>
-                        <Button className="bg-white text-black hover:bg-gray-100 font-semibold">
+                        <Button className="bg-white text-black hover:bg-gray-100 font-semibold text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2">
                           {category.cta}
                         </Button>
                       </div>
@@ -223,21 +223,21 @@ export default function Index() {
       {/* Trending Products */}
       <section className="py-16 bg-slate-50/50 dark:bg-muted border-y border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <Badge className="mb-4 bg-red-100 text-red-800 font-semibold px-4 py-2">
               <Timer className="w-4 h-4 mr-2" />
               Trending Now
             </Badge>
-            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-foreground mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sport font-bold text-foreground mb-3 sm:mb-4">
               WHAT'S HOT RIGHT NOW
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
               Join millions of fans worldwide who are rocking these trending
               items
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {trendingProducts.map((product, index) => {
               const convertedPrice = convertPrice(
                 product.basePrice,
@@ -258,7 +258,7 @@ export default function Index() {
                         <img
                           src="https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800"
                           alt={product.name}
-                          className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="w-full h-40 sm:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                         />
 
                         {/* Overlays */}
@@ -320,8 +320,8 @@ export default function Index() {
                         </div>
                       </div>
 
-                      <div className="p-4">
-                        <h3 className="font-semibold mb-2 text-sm line-clamp-2">
+                      <div className="p-3 sm:p-4">
+                        <h3 className="font-semibold mb-2 text-xs sm:text-sm line-clamp-2">
                           {product.name}
                         </h3>
 
@@ -338,7 +338,7 @@ export default function Index() {
                               />
                             ))}
                           </div>
-                          <span className="text-xs text-muted-foreground ml-2">
+                          <span className="text-xs text-muted-foreground ml-1 sm:ml-2 hidden sm:inline">
                             {product.rating} ({product.reviews.toLocaleString()}
                             )
                           </span>
@@ -346,13 +346,13 @@ export default function Index() {
 
                         <div className="flex items-center justify-between mb-3">
                           <div>
-                            <span className="font-bold text-primary text-lg">
+                            <span className="font-bold text-primary text-sm sm:text-lg">
                               {formatPrice(
                                 convertedPrice,
                                 selectedCurrency.code,
                               )}
                             </span>
-                            <span className="text-muted-foreground line-through text-sm ml-2">
+                            <span className="text-muted-foreground line-through text-xs sm:text-sm ml-1 sm:ml-2">
                               {formatPrice(
                                 convertedOriginalPrice,
                                 selectedCurrency.code,
@@ -370,7 +370,7 @@ export default function Index() {
                         </div>
 
                         <Button
-                          className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/80 font-semibold"
+                          className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/80 font-semibold text-xs sm:text-sm py-2 sm:py-2.5"
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
@@ -403,18 +403,18 @@ export default function Index() {
       </section>
 
       {/* Product Categories */}
-      <section className="py-16 bg-background">
+      <section className="py-8 sm:py-12 lg:py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-foreground mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sport font-bold text-foreground mb-3 sm:mb-4">
               SHOP BY PASSION
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
               Discover curated collections that speak to your soul
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {categories.map((category, index) => (
               <Link key={index} to={category.link}>
                 <Card className="group cursor-pointer hover:shadow-xl transition-all duration-300 h-full border border-border/50 hover:border-primary/20 bg-card">
@@ -423,25 +423,25 @@ export default function Index() {
                       <img
                         src={category.image}
                         alt={category.name}
-                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-32 sm:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute bottom-4 left-4 text-white">
-                        <h3 className="font-bold text-lg mb-1">
+                      <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-white">
+                        <h3 className="font-bold text-sm sm:text-lg mb-1">
                           {category.name}
                         </h3>
-                        <p className="text-sm text-white/80">
+                        <p className="text-xs sm:text-sm text-white/80">
                           {category.items} products
                         </p>
                       </div>
                     </div>
-                    <div className="p-4">
-                      <p className="text-muted-foreground text-sm mb-4">
+                    <div className="p-3 sm:p-4">
+                      <p className="text-muted-foreground text-xs sm:text-sm mb-3 sm:mb-4">
                         {category.description}
                       </p>
                       <Button
                         variant="outline"
-                        className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all"
+                        className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all text-xs sm:text-sm py-2"
                       >
                         Explore Collection
                       </Button>
@@ -455,36 +455,36 @@ export default function Index() {
       </section>
 
       {/* Global Shipping Banner */}
-      <section className="py-12 bg-gradient-to-r from-primary to-purple-500">
+      <section className="py-8 sm:py-12 bg-gradient-to-r from-primary to-purple-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-foreground">
             <div className="flex items-center justify-center mb-4">
-              <Globe className="w-8 h-8 mr-3" />
-              <h2 className="text-2xl font-sport font-bold">
+              <Globe className="w-6 sm:w-8 h-6 sm:h-8 mr-2 sm:mr-3" />
+              <h2 className="text-xl sm:text-2xl font-sport font-bold">
                 WORLDWIDE SHIPPING
               </h2>
             </div>
-            <p className="text-lg mb-6">
+            <p className="text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 px-4">
               Free shipping to 150+ countries • Express delivery • Track your
               order in real-time
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm font-medium">
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm font-medium">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇺🇸 USA: 5-7 days
               </span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇬🇧 UK: 7-10 days
               </span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇩🇪 Germany: 6-9 days
               </span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇨🇦 Canada: 8-12 days
               </span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇸🇦 Saudi: 5-8 days
               </span>
-              <span className="bg-black/10 px-4 py-2 rounded-full">
+              <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇮🇳 India: 3-5 days
               </span>
             </div>
@@ -493,13 +493,13 @@ export default function Index() {
       </section>
 
       {/* Instagram Feed */}
-      <section className="py-16 bg-slate-50/50 dark:bg-muted border-y border-border/20">
+      <section className="py-8 sm:py-12 lg:py-16 bg-slate-50/50 dark:bg-muted border-y border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-sport font-bold text-foreground mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sport font-bold text-foreground mb-3 sm:mb-4">
               FANKICK COMMUNITY
             </h2>
-            <p className="text-muted-foreground text-lg mb-6">
+            <p className="text-muted-foreground text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 px-4">
               See how fans worldwide rock their FanKick gear
             </p>
             <Button className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:opacity-90 font-semibold">
@@ -508,7 +508,7 @@ export default function Index() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
             {Array.from({ length: 12 }, (_, i) => (
               <div
                 key={i}
