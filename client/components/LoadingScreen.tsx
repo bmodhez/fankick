@@ -10,6 +10,7 @@ interface LoadingScreenProps {
 export function LoadingScreen({ isLoading, onComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("Loading FanKick...");
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const loadingSteps = [
     { text: "Loading FanKick...", duration: 800 },
