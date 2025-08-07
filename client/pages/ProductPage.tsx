@@ -401,6 +401,7 @@ export default function ProductPage() {
                 disabled={currentVariant.stock === 0}
                 onClick={() => {
                   addToCart(product, currentVariant, quantity);
+                  setShowCartNotification(true);
                   toast({
                     title: "Added to Cart! 🛒",
                     description: `${quantity}x ${product.name} (${currentVariant.size || currentVariant.color || 'Default'}) added to your cart.`,
