@@ -3,17 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/contexts/AuthContext";
-import { 
-  Mail, 
-  Lock, 
-  User, 
+import {
+  Mail,
+  Lock,
+  User,
   Phone,
-  Eye, 
-  EyeOff, 
+  Eye,
+  EyeOff,
   ChevronRight,
   ArrowLeft,
   Check,
-  Shield
+  Shield,
 } from "lucide-react";
 
 export default function Signup() {
@@ -23,7 +23,7 @@ export default function Signup() {
     email: "",
     phone: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -37,12 +37,17 @@ export default function Signup() {
       uppercase: false,
       lowercase: false,
       number: false,
-      special: false
-    }
+      special: false,
+    },
   });
-  
+
   const { signup, user } = useAuth();
   const navigate = useNavigate();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Redirect if already logged in
   useEffect(() => {
@@ -53,8 +58,8 @@ export default function Signup() {
 
   // Update form data
   const updateFormData = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    
+    setFormData((prev) => ({ ...prev, [field]: value }));
+
     // Check password strength if password field is updated
     if (field === "password") {
       checkPasswordStrength(value);
@@ -68,7 +73,7 @@ export default function Signup() {
       uppercase: /[A-Z]/.test(password),
       lowercase: /[a-z]/.test(password),
       number: /\d/.test(password),
-      special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+      special: /[!@#$%^&*(),.?":{}|<>]/.test(password),
     };
 
     const score = Object.values(requirements).filter(Boolean).length;
@@ -117,7 +122,7 @@ export default function Signup() {
       email: formData.email,
       password: formData.password,
       firstName: formData.firstName,
-      phone: formData.phone
+      phone: formData.phone,
     });
 
     if (result.success) {
@@ -132,7 +137,7 @@ export default function Signup() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
       {/* Back to home button */}
-      <Link 
+      <Link
         to="/"
         className="absolute top-6 left-6 flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
       >
@@ -185,7 +190,9 @@ export default function Signup() {
             {/* Error Message */}
             {error && (
               <div className="mb-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-                <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                <p className="text-sm text-red-600 dark:text-red-400">
+                  {error}
+                </p>
               </div>
             )}
 
@@ -204,7 +211,9 @@ export default function Signup() {
                     <input
                       type="text"
                       value={formData.firstName}
-                      onChange={(e) => updateFormData("firstName", e.target.value)}
+                      onChange={(e) =>
+                        updateFormData("firstName", e.target.value)
+                      }
                       className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
                       placeholder="First name"
                       required
@@ -294,40 +303,55 @@ export default function Signup() {
                     )}
                   </button>
                 </div>
-                
+
                 {/* Password Strength Indicator */}
                 {formData.password && (
                   <div className="mt-2">
                     <div className="flex items-center space-x-2 mb-2">
                       <div className="flex-1 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
-                        <div 
+                        <div
                           className={`h-full rounded-full transition-all ${getPasswordStrengthColor()}`}
-                          style={{ width: `${(passwordStrength.score / 5) * 100}%` }}
+                          style={{
+                            width: `${(passwordStrength.score / 5) * 100}%`,
+                          }}
                         />
                       </div>
-                      <span className={`text-xs font-medium ${
-                        passwordStrength.score <= 2 ? 'text-red-500' :
-                        passwordStrength.score <= 3 ? 'text-yellow-500' :
-                        passwordStrength.score <= 4 ? 'text-blue-500' :
-                        'text-green-500'
-                      }`}>
+                      <span
+                        className={`text-xs font-medium ${
+                          passwordStrength.score <= 2
+                            ? "text-red-500"
+                            : passwordStrength.score <= 3
+                              ? "text-yellow-500"
+                              : passwordStrength.score <= 4
+                                ? "text-blue-500"
+                                : "text-green-500"
+                        }`}
+                      >
                         {getPasswordStrengthText()}
                       </span>
                     </div>
                     <div className="grid grid-cols-2 gap-1 text-xs">
-                      <div className={`flex items-center space-x-1 ${passwordStrength.requirements.length ? 'text-green-500' : 'text-gray-400'}`}>
+                      <div
+                        className={`flex items-center space-x-1 ${passwordStrength.requirements.length ? "text-green-500" : "text-gray-400"}`}
+                      >
                         <Check className="w-3 h-3" />
                         <span>8+ characters</span>
                       </div>
-                      <div className={`flex items-center space-x-1 ${passwordStrength.requirements.uppercase ? 'text-green-500' : 'text-gray-400'}`}>
+                      <div
+                        className={`flex items-center space-x-1 ${passwordStrength.requirements.uppercase ? "text-green-500" : "text-gray-400"}`}
+                      >
                         <Check className="w-3 h-3" />
                         <span>Uppercase</span>
                       </div>
-                      <div className={`flex items-center space-x-1 ${passwordStrength.requirements.number ? 'text-green-500' : 'text-gray-400'}`}>
+                      <div
+                        className={`flex items-center space-x-1 ${passwordStrength.requirements.number ? "text-green-500" : "text-gray-400"}`}
+                      >
                         <Check className="w-3 h-3" />
                         <span>Number</span>
                       </div>
-                      <div className={`flex items-center space-x-1 ${passwordStrength.requirements.special ? 'text-green-500' : 'text-gray-400'}`}>
+                      <div
+                        className={`flex items-center space-x-1 ${passwordStrength.requirements.special ? "text-green-500" : "text-gray-400"}`}
+                      >
                         <Check className="w-3 h-3" />
                         <span>Special char</span>
                       </div>
@@ -348,7 +372,9 @@ export default function Signup() {
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     value={formData.confirmPassword}
-                    onChange={(e) => updateFormData("confirmPassword", e.target.value)}
+                    onChange={(e) =>
+                      updateFormData("confirmPassword", e.target.value)
+                    }
                     className="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
                     placeholder="Confirm your password"
                     required
@@ -365,9 +391,12 @@ export default function Signup() {
                     )}
                   </button>
                 </div>
-                {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                  <p className="mt-1 text-sm text-red-500">Passwords do not match</p>
-                )}
+                {formData.confirmPassword &&
+                  formData.password !== formData.confirmPassword && (
+                    <p className="mt-1 text-sm text-red-500">
+                      Passwords do not match
+                    </p>
+                  )}
               </div>
 
               {/* Terms Acceptance */}
@@ -380,7 +409,10 @@ export default function Signup() {
                   className="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary"
                   required
                 />
-                <label htmlFor="acceptTerms" className="text-sm text-gray-600 dark:text-gray-400">
+                <label
+                  htmlFor="acceptTerms"
+                  className="text-sm text-gray-600 dark:text-gray-400"
+                >
                   I agree to FanKick's{" "}
                   <Link to="/terms" className="text-primary hover:underline">
                     Terms of Service
@@ -446,7 +478,8 @@ export default function Signup() {
                 Your data is secure
               </h3>
               <p className="text-xs text-blue-700 dark:text-blue-400 mt-1">
-                We use industry-standard encryption to protect your personal information and never share your data with third parties.
+                We use industry-standard encryption to protect your personal
+                information and never share your data with third parties.
               </p>
             </div>
           </div>

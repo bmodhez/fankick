@@ -8,6 +8,8 @@ import { Footer } from "@/components/Footer";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useCart } from "@/contexts/CartContext";
+import { useLike } from "@/contexts/LikeContext";
+import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   TrendingUp,
@@ -31,6 +33,8 @@ export default function TrendingPage() {
   const { selectedCurrency } = useCurrency();
   const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
+  const { toggleLike, isLiked } = useLike();
+  const { requireAuth, AuthModalComponent } = useAuthRequired();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -483,8 +487,30 @@ export default function TrendingPage() {
                                   productId={product.id}
                                   variant="outline"
                                   size="sm"
+<<<<<<< HEAD
                                   className="border-border text-muted-foreground hover:text-foreground"
                                 />
+=======
+                                  className={`border-border transition-all duration-300 hover:scale-110 ${
+                                    isLiked(product.id)
+                                      ? "border-red-500 shadow-lg shadow-red-500/25"
+                                      : "hover:border-red-500"
+                                  }`}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    requireAuth(() => toggleLike(product.id));
+                                  }}
+                                >
+                                  <Heart
+                                    className={`w-4 h-4 transition-all duration-300 ${
+                                      isLiked(product.id)
+                                        ? "fill-red-500 text-red-500 scale-110"
+                                        : "text-muted-foreground hover:text-red-500"
+                                    }`}
+                                  />
+                                </Button>
+>>>>>>> origin/main
                                 <Button
                                   onClick={(e) => handleAddToCart(product, e)}
                                   className="bg-primary text-black hover:bg-primary/90"
@@ -552,8 +578,30 @@ export default function TrendingPage() {
                                 productId={product.id}
                                 variant="secondary"
                                 size="sm"
+<<<<<<< HEAD
                                 className="bg-background/90 hover:bg-background"
                               />
+=======
+                                className={`bg-background/90 hover:bg-background transition-all duration-300 hover:scale-110 ${
+                                  isLiked(product.id)
+                                    ? "shadow-lg shadow-red-500/25"
+                                    : ""
+                                }`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  requireAuth(() => toggleLike(product.id));
+                                }}
+                              >
+                                <Heart
+                                  className={`w-4 h-4 transition-all duration-300 ${
+                                    isLiked(product.id)
+                                      ? "fill-red-500 text-red-500 scale-110"
+                                      : "text-muted-foreground hover:text-red-500"
+                                  }`}
+                                />
+                              </Button>
+>>>>>>> origin/main
                             </div>
                           </div>
                         </div>
@@ -685,6 +733,7 @@ export default function TrendingPage() {
       </div>
 
       <Footer />
+      <AuthModalComponent />
     </div>
   );
 }

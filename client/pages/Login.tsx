@@ -25,6 +25,11 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Redirect if already logged in
   useEffect(() => {
     if (user) {
