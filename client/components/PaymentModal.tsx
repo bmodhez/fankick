@@ -199,7 +199,10 @@ export function PaymentModal({
             </div>
 
             <div className="text-center text-sm text-gray-600">
-              You'll receive email updates about your order status
+              {orderDetails.paymentMethod === 'cod'
+                ? "Pay when your order arrives at your doorstep. You'll receive SMS/email updates about your order status."
+                : "You'll receive email updates about your order status"
+              }
             </div>
 
             <div className="flex space-x-3">
