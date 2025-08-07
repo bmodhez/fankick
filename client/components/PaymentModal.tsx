@@ -113,8 +113,9 @@ export function PaymentModal({
   const handlePayment = async () => {
     setIsProcessing(true);
 
-    // Simulate payment processing
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // Different processing time for COD vs other payments
+    const processingTime = selectedPayment === 'cod' ? 1000 : 2000;
+    await new Promise((resolve) => setTimeout(resolve, processingTime));
 
     const orderId = formatOrderId(Date.now());
     const trackingNumber = generateTrackingNumber();
@@ -123,8 +124,9 @@ export function PaymentModal({
       orderId,
       trackingNumber,
       estimatedDelivery: new Date(
-        Date.now() + 7 * 24 * 60 * 60 * 1000,
+        Date.now() + (selectedPayment === 'cod' ? 5 : 7) * 24 * 60 * 60 * 1000,
       ).toLocaleDateString(),
+      paymentMethod: selectedPayment,
     });
 
     setIsProcessing(false);
