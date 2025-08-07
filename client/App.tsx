@@ -96,6 +96,12 @@ const AppContent = () => {
                             }
                           />
                           <Route
+                            path="/accessories"
+                            element={
+                              <Navigate to="/category/accessories" replace />
+                            }
+                          />
+                          <Route
                             path="/collections"
                             element={
                               <>
