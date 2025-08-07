@@ -141,6 +141,48 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Cart Notification Banner - Flipkart/Amazon Style */}
+      {totalItems > 0 && (
+        <div className="bg-green-50 border-b border-green-200 py-2 px-4 sticky top-0 z-40">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
+                <ShoppingCart className="w-4 h-4 text-green-600" />
+                <span className="text-sm font-medium text-green-800">
+                  {totalItems} item{totalItems > 1 ? 's' : ''} in cart
+                </span>
+              </div>
+              <div className="text-xs text-green-600">
+                Total: {formatPrice(
+                  items.reduce((sum, item) =>
+                    sum + convertPrice(item.variant.price, selectedCurrency.code, "INR") * item.quantity, 0
+                  ),
+                  selectedCurrency
+                )}
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Button
+                size="sm"
+                variant="outline"
+                className="text-green-700 border-green-300 hover:bg-green-100"
+                onClick={() => navigate('/checkout')}
+              >
+                View Cart & Checkout
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="text-green-600 hover:text-green-800"
+                onClick={() => setShowCartNotification(false)}
+              >
+                ×
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button and Breadcrumb */}
         <div className="mb-8">
