@@ -151,8 +151,51 @@ export default function CategoryPage() {
     "pop-culture": "🎭",
   };
 
+  const getCategoryHeroImage = (cat: string) => {
+    switch (cat?.toLowerCase()) {
+      case "football":
+        return "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F61ece27bc9db40fcb5161b972d368a2e?format=webp&width=800";
+      case "anime":
+        return "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&q=80";
+      case "pop-culture":
+        return "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80";
+      default:
+        return "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80";
+    }
+  };
+
+  const getCategoryColor = (cat: string) => {
+    switch (cat?.toLowerCase()) {
+      case "football":
+        return "from-green-600 to-blue-600";
+      case "anime":
+        return "from-purple-600 to-pink-600";
+      case "pop-culture":
+        return "from-red-600 to-orange-600";
+      default:
+        return "from-indigo-600 to-purple-600";
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <section className={`relative bg-gradient-to-br ${getCategoryColor(category || "")} py-16 overflow-hidden`}>
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${getCategoryHeroImage(category || "")})` }}></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+          <div className="text-6xl mb-4">
+            {categoryEmoji[category as keyof typeof categoryEmoji] || "🛍️"}
+          </div>
+          <h1 className="text-4xl lg:text-6xl font-sport font-bold mb-4">
+            {getCategoryTitle(category || "")}
+          </h1>
+          <p className="text-xl lg:text-2xl max-w-3xl mx-auto">
+            {getCategoryDescription(category || "")}
+          </p>
+        </div>
+      </section>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-8">
@@ -162,19 +205,6 @@ export default function CategoryPage() {
           <span>/</span>
           <span className="text-foreground capitalize">{category}</span>
         </nav>
-
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="text-6xl mb-4">
-            {categoryEmoji[category as keyof typeof categoryEmoji] || "🛍️"}
-          </div>
-          <h1 className="text-4xl lg:text-5xl font-sport font-bold text-foreground mb-4">
-            {getCategoryTitle(category || "")}
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {getCategoryDescription(category || "")}
-          </p>
-        </div>
 
         {/* Filters and Sort */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 p-4 bg-muted rounded-lg">
