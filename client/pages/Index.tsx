@@ -284,30 +284,8 @@ export default function Index() {
                             productId={product.id}
                             variant="ghost"
                             size="sm"
-<<<<<<< HEAD
                             className="bg-white/90 hover:bg-white"
                           />
-=======
-                            className={`bg-white/90 hover:bg-white transition-all duration-300 hover:scale-110 ${
-                              isLiked(product.id)
-                                ? "shadow-lg shadow-red-500/25"
-                                : ""
-                            }`}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              requireAuth(() => toggleLike(product.id));
-                            }}
-                          >
-                            <Heart
-                              className={`w-4 h-4 transition-all duration-300 ${
-                                isLiked(product.id)
-                                  ? "fill-red-500 text-red-500 scale-110"
-                                  : "text-gray-600 hover:text-red-500"
-                              }`}
-                            />
-                          </Button>
->>>>>>> origin/main
                         </div>
 
                         <div className="absolute bottom-2 left-2">
