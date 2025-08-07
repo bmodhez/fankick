@@ -32,6 +32,7 @@ import {
   Clock,
   CreditCard,
   Banknote,
+  X,
 } from "lucide-react";
 import { LikeButton } from "@/components/LikeButton";
 
