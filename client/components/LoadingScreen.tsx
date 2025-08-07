@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMediaQuery } from "@/hooks/use-mobile";
 
 interface LoadingScreenProps {
   isLoading: boolean;
