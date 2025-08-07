@@ -41,19 +41,27 @@ import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
-        <CurrencyProvider>
-          <AuthProvider>
-            <ProductProvider>
-              <CartProvider>
-                <LikeProvider>
-                  <TooltipProvider>
-                    <Toaster />
-                    <Sonner />
-                    <BrowserRouter>
+const AppContent = () => {
+  const { isLoading, setIsLoading } = useAppLoading();
+
+  return (
+    <>
+      <LoadingScreen
+        isLoading={isLoading}
+        onComplete={() => setIsLoading(false)}
+      />
+      <ErrorBoundary>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
+            <CurrencyProvider>
+              <AuthProvider>
+                <ProductProvider>
+                  <CartProvider>
+                    <LikeProvider>
+                      <TooltipProvider>
+                        <Toaster />
+                        <Sonner />
+                        <BrowserRouter>
                       <ScrollToTop />
                       <div className="min-h-screen">
                         <Routes>
@@ -259,17 +267,21 @@ const App = () => (
                           <Route path="*" element={<NotFound />} />
                         </Routes>
                       </div>
-                    </BrowserRouter>
-                  </TooltipProvider>
-                </LikeProvider>
-              </CartProvider>
-            </ProductProvider>
-          </AuthProvider>
-        </CurrencyProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  </ErrorBoundary>
-);
+                        </BrowserRouter>
+                      </TooltipProvider>
+                    </LikeProvider>
+                  </CartProvider>
+                </ProductProvider>
+              </AuthProvider>
+            </CurrencyProvider>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </ErrorBoundary>
+    </>
+  );
+};
+
+const App = () => <AppContent />;
 
 const rootElement = document.getElementById("root")!;
 
