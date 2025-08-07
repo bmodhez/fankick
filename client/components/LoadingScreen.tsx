@@ -70,7 +70,7 @@ export function LoadingScreen({ isLoading, onComplete }: LoadingScreenProps) {
           </div>
 
           {/* Main Loading Content */}
-          <div className="relative z-10 text-center max-w-md mx-auto px-6">
+          <div className={`relative z-10 text-center mx-auto px-6 ${isMobile ? 'max-w-sm' : 'max-w-md'}`}>
             {/* Logo */}
             <motion.div
               initial={{ scale: 0.5, opacity: 0 }}
