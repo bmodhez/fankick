@@ -41,14 +41,8 @@ import { Footer } from "./components/Footer";
 const queryClient = new QueryClient();
 
 const AppContent = () => {
-  const { isLoading, setIsLoading } = useAppLoading();
-
   return (
-    <>
-      <LoadingScreen
-        isLoading={isLoading}
-        onComplete={() => setIsLoading(false)}
-      />
+    <AppInitializer>
       <ErrorBoundary>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
@@ -276,7 +270,7 @@ const AppContent = () => {
           </ThemeProvider>
         </QueryClientProvider>
       </ErrorBoundary>
-    </>
+    </AppInitializer>
   );
 };
 
