@@ -18,7 +18,6 @@ import {
   Truck,
   ShieldCheck,
   Gift,
-  User,
   MapPin,
 } from "lucide-react";
 
@@ -49,19 +48,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   if (!isOpen) return null;
 
   const convertedTotal = convertPrice(totalPrice, selectedCurrency.code, "INR");
-  // Set free shipping threshold based on currency (4200 INR = ~50 USD equivalent)
-  const freeShippingThreshold = convertPrice(
-    4200,
-    selectedCurrency.code,
-    "INR",
-  );
-  const shippingCost =
-    convertedTotal >= freeShippingThreshold
-      ? 0
-      : convertPrice(420, selectedCurrency.code, "INR"); // 420 INR = ~5 USD
-  const discount = appliedCoupon
-    ? (convertedTotal * appliedCoupon.discount) / 100
-    : 0;
+  const freeShippingThreshold = convertPrice(4200, selectedCurrency.code, "INR");
+  const shippingCost = convertedTotal >= freeShippingThreshold ? 0 : convertPrice(420, selectedCurrency.code, "INR");
+  const discount = appliedCoupon ? (convertedTotal * appliedCoupon.discount) / 100 : 0;
   const finalTotal = convertedTotal + shippingCost - discount;
 
   const applyCoupon = () => {
@@ -71,13 +60,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       FANKICK15: { discount: 15, description: "15% off sitewide" },
     };
 
-    const coupon =
-      validCoupons[couponCode.toUpperCase() as keyof typeof validCoupons];
+    const coupon = validCoupons[couponCode.toUpperCase() as keyof typeof validCoupons];
     if (coupon) {
-      setAppliedCoupon({
-        code: couponCode.toUpperCase(),
-        discount: coupon.discount,
-      });
+      setAppliedCoupon({ code: couponCode.toUpperCase(), discount: coupon.discount });
       setCouponCode("");
     }
   };
@@ -92,16 +77,15 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
     }
 
     if (!user) {
-      // If not logged in, redirect to login with checkout redirect
-      onClose(); // Close the cart sidebar
+      onClose();
       navigate("/login", {
         state: { from: { pathname: "/checkout" } },
       });
       return;
     }
 
-    onClose(); // Close the cart sidebar
-    navigate("/checkout"); // Navigate to checkout page
+    onClose();
+    navigate("/checkout");
   };
 
   return (
@@ -113,33 +97,15 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       />
 
       {/* Sidebar */}
-<<<<<<< HEAD
       <div className="fixed right-0 top-0 h-full w-full max-w-lg bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 z-[61] shadow-2xl border-l-2 border-primary/30 flex flex-col backdrop-blur-sm transform transition-all duration-500 ease-out animate-slide-in relative overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-blue-500/5 opacity-80"></div>
-        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
-
         {/* Header */}
         <div className="relative flex items-center justify-between p-6 border-b-2 border-gray-600/30 bg-gradient-to-r from-primary/20 via-purple-500/15 to-blue-500/20 backdrop-blur-md shadow-lg">
-          <div className="absolute inset-0 bg-white/5 rounded-b-xl"></div>
           <div className="relative flex items-center space-x-3">
             <div className="p-3 bg-gradient-to-br from-primary/30 to-purple-500/30 rounded-xl border border-primary/40 shadow-lg">
               <ShoppingBag className="w-6 h-6 text-primary drop-shadow-lg" />
             </div>
             <div>
               <h2 className="text-xl font-bold text-white drop-shadow-lg">
-=======
-      <div className="fixed right-0 top-0 h-full w-full sm:max-w-lg bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 z-[61] shadow-2xl border-l-2 border-primary/20 flex flex-col backdrop-blur-sm transform transition-transform duration-300 ease-out animate-slide-in">
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 sm:p-6 border-b-2 border-gray-600/50 bg-gradient-to-r from-primary/15 via-purple-500/10 to-blue-500/15 backdrop-blur-sm">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-primary/20 rounded-full">
-              <ShoppingBag className="w-6 h-6 text-primary" />
-            </div>
-            <div>
-              <h2 className="text-lg sm:text-xl font-bold text-white">
->>>>>>> origin/main
                 Shopping Cart
               </h2>
               {totalItems > 0 && (
@@ -165,97 +131,56 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         </div>
 
         {/* Cart Items */}
-<<<<<<< HEAD
         <div className="relative flex-1 overflow-y-auto p-6 custom-scrollbar">
           {items.length === 0 ? (
             <div className="text-center py-20 animate-fade-in">
               <div className="relative w-28 h-28 bg-gradient-to-br from-gray-700/50 to-gray-600/30 rounded-full flex items-center justify-center mx-auto mb-6 border border-gray-600/50 shadow-xl">
                 <ShoppingBag className="w-14 h-14 text-gray-400 animate-bounce" />
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-purple-500/10 rounded-full blur-xl"></div>
               </div>
               <h3 className="text-2xl font-bold text-white mb-4 drop-shadow-lg">
                 Your cart is empty
               </h3>
               <p className="text-gray-400 mb-8 leading-relaxed px-4 text-lg">
-=======
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 custom-scrollbar">
-          {items.length === 0 ? (
-            <div className="text-center py-12 sm:py-20">
-              <div className="w-20 sm:w-24 h-20 sm:h-24 bg-gray-700/50 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                <ShoppingBag className="w-10 sm:w-12 h-10 sm:h-12 text-gray-500" />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-3">
-                Your cart is empty
-              </h3>
-              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed px-4 text-sm sm:text-base">
->>>>>>> origin/main
-                Add some amazing products to get started with your shopping
-                journey!
+                Add some amazing products to get started with your shopping journey!
               </p>
               <Button
                 onClick={onClose}
-<<<<<<< HEAD
                 className="bg-gradient-to-r from-primary to-yellow-400 text-black hover:from-primary/90 hover:to-yellow-400/90 px-10 py-4 rounded-xl font-semibold shadow-xl transform hover:scale-105 transition-all duration-300 border border-primary/30"
-=======
-                className="bg-primary text-black hover:bg-primary/90 px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-semibold shadow-lg transform hover:scale-105 transition-all text-sm sm:text-base"
->>>>>>> origin/main
               >
                 Continue Shopping
               </Button>
             </div>
           ) : (
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-6">
               {items.map((item) => {
-                const convertedPrice = convertPrice(
-                  item.variant.price,
-                  selectedCurrency.code,
-                  "INR",
-                );
+                const convertedPrice = convertPrice(item.variant.price, selectedCurrency.code, "INR");
 
                 return (
                   <div
                     key={item.id}
-<<<<<<< HEAD
                     className="relative bg-gradient-to-r from-gray-800/80 to-gray-700/60 rounded-2xl p-5 border border-gray-600/50 hover:border-primary/60 hover:shadow-2xl transition-all duration-300 backdrop-blur-md group overflow-hidden"
-=======
-                    className="bg-gradient-to-r from-gray-800/60 to-gray-700/40 rounded-2xl p-3 sm:p-5 border border-gray-600/50 hover:border-primary/40 hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
->>>>>>> origin/main
                   >
-                    {/* Hover effect background */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
                     <div className="relative flex space-x-4">
                       {/* Product Image */}
                       <div className="relative group">
                         <img
                           src={item.product.images[0]}
                           alt={item.product.name}
-<<<<<<< HEAD
                           className="w-20 h-20 object-cover rounded-xl border-2 border-gray-600/70 group-hover:border-primary/50 transition-all duration-300 shadow-lg"
                         />
                         <div className="absolute -top-2 -left-2 bg-gradient-to-r from-primary to-yellow-400 text-black text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center shadow-lg border-2 border-white/20 animate-pulse">
-=======
-                          className="w-16 sm:w-20 h-16 sm:h-20 object-cover rounded-xl border-2 border-gray-600"
-                        />
-                        <div className="absolute -top-1 sm:-top-2 -left-1 sm:-left-2 bg-primary text-black text-xs font-bold rounded-full w-5 sm:w-6 h-5 sm:h-6 flex items-center justify-center">
->>>>>>> origin/main
                           {item.quantity}
                         </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
 
                       {/* Product Details */}
-<<<<<<< HEAD
                       <div className="relative flex-1 space-y-3">
                         <h4 className="font-semibold text-white text-base line-clamp-2 leading-tight group-hover:text-primary transition-colors duration-300">
-=======
-                      <div className="flex-1 space-y-2 sm:space-y-3">
-                        <h4 className="font-semibold text-white text-sm sm:text-base line-clamp-2 leading-tight">
->>>>>>> origin/main
                           {item.product.name}
                         </h4>
 
                         {/* Variant Info */}
-                        <div className="flex items-center gap-2 sm:gap-3 text-xs">
+                        <div className="flex items-center gap-3 text-xs">
                           {item.variant.size && (
                             <span className="bg-gradient-to-r from-gray-600/60 to-gray-500/40 px-3 py-1.5 rounded-full text-gray-300 border border-gray-500/30 shadow-sm">
                               Size: {item.variant.size}
@@ -269,56 +194,31 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         </div>
 
                         {/* Price */}
-<<<<<<< HEAD
                         <p className="font-bold text-lg text-primary bg-gradient-to-r from-primary/15 to-yellow-400/15 px-4 py-2 rounded-xl inline-block border border-primary/30 shadow-lg">
-=======
-                        <p className="font-bold text-sm sm:text-lg text-primary bg-primary/10 px-2 sm:px-3 py-1 rounded-lg inline-block">
->>>>>>> origin/main
                           {formatPrice(convertedPrice, selectedCurrency)}
                         </p>
 
                         {/* Quantity Controls */}
-<<<<<<< HEAD
                         <div className="flex items-center justify-between mt-4">
                           <div className="flex items-center bg-gradient-to-r from-gray-700/80 to-gray-600/60 rounded-xl p-1 border border-gray-500/50 shadow-lg backdrop-blur-sm">
-=======
-                        <div className="flex items-center justify-between mt-3 sm:mt-4">
-                          <div className="flex items-center bg-gray-700/70 rounded-xl p-1 border border-gray-600">
->>>>>>> origin/main
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() =>
-                                updateQuantity(item.id, item.quantity - 1)
-                              }
-<<<<<<< HEAD
+                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
                               className="w-10 h-10 p-0 hover:bg-primary/30 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 hover:scale-110"
-=======
-                              className="w-8 sm:w-9 h-8 sm:h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
->>>>>>> origin/main
                             >
-                              <Minus className="w-3 sm:w-4 h-3 sm:h-4" />
+                              <Minus className="w-4 h-4" />
                             </Button>
-<<<<<<< HEAD
                             <span className="text-white font-bold w-14 text-center bg-gradient-to-r from-primary/25 to-purple-500/25 rounded-lg mx-1 py-2.5 border border-primary/40 shadow-inner text-lg">
-=======
-                            <span className="text-white font-bold w-10 sm:w-12 text-center bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-lg mx-1 py-1.5 sm:py-2 border border-primary/30 text-sm">
->>>>>>> origin/main
                               {item.quantity}
                             </span>
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() =>
-                                updateQuantity(item.id, item.quantity + 1)
-                              }
-<<<<<<< HEAD
+                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
                               className="w-10 h-10 p-0 hover:bg-primary/30 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 hover:scale-110"
-=======
-                              className="w-8 sm:w-9 h-8 sm:h-9 p-0 hover:bg-primary/20 text-gray-300 hover:text-primary rounded-lg transition-all"
->>>>>>> origin/main
                             >
-                              <Plus className="w-3 sm:w-4 h-3 sm:h-4" />
+                              <Plus className="w-4 h-4" />
                             </Button>
                           </div>
 
@@ -326,13 +226,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             variant="ghost"
                             size="sm"
                             onClick={() => removeFromCart(item.id)}
-<<<<<<< HEAD
                             className="text-gray-400 hover:text-red-400 hover:bg-red-500/20 rounded-xl p-3 transition-all transform hover:scale-110 duration-300 shadow-lg border border-transparent hover:border-red-400/30"
-=======
-                            className="text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-xl p-1.5 sm:p-2 transition-all transform hover:scale-105"
->>>>>>> origin/main
                           >
-                            <Trash2 className="w-4 sm:w-5 h-4 sm:h-5" />
+                            <Trash2 className="w-5 h-5" />
                           </Button>
                         </div>
                       </div>
@@ -363,7 +259,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
 
         {/* Cart Summary */}
         {items.length > 0 && (
-          <div className="border-t border-gray-600 p-4 sm:p-6 space-y-3 sm:space-y-5 bg-gradient-to-t from-gray-800 to-gray-800/50">
+          <div className="border-t border-gray-600 p-6 space-y-5 bg-gradient-to-t from-gray-800 to-gray-800/50">
             {/* Coupon Code */}
             <div className="space-y-2">
               <div className="flex space-x-2">
@@ -400,7 +296,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             </div>
 
             {/* Price Breakdown */}
-            <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm bg-gradient-to-br from-gray-700/40 to-gray-600/30 rounded-2xl p-3 sm:p-5 border-2 border-gray-600/50 backdrop-blur-sm">
+            <div className="space-y-4 text-sm bg-gradient-to-br from-gray-700/40 to-gray-600/30 rounded-2xl p-5 border-2 border-gray-600/50 backdrop-blur-sm">
               <div className="flex justify-between text-gray-300">
                 <span>Subtotal ({totalItems} items)</span>
                 <span>{formatPrice(convertedTotal, selectedCurrency)}</span>
@@ -424,46 +320,10 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 </div>
               )}
 
-              <div className="border-t-2 border-gray-600/70 pt-3 flex justify-between font-bold text-base sm:text-lg">
+              <div className="border-t-2 border-gray-600/70 pt-3 flex justify-between font-bold text-lg">
                 <span className="text-white">Total Amount</span>
-                <span className="text-primary bg-primary/10 px-2 sm:px-3 py-1 rounded-lg">
+                <span className="text-primary bg-primary/10 px-3 py-1 rounded-lg">
                   {formatPrice(finalTotal, selectedCurrency)}
-                </span>
-              </div>
-            </div>
-
-            {/* Free Shipping Message */}
-            {shippingCost > 0 && (
-              <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-2 border-blue-400/50 rounded-xl p-3 sm:p-4 text-blue-300 text-xs sm:text-sm font-medium">
-                <div className="flex items-center">
-                  <Truck className="w-4 sm:w-5 h-4 sm:h-5 mr-2 sm:mr-3 text-blue-400" />
-                  <div>
-                    <div className="font-semibold">Almost there!</div>
-                    <div>
-                      Add{" "}
-                      {formatPrice(
-                        freeShippingThreshold - convertedTotal,
-                        selectedCurrency,
-                      )}{" "}
-                      more for FREE shipping!
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Security & Benefits */}
-            <div className="grid grid-cols-2 gap-2 sm:gap-3 text-xs">
-              <div className="flex items-center bg-green-500/10 border border-green-500/30 rounded-lg p-1.5 sm:p-2">
-                <ShieldCheck className="w-3 sm:w-4 h-3 sm:h-4 mr-1 sm:mr-2 text-green-400" />
-                <span className="text-green-300 font-medium">
-                  Secure Payment
-                </span>
-              </div>
-              <div className="flex items-center bg-purple-500/10 border border-purple-500/30 rounded-lg p-1.5 sm:p-2">
-                <Gift className="w-3 sm:w-4 h-3 sm:h-4 mr-1 sm:mr-2 text-purple-400" />
-                <span className="text-purple-300 font-medium">
-                  Gift Options
                 </span>
               </div>
             </div>
@@ -472,59 +332,18 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             <div className="relative group">
               <Button
                 onClick={handleCheckout}
-<<<<<<< HEAD
                 className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/95 hover:via-green-400/95 hover:to-blue-400/95 font-bold py-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/40 relative overflow-hidden"
               >
-                {/* Animated shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-
                 <div className="relative flex items-center justify-center">
                   <CreditCard className="w-6 h-6 mr-3 animate-pulse" />
                   <div className="text-center">
-                    <div className="text-lg font-extrabold">
-                      Proceed to Checkout
-                    </div>
+                    <div className="text-lg font-extrabold">Proceed to Checkout</div>
                     <div className="text-sm opacity-90 font-semibold">
                       {formatPrice(finalTotal, selectedCurrency)}
-=======
-                className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/90 hover:via-green-400/90 hover:to-blue-400/90 font-bold py-3 sm:py-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/30"
-              >
-                <div className="flex items-center justify-center">
-                  {user ? (
-                    <CreditCard className="w-5 sm:w-6 h-5 sm:h-6 mr-2 sm:mr-3" />
-                  ) : (
-                    <User className="w-5 sm:w-6 h-5 sm:h-6 mr-2 sm:mr-3" />
-                  )}
-                  <div className="text-center">
-                    <div className="text-sm sm:text-lg">
-                      {user ? "Proceed to Checkout" : "Login to Checkout"}
-                    </div>
-                    <div className="text-xs sm:text-sm opacity-90">
-                      {user
-                        ? formatPrice(finalTotal, selectedCurrency)
-                        : "Sign in required"}
->>>>>>> origin/main
                     </div>
                   </div>
                 </div>
               </Button>
-
-              {/* Enhanced glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-green-400/30 rounded-2xl blur-xl -z-10 group-hover:blur-2xl transition-all duration-300"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-blue-400/10 rounded-2xl blur-2xl -z-20 animate-pulse"></div>
-            </div>
-
-            <div className="text-center space-y-2">
-              <p className="text-xs text-gray-400 flex items-center justify-center">
-                <ShieldCheck className="w-3 h-3 mr-1 text-green-400" />
-                256-bit SSL encrypted • Multiple payment options
-              </p>
-              <div className="flex justify-center space-x-2 sm:space-x-4 text-xs text-gray-500">
-                <span>💳 Card</span>
-                <span>📱 UPI</span>
-                <span>🏦 NetBanking</span>
-                <span>💰 COD</span>
-              </div>
             </div>
           </div>
         )}
