@@ -10,13 +10,7 @@ import { useLike } from "@/contexts/LikeContext";
 import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { Product } from "@/data/products";
 import { convertPrice, formatPrice } from "@/utils/currency";
-import {
-  Star,
-  Filter,
-  SlidersHorizontal,
-  Eye,
-  TrendingUp,
-} from "lucide-react";
+import { Star, Filter, SlidersHorizontal, Eye, TrendingUp } from "lucide-react";
 import { LikeButton } from "@/components/LikeButton";
 
 export default function CategoryPage() {

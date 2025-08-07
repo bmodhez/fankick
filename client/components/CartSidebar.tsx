@@ -48,9 +48,18 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   if (!isOpen) return null;
 
   const convertedTotal = convertPrice(totalPrice, selectedCurrency.code, "INR");
-  const freeShippingThreshold = convertPrice(4200, selectedCurrency.code, "INR");
-  const shippingCost = convertedTotal >= freeShippingThreshold ? 0 : convertPrice(420, selectedCurrency.code, "INR");
-  const discount = appliedCoupon ? (convertedTotal * appliedCoupon.discount) / 100 : 0;
+  const freeShippingThreshold = convertPrice(
+    4200,
+    selectedCurrency.code,
+    "INR",
+  );
+  const shippingCost =
+    convertedTotal >= freeShippingThreshold
+      ? 0
+      : convertPrice(420, selectedCurrency.code, "INR");
+  const discount = appliedCoupon
+    ? (convertedTotal * appliedCoupon.discount) / 100
+    : 0;
   const finalTotal = convertedTotal + shippingCost - discount;
 
   const applyCoupon = () => {
@@ -60,9 +69,13 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       FANKICK15: { discount: 15, description: "15% off sitewide" },
     };
 
-    const coupon = validCoupons[couponCode.toUpperCase() as keyof typeof validCoupons];
+    const coupon =
+      validCoupons[couponCode.toUpperCase() as keyof typeof validCoupons];
     if (coupon) {
-      setAppliedCoupon({ code: couponCode.toUpperCase(), discount: coupon.discount });
+      setAppliedCoupon({
+        code: couponCode.toUpperCase(),
+        discount: coupon.discount,
+      });
       setCouponCode("");
     }
   };
@@ -141,7 +154,8 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 Your cart is empty
               </h3>
               <p className="text-gray-400 mb-8 leading-relaxed px-4 text-lg">
-                Add some amazing products to get started with your shopping journey!
+                Add some amazing products to get started with your shopping
+                journey!
               </p>
               <Button
                 onClick={onClose}
@@ -153,7 +167,11 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
           ) : (
             <div className="space-y-6">
               {items.map((item) => {
-                const convertedPrice = convertPrice(item.variant.price, selectedCurrency.code, "INR");
+                const convertedPrice = convertPrice(
+                  item.variant.price,
+                  selectedCurrency.code,
+                  "INR",
+                );
 
                 return (
                   <div
@@ -204,7 +222,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity - 1)
+                              }
                               className="w-10 h-10 p-0 hover:bg-primary/30 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 hover:scale-110"
                             >
                               <Minus className="w-4 h-4" />
@@ -215,7 +235,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity + 1)
+                              }
                               className="w-10 h-10 p-0 hover:bg-primary/30 text-gray-300 hover:text-primary rounded-lg transition-all duration-300 hover:scale-110"
                             >
                               <Plus className="w-4 h-4" />
@@ -337,7 +359,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 <div className="relative flex items-center justify-center">
                   <CreditCard className="w-6 h-6 mr-3 animate-pulse" />
                   <div className="text-center">
-                    <div className="text-lg font-extrabold">Proceed to Checkout</div>
+                    <div className="text-lg font-extrabold">
+                      Proceed to Checkout
+                    </div>
                     <div className="text-sm opacity-90 font-semibold">
                       {formatPrice(finalTotal, selectedCurrency)}
                     </div>
