@@ -56,8 +56,9 @@ const AppContent = () => {
                         <Toaster />
                         <Sonner />
                         <BrowserRouter>
-                      <ScrollToTop />
-                      <div className="min-h-screen">
+                          <NavigationProgress />
+                          <ScrollToTop />
+                          <div className="min-h-screen">
                         <Routes>
                           <Route
                             path="/"
