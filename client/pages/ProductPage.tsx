@@ -144,40 +144,46 @@ export default function ProductPage() {
     <div className="min-h-screen bg-background">
       {/* Cart Notification Banner - Flipkart/Amazon Style */}
       {totalItems > 0 && (
-        <div className="bg-green-50 border-b border-green-200 py-2 px-4 sticky top-0 z-40">
+        <div className="bg-gradient-to-r from-green-50 to-green-100 border-b-2 border-green-300 py-3 px-4 sticky top-0 z-40 shadow-sm">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 bg-white rounded-full px-3 py-1 shadow-sm">
                 <ShoppingCart className="w-4 h-4 text-green-600" />
-                <span className="text-sm font-medium text-green-800">
+                <span className="text-sm font-semibold text-green-800">
                   {totalItems} item{totalItems > 1 ? 's' : ''} in cart
                 </span>
               </div>
-              <div className="text-xs text-green-600">
-                Total: {formatPrice(
-                  items.reduce((sum, item) =>
-                    sum + convertPrice(item.variant.price, selectedCurrency.code, "INR") * item.quantity, 0
-                  ),
-                  selectedCurrency
-                )}
+              <div className="hidden sm:flex items-center space-x-1 text-sm text-green-700">
+                <span>Total:</span>
+                <span className="font-bold">
+                  {formatPrice(
+                    items.reduce((sum, item) =>
+                      sum + convertPrice(item.variant.price, selectedCurrency.code, "INR") * item.quantity, 0
+                    ),
+                    selectedCurrency
+                  )}
+                </span>
+              </div>
+              <div className="hidden md:block text-xs text-green-600 bg-green-200 px-2 py-1 rounded">
+                ✓ Free delivery available
               </div>
             </div>
             <div className="flex items-center space-x-2">
               <Button
                 size="sm"
-                variant="outline"
-                className="text-green-700 border-green-300 hover:bg-green-100"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-1.5"
                 onClick={() => navigate('/checkout')}
               >
-                View Cart & Checkout
+                <ShoppingCart className="w-4 h-4 mr-1" />
+                Go to Cart
               </Button>
               <Button
                 size="sm"
                 variant="ghost"
-                className="text-green-600 hover:text-green-800"
+                className="text-green-600 hover:text-green-800 p-1"
                 onClick={() => setShowCartNotification(false)}
               >
-                ×
+                <X className="w-4 h-4" />
               </Button>
             </div>
           </div>
@@ -712,7 +718,7 @@ export default function ProductPage() {
                               const firstVariant = relatedProduct.variants[0];
                               addToCart(relatedProduct, firstVariant, 1);
                               toast({
-                                title: "Added to Cart! 🛒",
+                                title: "Added to Cart! ����",
                                 description: `${relatedProduct.name} added to your cart.`,
                                 duration: 2000,
                               });
