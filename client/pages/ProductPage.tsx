@@ -10,6 +10,7 @@ import { useProducts } from "@/contexts/ProductContext";
 import { useLike } from "@/contexts/LikeContext";
 import { useCart } from "@/contexts/CartContext";
 import { useAuthRequired } from "@/hooks/useAuthRequired";
+import { useToast } from "@/hooks/use-toast";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   getAvailablePaymentMethods,
