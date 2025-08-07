@@ -358,17 +358,11 @@ export default function ProductPage() {
                 disabled={currentVariant.stock === 0}
                 onClick={() => {
                   addToCart(product, currentVariant, quantity);
-                  // Show success feedback
-                  const button = document.activeElement as HTMLButtonElement;
-                  const originalText = button.textContent;
-                  button.textContent = 'Added to Cart! ✓';
-                  button.classList.add('bg-green-500', 'hover:bg-green-600');
-                  button.classList.remove('bg-primary', 'hover:bg-primary/90');
-                  setTimeout(() => {
-                    button.textContent = originalText;
-                    button.classList.remove('bg-green-500', 'hover:bg-green-600');
-                    button.classList.add('bg-primary', 'hover:bg-primary/90');
-                  }, 2000);
+                  toast({
+                    title: "Added to Cart! 🛒",
+                    description: `${quantity}x ${product.name} (${currentVariant.size || currentVariant.color || 'Default'}) added to your cart.`,
+                    duration: 3000,
+                  });
                 }}
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
