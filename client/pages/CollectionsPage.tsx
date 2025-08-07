@@ -200,7 +200,14 @@ export default function CollectionsPage() {
   const getSubcategories = () => {
     let collectionProducts = products;
     if (collection && collection !== "all") {
-      collectionProducts = products.filter((p) => p.category === collection);
+      if (collection === "accessories") {
+        const accessorySubcategories = ["rings", "necklaces", "boots", "accessories"];
+        collectionProducts = products.filter((p) =>
+          accessorySubcategories.includes(p.subcategory)
+        );
+      } else {
+        collectionProducts = products.filter((p) => p.category === collection);
+      }
     }
     return [...new Set(collectionProducts.map((p) => p.subcategory))];
   };
