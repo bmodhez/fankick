@@ -173,7 +173,7 @@ export function PaymentModal({
               <CheckCircle className="w-8 h-8 text-green-600" />
             </div>
             <CardTitle className="text-2xl font-bold text-green-600">
-              Order Confirmed!
+              {orderDetails.paymentMethod === 'cod' ? 'Order Placed - COD!' : 'Order Confirmed!'}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
