@@ -119,7 +119,15 @@ export default function CollectionsPage() {
 
     // Filter by collection/category
     if (collection && collection !== "all") {
-      filtered = filtered.filter((product) => product.category === collection);
+      if (collection === "accessories") {
+        // Special handling for accessories - show items from specific subcategories across all categories
+        const accessorySubcategories = ["rings", "necklaces", "boots", "accessories"];
+        filtered = filtered.filter((product) =>
+          accessorySubcategories.includes(product.subcategory)
+        );
+      } else {
+        filtered = filtered.filter((product) => product.category === collection);
+      }
     }
 
     // Filter by subcategory
