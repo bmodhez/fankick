@@ -43,6 +43,7 @@ export default function ProductPage() {
   const { toggleLike, isLiked } = useLike();
   const { addToCart } = useCart();
   const { requireAuth, AuthModalComponent } = useAuthRequired();
+  const { toast } = useToast();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState("");
   const [quantity, setQuantity] = useState(1);
