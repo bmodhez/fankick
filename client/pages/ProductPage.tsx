@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +8,7 @@ import { PaymentModal } from "@/components/PaymentModal";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useLike } from "@/contexts/LikeContext";
+import { useCart } from "@/contexts/CartContext";
 import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
@@ -35,9 +36,11 @@ import { LikeButton } from "@/components/LikeButton";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { selectedCurrency } = useCurrency();
   const { getProductById, getTrendingProducts } = useProducts();
   const { toggleLike, isLiked } = useLike();
+  const { addToCart } = useCart();
   const { requireAuth, AuthModalComponent } = useAuthRequired();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState("");
@@ -136,21 +139,31 @@ export default function ProductPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Breadcrumb */}
-        <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
-          <Link to="/" className="hover:text-primary">
-            Home
-          </Link>
-          <span>/</span>
-          <Link
-            to={`/${product.category}`}
-            className="hover:text-primary capitalize"
+        {/* Back Button and Breadcrumb */}
+        <div className="mb-8">
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="mb-4 text-foreground hover:text-primary p-2 h-auto"
           >
-            {product.category}
-          </Link>
-          <span>/</span>
-          <span className="text-foreground">{product.name}</span>
-        </nav>
+            <ChevronLeft className="w-4 h-4 mr-1" />
+            Back
+          </Button>
+          <nav className="flex items-center space-x-2 text-sm text-gray-500">
+            <Link to="/" className="hover:text-primary">
+              Home
+            </Link>
+            <span>/</span>
+            <Link
+              to={`/${product.category}`}
+              className="hover:text-primary capitalize"
+            >
+              {product.category}
+            </Link>
+            <span>/</span>
+            <span className="text-foreground">{product.name}</span>
+          </nav>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Product Images */}
@@ -341,6 +354,20 @@ export default function ProductPage() {
                 size="lg"
                 className="w-full bg-primary text-black hover:bg-primary/90 font-semibold py-4"
                 disabled={currentVariant.stock === 0}
+                onClick={() => {
+                  addToCart(product, currentVariant, quantity);
+                  // Show success feedback
+                  const button = document.activeElement as HTMLButtonElement;
+                  const originalText = button.textContent;
+                  button.textContent = 'Added to Cart! ✓';
+                  button.classList.add('bg-green-500', 'hover:bg-green-600');
+                  button.classList.remove('bg-primary', 'hover:bg-primary/90');
+                  setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('bg-green-500', 'hover:bg-green-600');
+                    button.classList.add('bg-primary', 'hover:bg-primary/90');
+                  }, 2000);
+                }}
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Add to Cart -{" "}
@@ -348,7 +375,16 @@ export default function ProductPage() {
               </Button>
 
               {codAvailable && (
-                <Button size="lg" variant="outline" className="w-full py-4">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full py-4 border-2 border-green-500 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20"
+                  onClick={() => {
+                    // Add to cart first, then navigate to checkout with COD preselected
+                    addToCart(product, currentVariant, quantity);
+                    navigate('/checkout', { state: { paymentMethod: 'cod' } });
+                  }}
+                >
                   <Banknote className="w-5 h-5 mr-2" />
                   Buy Now with COD
                 </Button>
