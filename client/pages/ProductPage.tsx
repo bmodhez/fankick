@@ -666,16 +666,11 @@ export default function ProductPage() {
                               // Use the first available variant
                               const firstVariant = relatedProduct.variants[0];
                               addToCart(relatedProduct, firstVariant, 1);
-
-                              // Show success feedback
-                              const button = e.target as HTMLButtonElement;
-                              const originalText = button.textContent;
-                              button.textContent = 'Added! ✓';
-                              button.classList.add('bg-green-500', 'hover:bg-green-600');
-                              setTimeout(() => {
-                                button.textContent = originalText;
-                                button.classList.remove('bg-green-500', 'hover:bg-green-600');
-                              }, 1500);
+                              toast({
+                                title: "Added to Cart! 🛒",
+                                description: `${relatedProduct.name} added to your cart.`,
+                                duration: 2000,
+                              });
                             }}
                           >
                             Add to Cart
