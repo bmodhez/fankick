@@ -50,6 +50,7 @@ export default function ProductPage() {
   const [quantity, setQuantity] = useState(1);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showCartNotification, setShowCartNotification] = useState(false);
+  const [showMiniCart, setShowMiniCart] = useState(false);
 
   const product = getProductById(id || "");
   const relatedProducts = getTrendingProducts(3);
@@ -718,7 +719,7 @@ export default function ProductPage() {
                               const firstVariant = relatedProduct.variants[0];
                               addToCart(relatedProduct, firstVariant, 1);
                               toast({
-                                title: "Added to Cart! ����",
+                                title: "Added to Cart! 🛒",
                                 description: `${relatedProduct.name} added to your cart.`,
                                 duration: 2000,
                               });
