@@ -41,13 +41,14 @@ export default function ProductPage() {
   const { selectedCurrency } = useCurrency();
   const { getProductById, getTrendingProducts } = useProducts();
   const { toggleLike, isLiked } = useLike();
-  const { addToCart } = useCart();
+  const { addToCart, totalItems, items } = useCart();
   const { requireAuth, AuthModalComponent } = useAuthRequired();
   const { toast } = useToast();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showCartNotification, setShowCartNotification] = useState(false);
 
   const product = getProductById(id || "");
   const relatedProducts = getTrendingProducts(3);
