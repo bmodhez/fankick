@@ -148,11 +148,59 @@ export default function ProductPage() {
         <div className="bg-gradient-to-r from-green-50 to-green-100 border-b-2 border-green-300 py-3 px-4 sticky top-0 z-40 shadow-sm">
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 bg-white rounded-full px-3 py-1 shadow-sm">
+              <div
+                className="relative flex items-center space-x-2 bg-white rounded-full px-3 py-1 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+                onMouseEnter={() => setShowMiniCart(true)}
+                onMouseLeave={() => setShowMiniCart(false)}
+              >
                 <ShoppingCart className="w-4 h-4 text-green-600" />
                 <span className="text-sm font-semibold text-green-800">
                   {totalItems} item{totalItems > 1 ? 's' : ''} in cart
                 </span>
+
+                {/* Mini Cart Dropdown */}
+                {showMiniCart && (
+                  <div className="absolute top-full left-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                    <div className="p-4">
+                      <div className="text-sm font-semibold text-gray-800 mb-3 border-b pb-2">
+                        Cart Items ({totalItems})
+                      </div>
+                      <div className="space-y-2 max-h-60 overflow-y-auto">
+                        {items.slice(0, 3).map((item) => (
+                          <div key={item.id} className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded">
+                            <img
+                              src={item.product.images[0]}
+                              alt={item.product.name}
+                              className="w-10 h-10 object-cover rounded"
+                            />
+                            <div className="flex-1">
+                              <p className="text-xs font-medium text-gray-800 line-clamp-1">
+                                {item.product.name}
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                Qty: {item.quantity} • {formatPrice(convertPrice(item.variant.price, selectedCurrency.code, "INR"), selectedCurrency)}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                        {items.length > 3 && (
+                          <p className="text-xs text-gray-500 text-center pt-2">
+                            +{items.length - 3} more items
+                          </p>
+                        )}
+                      </div>
+                      <div className="mt-3 pt-3 border-t">
+                        <Button
+                          size="sm"
+                          className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                          onClick={() => navigate('/checkout')}
+                        >
+                          View Full Cart & Checkout
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="hidden sm:flex items-center space-x-1 text-sm text-green-700">
                 <span>Total:</span>
