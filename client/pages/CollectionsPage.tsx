@@ -80,6 +80,16 @@ export default function CollectionsPage() {
       color: "from-red-600 to-orange-600",
       icon: "🎭",
     },
+    accessories: {
+      title: "Accessories Collection",
+      subtitle: "Premium accessories, rings, necklaces & gear",
+      description:
+        "Discover our exclusive collection of rings, necklaces, boots, and other premium accessories from football, anime, and pop culture. Complete your look with authentic merchandise.",
+      categories: ["rings", "necklaces", "boots", "accessories"],
+      hero: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1200&q=80",
+      color: "from-amber-600 to-orange-600",
+      icon: "💎",
+    },
     all: {
       title: "All Collections",
       subtitle: "Discover our complete range of premium merchandise",
