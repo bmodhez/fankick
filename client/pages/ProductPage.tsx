@@ -378,7 +378,14 @@ export default function ProductPage() {
                   onClick={() => {
                     // Add to cart first, then navigate to checkout with COD preselected
                     addToCart(product, currentVariant, quantity);
-                    navigate('/checkout', { state: { paymentMethod: 'cod' } });
+                    toast({
+                      title: "Proceeding to COD Checkout 💰",
+                      description: "Taking you to checkout with Cash on Delivery selected.",
+                      duration: 2000,
+                    });
+                    setTimeout(() => {
+                      navigate('/checkout', { state: { paymentMethod: 'cod' } });
+                    }, 500);
                   }}
                 >
                   <Banknote className="w-5 h-5 mr-2" />
