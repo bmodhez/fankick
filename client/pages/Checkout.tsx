@@ -35,7 +35,9 @@ export default function Checkout() {
   const [activeStep, setActiveStep] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("new");
-  const [selectedPayment, setSelectedPayment] = useState("card");
+  const [selectedPayment, setSelectedPayment] = useState(
+    location.state?.paymentMethod || "card"
+  );
 
   // Form states
   const [shippingForm, setShippingForm] = useState({
