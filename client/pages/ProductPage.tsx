@@ -655,7 +655,28 @@ export default function ProductPage() {
                               )}
                             </span>
                           </div>
-                          <Button size="sm">Add to Cart</Button>
+                          <Button
+                            size="sm"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              // Use the first available variant
+                              const firstVariant = relatedProduct.variants[0];
+                              addToCart(relatedProduct, firstVariant, 1);
+
+                              // Show success feedback
+                              const button = e.target as HTMLButtonElement;
+                              const originalText = button.textContent;
+                              button.textContent = 'Added! ✓';
+                              button.classList.add('bg-green-500', 'hover:bg-green-600');
+                              setTimeout(() => {
+                                button.textContent = originalText;
+                                button.classList.remove('bg-green-500', 'hover:bg-green-600');
+                              }, 1500);
+                            }}
+                          >
+                            Add to Cart
+                          </Button>
                         </div>
                       </div>
                     </CardContent>
