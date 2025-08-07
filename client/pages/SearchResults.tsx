@@ -403,30 +403,8 @@ export default function SearchResults() {
                           productId={product.id}
                           size="sm"
                           variant="secondary"
-<<<<<<< HEAD
                           className="bg-background/90 hover:bg-background"
                         />
-=======
-                          className={`bg-background/90 hover:bg-background transition-all duration-300 hover:scale-110 ${
-                            isLiked(product.id)
-                              ? "shadow-lg shadow-red-500/25 opacity-100"
-                              : ""
-                          }`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            requireAuth(() => toggleLike(product.id));
-                          }}
-                        >
-                          <Heart
-                            className={`w-4 h-4 transition-all duration-300 ${
-                              isLiked(product.id)
-                                ? "fill-red-500 text-red-500 scale-110"
-                                : "text-muted-foreground hover:text-red-500"
-                            }`}
-                          />
-                        </Button>
->>>>>>> origin/main
                       </div>
                     </div>
 
