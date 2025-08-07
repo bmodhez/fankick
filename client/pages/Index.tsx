@@ -492,8 +492,8 @@ export default function Index() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
-            {Array.from({ length: 12 }, (_, i) => (
+          <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
+            {Array.from({ length: 6 }, (_, i) => (
               <div
                 key={i}
                 className="aspect-square bg-gray-200 rounded-xl overflow-hidden group cursor-pointer relative"
