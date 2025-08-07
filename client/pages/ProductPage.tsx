@@ -180,37 +180,12 @@ export default function ProductPage() {
               </div>
 
               <div className="absolute top-4 right-4 space-y-2">
-<<<<<<< HEAD
                 <LikeButton
                   productId={product.id}
                   size="sm"
                   variant="outline"
                   className="bg-background"
                 />
-=======
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className={`bg-background transition-all duration-300 hover:scale-110 ${
-                    isLiked(product.id)
-                      ? "border-red-500 shadow-lg shadow-red-500/25"
-                      : "hover:border-red-500"
-                  }`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    requireAuth(() => toggleLike(product.id));
-                  }}
-                >
-                  <Heart
-                    className={`w-4 h-4 transition-all duration-300 ${
-                      isLiked(product.id)
-                        ? "fill-red-500 text-red-500 scale-110"
-                        : "text-muted-foreground hover:text-red-500"
-                    }`}
-                  />
-                </Button>
->>>>>>> origin/main
                 <Button size="sm" variant="outline" className="bg-background">
                   <Share2 className="w-4 h-4" />
                 </Button>
