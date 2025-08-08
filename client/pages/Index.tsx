@@ -603,6 +603,65 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Customer Testimonials */}
+      <section className="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-800 dark:to-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12">
+            <Badge className="mb-4 bg-green-500 text-white font-bold px-4 py-2">
+              <ShieldCheck className="w-4 h-4 mr-2" />
+              VERIFIED REVIEWS
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sport font-bold text-foreground mb-3 sm:mb-4">
+              500K+ HAPPY CUSTOMERS WORLDWIDE
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
+              Don't just take our word for it - see what our fans are saying!
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {customerTestimonials.map((testimonial, index) => (
+              <Card key={index} className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-green-200 dark:border-green-800">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <div className="flex items-center">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    {testimonial.verified && (
+                      <Badge className="ml-2 bg-green-100 text-green-800 text-xs">
+                        <ShieldCheck className="w-3 h-3 mr-1" />
+                        Verified
+                      </Badge>
+                    )}
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 italic">
+                    "{testimonial.text}"
+                  </p>
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 bg-gradient-to-r from-primary to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                      {testimonial.name.charAt(0)}
+                    </div>
+                    <div className="ml-3">
+                      <div className="font-semibold text-sm">{testimonial.name}</div>
+                      <div className="text-xs text-muted-foreground">{testimonial.location}</div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Button className="bg-gradient-to-r from-green-500 to-blue-500 text-white hover:from-green-600 hover:to-blue-600 font-bold px-8 py-3">
+              <Star className="w-4 h-4 mr-2" />
+              Read All 50K+ Reviews
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Instagram Feed */}
       <section className="py-8 sm:py-12 lg:py-16 bg-slate-50/50 dark:bg-muted border-y border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
