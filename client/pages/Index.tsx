@@ -479,7 +479,7 @@ export default function Index() {
                             }
                           }}
                         >
-                          <Lightning className="w-3 h-3 mr-1" />
+                          <Zap className="w-3 h-3 mr-1" />
                           Buy Now - 70% OFF!
                         </Button>
                       </div>
@@ -586,7 +586,7 @@ export default function Index() {
                 🇬🇧 UK: 7-10 days
               </span>
               <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
-                🇩��� Germany: 6-9 days
+                🇩🇪 Germany: 6-9 days
               </span>
               <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇨🇦 Canada: 8-12 days
