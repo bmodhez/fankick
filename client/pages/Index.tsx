@@ -28,7 +28,6 @@ import {
   CreditCard,
   Heart,
   Gift,
-  Lightning,
   Crown,
   Award,
 } from "lucide-react";
