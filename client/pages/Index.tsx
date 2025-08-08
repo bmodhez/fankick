@@ -145,6 +145,30 @@ export default function Index() {
     { icon: CreditCard, text: "Easy Returns", desc: "30-day guarantee" },
   ];
 
+  const customerTestimonials = [
+    {
+      name: "Sarah M.",
+      location: "🇺🇸 USA",
+      text: "Best quality jerseys I've ever bought! My Messi jersey looks exactly like the real one. Fast shipping too!",
+      rating: 5,
+      verified: true
+    },
+    {
+      name: "Alex K.",
+      location: "🇬🇧 UK",
+      text: "Amazing anime rings collection! Got my Naruto ring and it's perfect. Customer service is top-notch.",
+      rating: 5,
+      verified: true
+    },
+    {
+      name: "Michael R.",
+      location: "🇨🇦 Canada",
+      text: "FanKick is my go-to for all pop culture merch. Quality is incredible and prices are unbeatable!",
+      rating: 5,
+      verified: true
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       {/* Urgent Offer Banner */}
@@ -484,11 +508,15 @@ export default function Index() {
       <section className="py-8 sm:py-12 lg:py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
+            <Badge className="mb-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold px-4 py-2">
+              <Crown className="w-4 h-4 mr-2" />
+              PREMIUM COLLECTIONS
+            </Badge>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sport font-bold text-foreground mb-3 sm:mb-4">
-              SHOP BY PASSION
+              SHOP BY YOUR PASSION
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
-              Discover curated collections that speak to your soul
+              <span className="font-bold text-primary">500K+ fans trust us</span> for authentic merchandise. Find your perfect collection below!
             </p>
           </div>
 
@@ -504,12 +532,17 @@ export default function Index() {
                         className="w-full h-32 sm:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      <div className="absolute top-2 right-2">
+                        <Badge className="bg-red-500 text-white text-xs font-bold">
+                          UP TO 70% OFF
+                        </Badge>
+                      </div>
                       <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 text-white">
                         <h3 className="font-bold text-sm sm:text-lg mb-1">
                           {category.name}
                         </h3>
                         <p className="text-xs sm:text-sm text-white/80">
-                          {category.items} products
+                          {category.items} products • <span className="text-yellow-400 font-bold">⭐ 4.8 rating</span>
                         </p>
                       </div>
                     </div>
@@ -518,10 +551,10 @@ export default function Index() {
                         {category.description}
                       </p>
                       <Button
-                        variant="outline"
-                        className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all text-xs sm:text-sm py-2"
+                        className="w-full bg-gradient-to-r from-primary to-purple-500 text-white hover:from-purple-500 hover:to-pink-500 font-bold text-xs sm:text-sm py-2 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
                       >
-                        Explore Collection
+                        <Zap className="w-3 h-3 mr-1" />
+                        Shop Now - 70% OFF!
                       </Button>
                     </div>
                   </CardContent>
