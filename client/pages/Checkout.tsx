@@ -422,17 +422,17 @@ export default function Checkout() {
                           </Label>
                           <div className="flex space-x-2">
                             <img
-                              src="/api/placeholder/40/25"
+                              src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png"
                               alt="Visa"
                               className="h-6"
                             />
                             <img
-                              src="/api/placeholder/40/25"
+                              src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
                               alt="Mastercard"
                               className="h-6"
                             />
                             <img
-                              src="/api/placeholder/40/25"
+                              src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo_%282018%29.svg"
                               alt="American Express"
                               className="h-6"
                             />
@@ -519,17 +519,17 @@ export default function Checkout() {
                           </Label>
                           <div className="flex space-x-2">
                             <img
-                              src="/api/placeholder/40/25"
+                              src="https://developers.google.com/pay/api/images/brand-guidelines/google-pay-mark.png"
                               alt="Google Pay"
                               className="h-6"
                             />
                             <img
-                              src="/api/placeholder/40/25"
-                              alt="PhonePe"
+                              src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
+                              alt="PayPal"
                               className="h-6"
                             />
                             <img
-                              src="/api/placeholder/40/25"
+                              src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg"
                               alt="Paytm"
                               className="h-6"
                             />
