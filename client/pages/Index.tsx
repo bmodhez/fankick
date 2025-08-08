@@ -776,6 +776,7 @@ export default function Index() {
 
       <Footer />
       <FloatingActionButton />
+      <PopupNotifications />
       <AuthModalComponent />
     </div>
   );
