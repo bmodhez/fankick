@@ -144,9 +144,10 @@ export class UserServiceJson {
     const users = await loadUsers();
 
     // Check if it's a phone number or email
-    const isPhoneNumber = /^\d{10,15}$/.test(
-      loginData.email.replace(/[^\d]/g, ""),
-    );
+    // A phone number should contain only digits, spaces, dashes, or parentheses
+    // and should not contain @ symbol (which indicates email)
+    const isPhoneNumber = !loginData.email.includes('@') &&
+      /^[\d\s\-\(\)\+]{10,15}$/.test(loginData.email.replace(/[\s\-\(\)\+]/g, ''));
 
     // Find user by email or phone
     const user = users.find((u) => {

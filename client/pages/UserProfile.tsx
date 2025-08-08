@@ -33,6 +33,7 @@ import {
   Eye,
   Download,
   X,
+  ArrowLeft,
 } from "lucide-react";
 
 export default function UserProfile() {
@@ -153,6 +154,18 @@ export default function UserProfile() {
   return (
     <div className="min-h-screen bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Back Button */}
+        <div className="mb-6">
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back
+          </Button>
+        </div>
+
         {/* User Header */}
         <Card className="bg-gray-800 border-gray-700 mb-8">
           <CardContent className="p-6">
