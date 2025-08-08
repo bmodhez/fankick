@@ -310,7 +310,7 @@ export default function Index() {
       <section className="py-4 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-4 font-bold">
-            <Lightning className="w-6 h-6 animate-bounce" />
+            <Zap className="w-6 h-6 animate-bounce" />
             <span className="text-lg">⚡ FLASH SALE: Extra 25% OFF for next 100 customers only!</span>
             <Crown className="w-6 h-6 animate-bounce" />
           </div>
@@ -586,7 +586,7 @@ export default function Index() {
                 🇬🇧 UK: 7-10 days
               </span>
               <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
-                🇩🇪 Germany: 6-9 days
+                🇩��� Germany: 6-9 days
               </span>
               <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇨🇦 Canada: 8-12 days
