@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { LikeButton } from "@/components/LikeButton";
 import { FloatingActionButton } from "@/components/FloatingActionButton";
+import { PopupNotifications } from "@/components/PopupNotifications";
 
 export default function Index() {
   const { selectedCurrency } = useCurrency();
