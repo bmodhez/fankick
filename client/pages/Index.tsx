@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -598,7 +597,7 @@ export default function Index() {
                 🇬🇧 UK: 7-10 days
               </span>
               <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
-                🇩🇪 Germany: 6-9 days
+                🇩��� Germany: 6-9 days
               </span>
               <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇨🇦 Canada: 8-12 days
