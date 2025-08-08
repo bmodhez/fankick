@@ -42,5 +42,16 @@
     "createdAt": "2025-08-08T15:54:59.251Z",
     "updatedAt": "2025-08-08T15:54:59.251Z",
     "passwordHash": "$2b$10$N.LhORMKMCAwxSXslMQNRucm/rMD3bfTOjhrOCw58omSaE8nzgohG"
+  },
+  {
+    "id": "user_1754668527101_lgzyflwrh",
+    "email": "testuser1754668527005@example.com",
+    "firstName": "Test",
+    "lastName": "User",
+    "isVerified": false,
+    "isActive": true,
+    "createdAt": "2025-08-08T15:55:27.101Z",
+    "updatedAt": "2025-08-08T15:55:27.101Z",
+    "passwordHash": "$2b$10$wV1Qiic4cvRyf6GIqsefEueR6U5LTkH.WELn3vKOmeHvuNc.b5fWW"
   }
 ]
