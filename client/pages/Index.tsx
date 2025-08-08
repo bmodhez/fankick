@@ -666,16 +666,26 @@ export default function Index() {
       <section className="py-8 sm:py-12 lg:py-16 bg-slate-50/50 dark:bg-muted border-y border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
+            <Badge className="mb-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold px-4 py-2">
+              <Instagram className="w-4 h-4 mr-2" />
+              1M+ FOLLOWERS
+            </Badge>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sport font-bold text-foreground mb-3 sm:mb-4">
-              FANKICK COMMUNITY
+              JOIN THE FANKICK COMMUNITY
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 px-4">
-              See how fans worldwide rock their FanKick gear
+              <span className="font-bold text-primary">1M+ fans worldwide</span> are already showing off their FanKick gear! <span className="font-bold">Tag us and get featured!</span>
             </p>
-            <Button className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:opacity-90 font-semibold">
-              <Instagram className="w-4 h-4 mr-2" />
-              Follow @fankick_global
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:opacity-90 font-semibold">
+                <Instagram className="w-4 h-4 mr-2" />
+                Follow @fankick_global
+              </Button>
+              <Button variant="outline" className="border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white font-semibold">
+                <Heart className="w-4 h-4 mr-2" />
+                Share Your Style
+              </Button>
+            </div>
           </div>
 
           <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
