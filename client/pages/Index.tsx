@@ -22,6 +22,15 @@ import {
   Globe,
   Eye,
   Timer,
+  Flame,
+  ShieldCheck,
+  Truck,
+  CreditCard,
+  Heart,
+  Gift,
+  Lightning,
+  Crown,
+  Award,
 } from "lucide-react";
 import { LikeButton } from "@/components/LikeButton";
 
@@ -117,14 +126,42 @@ export default function Index() {
   ];
 
   const socialProof = [
-    { metric: "500K+", label: "Happy Customers" },
-    { metric: "150+", label: "Countries Shipped" },
-    { metric: "4.8★", label: "Average Rating" },
-    { metric: "24/7", label: "Customer Support" },
+    { metric: "500K+", label: "Happy Customers", icon: Users, color: "text-blue-500" },
+    { metric: "150+", label: "Countries Shipped", icon: Globe, color: "text-green-500" },
+    { metric: "4.8★", label: "Average Rating", icon: Award, color: "text-yellow-500" },
+    { metric: "24/7", label: "Customer Support", icon: ShieldCheck, color: "text-purple-500" },
+  ];
+
+  const urgencyOffers = [
+    { text: "🔥 LIMITED TIME: Extra 25% OFF on first order!", bgColor: "bg-red-500" },
+    { text: "⚡ FREE shipping worldwide - No minimum order!", bgColor: "bg-blue-500" },
+    { text: "🎁 Buy 2 Get 1 FREE on selected items!", bgColor: "bg-green-500" },
+  ];
+
+  const trustSignals = [
+    { icon: ShieldCheck, text: "Secure Payment", desc: "SSL Protected" },
+    { icon: Truck, text: "Fast Shipping", desc: "3-7 days delivery" },
+    { icon: Award, text: "Premium Quality", desc: "Authentic products" },
+    { icon: CreditCard, text: "Easy Returns", desc: "30-day guarantee" },
   ];
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Urgent Offer Banner */}
+      <div className="bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 text-white py-2 overflow-hidden">
+        <div className="animate-scroll whitespace-nowrap">
+          <span className="inline-block px-4 font-bold text-sm">
+            🔥 MEGA SALE: 50% OFF Everything + FREE Worldwide Shipping! Limited Time Only!
+          </span>
+          <span className="inline-block px-4 font-bold text-sm">
+            ⚡ Use Code: FANKICK50 | Order now and get instant 50% discount!
+          </span>
+          <span className="inline-block px-4 font-bold text-sm">
+            🎁 Plus FREE Gift with every order above $50! Don't miss out!
+          </span>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-8 sm:py-12 lg:py-20 overflow-hidden border-b border-border/20">
         <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-5"></div>
@@ -157,36 +194,62 @@ export default function Index() {
               passion. Trusted by 500K+ fans worldwide.
             </p>
 
-            {/* Social Proof */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8 max-w-2xl mx-auto">
-              {socialProof.map((item, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-lg sm:text-2xl font-bold text-primary">
-                    {item.metric}
+            {/* Enhanced Social Proof */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8 max-w-3xl mx-auto">
+              {socialProof.map((item, index) => {
+                const IconComponent = item.icon;
+                return (
+                  <div key={index} className="text-center bg-white/80 dark:bg-black/20 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-lg border border-white/20">
+                    <IconComponent className={`w-6 h-6 mx-auto mb-2 ${item.color}`} />
+                    <div className="text-lg sm:text-2xl font-bold text-primary">
+                      {item.metric}
+                    </div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">
+                      {item.label}
+                    </div>
                   </div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">
-                    {item.label}
+                );
+              })}
+            </div>
+
+            {/* Trust Signals */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-6 sm:mb-8 max-w-4xl mx-auto">
+              {trustSignals.map((signal, index) => {
+                const IconComponent = signal.icon;
+                return (
+                  <div key={index} className="flex flex-col items-center bg-white/60 dark:bg-black/10 backdrop-blur-sm rounded-lg p-2 sm:p-3 border border-white/20">
+                    <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 text-primary mb-1" />
+                    <div className="text-xs sm:text-sm font-semibold text-center">{signal.text}</div>
+                    <div className="text-xs text-muted-foreground text-center">{signal.desc}</div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-primary via-cyan-500 to-purple-500 text-white hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg transition-all duration-300 border border-white/20 backdrop-blur-sm"
+                className="bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 text-white hover:scale-105 hover:shadow-2xl hover:shadow-red-500/25 font-bold px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg transition-all duration-300 border border-white/20 backdrop-blur-sm relative overflow-hidden"
               >
-                <ShoppingBag className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-                Shop Now
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 animate-pulse"></div>
+                <Lightning className="w-4 sm:w-5 h-4 sm:h-5 mr-2 relative z-10" />
+                <span className="relative z-10">Get 50% OFF Now!</span>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-purple-500 hover:text-white hover:scale-105 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-lg hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 backdrop-blur-sm"
+                className="border-2 border-primary text-primary hover:bg-gradient-to-r hover:from-primary hover:to-purple-500 hover:text-white hover:scale-105 px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg shadow-lg hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 backdrop-blur-sm"
               >
-                <TrendingUp className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
+                <Flame className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
                 Trending Products
               </Button>
+            </div>
+
+            {/* Limited Time Offer */}
+            <div className="mt-6 sm:mt-8 text-center">
+              <div className="inline-block bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold animate-pulse">
+                ⏰ HURRY! Offer ends in: <span className="font-mono">23:59:45</span>
+              </div>
             </div>
           </div>
 
@@ -220,20 +283,36 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Flash Sale Banner */}
+      <section className="py-4 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <div className="flex items-center justify-center gap-4 font-bold">
+            <Lightning className="w-6 h-6 animate-bounce" />
+            <span className="text-lg">⚡ FLASH SALE: Extra 25% OFF for next 100 customers only!</span>
+            <Crown className="w-6 h-6 animate-bounce" />
+          </div>
+        </div>
+      </section>
+
       {/* Trending Products */}
       <section className="py-16 bg-slate-50/50 dark:bg-muted border-y border-border/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
-            <Badge className="mb-4 bg-red-100 text-red-800 font-semibold px-4 py-2">
-              <Timer className="w-4 h-4 mr-2" />
-              Trending Now
-            </Badge>
+            <div className="flex justify-center gap-2 mb-4">
+              <Badge className="bg-red-500 text-white font-bold px-4 py-2 animate-pulse">
+                <Flame className="w-4 h-4 mr-2" />
+                🔥 HOT DEALS
+              </Badge>
+              <Badge className="bg-green-500 text-white font-bold px-4 py-2">
+                <Gift className="w-4 h-4 mr-2" />
+                FREE SHIPPING
+              </Badge>
+            </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sport font-bold text-foreground mb-3 sm:mb-4">
-              WHAT'S HOT RIGHT NOW
+              🔥 BEST SELLERS - UP TO 70% OFF!
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
-              Join millions of fans worldwide who are rocking these trending
-              items
+              <span className="font-bold text-red-500">LIMITED STOCK!</span> Join 500K+ fans who grabbed these trending items. <span className="font-bold">Only few pieces left!</span>
             </p>
           </div>
 
@@ -261,14 +340,22 @@ export default function Index() {
                           className="w-full h-40 sm:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                         />
 
-                        {/* Overlays */}
+                        {/* Enhanced Overlays */}
                         <div className="absolute top-2 left-2 space-y-1">
+                          <Badge className="bg-red-500 text-white text-xs font-bold animate-pulse">
+                            <Flame className="w-3 h-3 mr-1" />
+                            🔥 70% OFF
+                          </Badge>
                           {product.isTrending && (
-                            <Badge className="bg-red-500 text-white text-xs">
-                              <TrendingUp className="w-3 h-3 mr-1" />
-                              TRENDING
+                            <Badge className="bg-yellow-500 text-black text-xs font-bold">
+                              <Crown className="w-3 h-3 mr-1" />
+                              #1 BESTSELLER
                             </Badge>
                           )}
+                          <Badge className="bg-green-500 text-white text-xs font-bold">
+                            <Heart className="w-3 h-3 mr-1" />
+                            1.2K LOVES
+                          </Badge>
                           {product.badges.map((badge, badgeIndex) => (
                             <Badge
                               key={badgeIndex}
@@ -289,11 +376,17 @@ export default function Index() {
                         </div>
 
                         <div className="absolute bottom-2 left-2">
-                          {product.stockAlert && (
-                            <Badge className="bg-primary text-black text-xs font-bold">
-                              {product.stockAlert}
-                            </Badge>
-                          )}
+                          <Badge className="bg-red-500 text-white text-xs font-bold animate-pulse">
+                            ⚠️ Only 3 left!
+                          </Badge>
+                        </div>
+
+                        {/* Urgency Timer */}
+                        <div className="absolute top-2 right-2">
+                          <div className="bg-black/80 text-white px-2 py-1 rounded text-xs font-bold">
+                            <Timer className="w-3 h-3 inline mr-1" />
+                            2h 15m left
+                          </div>
                         </div>
 
                         <div className="absolute bottom-2 right-2 flex items-center space-x-1 bg-black/70 text-white px-2 py-1 rounded text-xs">
@@ -354,7 +447,7 @@ export default function Index() {
                         </div>
 
                         <Button
-                          className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/80 font-semibold text-xs sm:text-sm py-2 sm:py-2.5"
+                          className="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white hover:from-red-600 hover:to-orange-600 font-bold text-xs sm:text-sm py-2 sm:py-2.5 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
@@ -363,7 +456,8 @@ export default function Index() {
                             }
                           }}
                         >
-                          Add to Cart
+                          <Lightning className="w-3 h-3 mr-1" />
+                          Buy Now - 70% OFF!
                         </Button>
                       </div>
                     </CardContent>
