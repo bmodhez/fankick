@@ -56,7 +56,7 @@ export default function CollectionsPage() {
       description:
         "Discover authentic merchandise from Messi, Ronaldo, Mbappé and other football legends. Premium quality jerseys, professional boots, and exclusive fan gear.",
       categories: ["jerseys", "boots", "accessories"],
-      hero: "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F8bebf119965a4b5ba2f2d45b556c0cb2?format=webp&width=800",
+      hero: "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F61ece27bc9db40fcb5161b972d368a2e?format=webp&width=800",
       color: "from-green-600 to-blue-600",
       icon: "⚽",
     },
@@ -79,6 +79,16 @@ export default function CollectionsPage() {
       hero: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80",
       color: "from-red-600 to-orange-600",
       icon: "🎭",
+    },
+    accessories: {
+      title: "Accessories Collection",
+      subtitle: "Premium accessories, rings, necklaces & gear",
+      description:
+        "Discover our exclusive collection of rings, necklaces, boots, and other premium accessories from football, anime, and pop culture. Complete your look with authentic merchandise.",
+      categories: ["rings", "necklaces", "boots", "accessories"],
+      hero: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=1200&q=80",
+      color: "from-amber-600 to-orange-600",
+      icon: "💎",
     },
     all: {
       title: "All Collections",
@@ -109,7 +119,15 @@ export default function CollectionsPage() {
 
     // Filter by collection/category
     if (collection && collection !== "all") {
-      filtered = filtered.filter((product) => product.category === collection);
+      if (collection === "accessories") {
+        // Special handling for accessories - show items from specific subcategories across all categories
+        const accessorySubcategories = ["rings", "necklaces", "boots", "accessories"];
+        filtered = filtered.filter((product) =>
+          accessorySubcategories.includes(product.subcategory)
+        );
+      } else {
+        filtered = filtered.filter((product) => product.category === collection);
+      }
     }
 
     // Filter by subcategory
@@ -182,7 +200,14 @@ export default function CollectionsPage() {
   const getSubcategories = () => {
     let collectionProducts = products;
     if (collection && collection !== "all") {
-      collectionProducts = products.filter((p) => p.category === collection);
+      if (collection === "accessories") {
+        const accessorySubcategories = ["rings", "necklaces", "boots", "accessories"];
+        collectionProducts = products.filter((p) =>
+          accessorySubcategories.includes(p.subcategory)
+        );
+      } else {
+        collectionProducts = products.filter((p) => p.category === collection);
+      }
     }
     return [...new Set(collectionProducts.map((p) => p.subcategory))];
   };

@@ -6,6 +6,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
+import { AppInitializer } from "@/components/AppInitializer";
+import { NavigationProgress } from "@/components/NavigationProgress";
 import { Navigation } from "@/components/Navigation";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -39,21 +41,24 @@ import { Footer } from "./components/Footer";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
-        <CurrencyProvider>
-          <AuthProvider>
-            <ProductProvider>
-              <CartProvider>
-                <LikeProvider>
-                  <TooltipProvider>
-                    <Toaster />
-                    <Sonner />
-                    <BrowserRouter>
-                      <ScrollToTop />
-                      <div className="min-h-screen">
+const AppContent = () => {
+  return (
+    <AppInitializer>
+      <ErrorBoundary>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
+            <CurrencyProvider>
+              <AuthProvider>
+                <ProductProvider>
+                  <CartProvider>
+                    <LikeProvider>
+                      <TooltipProvider>
+                        <Toaster />
+                        <Sonner />
+                        <BrowserRouter>
+                          <NavigationProgress />
+                          <ScrollToTop />
+                          <div className="min-h-screen">
                         <Routes>
                           <Route
                             path="/"
@@ -88,6 +93,36 @@ const App = () => (
                             path="/pop-culture"
                             element={
                               <Navigate to="/category/pop-culture" replace />
+                            }
+                          />
+                          <Route
+                            path="/accessories"
+                            element={
+                              <Navigate to="/collections/accessories" replace />
+                            }
+                          />
+                          <Route
+                            path="/category/accessories"
+                            element={
+                              <Navigate to="/collections/accessories" replace />
+                            }
+                          />
+                          <Route
+                            path="/merchandise"
+                            element={
+                              <Navigate to="/collections" replace />
+                            }
+                          />
+                          <Route
+                            path="/products"
+                            element={
+                              <Navigate to="/collections" replace />
+                            }
+                          />
+                          <Route
+                            path="/shop"
+                            element={
+                              <Navigate to="/collections" replace />
                             }
                           />
                           <Route
@@ -257,17 +292,21 @@ const App = () => (
                           <Route path="*" element={<NotFound />} />
                         </Routes>
                       </div>
-                    </BrowserRouter>
-                  </TooltipProvider>
-                </LikeProvider>
-              </CartProvider>
-            </ProductProvider>
-          </AuthProvider>
-        </CurrencyProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  </ErrorBoundary>
-);
+                        </BrowserRouter>
+                      </TooltipProvider>
+                    </LikeProvider>
+                  </CartProvider>
+                </ProductProvider>
+              </AuthProvider>
+            </CurrencyProvider>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </ErrorBoundary>
+    </AppInitializer>
+  );
+};
+
+const App = () => <AppContent />;
 
 const rootElement = document.getElementById("root")!;
 

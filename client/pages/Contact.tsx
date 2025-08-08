@@ -43,14 +43,30 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-background">
-      
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-primary via-cyan-500 to-purple-500 py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+          <div className="flex items-center justify-center mb-6">
+            <Headphones className="w-12 h-12 mr-3" />
+            <h1 className="text-4xl lg:text-6xl font-sport font-bold">
+              GET IN TOUCH
+            </h1>
+            <MessageSquare className="w-12 h-12 ml-3" />
+          </div>
+          <p className="text-xl lg:text-2xl max-w-3xl mx-auto">
+            Have questions? We're here to help! Get 24/7 support from our amazing team.
+          </p>
+        </div>
+      </section>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-sport font-bold text-black mb-4">
+          <h2 className="text-3xl font-sport font-bold text-foreground mb-4">
             Contact Us
-          </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             We're here to help! Get in touch with our friendly support team for any questions about orders, products, or shipping.
           </p>
         </div>

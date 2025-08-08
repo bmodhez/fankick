@@ -416,6 +416,13 @@ export function Navigation() {
               >
                 ✨ Collections
               </Link>
+              <Link
+                to="/collections/accessories"
+                className="block px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-all active:scale-95"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                💎 Accessories
+              </Link>
 
               {/* Mobile Currency Selector */}
               <div className="pt-4 pb-3 border-t border-border/50">

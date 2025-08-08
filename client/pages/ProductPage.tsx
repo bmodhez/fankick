@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,7 +8,9 @@ import { PaymentModal } from "@/components/PaymentModal";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useLike } from "@/contexts/LikeContext";
+import { useCart } from "@/contexts/CartContext";
 import { useAuthRequired } from "@/hooks/useAuthRequired";
+import { useToast } from "@/hooks/use-toast";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   getAvailablePaymentMethods,
@@ -30,19 +32,25 @@ import {
   Clock,
   CreditCard,
   Banknote,
+  X,
 } from "lucide-react";
 import { LikeButton } from "@/components/LikeButton";
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { selectedCurrency } = useCurrency();
   const { getProductById, getTrendingProducts } = useProducts();
   const { toggleLike, isLiked } = useLike();
+  const { addToCart, totalItems, items } = useCart();
   const { requireAuth, AuthModalComponent } = useAuthRequired();
+  const { toast } = useToast();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showCartNotification, setShowCartNotification] = useState(false);
+  const [showMiniCart, setShowMiniCart] = useState(false);
 
   const product = getProductById(id || "");
   const relatedProducts = getTrendingProducts(3);
@@ -135,29 +143,135 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Cart Notification Banner - Flipkart/Amazon Style */}
+      {totalItems > 0 && (
+        <div className="bg-gradient-to-r from-green-50 to-green-100 border-b-2 border-green-300 py-3 px-4 sticky top-0 z-40 shadow-sm">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div
+                className="relative flex items-center space-x-2 bg-white rounded-full px-3 py-1 shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+                onMouseEnter={() => setShowMiniCart(true)}
+                onMouseLeave={() => setShowMiniCart(false)}
+              >
+                <ShoppingCart className="w-4 h-4 text-green-600" />
+                <span className="text-sm font-semibold text-green-800">
+                  {totalItems} item{totalItems > 1 ? 's' : ''} in cart
+                </span>
+
+                {/* Mini Cart Dropdown */}
+                {showMiniCart && (
+                  <div className="absolute top-full left-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                    <div className="p-4">
+                      <div className="text-sm font-semibold text-gray-800 mb-3 border-b pb-2">
+                        Cart Items ({totalItems})
+                      </div>
+                      <div className="space-y-2 max-h-60 overflow-y-auto">
+                        {items.slice(0, 3).map((item) => (
+                          <div key={item.id} className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded">
+                            <img
+                              src={item.product.images[0]}
+                              alt={item.product.name}
+                              className="w-10 h-10 object-cover rounded"
+                            />
+                            <div className="flex-1">
+                              <p className="text-xs font-medium text-gray-800 line-clamp-1">
+                                {item.product.name}
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                Qty: {item.quantity} • {formatPrice(convertPrice(item.variant.price, selectedCurrency.code, "INR"), selectedCurrency)}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                        {items.length > 3 && (
+                          <p className="text-xs text-gray-500 text-center pt-2">
+                            +{items.length - 3} more items
+                          </p>
+                        )}
+                      </div>
+                      <div className="mt-3 pt-3 border-t">
+                        <Button
+                          size="sm"
+                          className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                          onClick={() => navigate('/checkout')}
+                        >
+                          View Full Cart & Checkout
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="hidden sm:flex items-center space-x-1 text-sm text-green-700">
+                <span>Total:</span>
+                <span className="font-bold">
+                  {formatPrice(
+                    items.reduce((sum, item) =>
+                      sum + convertPrice(item.variant.price, selectedCurrency.code, "INR") * item.quantity, 0
+                    ),
+                    selectedCurrency
+                  )}
+                </span>
+              </div>
+              <div className="hidden md:block text-xs text-green-600 bg-green-200 px-2 py-1 rounded">
+                ✓ Free delivery available
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Button
+                size="sm"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-1.5"
+                onClick={() => navigate('/checkout')}
+              >
+                <ShoppingCart className="w-4 h-4 mr-1" />
+                Go to Cart
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="text-green-600 hover:text-green-800 p-1"
+                onClick={() => setShowCartNotification(false)}
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Breadcrumb */}
-        <nav className="flex items-center space-x-2 text-sm text-gray-500 mb-8">
-          <Link to="/" className="hover:text-primary">
-            Home
-          </Link>
-          <span>/</span>
-          <Link
-            to={`/${product.category}`}
-            className="hover:text-primary capitalize"
+        {/* Back Button and Breadcrumb */}
+        <div className="mb-8">
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="mb-4 text-foreground hover:text-primary p-2 h-auto"
           >
-            {product.category}
-          </Link>
-          <span>/</span>
-          <span className="text-foreground">{product.name}</span>
-        </nav>
+            <ChevronLeft className="w-4 h-4 mr-1" />
+            Back
+          </Button>
+          <nav className="flex items-center space-x-2 text-sm text-gray-500">
+            <Link to="/" className="hover:text-primary">
+              Home
+            </Link>
+            <span>/</span>
+            <Link
+              to={`/${product.category}`}
+              className="hover:text-primary capitalize"
+            >
+              {product.category}
+            </Link>
+            <span>/</span>
+            <span className="text-foreground">{product.name}</span>
+          </nav>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Product Images */}
           <div className="space-y-4">
             <div className="relative aspect-square bg-muted rounded-lg overflow-hidden">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2F2d9a6554584f4d3ea64314477a873f8e%2Ff89fc9194a2941a5b71d7367f2510517?format=webp&width=800"
+                src="https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F61ece27bc9db40fcb5161b972d368a2e?format=webp&width=800"
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
@@ -205,7 +319,7 @@ export default function ProductPage() {
                   }`}
                 >
                   <img
-                    src="https://cdn.builder.io/api/v1/image/assets%2F2d9a6554584f4d3ea64314477a873f8e%2Ff89fc9194a2941a5b71d7367f2510517?format=webp&width=800"
+                    src="https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F61ece27bc9db40fcb5161b972d368a2e?format=webp&width=800"
                     alt={`View ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
@@ -341,6 +455,15 @@ export default function ProductPage() {
                 size="lg"
                 className="w-full bg-primary text-black hover:bg-primary/90 font-semibold py-4"
                 disabled={currentVariant.stock === 0}
+                onClick={() => {
+                  addToCart(product, currentVariant, quantity);
+                  setShowCartNotification(true);
+                  toast({
+                    title: "Added to Cart! 🛒",
+                    description: `${quantity}x ${product.name} (${currentVariant.size || currentVariant.color || 'Default'}) added to your cart.`,
+                    duration: 3000,
+                  });
+                }}
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Add to Cart -{" "}
@@ -348,7 +471,23 @@ export default function ProductPage() {
               </Button>
 
               {codAvailable && (
-                <Button size="lg" variant="outline" className="w-full py-4">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full py-4 border-2 border-green-500 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20"
+                  onClick={() => {
+                    // Add to cart first, then navigate to checkout with COD preselected
+                    addToCart(product, currentVariant, quantity);
+                    toast({
+                      title: "Proceeding to COD Checkout 💰",
+                      description: "Taking you to checkout with Cash on Delivery selected.",
+                      duration: 2000,
+                    });
+                    setTimeout(() => {
+                      navigate('/checkout', { state: { paymentMethod: 'cod' } });
+                    }, 500);
+                  }}
+                >
                   <Banknote className="w-5 h-5 mr-2" />
                   Buy Now with COD
                 </Button>
@@ -619,7 +758,23 @@ export default function ProductPage() {
                               )}
                             </span>
                           </div>
-                          <Button size="sm">Add to Cart</Button>
+                          <Button
+                            size="sm"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              // Use the first available variant
+                              const firstVariant = relatedProduct.variants[0];
+                              addToCart(relatedProduct, firstVariant, 1);
+                              toast({
+                                title: "Added to Cart! 🛒",
+                                description: `${relatedProduct.name} added to your cart.`,
+                                duration: 2000,
+                              });
+                            }}
+                          >
+                            Add to Cart
+                          </Button>
                         </div>
                       </div>
                     </CardContent>
