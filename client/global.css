@@ -352,6 +352,48 @@
     }
   }
 
+  /* Scrolling banner animation */
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 20s linear infinite;
+  }
+
+  /* Enhanced product hover effects */
+  @keyframes product-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(239, 68, 68, 0.6);
+    }
+  }
+
+  .product-glow {
+    animation: product-glow 2s ease-in-out infinite;
+  }
+
+  /* Pulsing effect for urgent elements */
+  @keyframes pulse-red {
+    0%, 100% {
+      background-color: rgb(239, 68, 68);
+    }
+    50% {
+      background-color: rgb(220, 38, 38);
+    }
+  }
+
+  .pulse-red {
+    animation: pulse-red 1.5s ease-in-out infinite;
+  }
+
   /* Loading screen animations */
   @keyframes shimmer {
     0% {
