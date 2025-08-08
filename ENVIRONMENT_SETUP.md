@@ -13,7 +13,8 @@ SESSION_SECRET=fankick-super-secure-session-secret-2025
 ## ✅ Status: CONFIGURED ✅
 
 Your FanKick application is connected to:
-- **Database**: Neon PostgreSQL 
+
+- **Database**: Neon PostgreSQL
 - **Host**: ep-odd-band-a191a9hi-pooler.ap-southeast-1.aws.neon.tech
 - **Database Name**: neondb
 - **SSL**: Required (secure connection)
@@ -30,7 +31,7 @@ If you absolutely need a `.env` file for local development, create one with:
 # Database Configuration
 DATABASE_URL=postgresql://neondb_owner:npg_M8e2Ungpvlzm@ep-odd-band-a191a9hi-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 
-# Application Configuration  
+# Application Configuration
 NODE_ENV=development
 PORT=8080
 
