@@ -708,6 +708,71 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Final Urgency Call-to-Action */}
+      <section className="py-12 sm:py-16 bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-white/10 rounded-full blur-xl animate-pulse delay-1000"></div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <div className="mb-6">
+            <Badge className="bg-yellow-400 text-black font-bold px-4 py-2 text-lg animate-bounce">
+              <Timer className="w-5 h-5 mr-2" />
+              🚨 LAST CHANCE!
+            </Badge>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-sport font-bold mb-4">
+            DON'T MISS OUT!
+          </h2>
+
+          <p className="text-xl sm:text-2xl mb-6">
+            <span className="font-bold">70% OFF</span> ends in:
+            <span className="block text-3xl font-mono font-bold mt-2 animate-pulse">
+              23:59:45
+            </span>
+          </p>
+
+          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div>
+                <div className="text-2xl font-bold">500K+</div>
+                <div className="text-sm">Happy Customers</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold">4.8★</div>
+                <div className="text-sm">Rating</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold">FREE</div>
+                <div className="text-sm">Worldwide Shipping</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold">30-Day</div>
+                <div className="text-sm">Money Back</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-white text-red-500 hover:bg-gray-100 font-bold px-8 py-4 text-xl shadow-2xl">
+              <Lightning className="w-6 h-6 mr-2" />
+              CLAIM 70% OFF NOW!
+            </Button>
+            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-red-500 font-bold px-8 py-4 text-xl">
+              <Gift className="w-6 h-6 mr-2" />
+              Free Gift Included
+            </Button>
+          </div>
+
+          <p className="text-sm mt-4 opacity-90">
+            ⚡ Over 1,000 customers bought in the last 24 hours! Only <span className="font-bold">few items left</span> at this price.
+          </p>
+        </div>
+      </section>
+
       <Footer />
       <AuthModalComponent />
     </div>
