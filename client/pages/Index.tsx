@@ -255,7 +255,7 @@ export default function Index() {
                 className="bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 text-white hover:scale-105 hover:shadow-2xl hover:shadow-red-500/25 font-bold px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg transition-all duration-300 border border-white/20 backdrop-blur-sm relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 animate-pulse"></div>
-                <Lightning className="w-4 sm:w-5 h-4 sm:h-5 mr-2 relative z-10" />
+                <Zap className="w-4 sm:w-5 h-4 sm:h-5 mr-2 relative z-10" />
                 <span className="relative z-10">Get 50% OFF Now!</span>
               </Button>
               <Button
