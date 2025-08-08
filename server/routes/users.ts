@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { Request, Response } from "express";
 import { userService } from "../services/userServiceJson.js";
 import {
   UserCreateRequest,
