@@ -301,12 +301,12 @@ export function PaymentModal({
                 {items.map((item, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <img
-                      src={item.image || "/placeholder.svg"}
+                      src={item.image || "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=400"}
                       alt={item.name}
                       className="w-12 h-12 object-cover rounded border border-gray-200 dark:border-gray-600"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        target.src = "/placeholder.svg";
+                        target.src = "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=400";
                       }}
                     />
                     <div className="flex-1">
