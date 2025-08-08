@@ -69,7 +69,7 @@ export default function Index() {
     {
       title: "Football Legends",
       subtitle: "Messi • Ronaldo • Mbappé",
-      image: "/placeholder.svg",
+      image: "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=800",
       cta: "Shop Jerseys",
       link: "/football",
       color: "from-green-600 to-blue-600",
@@ -77,7 +77,7 @@ export default function Index() {
     {
       title: "Anime Universe",
       subtitle: "Naruto • Chainsaw Man • Demon Slayer",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=400&fit=crop&crop=center&auto=format&q=80",
       cta: "Explore Anime",
       link: "/anime",
       color: "from-purple-600 to-pink-600",
@@ -85,7 +85,7 @@ export default function Index() {
     {
       title: "Pop Culture",
       subtitle: "Taylor Swift • K-pop • Marvel",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&h=400&fit=crop&crop=center&auto=format&q=80",
       cta: "Discover More",
       link: "/pop-culture",
       color: "from-red-600 to-orange-600",
