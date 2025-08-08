@@ -123,7 +123,7 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
         description: "",
         category: "football",
         subcategory: "",
-        images: ["/placeholder.svg"],
+        images: ["https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=400"],
         variants: [],
         basePrice: 0,
         originalPrice: 0,
