@@ -369,9 +369,13 @@ export default function Index() {
                     <CardContent className="p-0">
                       <div className="relative">
                         <img
-                          src="https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F61ece27bc9db40fcb5161b972d368a2e?format=webp&width=800"
+                          src={product.images[0] || "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2Fa924a8bea1e5433a8359466af5c1c95d?format=webp&width=800"}
                           alt={product.name}
                           className="w-full h-40 sm:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2Fa924a8bea1e5433a8359466af5c1c95d?format=webp&width=800";
+                          }}
                         />
 
                         {/* Enhanced Overlays */}
