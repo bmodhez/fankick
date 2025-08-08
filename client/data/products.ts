@@ -901,9 +901,9 @@ export const PRODUCTS: Product[] = [
     category: "pop-culture",
     subcategory: "hoodies",
     images: [
+      "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&q=80",
       "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=80",
       "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80",
-      "https://images.unsplash.com/photo-1543269664-7eef42226a21?w=800&q=80",
     ],
     variants: [
       {
