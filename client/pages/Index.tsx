@@ -776,6 +776,7 @@ export default function Index() {
       </section>
 
       <Footer />
+      <StickyDiscountBar />
       <FloatingActionButton />
       <PopupNotifications />
       <AuthModalComponent />
