@@ -25,6 +25,7 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "./routes/users";
+import { UserServiceJson } from "./services/userServiceJson.js";
 // import "./database/init.js"; // Initialize database on startup - disabled until PostgreSQL is configured
 
 export function createServer() {
