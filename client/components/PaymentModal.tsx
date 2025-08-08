@@ -141,7 +141,7 @@ export function PaymentModal({
         currency: "INR",
         name: "FanKick",
         description: product?.name || "FanKick Purchase",
-        image: "/placeholder.svg",
+        image: "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=400",
         handler: (response: any) => {
           console.log("Payment successful:", response);
           handlePayment();
