@@ -64,7 +64,10 @@ export default function Checkout() {
   useEffect(() => {
     if (!user) {
       navigate("/login", {
-        state: { from: location },
+        state: {
+          from: location,
+          message: "Please login to proceed with checkout"
+        },
         replace: true,
       });
     }
