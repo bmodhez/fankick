@@ -33,6 +33,7 @@ import {
   Eye,
   Download,
   X,
+  ArrowLeft,
 } from "lucide-react";
 
 export default function UserProfile() {
