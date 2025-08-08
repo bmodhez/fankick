@@ -458,9 +458,9 @@ export const PRODUCTS: Product[] = [
     category: "anime",
     subcategory: "hoodies",
     images: [
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80",
       "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
       "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=80",
-      "https://images.unsplash.com/photo-1522706604291-210a56c3b376?w=800&q=80",
     ],
     variants: [
       {
