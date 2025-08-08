@@ -61,6 +61,9 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Test auth endpoint
+  app.get("/api/test-auth", testAuthFlow);
+
   // Product API routes
   app.get("/api/products", getAllProducts);
   app.get("/api/products/:id", getProductById);
