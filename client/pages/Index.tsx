@@ -699,21 +699,31 @@ export default function Index() {
           </div>
 
           <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
-            {Array.from({ length: 6 }, (_, i) => (
-              <div
-                key={i}
-                className="aspect-square bg-gray-200 rounded-xl overflow-hidden group cursor-pointer relative"
-              >
-                <img
-                  src="/placeholder.svg"
-                  alt={`Community post ${i + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                  <Instagram className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {Array.from({ length: 6 }, (_, i) => {
+              const communityImages = [
+                "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+                "https://images.unsplash.com/photo-1614027164687-a7dd4b27c3dc?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+                "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+                "https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+                "https://images.unsplash.com/photo-1560762484-813fc97650a0?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+                "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=400&fit=crop&crop=center&auto=format&q=80"
+              ];
+              return (
+                <div
+                  key={i}
+                  className="aspect-square bg-gray-200 rounded-xl overflow-hidden group cursor-pointer relative"
+                >
+                  <img
+                    src={communityImages[i]}
+                    alt={`Community post ${i + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                    <Instagram className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
