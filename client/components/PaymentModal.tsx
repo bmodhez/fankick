@@ -268,7 +268,7 @@ export function PaymentModal({
             {product && (
               <div className="flex items-center space-x-3 mb-4">
                 <img
-                  src={product.image || "/placeholder.svg"}
+                  src={product.image || "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=400"}
                   alt={product.name}
                   className="w-16 h-16 object-cover rounded border border-gray-200 dark:border-gray-600"
                   onLoad={() => {
@@ -277,7 +277,7 @@ export function PaymentModal({
                   onError={(e) => {
                     console.log("Image failed to load:", product.image);
                     const target = e.target as HTMLImageElement;
-                    target.src = "/placeholder.svg";
+                    target.src = "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=400";
                   }}
                 />
                 <div className="flex-1">
