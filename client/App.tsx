@@ -43,16 +43,16 @@ const queryClient = new QueryClient();
 
 const AppContent = () => {
   return (
-    <AppInitializer>
-      <ErrorBoundary>
-        <QueryClientProvider client={queryClient}>
-          <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
-            <CurrencyProvider>
-              <AuthProvider>
-                <ProductProvider>
-                  <CartProvider>
-                    <LikeProvider>
-                      <TooltipProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider defaultTheme="dark" storageKey="fankick-theme">
+          <CurrencyProvider>
+            <AuthProvider>
+              <ProductProvider>
+                <CartProvider>
+                  <LikeProvider>
+                    <TooltipProvider>
+                      <AppInitializer>
                         <Toaster />
                         <Sonner />
                         <BrowserRouter>
@@ -293,16 +293,16 @@ const AppContent = () => {
                         </Routes>
                       </div>
                         </BrowserRouter>
-                      </TooltipProvider>
-                    </LikeProvider>
-                  </CartProvider>
-                </ProductProvider>
-              </AuthProvider>
-            </CurrencyProvider>
-          </ThemeProvider>
-        </QueryClientProvider>
-      </ErrorBoundary>
-    </AppInitializer>
+                      </AppInitializer>
+                    </TooltipProvider>
+                  </LikeProvider>
+                </CartProvider>
+              </ProductProvider>
+            </AuthProvider>
+          </CurrencyProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };
 
