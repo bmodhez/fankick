@@ -432,7 +432,7 @@ export default function Checkout() {
                               className="h-6"
                             />
                             <img
-                              src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo_%282018%29.svg"
+                              src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg"
                               alt="American Express"
                               className="h-6"
                             />
