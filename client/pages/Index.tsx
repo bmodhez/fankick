@@ -757,7 +757,7 @@ export default function Index() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-white text-red-500 hover:bg-gray-100 font-bold px-8 py-4 text-xl shadow-2xl">
-              <Lightning className="w-6 h-6 mr-2" />
+              <Zap className="w-6 h-6 mr-2" />
               CLAIM 70% OFF NOW!
             </Button>
             <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-red-500 font-bold px-8 py-4 text-xl">
