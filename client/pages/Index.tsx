@@ -190,7 +190,7 @@ export default function Index() {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-8 sm:py-12 lg:py-20 overflow-hidden border-b border-border/20">
-        <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center opacity-5"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1560762484-813fc97650a0?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80')] bg-cover bg-center opacity-5"></div>
 
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
