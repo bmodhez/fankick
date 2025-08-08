@@ -32,6 +32,7 @@ import {
   Award,
 } from "lucide-react";
 import { LikeButton } from "@/components/LikeButton";
+import { FloatingActionButton } from "@/components/FloatingActionButton";
 
 export default function Index() {
   const { selectedCurrency } = useCurrency();
