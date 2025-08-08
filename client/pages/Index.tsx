@@ -34,6 +34,7 @@ import {
 import { LikeButton } from "@/components/LikeButton";
 import { FloatingActionButton } from "@/components/FloatingActionButton";
 import { PopupNotifications } from "@/components/PopupNotifications";
+import { StickyDiscountBar } from "@/components/StickyDiscountBar";
 
 export default function Index() {
   const { selectedCurrency } = useCurrency();
