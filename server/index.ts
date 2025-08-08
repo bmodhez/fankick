@@ -31,6 +31,9 @@ import { UserServiceJson } from "./services/userServiceJson.js";
 export function createServer() {
   const app = express();
 
+  // Initialize user service to ensure database is ready
+  new UserServiceJson();
+
   // Middleware
   app.use(
     cors({
