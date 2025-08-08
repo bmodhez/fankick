@@ -285,9 +285,17 @@ export default function Index() {
               <Link key={index} to={category.link}>
                 <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-secondary to-background border-border shadow-lg hover:shadow-xl">
                   <CardContent className="p-0">
-                    <div
-                      className={`h-40 sm:h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
-                    >
+                    <div className="h-40 sm:h-48 relative overflow-hidden">
+                      <img
+                        src={category.image}
+                        alt={category.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          target.parentElement!.classList.add(`bg-gradient-to-br`, category.color.split(' ')[0], category.color.split(' ')[1]);
+                        }}
+                      />
                       <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300"></div>
                       <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white">
                         <h3 className="font-sport font-bold text-lg sm:text-2xl mb-1">
