@@ -324,13 +324,31 @@ const App = () => <AppContent />;
 
 const rootElement = document.getElementById("root")!;
 
-// Store root globally to prevent recreation on hot reload
-declare global {
-  var __APP_ROOT__: ReturnType<typeof createRoot> | undefined;
+// Create root if not exists or in development mode for HMR
+let root: ReturnType<typeof createRoot>;
+
+// Check if we're in development mode and handle HMR properly
+if (import.meta.hot) {
+  // In development, always create a fresh root for proper HMR
+  if (rootElement.children.length > 0) {
+    rootElement.innerHTML = '';
+  }
+  root = createRoot(rootElement);
+} else {
+  // In production, use the singleton pattern
+  declare global {
+    var __APP_ROOT__: ReturnType<typeof createRoot> | undefined;
+  }
+
+  if (!globalThis.__APP_ROOT__) {
+    globalThis.__APP_ROOT__ = createRoot(rootElement);
+  }
+  root = globalThis.__APP_ROOT__;
 }
 
-if (!globalThis.__APP_ROOT__) {
-  globalThis.__APP_ROOT__ = createRoot(rootElement);
-}
+root.render(<App />);
 
-globalThis.__APP_ROOT__.render(<App />);
+// Handle HMR cleanup
+if (import.meta.hot) {
+  import.meta.hot.accept();
+}
