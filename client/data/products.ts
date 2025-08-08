@@ -136,8 +136,8 @@ export const PRODUCTS: Product[] = [
     subcategory: "jerseys",
     images: [
       "https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=800&q=80",
-      "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=800&q=80",
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80",
+      "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=800&q=80",
     ],
     variants: [
       {
