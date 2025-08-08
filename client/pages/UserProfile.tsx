@@ -9,6 +9,8 @@ import { Footer } from "@/components/Footer";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useCurrency } from "@/contexts/CurrencyContext";
+import { useProducts } from "@/contexts/ProductContext";
+import { userApi, WishlistItem } from "@/services/userApi";
 import { formatPrice, convertPrice } from "@/utils/currency";
 import {
   User,
@@ -31,20 +33,53 @@ import {
   Eye,
   Download,
   X,
+  ArrowLeft,
 } from "lucide-react";
 
 export default function UserProfile() {
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout, isAdmin, isAuthenticated } = useAuth();
   const { items: cartItems, totalPrice } = useCart();
   const { selectedCurrency } = useCurrency();
+  const { products } = useProducts();
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("profile");
+  const [userWishlist, setUserWishlist] = useState<WishlistItem[]>([]);
+  const [wishlistLoading, setWishlistLoading] = useState(false);
 
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Load user wishlist when component mounts or user changes
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      loadWishlist();
+    }
+  }, [isAuthenticated, user]);
+
+  const loadWishlist = async () => {
+    try {
+      setWishlistLoading(true);
+      const wishlistData = await userApi.getWishlist();
+      setUserWishlist(wishlistData);
+    } catch (error) {
+      console.error('Error loading wishlist:', error);
+    } finally {
+      setWishlistLoading(false);
+    }
+  };
+
+  const removeFromWishlist = async (productId: string) => {
+    try {
+      await userApi.removeFromWishlist(productId);
+      setUserWishlist(prev => prev.filter(item => item.productId !== productId));
+    } catch (error) {
+      console.error('Error removing from wishlist:', error);
+    }
+  };
+
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({
     name: user?.firstName || "",
@@ -79,6 +114,11 @@ export default function UserProfile() {
     }
   }, [user, navigate]);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (!user) {
     return null;
   }
@@ -107,13 +147,25 @@ export default function UserProfile() {
   const tabs = [
     { id: "profile", label: "Profile", icon: User, count: null },
     { id: "orders", label: "Orders", icon: Package, count: orders.length },
-    { id: "wishlist", label: "Wishlist", icon: Heart, count: wishlist.length },
+    { id: "wishlist", label: "Liked Products", icon: Heart, count: userWishlist.length },
     { id: "cart", label: "Cart", icon: ShoppingCart, count: cartItems.length },
   ];
 
   return (
     <div className="min-h-screen bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Back Button */}
+        <div className="mb-6">
+          <Button
+            variant="ghost"
+            onClick={() => navigate(-1)}
+            className="text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back
+          </Button>
+        </div>
+
         {/* User Header */}
         <Card className="bg-gray-800 border-gray-700 mb-8">
           <CardContent className="p-6">
@@ -159,9 +211,9 @@ export default function UserProfile() {
                   </div>
                   <div className="text-center">
                     <div className="text-xl font-bold text-primary">
-                      {wishlist.length}
+                      {userWishlist.length}
                     </div>
-                    <div className="text-gray-400">Wishlist</div>
+                    <div className="text-gray-400">Liked Products</div>
                   </div>
                   <div className="text-center">
                     <div className="text-xl font-bold text-primary">
@@ -483,75 +535,89 @@ export default function UserProfile() {
 
           {/* Wishlist Tab */}
           {activeTab === "wishlist" && (
-            <div className="space-y-6">
-              {wishlist.length === 0 ? (
-                <Card className="bg-gray-800 border-gray-700">
-                  <CardContent className="p-12 text-center">
-                    <Heart className="w-20 h-20 text-gray-600 mx-auto mb-6" />
-                    <h3 className="text-2xl font-semibold text-white mb-4">
-                      Your wishlist is empty
-                    </h3>
-                    <p className="text-gray-400 mb-6 max-w-md mx-auto">
-                      Save items you love to your wishlist. Simply click the
-                      heart icon on any product!
-                    </p>
-                    <Link to="/">
-                      <Button className="bg-primary text-black hover:bg-primary/90">
-                        <Heart className="w-4 h-4 mr-2" />
-                        Explore Products
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
+            <div>
+              {wishlistLoading ? (
+                <div className="text-center py-8">
+                  <div className="text-gray-400">Loading liked products...</div>
+                </div>
+              ) : userWishlist.length === 0 ? (
+                <div className="text-center py-8">
+                  <Heart className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-gray-400 mb-2">
+                    No liked products yet
+                  </h3>
+                  <p className="text-gray-500 mb-6">
+                    Start liking products to see them here!
+                  </p>
+                  <Link to="/">
+                    <Button className="bg-primary text-black hover:bg-primary/90">
+                      Explore Products
+                    </Button>
+                  </Link>
+                </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {wishlist.map((item) => (
-                    <Card key={item.id} className="bg-gray-800 border-gray-700">
-                      <CardContent className="p-4">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-32 object-cover rounded-lg mb-4"
-                        />
-                        <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2">
-                          {item.name}
-                        </h3>
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="text-lg font-bold text-primary">
-                            {formatPrice(
-                              convertPrice(item.price, selectedCurrency.code),
-                              selectedCurrency,
-                            )}
-                          </span>
-                          <Badge
-                            className={
-                              item.inStock
-                                ? "bg-green-500 text-white"
-                                : "bg-red-500 text-white"
-                            }
-                          >
-                            {item.inStock ? "In Stock" : "Out of Stock"}
-                          </Badge>
-                        </div>
-                        <div className="flex space-x-2">
-                          <Button
-                            disabled={!item.inStock}
-                            className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
-                          >
-                            <ShoppingCart className="w-4 h-4 mr-2" />
-                            Add to Cart
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="border-gray-600 text-red-400"
-                          >
-                            <X className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                  {userWishlist.map((wishlistItem) => {
+                    const product = products.find(p => p.id === wishlistItem.productId);
+                    if (!product) return null;
+
+                    return (
+                      <Card key={wishlistItem.id} className="bg-gray-800 border-gray-700">
+                        <CardContent className="p-4">
+                          <Link to={`/product/${product.id}`}>
+                            <img
+                              src={product.images[0]}
+                              alt={product.name}
+                              className="w-full h-32 object-cover rounded-lg mb-4 hover:scale-105 transition-transform"
+                            />
+                          </Link>
+                          <Link to={`/product/${product.id}`}>
+                            <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2 hover:text-primary transition-colors">
+                              {product.name}
+                            </h3>
+                          </Link>
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="text-lg font-bold text-primary">
+                              {formatPrice(
+                                convertPrice(product.variants[0]?.price || product.price, selectedCurrency.code, "INR"),
+                                selectedCurrency,
+                              )}
+                            </span>
+                            <Badge
+                              className={
+                                product.stockQuantity > 0
+                                  ? "bg-green-500 text-white"
+                                  : "bg-red-500 text-white"
+                              }
+                            >
+                              {product.stockQuantity > 0 ? "In Stock" : "Out of Stock"}
+                            </Badge>
+                          </div>
+                          <div className="flex space-x-2">
+                            <Button
+                              disabled={product.stockQuantity === 0}
+                              className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
+                              onClick={() => {
+                                // Add to cart logic here
+                                console.log('Add to cart:', product.id);
+                              }}
+                            >
+                              <ShoppingCart className="w-4 h-4 mr-2" />
+                              Add to Cart
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-gray-600 text-red-400 hover:bg-red-500 hover:text-white"
+                              onClick={() => removeFromWishlist(product.id)}
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
               )}
             </div>

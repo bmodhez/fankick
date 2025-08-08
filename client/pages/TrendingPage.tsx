@@ -8,13 +8,14 @@ import { Footer } from "@/components/Footer";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useCart } from "@/contexts/CartContext";
+import { useLike } from "@/contexts/LikeContext";
+import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   TrendingUp,
   Filter,
   Search,
   Star,
-  Heart,
   ShoppingCart,
   Clock,
   Flame,
@@ -25,12 +26,15 @@ import {
   List,
   ArrowUpDown,
 } from "lucide-react";
+import { LikeButton } from "@/components/LikeButton";
 
 export default function TrendingPage() {
   const navigate = useNavigate();
   const { selectedCurrency } = useCurrency();
   const { getTrendingProducts, products } = useProducts();
   const { addToCart } = useCart();
+  const { toggleLike, isLiked } = useLike();
+  const { requireAuth, AuthModalComponent } = useAuthRequired();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -479,20 +483,12 @@ export default function TrendingPage() {
                               </div>
 
                               <div className="flex items-center space-x-2">
-                                <Button
+                                <LikeButton
+                                  productId={product.id}
                                   variant="outline"
                                   size="sm"
                                   className="border-border text-muted-foreground hover:text-foreground"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    console.log(
-                                      `Added ${product.name} to wishlist`,
-                                    );
-                                  }}
-                                >
-                                  <Heart className="w-4 h-4" />
-                                </Button>
+                                />
                                 <Button
                                   onClick={(e) => handleAddToCart(product, e)}
                                   className="bg-primary text-black hover:bg-primary/90"
@@ -556,20 +552,12 @@ export default function TrendingPage() {
                               >
                                 <Eye className="w-4 h-4" />
                               </Button>
-                              <Button
+                              <LikeButton
+                                productId={product.id}
                                 variant="secondary"
                                 size="sm"
                                 className="bg-background/90 hover:bg-background"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  e.stopPropagation();
-                                  console.log(
-                                    `Added ${product.name} to wishlist`,
-                                  );
-                                }}
-                              >
-                                <Heart className="w-4 h-4" />
-                              </Button>
+                              />
                             </div>
                           </div>
                         </div>
@@ -701,6 +689,7 @@ export default function TrendingPage() {
       </div>
 
       <Footer />
+      <AuthModalComponent />
     </div>
   );
 }

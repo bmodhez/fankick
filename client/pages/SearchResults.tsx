@@ -7,24 +7,28 @@ import { Input } from "@/components/ui/input";
 import { Footer } from "@/components/Footer";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
+import { useLike } from "@/contexts/LikeContext";
+import { useAuthRequired } from "@/hooks/useAuthRequired";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import {
   Search,
   Filter,
   SlidersHorizontal,
   Star,
-  Heart,
   ShoppingCart,
   TrendingUp,
   Clock,
   X,
 } from "lucide-react";
+import { LikeButton } from "@/components/LikeButton";
 
 export default function SearchResults() {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
   const { selectedCurrency } = useCurrency();
   const { searchProducts, products } = useProducts();
+  const { toggleLike, isLiked } = useLike();
+  const { requireAuth, AuthModalComponent } = useAuthRequired();
 
   const [searchQuery, setSearchQuery] = useState(query);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -395,13 +399,12 @@ export default function SearchResults() {
 
                       {/* Actions */}
                       <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button
+                        <LikeButton
+                          productId={product.id}
                           size="sm"
                           variant="secondary"
                           className="bg-background/90 hover:bg-background"
-                        >
-                          <Heart className="w-4 h-4" />
-                        </Button>
+                        />
                       </div>
                     </div>
 
@@ -508,6 +511,7 @@ export default function SearchResults() {
       </div>
 
       <Footer />
+      <AuthModalComponent />
     </div>
   );
 }

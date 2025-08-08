@@ -25,10 +25,18 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "./routes/users";
+<<<<<<< HEAD
 import "./database/init.js"; // Initialize database on startup
+=======
+import { UserServiceJson } from "./services/userServiceJson.js";
+// import "./database/init.js"; // Initialize database on startup - disabled until PostgreSQL is configured
+>>>>>>> origin/main
 
 export function createServer() {
   const app = express();
+
+  // Initialize user service to ensure database is ready
+  new UserServiceJson();
 
   // Middleware
   app.use(

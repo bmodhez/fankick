@@ -113,8 +113,9 @@ export function PaymentModal({
   const handlePayment = async () => {
     setIsProcessing(true);
 
-    // Simulate payment processing
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // Different processing time for COD vs other payments
+    const processingTime = selectedPayment === 'cod' ? 1000 : 2000;
+    await new Promise((resolve) => setTimeout(resolve, processingTime));
 
     const orderId = formatOrderId(Date.now());
     const trackingNumber = generateTrackingNumber();
@@ -123,8 +124,9 @@ export function PaymentModal({
       orderId,
       trackingNumber,
       estimatedDelivery: new Date(
-        Date.now() + 7 * 24 * 60 * 60 * 1000,
+        Date.now() + (selectedPayment === 'cod' ? 5 : 7) * 24 * 60 * 60 * 1000,
       ).toLocaleDateString(),
+      paymentMethod: selectedPayment,
     });
 
     setIsProcessing(false);
@@ -171,7 +173,7 @@ export function PaymentModal({
               <CheckCircle className="w-8 h-8 text-green-600" />
             </div>
             <CardTitle className="text-2xl font-bold text-green-600">
-              Order Confirmed!
+              {orderDetails.paymentMethod === 'cod' ? 'Order Placed - COD!' : 'Order Confirmed!'}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -197,7 +199,10 @@ export function PaymentModal({
             </div>
 
             <div className="text-center text-sm text-gray-600">
-              You'll receive email updates about your order status
+              {orderDetails.paymentMethod === 'cod'
+                ? "Pay when your order arrives at your doorstep. You'll receive SMS/email updates about your order status."
+                : "You'll receive email updates about your order status"
+              }
             </div>
 
             <div className="flex space-x-3">

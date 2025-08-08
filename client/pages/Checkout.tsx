@@ -35,7 +35,9 @@ export default function Checkout() {
   const [activeStep, setActiveStep] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("new");
-  const [selectedPayment, setSelectedPayment] = useState("card");
+  const [selectedPayment, setSelectedPayment] = useState(
+    location.state?.paymentMethod || "card"
+  );
 
   // Form states
   const [shippingForm, setShippingForm] = useState({
@@ -62,7 +64,10 @@ export default function Checkout() {
   useEffect(() => {
     if (!user) {
       navigate("/login", {
-        state: { from: location },
+        state: {
+          from: location,
+          message: "Please login to proceed with checkout"
+        },
         replace: true,
       });
     }
@@ -143,13 +148,113 @@ export default function Checkout() {
   const handlePlaceOrder = async () => {
     setIsProcessing(true);
 
-    // Simulate order processing
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // Validate payment details based on selected payment method
+      if (selectedPayment === "card") {
+        if (!paymentForm.cardNumber || !paymentForm.cardholderName || !paymentForm.expiryDate || !paymentForm.cvv) {
+          alert("Please fill in all card details");
+          setIsProcessing(false);
+          return;
+        }
 
-    // Clear cart and redirect
-    clearCart();
-    navigate("/order-success");
-    setIsProcessing(false);
+        // Basic card number validation (should be 16 digits)
+        const cleanCardNumber = paymentForm.cardNumber.replace(/\s/g, '');
+        if (cleanCardNumber.length !== 16 || !/^\d+$/.test(cleanCardNumber)) {
+          alert("Please enter a valid 16-digit card number");
+          setIsProcessing(false);
+          return;
+        }
+
+        // Basic CVV validation
+        if (!/^\d{3,4}$/.test(paymentForm.cvv)) {
+          alert("Please enter a valid CVV (3-4 digits)");
+          setIsProcessing(false);
+          return;
+        }
+
+        // Basic expiry date validation
+        const [month, year] = paymentForm.expiryDate.split('/');
+        const currentDate = new Date();
+        const expiryDate = new Date(2000 + parseInt(year), parseInt(month) - 1);
+        if (expiryDate <= currentDate) {
+          alert("Card has expired. Please use a valid card");
+          setIsProcessing(false);
+          return;
+        }
+      } else if (selectedPayment === "upi") {
+        if (!paymentForm.upiId) {
+          alert("Please enter your UPI ID");
+          setIsProcessing(false);
+          return;
+        }
+
+        // Basic UPI ID validation
+        if (!paymentForm.upiId.includes('@') || paymentForm.upiId.length < 6) {
+          alert("Please enter a valid UPI ID (e.g., yourname@paytm)");
+          setIsProcessing(false);
+          return;
+        }
+      } else if (selectedPayment === "cod") {
+        // COD is always valid, but confirm with user
+        const confirmCOD = window.confirm("Confirm Cash on Delivery order?");
+        if (!confirmCOD) {
+          setIsProcessing(false);
+          return;
+        }
+      }
+
+      // Validate shipping details
+      if (!shippingForm.firstName || !shippingForm.lastName || !shippingForm.email || !shippingForm.phone || !shippingForm.address || !shippingForm.city || !shippingForm.state || !shippingForm.zipCode) {
+        alert("Please fill in all shipping details");
+        setIsProcessing(false);
+        return;
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(shippingForm.email)) {
+        alert("Please enter a valid email address");
+        setIsProcessing(false);
+        return;
+      }
+
+      // Phone validation (basic)
+      if (!/^\d{10}$/.test(shippingForm.phone.replace(/[^\d]/g, ''))) {
+        alert("Please enter a valid 10-digit phone number");
+        setIsProcessing(false);
+        return;
+      }
+
+      // Simulate payment processing
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      // Simulate payment verification (95% success rate for demo)
+      const paymentSuccess = Math.random() > 0.05;
+
+      if (!paymentSuccess) {
+        alert("Payment failed. Please try again or use a different payment method.");
+        setIsProcessing(false);
+        return;
+      }
+
+      // Clear cart and redirect only after successful payment
+      clearCart();
+      navigate("/order-success", {
+        state: {
+          orderDetails: {
+            paymentMethod: selectedPayment,
+            amount: finalTotal,
+            currency: selectedCurrency.code,
+            shippingAddress: shippingForm
+          }
+        }
+      });
+    } catch (error) {
+      console.error("Order processing error:", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -420,17 +525,17 @@ export default function Checkout() {
                           </Label>
                           <div className="flex space-x-2">
                             <img
-                              src="/api/placeholder/40/25"
+                              src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png"
                               alt="Visa"
                               className="h-6"
                             />
                             <img
-                              src="/api/placeholder/40/25"
+                              src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
                               alt="Mastercard"
                               className="h-6"
                             />
                             <img
-                              src="/api/placeholder/40/25"
+                              src="https://logoeps.com/wp-content/uploads/2013/03/american-express-vector-logo.png"
                               alt="American Express"
                               className="h-6"
                             />
@@ -517,17 +622,17 @@ export default function Checkout() {
                           </Label>
                           <div className="flex space-x-2">
                             <img
-                              src="/api/placeholder/40/25"
+                              src="https://developers.google.com/pay/api/images/brand-guidelines/google-pay-mark.png"
                               alt="Google Pay"
                               className="h-6"
                             />
                             <img
-                              src="/api/placeholder/40/25"
-                              alt="PhonePe"
+                              src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
+                              alt="PayPal"
                               className="h-6"
                             />
                             <img
-                              src="/api/placeholder/40/25"
+                              src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg"
                               alt="Paytm"
                               className="h-6"
                             />
