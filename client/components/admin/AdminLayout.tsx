@@ -201,7 +201,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
 
       {/* Desktop sidebar */}
       <div className="hidden lg:block fixed left-0 top-0 bottom-0 w-64 bg-gray-800 border-r border-gray-700">
-        <SidebarContent currentPath={currentPath} />
+        <SidebarContent currentPath={currentPath} navigation={navigation} />
       </div>
 
       {/* Main content */}
