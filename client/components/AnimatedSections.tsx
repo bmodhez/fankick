@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useGSAP, useScrollFadeIn, useStaggerAnimation, useCounterAnimation, useParallax } from '@/hooks/useGSAP';
+import { useScrollDrop, useScrollDropSequence } from '@/hooks/useScrollDrop';
 import {
   ArrowRight,
   Star,
