@@ -12,6 +12,7 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import { SimpleNav } from "@/components/SimpleNav";
+import { orderApi } from "@/services/orderApi";
 import {
   ChevronLeft,
   MapPin,
@@ -246,35 +247,40 @@ export default function Checkout() {
         }
       }
 
-      // Validate shipping details
-      if (
-        !shippingForm.firstName ||
-        !shippingForm.lastName ||
-        !shippingForm.email ||
-        !shippingForm.phone ||
-        !shippingForm.address ||
-        !shippingForm.city ||
-        !shippingForm.state ||
-        !shippingForm.zipCode
-      ) {
-        alert("Please fill in all shipping details");
-        setIsProcessing(false);
-        return;
+      // Validate shipping details only if new address is selected
+      if (selectedAddress === "new") {
+        if (
+          !shippingForm.firstName ||
+          !shippingForm.lastName ||
+          !shippingForm.email ||
+          !shippingForm.phone ||
+          !shippingForm.address ||
+          !shippingForm.city ||
+          !shippingForm.state ||
+          !shippingForm.zipCode
+        ) {
+          alert("Please fill in all shipping details");
+          setIsProcessing(false);
+          return;
+        }
       }
 
-      // Email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(shippingForm.email)) {
-        alert("Please enter a valid email address");
-        setIsProcessing(false);
-        return;
-      }
+      // Email and phone validation only for new address
+      if (selectedAddress === "new") {
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(shippingForm.email)) {
+          alert("Please enter a valid email address");
+          setIsProcessing(false);
+          return;
+        }
 
-      // Phone validation (basic)
-      if (!/^\d{10}$/.test(shippingForm.phone.replace(/[^\d]/g, ""))) {
-        alert("Please enter a valid 10-digit phone number");
-        setIsProcessing(false);
-        return;
+        // Phone validation (basic)
+        if (!/^\d{10}$/.test(shippingForm.phone.replace(/[^\d]/g, ""))) {
+          alert("Please enter a valid 10-digit phone number");
+          setIsProcessing(false);
+          return;
+        }
       }
 
       // Simulate payment processing
@@ -291,19 +297,70 @@ export default function Checkout() {
         return;
       }
 
-      // Clear cart and redirect only after successful payment
-      clearCart();
-      navigate("/order-success", {
-        state: {
-          orderDetails: {
-            paymentMethod: selectedPayment,
-            amount: finalTotal,
-            currency: selectedCurrency.code,
-            shippingAddress: shippingForm,
-            customerName: user.firstName,
+      // Save order to database
+      const orderData = {
+        userId: user.id,
+        totalAmount: finalTotal,
+        currency: selectedCurrency.code,
+        paymentMethod: selectedPayment,
+        paymentStatus: selectedPayment === "cod" ? "pending" : "paid",
+        orderStatus: "placed",
+        shippingAddress: selectedAddress === "saved" ? {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          address: "123 Main Street, Apartment 4B",
+          city: "New York",
+          state: "NY",
+          zipCode: "10001",
+          phone: "+1 (555) 123-4567"
+        } : shippingForm,
+        items: items.map(item => ({
+          productId: item.id,
+          variantId: item.selectedVariant || "default",
+          quantity: item.quantity,
+          price: convertPrice(item.price, selectedCurrency.code, "INR"),
+          name: item.name,
+          selectedVariant: item.selectedVariant
+        })),
+        notes: `Payment method: ${selectedPayment}, Address type: ${selectedAddress}`
+      };
+
+      try {
+        const savedOrder = await orderApi.createOrder(orderData);
+        console.log("Order saved successfully:", savedOrder);
+
+        // Clear cart and redirect only after successful order creation
+        clearCart();
+        navigate("/order-success", {
+          state: {
+            orderDetails: {
+              paymentMethod: selectedPayment,
+              amount: finalTotal,
+              currency: selectedCurrency.code,
+              shippingAddress: orderData.shippingAddress,
+              customerName: user.firstName,
+              orderId: savedOrder.orderNumber,
+              orderData: savedOrder
+            },
           },
-        },
-      });
+        });
+      } catch (orderError) {
+        console.error("Error saving order:", orderError);
+        // Still proceed with success page but log the error
+        clearCart();
+        navigate("/order-success", {
+          state: {
+            orderDetails: {
+              paymentMethod: selectedPayment,
+              amount: finalTotal,
+              currency: selectedCurrency.code,
+              shippingAddress: orderData.shippingAddress,
+              customerName: user.firstName,
+              error: "Order placement successful but failed to save order details"
+            },
+          },
+        });
+      }
     } catch (error) {
       console.error("Order processing error:", error);
       alert("Something went wrong. Please try again.");

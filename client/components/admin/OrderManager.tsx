@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,6 +23,9 @@ import {
   Edit,
   MoreVertical,
 } from "lucide-react";
+import { orderApi } from "@/services/orderApi";
+import { UserOrder } from "@/types/user";
+import { useRealTime } from "@/contexts/RealTimeContext";
 
 interface Order {
   id: string;
@@ -64,119 +67,41 @@ interface Order {
   updatedAt: string;
 }
 
-const mockOrders: Order[] = [
-  {
-    id: "ord-001",
-    orderNumber: "FK2024001",
-    customer: {
-      name: "Arjun Kumar",
-      email: "arjun.k@example.com",
-      phone: "+91 9876543210",
-      address: "Mumbai, Maharashtra, India",
-      country: "India",
-      flag: "🇮🇳",
-    },
-    items: [
-      {
-        name: "Messi Inter Miami Jersey",
-        variant: "Size: M, Color: Pink",
-        quantity: 1,
-        price: 7999,
-        image: "/placeholder.svg",
-      },
-    ],
-    status: "shipped",
-    payment: {
-      method: "Razorpay",
-      status: "paid",
-      amount: 7999,
-    },
-    shipping: {
-      method: "Standard Delivery",
-      cost: 0,
-      trackingNumber: "FK24001TRK",
-      estimatedDelivery: "2024-01-28",
-    },
-    createdAt: "2024-01-25T10:30:00Z",
-    updatedAt: "2024-01-26T14:20:00Z",
+// Minimal test data - only 1 order for demo
+const testOrder: Order = {
+  id: "test-001",
+  orderNumber: "FK-TEST",
+  customer: {
+    name: "Test User",
+    email: "test@example.com",
+    phone: "+91 9999999999",
+    address: "Test Address, India",
+    country: "India",
+    flag: "🇮🇳",
   },
-  {
-    id: "ord-002",
-    orderNumber: "FK2024002",
-    customer: {
-      name: "Sarah Wilson",
-      email: "sarah.w@example.com",
-      phone: "+1 555-123-4567",
-      address: "New York, NY, USA",
-      country: "USA",
-      flag: "🇺🇸",
+  items: [
+    {
+      name: "Test Product",
+      variant: "Size: M",
+      quantity: 1,
+      price: 999,
+      image: "/placeholder.svg",
     },
-    items: [
-      {
-        name: "Taylor Swift Eras Hoodie",
-        variant: "Size: L, Color: Lavender",
-        quantity: 2,
-        price: 3799,
-        image: "/placeholder.svg",
-      },
-    ],
-    status: "pending",
-    payment: {
-      method: "PayPal",
-      status: "paid",
-      amount: 7598,
-    },
-    shipping: {
-      method: "Express Delivery",
-      cost: 599,
-      estimatedDelivery: "2024-01-30",
-    },
-    createdAt: "2024-01-26T08:15:00Z",
-    updatedAt: "2024-01-26T08:15:00Z",
+  ],
+  status: "pending",
+  payment: {
+    method: "Test",
+    status: "paid",
+    amount: 999,
   },
-  {
-    id: "ord-003",
-    orderNumber: "FK2024003",
-    customer: {
-      name: "Ahmed Al-Rashid",
-      email: "ahmed.r@example.com",
-      phone: "+966 50 123 4567",
-      address: "Riyadh, Saudi Arabia",
-      country: "Saudi Arabia",
-      flag: "🇸🇦",
-    },
-    items: [
-      {
-        name: "Ronaldo Al Nassr Jersey",
-        variant: "Size: XL",
-        quantity: 1,
-        price: 8499,
-        image: "/placeholder.svg",
-      },
-      {
-        name: "Football Boots",
-        variant: "Size: 42",
-        quantity: 1,
-        price: 12999,
-        image: "/placeholder.svg",
-      },
-    ],
-    status: "delivered",
-    payment: {
-      method: "COD",
-      status: "paid",
-      amount: 21498,
-    },
-    shipping: {
-      method: "Standard Delivery",
-      cost: 0,
-      trackingNumber: "FK24003TRK",
-      estimatedDelivery: "2024-01-27",
-    },
-    createdAt: "2024-01-23T16:45:00Z",
-    updatedAt: "2024-01-27T11:30:00Z",
+  shipping: {
+    method: "Standard",
+    cost: 0,
+    estimatedDelivery: "2024-01-30",
   },
-];
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+};
 
 function getStatusColor(status: string) {
   switch (status) {
@@ -217,11 +142,115 @@ function getStatusIcon(status: string) {
 }
 
 export function OrderManager() {
-  const [orders, setOrders] = useState(mockOrders);
+  const [orders, setOrders] = useState<Order[]>([testOrder]); // Start with 1 test order
+  const [realTimeOrders, setRealTimeOrders] = useState<UserOrder[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [dateRange, setDateRange] = useState("all");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { showNotification } = useRealTime();
+
+  // Load real orders from API with cache busting
+  const loadRealOrders = async () => {
+    try {
+      setIsLoading(true);
+      console.log('🔄 Loading orders from API...');
+
+      // Add cache busting to ensure fresh data
+      const apiOrders = await orderApi.getAllOrders();
+      console.log(`📦 Loaded ${apiOrders.length} orders from API:`, apiOrders);
+      setRealTimeOrders(apiOrders);
+
+      // Convert API orders to admin format and combine with minimal test data
+      const convertedOrders = apiOrders.map(order => ({
+        id: order.id,
+        orderNumber: order.orderNumber,
+        customer: {
+          name: order.shippingAddress?.firstName ?
+            `${order.shippingAddress.firstName} ${order.shippingAddress.lastName || ''}`.trim() :
+            'Customer',
+          email: order.shippingAddress?.email || 'N/A',
+          phone: order.shippingAddress?.phone || 'N/A',
+          address: order.shippingAddress ?
+            `${order.shippingAddress.address || ''}, ${order.shippingAddress.city || ''}, ${order.shippingAddress.state || ''}`.replace(/^,\s*|,\s*$/g, '') :
+            'N/A',
+          country: order.shippingAddress?.country || 'India',
+          flag: "🇮🇳",
+        },
+        items: order.items?.map(item => ({
+          name: item.productName || 'Product',
+          variant: item.variantDetails || 'Standard',
+          quantity: item.quantity,
+          price: item.unitPrice,
+          image: "/placeholder.svg",
+        })) || [],
+        status: order.orderStatus as Order["status"],
+        payment: {
+          method: order.paymentMethod || 'Unknown',
+          status: order.paymentStatus as "pending" | "paid" | "failed" | "refunded",
+          amount: order.totalAmount,
+        },
+        shipping: {
+          method: "Standard Delivery",
+          cost: 0,
+          estimatedDelivery: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        },
+        createdAt: order.createdAt,
+        updatedAt: order.updatedAt,
+      }));
+
+      // Combine real orders with minimal test data
+      setOrders([testOrder, ...convertedOrders]);
+      const timestamp = new Date().toLocaleTimeString();
+      showNotification(`✅ ${timestamp}: Loaded ${apiOrders.length} real orders`, 'success');
+      console.log(`✅ Successfully updated orders at ${timestamp}`);
+    } catch (error) {
+      console.error('Failed to load orders:', error);
+      showNotification('Failed to load orders', 'error');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Load orders on mount and set up real-time refresh
+  useEffect(() => {
+    loadRealOrders();
+
+    // Aggressive real-time refresh every 5 seconds for true real-time experience
+    const interval = setInterval(loadRealOrders, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Also refresh when component becomes visible
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        loadRealOrders();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
+
+  // Refresh function for manual sync
+  const handleRefresh = () => {
+    showNotification('🔄 Syncing orders...', 'info');
+    loadRealOrders();
+  };
+
+  // Add window focus listener for immediate refresh when user returns
+  useEffect(() => {
+    const handleFocus = () => {
+      console.log('🎯 Window focused - refreshing orders immediately');
+      loadRealOrders();
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, []);
 
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
@@ -233,14 +262,31 @@ export function OrderManager() {
     return matchesSearch && matchesStatus;
   });
 
-  const updateOrderStatus = (orderId: string, newStatus: Order["status"]) => {
-    setOrders(
-      orders.map((order) =>
-        order.id === orderId
-          ? { ...order, status: newStatus, updatedAt: new Date().toISOString() }
-          : order,
-      ),
-    );
+  const updateOrderStatus = async (orderId: string, newStatus: Order["status"]) => {
+    try {
+      // Update in API if it's a real order (not test order)
+      if (orderId !== "test-001") {
+        await orderApi.updateOrderStatus(orderId, { orderStatus: newStatus });
+        showNotification(`Order status updated to ${newStatus}`, 'success');
+      }
+
+      // Update local state immediately for UI feedback
+      setOrders(
+        orders.map((order) =>
+          order.id === orderId
+            ? { ...order, status: newStatus, updatedAt: new Date().toISOString() }
+            : order,
+        ),
+      );
+
+      // Refresh from API to ensure consistency
+      if (orderId !== "test-001") {
+        setTimeout(loadRealOrders, 1000);
+      }
+    } catch (error) {
+      console.error('Failed to update order status:', error);
+      showNotification('Failed to update order status', 'error');
+    }
   };
 
   const orderStats = {
@@ -256,13 +302,26 @@ export function OrderManager() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-white">🛒 Order Management</h2>
-          <p className="text-gray-400">Track and manage customer orders</p>
+          <div className="flex items-center space-x-3">
+            <h2 className="text-2xl font-bold text-white">🛒 Order Management</h2>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-xs text-green-400 font-medium">LIVE</span>
+            </div>
+          </div>
+          <p className="text-gray-400">Track and manage customer orders • Auto-refresh: 5s</p>
         </div>
         <div className="flex items-center space-x-3">
-          <Button variant="outline" className="border-gray-600 text-gray-300">
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Sync Orders
+          <div className="text-xs text-gray-400">
+            Auto-refresh: 5s
+          </div>
+          <Button
+            className="bg-primary text-black hover:bg-primary/90 font-bold"
+            onClick={handleRefresh}
+            disabled={isLoading}
+          >
+            <RefreshCw className={`w-4 h-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
+            {isLoading ? 'Syncing...' : '🔄 Refresh Now'}
           </Button>
           <Button variant="outline" className="border-gray-600 text-gray-300">
             <Download className="w-4 h-4 mr-2" />

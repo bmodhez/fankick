@@ -40,6 +40,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [lastUpdateTime, setLastUpdateTime] = useState(Date.now());
 
   // Load local products immediately on initialization
   useEffect(() => {
@@ -108,6 +109,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
       if (!signal?.aborted) {
         setProducts(apiProducts);
+        setLastUpdateTime(Date.now());
         console.log("Successfully loaded products from API");
       }
     } catch (error) {
@@ -175,6 +177,20 @@ export function ProductProvider({ children }: ProductProviderProps) {
       clearTimeout(maxTimeout);
     };
   }, []);
+
+  // Real-time product sync every 5 minutes for admin changes
+  useEffect(() => {
+    if (!isInitialized) return;
+
+    const syncInterval = setInterval(() => {
+      const abortController = new AbortController();
+      loadProductsFromAPI(abortController.signal).catch(() => {
+        console.log("Background product sync failed - using cached data");
+      });
+    }, 300000); // 5 minutes
+
+    return () => clearInterval(syncInterval);
+  }, [isInitialized]);
 
   // CRUD operations with API calls
 
