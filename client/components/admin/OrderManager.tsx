@@ -302,8 +302,14 @@ export function OrderManager() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-white">🛒 Order Management</h2>
-          <p className="text-gray-400">Track and manage customer orders</p>
+          <div className="flex items-center space-x-3">
+            <h2 className="text-2xl font-bold text-white">🛒 Order Management</h2>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-xs text-green-400 font-medium">LIVE</span>
+            </div>
+          </div>
+          <p className="text-gray-400">Track and manage customer orders • Auto-refresh: 5s</p>
         </div>
         <div className="flex items-center space-x-3">
           <div className="text-xs text-gray-400">
