@@ -339,24 +339,15 @@ const rootElement = document.getElementById("root")!;
 // Create root if not exists or in development mode for HMR
 let root: ReturnType<typeof createRoot>;
 
-// Check if we're in development mode and handle HMR properly
-if (import.meta.hot) {
-  // In development, always create a fresh root for proper HMR
-  if (rootElement.children.length > 0) {
-    rootElement.innerHTML = "";
-  }
-  root = createRoot(rootElement);
-} else {
-  // In production, use the singleton pattern
-  declare global {
-    var __APP_ROOT__: ReturnType<typeof createRoot> | undefined;
-  }
-
-  if (!globalThis.__APP_ROOT__) {
-    globalThis.__APP_ROOT__ = createRoot(rootElement);
-  }
-  root = globalThis.__APP_ROOT__;
+// Use singleton pattern for both development and production
+declare global {
+  var __APP_ROOT__: ReturnType<typeof createRoot> | undefined;
 }
+
+if (!globalThis.__APP_ROOT__) {
+  globalThis.__APP_ROOT__ = createRoot(rootElement);
+}
+root = globalThis.__APP_ROOT__;
 
 root.render(<App />);
 
