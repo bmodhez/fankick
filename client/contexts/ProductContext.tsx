@@ -178,6 +178,20 @@ export function ProductProvider({ children }: ProductProviderProps) {
     };
   }, []);
 
+  // Real-time product sync every 5 minutes for admin changes
+  useEffect(() => {
+    if (!isInitialized) return;
+
+    const syncInterval = setInterval(() => {
+      const abortController = new AbortController();
+      loadProductsFromAPI(abortController.signal).catch(() => {
+        console.log("Background product sync failed - using cached data");
+      });
+    }, 300000); // 5 minutes
+
+    return () => clearInterval(syncInterval);
+  }, [isInitialized]);
+
   // CRUD operations with API calls
 
   const updateProduct = async (updatedProduct: Product) => {
