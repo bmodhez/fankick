@@ -115,6 +115,9 @@ export default function IndexAnimated() {
           </section>
         )}
 
+        {/* Animation Showcase */}
+        <AnimationShowcase />
+
         {/* CTA Section */}
         <AnimatedCTASection />
 
