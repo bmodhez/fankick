@@ -54,12 +54,6 @@ export default function Index() {
 
   // Use original product images without override
 
-  // Add global debug function
-  (window as any).updateProductImages = () => {
-    console.log("🔄 Manually updating product images...");
-    console.log("New image URL:", builderImageUrl);
-  };
-
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
