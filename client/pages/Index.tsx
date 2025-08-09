@@ -97,7 +97,7 @@ export default function Index() {
       name: "Football Jerseys",
       items: 350,
       image:
-        "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F8bebf119965a4b5ba2f2d45b556c0cb2?format=webp&width=800",
+        "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80",
       description: "Official jerseys from Messi, Ronaldo & more",
       link: "/collections/football",
     },
