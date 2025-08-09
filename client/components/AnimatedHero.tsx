@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { useGSAP, useHeroTextReveal, useParallax, useMagneticEffect } from '@/hooks/useGSAP';
 import { useMobileHeroAnimation, useMobilePerformanceOptimization } from '@/hooks/useResponsiveGSAP';
 import { useHeroDropAnimation, useFloatingImageDrop } from '@/hooks/useScrollDrop';
+import { useHeroDramaticDrop, showAnimationDebug } from '@/components/VisibleDropAnimation';
 import {
   ArrowRight,
   Star,
