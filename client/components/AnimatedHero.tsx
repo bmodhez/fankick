@@ -326,6 +326,9 @@ export function AnimatedHero() {
 
           {/* Right Content - Hero Image */}
           <div className="relative">
+            {/* Floating Product Image */}
+            <div ref={floatingImageRef} className="absolute -top-20 -right-10 w-32 h-32"></div>
+
             <div ref={imageRef} className="relative group">
               {/* Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-300" />
