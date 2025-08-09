@@ -1,6 +1,6 @@
-import { useRef, useLayoutEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef, useLayoutEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,7 +9,7 @@ export const useImmediateDropAnimation = (
   startY: number = -200,
   duration: number = 1.5,
   delay: number = 0,
-  ease: string = "elastic.out(1, 0.75)"
+  ease: string = "elastic.out(1, 0.75)",
 ) => {
   const elementRef = useRef<HTMLDivElement>(null);
 
@@ -20,7 +20,7 @@ export const useImmediateDropAnimation = (
     gsap.set(elementRef.current, {
       y: startY,
       opacity: 0,
-      scale: 0.8
+      scale: 0.8,
     });
 
     // Immediately drop into place
@@ -30,7 +30,7 @@ export const useImmediateDropAnimation = (
       scale: 1,
       duration: duration,
       ease: ease,
-      delay: delay
+      delay: delay,
     });
 
     return () => {
@@ -44,7 +44,7 @@ export const useImmediateDropAnimation = (
 // Hook for scroll-triggered visible drop
 export const useScrollVisibleDrop = (
   startY: number = -300,
-  ease: string = "back.out(2)"
+  ease: string = "back.out(2)",
 ) => {
   const elementRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +55,7 @@ export const useScrollVisibleDrop = (
     gsap.set(elementRef.current, {
       y: startY,
       opacity: 0,
-      scale: 0.5
+      scale: 0.5,
     });
 
     // Create scroll trigger
@@ -68,7 +68,7 @@ export const useScrollVisibleDrop = (
           opacity: 1,
           scale: 1,
           duration: 1.2,
-          ease: ease
+          ease: ease,
         });
       },
       onLeave: () => {
@@ -77,7 +77,7 @@ export const useScrollVisibleDrop = (
           opacity: 0,
           scale: 0.5,
           duration: 0.6,
-          ease: "power2.in"
+          ease: "power2.in",
         });
       },
       onEnterBack: () => {
@@ -86,13 +86,13 @@ export const useScrollVisibleDrop = (
           opacity: 1,
           scale: 1,
           duration: 1.2,
-          ease: ease
+          ease: ease,
         });
-      }
+      },
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, [startY, ease]);
 
@@ -107,13 +107,13 @@ export const useBottleDropSequence = () => {
     if (!containerRef.current) return;
 
     const items = containerRef.current.children;
-    
+
     // Set all items way above screen initially
     gsap.set(items, {
       y: -400,
       opacity: 0,
       scale: 0.3,
-      rotation: () => gsap.utils.random(-180, 180)
+      rotation: () => gsap.utils.random(-180, 180),
     });
 
     // Drop each item with staggered timing
@@ -126,9 +126,9 @@ export const useBottleDropSequence = () => {
       ease: "bounce.out",
       stagger: {
         each: 0.2,
-        from: "start"
+        from: "start",
       },
-      delay: 0.5
+      delay: 0.5,
     });
 
     return () => {
@@ -146,19 +146,19 @@ export const useProductPhysicsDrop = () => {
   useLayoutEffect(() => {
     if (!gridRef.current) return;
 
-    const cards = gridRef.current.querySelectorAll('.product-card');
-    
+    const cards = gridRef.current.querySelectorAll(".product-card");
+
     cards.forEach((card, index) => {
       // Start each card way above with random horizontal offset
-      const startY = -500 - (index * 50);
+      const startY = -500 - index * 50;
       const startX = gsap.utils.random(-100, 100);
-      
+
       gsap.set(card, {
         y: startY,
         x: startX,
         opacity: 0,
         scale: 0.2,
-        rotation: gsap.utils.random(-360, 360)
+        rotation: gsap.utils.random(-360, 360),
       });
 
       // Create scroll trigger for this card
@@ -175,14 +175,14 @@ export const useProductPhysicsDrop = () => {
             rotation: 0,
             duration: 2,
             ease: "elastic.out(1, 0.5)",
-            delay: index * 0.1
+            delay: index * 0.1,
           });
-        }
+        },
       });
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
 
@@ -196,11 +196,11 @@ export const useHeroDramaticDrop = () => {
   useLayoutEffect(() => {
     if (!heroRef.current) return;
 
-    const title = heroRef.current.querySelector('.hero-title');
-    const subtitle = heroRef.current.querySelector('.hero-subtitle');
-    const cta = heroRef.current.querySelector('.hero-cta');
-    const stats = heroRef.current.querySelector('.hero-stats');
-    const image = heroRef.current.querySelector('.hero-image');
+    const title = heroRef.current.querySelector(".hero-title");
+    const subtitle = heroRef.current.querySelector(".hero-subtitle");
+    const cta = heroRef.current.querySelector(".hero-cta");
+    const stats = heroRef.current.querySelector(".hero-stats");
+    const image = heroRef.current.querySelector(".hero-image");
 
     // Title drops first with big impact
     if (title) {
@@ -211,7 +211,7 @@ export const useHeroDramaticDrop = () => {
         scale: 1,
         duration: 2,
         ease: "bounce.out",
-        delay: 0.5
+        delay: 0.5,
       });
     }
 
@@ -224,7 +224,7 @@ export const useHeroDramaticDrop = () => {
         scale: 1,
         duration: 1.5,
         ease: "back.out(2)",
-        delay: 1
+        delay: 1,
       });
     }
 
@@ -237,7 +237,7 @@ export const useHeroDramaticDrop = () => {
         scale: 1,
         duration: 1.2,
         ease: "elastic.out(1, 0.75)",
-        delay: 1.5
+        delay: 1.5,
       });
     }
 
@@ -252,7 +252,7 @@ export const useHeroDramaticDrop = () => {
         duration: 1,
         ease: "back.out(1.7)",
         stagger: 0.1,
-        delay: 2
+        delay: 2,
       });
     }
 
@@ -266,12 +266,12 @@ export const useHeroDramaticDrop = () => {
         rotation: 0,
         duration: 2.5,
         ease: "elastic.out(1, 0.3)",
-        delay: 0.8
+        delay: 0.8,
       });
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().forEach((st) => st.kill());
       gsap.killTweensOf([title, subtitle, cta, stats, image]);
     };
   }, []);

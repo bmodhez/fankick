@@ -1,6 +1,6 @@
-import { useEffect, useRef, useLayoutEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef, useLayoutEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,7 +21,7 @@ export const useResponsiveGSAP = () => {
         gsap.set(".desktop-enhanced", {
           y: 100,
           opacity: 0,
-          scale: 0.9
+          scale: 0.9,
         });
 
         gsap.to(".desktop-enhanced", {
@@ -34,8 +34,8 @@ export const useResponsiveGSAP = () => {
           scrollTrigger: {
             trigger: ".desktop-enhanced",
             start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
+            toggleActions: "play none none reverse",
+          },
         });
 
         // Parallax effects for desktop
@@ -46,8 +46,8 @@ export const useResponsiveGSAP = () => {
             trigger: ".parallax-desktop",
             start: "top bottom",
             end: "bottom top",
-            scrub: true
-          }
+            scrub: true,
+          },
         });
       });
 
@@ -56,7 +56,7 @@ export const useResponsiveGSAP = () => {
         // Moderate animations for tablet
         gsap.set(".tablet-optimized", {
           y: 60,
-          opacity: 0
+          opacity: 0,
         });
 
         gsap.to(".tablet-optimized", {
@@ -68,8 +68,8 @@ export const useResponsiveGSAP = () => {
           scrollTrigger: {
             trigger: ".tablet-optimized",
             start: "top 85%",
-            toggleActions: "play none none reverse"
-          }
+            toggleActions: "play none none reverse",
+          },
         });
 
         // Reduced parallax for tablet
@@ -80,8 +80,8 @@ export const useResponsiveGSAP = () => {
             trigger: ".parallax-tablet",
             start: "top bottom",
             end: "bottom top",
-            scrub: true
-          }
+            scrub: true,
+          },
         });
       });
 
@@ -90,7 +90,7 @@ export const useResponsiveGSAP = () => {
         // Simplified animations for mobile
         gsap.set(".mobile-optimized", {
           y: 30,
-          opacity: 0
+          opacity: 0,
         });
 
         gsap.to(".mobile-optimized", {
@@ -102,13 +102,13 @@ export const useResponsiveGSAP = () => {
           scrollTrigger: {
             trigger: ".mobile-optimized",
             start: "top 90%",
-            toggleActions: "play none none reverse"
-          }
+            toggleActions: "play none none reverse",
+          },
         });
 
         // No parallax on mobile for better performance
         gsap.set(".no-parallax-mobile", {
-          transform: "none"
+          transform: "none",
         });
       });
 
@@ -136,47 +136,52 @@ export const useMobileHeroAnimation = () => {
         const tl = gsap.timeline();
 
         // Simpler hero animations for mobile
-        tl.fromTo(".mobile-hero-title", 
-          { 
-            opacity: 0, 
+        tl.fromTo(
+          ".mobile-hero-title",
+          {
+            opacity: 0,
             y: 50,
-            scale: 0.9
+            scale: 0.9,
           },
-          { 
-            opacity: 1, 
+          {
+            opacity: 1,
             y: 0,
             scale: 1,
             duration: 0.8,
-            ease: "power2.out"
-          }
+            ease: "power2.out",
+          },
         );
 
-        tl.fromTo(".mobile-hero-subtitle",
-          { 
-            opacity: 0, 
-            y: 30 
+        tl.fromTo(
+          ".mobile-hero-subtitle",
+          {
+            opacity: 0,
+            y: 30,
           },
-          { 
-            opacity: 1, 
+          {
+            opacity: 1,
             y: 0,
             duration: 0.6,
-            ease: "power2.out"
-          }, "-=0.4"
+            ease: "power2.out",
+          },
+          "-=0.4",
         );
 
-        tl.fromTo(".mobile-hero-cta",
-          { 
-            opacity: 0, 
+        tl.fromTo(
+          ".mobile-hero-cta",
+          {
+            opacity: 0,
             y: 20,
-            scale: 0.9
+            scale: 0.9,
           },
-          { 
-            opacity: 1, 
+          {
+            opacity: 1,
             y: 0,
             scale: 1,
             duration: 0.5,
-            ease: "back.out(1.7)"
-          }, "-=0.2"
+            ease: "back.out(1.7)",
+          },
+          "-=0.2",
         );
       });
 
@@ -184,34 +189,37 @@ export const useMobileHeroAnimation = () => {
       mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
         const tl = gsap.timeline();
 
-        tl.fromTo(".tablet-hero-title", 
-          { 
-            opacity: 0, 
+        tl.fromTo(
+          ".tablet-hero-title",
+          {
+            opacity: 0,
             y: 80,
-            rotationX: -45
+            rotationX: -45,
           },
-          { 
-            opacity: 1, 
+          {
+            opacity: 1,
             y: 0,
             rotationX: 0,
             duration: 1,
-            ease: "power3.out"
-          }
+            ease: "power3.out",
+          },
         );
 
-        tl.fromTo(".tablet-hero-elements",
-          { 
-            opacity: 0, 
+        tl.fromTo(
+          ".tablet-hero-elements",
+          {
+            opacity: 0,
             y: 40,
-            stagger: 0.1
+            stagger: 0.1,
           },
-          { 
-            opacity: 1, 
+          {
+            opacity: 1,
             y: 0,
             duration: 0.8,
             stagger: 0.1,
-            ease: "power2.out"
-          }, "-=0.5"
+            ease: "power2.out",
+          },
+          "-=0.5",
         );
       });
 
@@ -220,45 +228,52 @@ export const useMobileHeroAnimation = () => {
         const tl = gsap.timeline();
 
         // Full desktop hero animations
-        tl.fromTo(".desktop-hero-title", 
-          { 
-            opacity: 0, 
+        tl.fromTo(
+          ".desktop-hero-title",
+          {
+            opacity: 0,
             y: 100,
             rotationX: -90,
-            transformOrigin: "50% 50% -50px"
+            transformOrigin: "50% 50% -50px",
           },
-          { 
-            opacity: 1, 
+          {
+            opacity: 1,
             y: 0,
             rotationX: 0,
             duration: 1.2,
-            ease: "power3.out"
-          }
+            ease: "power3.out",
+          },
         );
 
-        tl.fromTo(".desktop-hero-elements",
-          { 
-            opacity: 0, 
+        tl.fromTo(
+          ".desktop-hero-elements",
+          {
+            opacity: 0,
             y: 60,
-            scale: 0.8
+            scale: 0.8,
           },
-          { 
-            opacity: 1, 
+          {
+            opacity: 1,
             y: 0,
             scale: 1,
             duration: 0.8,
             stagger: 0.15,
-            ease: "back.out(1.7)"
-          }, "-=0.6"
+            ease: "back.out(1.7)",
+          },
+          "-=0.6",
         );
 
         // Background animations
-        tl.to(".desktop-bg-elements", {
-          rotation: 360,
-          duration: 20,
-          ease: "none",
-          repeat: -1
-        }, 0);
+        tl.to(
+          ".desktop-bg-elements",
+          {
+            rotation: 360,
+            duration: 20,
+            ease: "none",
+            repeat: -1,
+          },
+          0,
+        );
       });
 
       return mm;
@@ -282,11 +297,12 @@ export const useResponsiveCardAnimation = () => {
 
       // Mobile cards (under 768px)
       mm.add("(max-width: 767px)", () => {
-        gsap.fromTo(".mobile-card", 
+        gsap.fromTo(
+          ".mobile-card",
           {
             opacity: 0,
             y: 30,
-            scale: 0.95
+            scale: 0.95,
           },
           {
             opacity: 1,
@@ -298,14 +314,14 @@ export const useResponsiveCardAnimation = () => {
             scrollTrigger: {
               trigger: ".mobile-card",
               start: "top 85%",
-              toggleActions: "play none none reverse"
-            }
-          }
+              toggleActions: "play none none reverse",
+            },
+          },
         );
 
         // Simplified hover effects for mobile
         gsap.set(".mobile-card", {
-          scale: 1
+          scale: 1,
         });
 
         // Touch-friendly interactions
@@ -315,7 +331,7 @@ export const useResponsiveCardAnimation = () => {
             gsap.to(card, {
               scale: 0.98,
               duration: 0.2,
-              ease: "power2.out"
+              ease: "power2.out",
             });
           });
 
@@ -323,7 +339,7 @@ export const useResponsiveCardAnimation = () => {
             gsap.to(card, {
               scale: 1,
               duration: 0.3,
-              ease: "elastic.out(1, 0.3)"
+              ease: "elastic.out(1, 0.3)",
             });
           });
         });
@@ -331,11 +347,12 @@ export const useResponsiveCardAnimation = () => {
 
       // Tablet cards (768px to 1023px)
       mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
-        gsap.fromTo(".tablet-card", 
+        gsap.fromTo(
+          ".tablet-card",
           {
             opacity: 0,
             y: 50,
-            rotationY: -20
+            rotationY: -20,
           },
           {
             opacity: 1,
@@ -347,20 +364,21 @@ export const useResponsiveCardAnimation = () => {
             scrollTrigger: {
               trigger: ".tablet-card",
               start: "top 80%",
-              toggleActions: "play none none reverse"
-            }
-          }
+              toggleActions: "play none none reverse",
+            },
+          },
         );
       });
 
       // Desktop cards (1024px and up)
       mm.add("(min-width: 1024px)", () => {
-        gsap.fromTo(".desktop-card", 
+        gsap.fromTo(
+          ".desktop-card",
           {
             opacity: 0,
             y: 80,
             rotationX: -45,
-            scale: 0.8
+            scale: 0.8,
           },
           {
             opacity: 1,
@@ -373,9 +391,9 @@ export const useResponsiveCardAnimation = () => {
             scrollTrigger: {
               trigger: ".desktop-card",
               start: "top 75%",
-              toggleActions: "play none none reverse"
-            }
-          }
+              toggleActions: "play none none reverse",
+            },
+          },
         );
       });
 
@@ -392,18 +410,18 @@ export const useResponsiveCardAnimation = () => {
 export const useMobilePerformanceOptimization = () => {
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
-    
+
     if (isMobile) {
       // Reduce animation quality on mobile for better performance
       gsap.config({
         force3D: true,
-        nullTargetWarn: false
+        nullTargetWarn: false,
       });
 
       // Disable complex animations on mobile
       ScrollTrigger.config({
         limitCallbacks: true,
-        ignoreMobileResize: true
+        ignoreMobileResize: true,
       });
 
       // Optimize scroll triggers for mobile
@@ -435,39 +453,39 @@ export const useTouchGestures = () => {
 
     const handleTouchMove = (e: TouchEvent) => {
       if (!isDragging) return;
-      
+
       currentY = e.touches[0].clientY;
       const deltaY = currentY - startY;
-      
+
       // Apply subtle transform based on gesture
       gsap.to(element, {
         y: deltaY * 0.3,
         rotation: deltaY * 0.05,
         duration: 0.1,
-        ease: "none"
+        ease: "none",
       });
     };
 
     const handleTouchEnd = () => {
       isDragging = false;
-      
+
       // Spring back to original position
       gsap.to(element, {
         y: 0,
         rotation: 0,
         duration: 0.5,
-        ease: "elastic.out(1, 0.3)"
+        ease: "elastic.out(1, 0.3)",
       });
     };
 
-    element.addEventListener('touchstart', handleTouchStart, { passive: true });
-    element.addEventListener('touchmove', handleTouchMove, { passive: true });
-    element.addEventListener('touchend', handleTouchEnd, { passive: true });
+    element.addEventListener("touchstart", handleTouchStart, { passive: true });
+    element.addEventListener("touchmove", handleTouchMove, { passive: true });
+    element.addEventListener("touchend", handleTouchEnd, { passive: true });
 
     return () => {
-      element.removeEventListener('touchstart', handleTouchStart);
-      element.removeEventListener('touchmove', handleTouchMove);
-      element.removeEventListener('touchend', handleTouchEnd);
+      element.removeEventListener("touchstart", handleTouchStart);
+      element.removeEventListener("touchmove", handleTouchMove);
+      element.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 

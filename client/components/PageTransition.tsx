@@ -1,12 +1,15 @@
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
 
 interface PageTransitionProps {
   children: React.ReactNode;
   className?: string;
 }
 
-export function PageTransition({ children, className = '' }: PageTransitionProps) {
+export function PageTransition({
+  children,
+  className = "",
+}: PageTransitionProps) {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -15,7 +18,7 @@ export function PageTransition({ children, className = '' }: PageTransitionProps
     // Set initial state
     gsap.set(pageRef.current, {
       opacity: 0,
-      y: 30
+      y: 30,
     });
 
     // Animate in
@@ -23,8 +26,8 @@ export function PageTransition({ children, className = '' }: PageTransitionProps
       opacity: 1,
       y: 0,
       duration: 0.6,
-      ease: 'power2.out',
-      delay: 0.1
+      ease: "power2.out",
+      delay: 0.1,
     });
 
     return () => {
@@ -49,45 +52,50 @@ export function LoadingScreen() {
     const tl = gsap.timeline();
 
     // Logo animation
-    tl.fromTo(logoRef.current,
+    tl.fromTo(
+      logoRef.current,
       {
         scale: 0,
         rotation: -180,
-        opacity: 0
+        opacity: 0,
       },
       {
         scale: 1,
         rotation: 0,
         opacity: 1,
         duration: 0.8,
-        ease: 'back.out(1.7)'
-      }
+        ease: "back.out(1.7)",
+      },
     );
 
     // Text animation
-    tl.fromTo(textRef.current,
+    tl.fromTo(
+      textRef.current,
       {
         opacity: 0,
-        y: 20
+        y: 20,
       },
       {
         opacity: 1,
         y: 0,
         duration: 0.6,
-        ease: 'power2.out'
-      }, '-=0.3'
+        ease: "power2.out",
+      },
+      "-=0.3",
     );
 
     // Loading bar animation
-    tl.fromTo('.loading-bar',
+    tl.fromTo(
+      ".loading-bar",
       {
-        scaleX: 0
+        scaleX: 0,
       },
       {
         scaleX: 1,
         duration: 2,
-        ease: 'power2.inOut'
-      }, '-=0.2'
+        ease: "power2.inOut",
+      },
+      "-=0.2",
     );
 
     // Fade out
@@ -95,8 +103,8 @@ export function LoadingScreen() {
       opacity: 0,
       scale: 0.9,
       duration: 0.5,
-      ease: 'power2.inOut',
-      delay: 0.5
+      ease: "power2.inOut",
+      delay: 0.5,
     });
 
     return () => {
@@ -115,7 +123,7 @@ export function LoadingScreen() {
             <span className="text-2xl font-bold text-white">FK</span>
           </div>
         </div>
-        
+
         <div ref={textRef} className="mb-8">
           <h2 className="text-2xl font-bold text-white mb-2">FanKick</h2>
           <p className="text-gray-400">Loading your fan experience...</p>
@@ -138,21 +146,21 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     // Enable smooth scrolling
     const scrollContainer = scrollRef.current;
-    
+
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      
+
       gsap.to(scrollContainer, {
         scrollTop: scrollContainer.scrollTop + e.deltaY * 0.8,
         duration: 0.8,
-        ease: 'power2.out'
+        ease: "power2.out",
       });
     };
 
-    scrollContainer.addEventListener('wheel', handleWheel, { passive: false });
+    scrollContainer.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => {
-      scrollContainer.removeEventListener('wheel', handleWheel);
+      scrollContainer.removeEventListener("wheel", handleWheel);
     };
   }, []);
 

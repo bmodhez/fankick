@@ -19,8 +19,8 @@ export function useParallaxBackground(speed: number = 0.5) {
         trigger: element,
         start: "top bottom",
         end: "bottom top",
-        scrub: true
-      }
+        scrub: true,
+      },
     });
 
     return () => {
@@ -32,7 +32,9 @@ export function useParallaxBackground(speed: number = 0.5) {
 }
 
 // Multi-layer parallax effect
-export function useMultiLayerParallax(layers: Array<{ speed: number; selector: string }>) {
+export function useMultiLayerParallax(
+  layers: Array<{ speed: number; selector: string }>,
+) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export function useMultiLayerParallax(layers: Array<{ speed: number; selector: s
 
     const tweens = layers.map(({ speed, selector }) => {
       const elements = container.querySelectorAll(selector);
-      
+
       return gsap.to(elements, {
         yPercent: -100 * speed,
         ease: "none",
@@ -49,13 +51,13 @@ export function useMultiLayerParallax(layers: Array<{ speed: number; selector: s
           trigger: container,
           start: "top bottom",
           end: "bottom top",
-          scrub: true
-        }
+          scrub: true,
+        },
       });
     });
 
     return () => {
-      tweens.forEach(tween => tween.kill());
+      tweens.forEach((tween) => tween.kill());
     };
   }, [layers]);
 
@@ -75,12 +77,7 @@ export function useAdvancedParallax(config: {
     const element = elementRef.current;
     if (!element) return;
 
-    const {
-      yPercent = -30,
-      rotation = 0,
-      scale = 1,
-      opacity = 1
-    } = config;
+    const { yPercent = -30, rotation = 0, scale = 1, opacity = 1 } = config;
 
     const parallaxTween = gsap.to(element, {
       yPercent,
@@ -92,8 +89,8 @@ export function useAdvancedParallax(config: {
         trigger: element,
         start: "top bottom",
         end: "bottom top",
-        scrub: 1
-      }
+        scrub: 1,
+      },
     });
 
     return () => {
@@ -105,7 +102,9 @@ export function useAdvancedParallax(config: {
 }
 
 // Smooth reveal parallax for content
-export function useParallaxReveal(direction: 'up' | 'down' | 'left' | 'right' = 'up') {
+export function useParallaxReveal(
+  direction: "up" | "down" | "left" | "right" = "up",
+) {
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -116,19 +115,19 @@ export function useParallaxReveal(direction: 'up' | 'down' | 'left' | 'right' = 
     let toProps: any = { opacity: 1 };
 
     switch (direction) {
-      case 'up':
+      case "up":
         fromProps.y = 100;
         toProps.y = 0;
         break;
-      case 'down':
+      case "down":
         fromProps.y = -100;
         toProps.y = 0;
         break;
-      case 'left':
+      case "left":
         fromProps.x = 100;
         toProps.x = 0;
         break;
-      case 'right':
+      case "right":
         fromProps.x = -100;
         toProps.x = 0;
         break;
@@ -142,10 +141,9 @@ export function useParallaxReveal(direction: 'up' | 'down' | 'left' | 'right' = 
         trigger: element,
         start: "top 85%",
         end: "top 50%",
-        toggleActions: "play none none reverse"
-      }
+        toggleActions: "play none none reverse",
+      },
     });
-
   }, [direction]);
 
   return elementRef;
@@ -167,8 +165,8 @@ export function useImageParallax(intensity: number = 1) {
         trigger: image,
         start: "top bottom",
         end: "bottom top",
-        scrub: true
-      }
+        scrub: true,
+      },
     });
 
     return () => {

@@ -13,18 +13,19 @@ export function ParallaxNavigation() {
     if (!nav) return;
 
     // Initial animation
-    gsap.fromTo(nav,
+    gsap.fromTo(
+      nav,
       {
         y: -100,
-        opacity: 0
+        opacity: 0,
       },
       {
         y: 0,
         opacity: 1,
         duration: 1,
         ease: "power3.out",
-        delay: 0.5
-      }
+        delay: 0.5,
+      },
     );
 
     // Scroll-based background change
@@ -33,28 +34,27 @@ export function ParallaxNavigation() {
       end: "bottom bottom",
       onUpdate: (self) => {
         setIsScrolled(self.progress > 0);
-      }
+      },
     });
 
     // Smooth scroll to sections
     const links = nav.querySelectorAll('a[href^="#"]');
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
         e.preventDefault();
-        const href = link.getAttribute('href');
+        const href = link.getAttribute("href");
         if (href) {
           const target = document.querySelector(href);
           if (target) {
             gsap.to(window, {
               duration: 1.5,
               scrollTo: { y: target, offsetY: 80 },
-              ease: "power2.inOut"
+              ease: "power2.inOut",
             });
           }
         }
       });
     });
-
   }, []);
 
   return (
@@ -62,8 +62,8 @@ export function ParallaxNavigation() {
       ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-black/80 backdrop-blur-lg border-b border-white/10'
-          : 'bg-transparent'
+          ? "bg-black/80 backdrop-blur-lg border-b border-white/10"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -121,8 +121,18 @@ export function ParallaxNavigation() {
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button className="text-white hover:text-blue-300 transition-colors duration-300">
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </button>
           </div>

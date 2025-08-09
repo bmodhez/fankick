@@ -127,8 +127,8 @@ export async function updateProduct(req: Request, res: Response) {
     if (updateData.images) {
       console.log(`📸 Product ${id} image update:`, {
         imageCount: updateData.images.length,
-        firstImage: updateData.images[0] || 'No images',
-        allImages: updateData.images
+        firstImage: updateData.images[0] || "No images",
+        allImages: updateData.images,
       });
     }
 

@@ -5,7 +5,7 @@ import {
   AnimatedCategoriesSection,
   AnimatedStatsSection,
   AnimatedFeaturesSection,
-  AnimatedCTASection
+  AnimatedCTASection,
 } from "@/components/AnimatedSections";
 import { AnimationShowcase } from "@/components/AnimationShowcase";
 import { FloatingProductShowcase } from "@/components/FloatingProductShowcase";
@@ -41,7 +41,7 @@ export default function IndexAnimated() {
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
-    
+
     // Show loading screen for a minimum time for better UX
     const timer = setTimeout(() => {
       setShowLoading(false);
@@ -61,10 +61,10 @@ export default function IndexAnimated() {
       <PopupNotifications />
       <StickyDiscountBar />
       <AuthModalComponent />
-      
+
       {/* Replace default navigation with animated version */}
       <AnimatedNavigation />
-      
+
       <div className="min-h-screen bg-gray-900">
         {/* Hero Section with stunning animations */}
         <AnimatedHero />
@@ -85,7 +85,7 @@ export default function IndexAnimated() {
         {trendingProducts.length > 0 && (
           <section className="py-20 bg-gray-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <AnimatedProductGrid 
+              <AnimatedProductGrid
                 products={trendingProducts}
                 title="🔥 Trending Now"
                 variant="trending"
@@ -98,7 +98,7 @@ export default function IndexAnimated() {
         {featuredProducts.length > 0 && (
           <section className="py-20 bg-gray-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <AnimatedProductGrid 
+              <AnimatedProductGrid
                 products={featuredProducts}
                 title="👑 Exclusive Collection"
                 variant="featured"
@@ -114,7 +114,7 @@ export default function IndexAnimated() {
         {newArrivals.length > 0 && (
           <section className="py-20 bg-gray-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <AnimatedProductGrid 
+              <AnimatedProductGrid
                 products={newArrivals}
                 title="✨ New Arrivals"
                 variant="default"

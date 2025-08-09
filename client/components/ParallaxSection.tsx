@@ -13,13 +13,13 @@ interface ParallaxSectionProps {
   children?: React.ReactNode;
 }
 
-export function ParallaxSection({ 
-  backgroundImage, 
-  title, 
-  subtitle, 
-  description, 
+export function ParallaxSection({
+  backgroundImage,
+  title,
+  subtitle,
+  description,
   reverse = false,
-  children 
+  children,
 }: ParallaxSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -40,15 +40,16 @@ export function ParallaxSection({
         trigger: section,
         start: "top bottom",
         end: "bottom top",
-        scrub: true
-      }
+        scrub: true,
+      },
     });
 
     // Content animation
-    gsap.fromTo(content,
+    gsap.fromTo(
+      content,
       {
         y: 100,
-        opacity: 0
+        opacity: 0,
       },
       {
         y: 0,
@@ -59,17 +60,18 @@ export function ParallaxSection({
           trigger: section,
           start: "top 80%",
           end: "top 50%",
-          toggleActions: "play none none reverse"
-        }
-      }
+          toggleActions: "play none none reverse",
+        },
+      },
     );
 
     // Individual element animations
-    const elements = content.querySelectorAll('.animate-element');
-    gsap.fromTo(elements,
+    const elements = content.querySelectorAll(".animate-element");
+    gsap.fromTo(
+      elements,
       {
         y: 60,
-        opacity: 0
+        opacity: 0,
       },
       {
         y: 0,
@@ -80,11 +82,10 @@ export function ParallaxSection({
         scrollTrigger: {
           trigger: section,
           start: "top 70%",
-          toggleActions: "play none none reverse"
-        }
-      }
+          toggleActions: "play none none reverse",
+        },
+      },
     );
-
   }, [reverse]);
 
   return (
@@ -94,19 +95,21 @@ export function ParallaxSection({
         ref={backgroundRef}
         className="absolute inset-0 w-full h-[120%] bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('${backgroundImage}')`
+          backgroundImage: `url('${backgroundImage}')`,
         }}
       />
-      
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/50" />
-      
+
       {/* Content */}
       <div ref={contentRef} className="relative z-10 h-full flex items-center">
-        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full ${
-          reverse ? 'text-right' : 'text-left'
-        }`}>
-          <div className={`max-w-2xl ${reverse ? 'ml-auto' : 'mr-auto'}`}>
+        <div
+          className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full ${
+            reverse ? "text-right" : "text-left"
+          }`}
+        >
+          <div className={`max-w-2xl ${reverse ? "ml-auto" : "mr-auto"}`}>
             <h2 className="animate-element text-5xl md:text-7xl font-bold text-white mb-6 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
               {title}
             </h2>
@@ -116,11 +119,7 @@ export function ParallaxSection({
             <p className="animate-element text-lg md:text-xl text-gray-200 leading-relaxed mb-12">
               {description}
             </p>
-            {children && (
-              <div className="animate-element">
-                {children}
-              </div>
-            )}
+            {children && <div className="animate-element">{children}</div>}
           </div>
         </div>
       </div>

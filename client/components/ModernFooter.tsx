@@ -8,7 +8,7 @@ import {
   Phone,
   MapPin,
   Crown,
-  Heart
+  Heart,
 } from "lucide-react";
 
 export function ModernFooter() {
@@ -30,7 +30,7 @@ export function ModernFooter() {
               </span>
             </Link>
             <p className="text-gray-400 text-sm max-w-xs">
-              India's most trusted destination for authentic fan merchandise. 
+              India's most trusted destination for authentic fan merchandise.
               Quality products for passionate fans.
             </p>
             <div className="flex space-x-3">
@@ -63,27 +63,42 @@ export function ModernFooter() {
             <h3 className="font-semibold text-white mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/collections" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/collections"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   All Collections
                 </Link>
               </li>
               <li>
-                <Link to="/category/football" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/category/football"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   Football Jerseys
                 </Link>
               </li>
               <li>
-                <Link to="/category/anime" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/category/anime"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   Anime Merchandise
                 </Link>
               </li>
               <li>
-                <Link to="/category/pop-culture" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/category/pop-culture"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   Pop Culture Items
                 </Link>
               </li>
               <li>
-                <Link to="/trending" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/trending"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   Trending Products
                 </Link>
               </li>
@@ -95,27 +110,42 @@ export function ModernFooter() {
             <h3 className="font-semibold text-white mb-4">Customer Service</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/contact"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link to="/shipping" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/shipping"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   Shipping Info
                 </Link>
               </li>
               <li>
-                <Link to="/refunds" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/refunds"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   Returns & Refunds
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/terms"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   Terms & Conditions
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">
+                <Link
+                  to="/privacy"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   Privacy Policy
                 </Link>
               </li>
@@ -128,7 +158,9 @@ export function ModernFooter() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-blue-400" />
-                <span className="text-gray-400 text-sm">support@fankick.in</span>
+                <span className="text-gray-400 text-sm">
+                  support@fankick.in
+                </span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-blue-400" />
@@ -149,7 +181,10 @@ export function ModernFooter() {
                   placeholder="Enter your email"
                   className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
                 />
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+                <Button
+                  size="sm"
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                >
                   Subscribe
                 </Button>
               </div>
@@ -163,7 +198,7 @@ export function ModernFooter() {
             <div className="text-sm text-gray-400">
               © {currentYear} FanKick. All rights reserved.
             </div>
-            
+
             <div className="flex items-center space-x-1 text-sm text-gray-400">
               <span>Made with</span>
               <Heart className="w-4 h-4 text-red-500 fill-red-500" />
@@ -171,13 +206,22 @@ export function ModernFooter() {
             </div>
 
             <div className="flex space-x-6">
-              <Link to="/terms" className="text-sm text-gray-400 hover:text-white transition-colors">
+              <Link
+                to="/terms"
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
                 Terms
               </Link>
-              <Link to="/privacy" className="text-sm text-gray-400 hover:text-white transition-colors">
+              <Link
+                to="/privacy"
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
                 Privacy
               </Link>
-              <Link to="/refunds" className="text-sm text-gray-400 hover:text-white transition-colors">
+              <Link
+                to="/refunds"
+                className="text-sm text-gray-400 hover:text-white transition-colors"
+              >
                 Refunds
               </Link>
             </div>

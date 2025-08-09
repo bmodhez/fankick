@@ -50,16 +50,19 @@ export function ProductProvider({ children }: ProductProviderProps) {
         // Only set default images for products that have placeholder images
         const updatedProducts = PRODUCTS.map((product) => ({
           ...product,
-          images: product.images.some(img =>
-            img.includes('placeholder.svg') ||
-            img.includes('via.placeholder.com') ||
-            img === '/placeholder.svg'
-          ) ? [
-            builderImageUrl,
-            builderImageUrl,
-            builderImageUrl,
-            builderImageUrl,
-          ] : product.images,
+          images: product.images.some(
+            (img) =>
+              img.includes("placeholder.svg") ||
+              img.includes("via.placeholder.com") ||
+              img === "/placeholder.svg",
+          )
+            ? [
+                builderImageUrl,
+                builderImageUrl,
+                builderImageUrl,
+                builderImageUrl,
+              ]
+            : product.images,
         }));
 
         console.log("FORCING PRODUCT IMAGES UPDATE:");
@@ -181,20 +184,22 @@ export function ProductProvider({ children }: ProductProviderProps) {
         name: updatedProduct.name,
         price: updatedProduct.basePrice,
         variants: updatedProduct.variants?.length || 0,
-        images: updatedProduct.images?.length || 0
+        images: updatedProduct.images?.length || 0,
       });
 
       // Log detailed image information for debugging
       console.log(`📸 Product images being updated:`, {
         productId: updatedProduct.id,
         imageCount: updatedProduct.images?.length || 0,
-        firstImage: updatedProduct.images?.[0] || 'No images',
-        allImages: updatedProduct.images
+        firstImage: updatedProduct.images?.[0] || "No images",
+        allImages: updatedProduct.images,
       });
 
       const result = await productApi.update(updatedProduct.id, updatedProduct);
 
-      console.log(`✅ Product ${updatedProduct.id} updated successfully on backend`);
+      console.log(
+        `✅ Product ${updatedProduct.id} updated successfully on backend`,
+      );
 
       setProducts((prevProducts) =>
         prevProducts.map((product) =>

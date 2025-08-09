@@ -1,12 +1,12 @@
-import { useState, useRef, useLayoutEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Product } from '@/data/products';
-import { useCart } from '@/contexts/CartContext';
-import { useLike } from '@/contexts/LikeContext';
+import { useState, useRef, useLayoutEffect } from "react";
+import { Link } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Product } from "@/data/products";
+import { useCart } from "@/contexts/CartContext";
+import { useLike } from "@/contexts/LikeContext";
 import {
   Heart,
   ShoppingBag,
@@ -14,8 +14,8 @@ import {
   Eye,
   TrendingUp,
   Crown,
-  ArrowRight
-} from 'lucide-react';
+  ArrowRight,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,15 +24,20 @@ interface ModernProductCardProps {
   index?: number;
 }
 
-export function ModernProductCard({ product, index = 0 }: ModernProductCardProps) {
+export function ModernProductCard({
+  product,
+  index = 0,
+}: ModernProductCardProps) {
   const { addToCart } = useCart();
   const { toggleLike, isLiked } = useLike();
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const cardRef = useRef<HTMLDivElement>(null);
 
   const isProductLiked = isLiked(product.id);
-  const discount = Math.round(((product.originalPrice - product.basePrice) / product.originalPrice) * 100);
+  const discount = Math.round(
+    ((product.originalPrice - product.basePrice) / product.originalPrice) * 100,
+  );
 
   // Smooth scroll-triggered animation
   useLayoutEffect(() => {
@@ -41,7 +46,7 @@ export function ModernProductCard({ product, index = 0 }: ModernProductCardProps
     gsap.set(cardRef.current, {
       opacity: 0,
       y: 30,
-      scale: 0.95
+      scale: 0.95,
     });
 
     ScrollTrigger.create({
@@ -54,13 +59,13 @@ export function ModernProductCard({ product, index = 0 }: ModernProductCardProps
           scale: 1,
           duration: 0.6,
           ease: "power2.out",
-          delay: index * 0.1
+          delay: index * 0.1,
         });
-      }
+      },
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, [index]);
 
@@ -69,7 +74,7 @@ export function ModernProductCard({ product, index = 0 }: ModernProductCardProps
       addToCart({
         productId: product.id,
         variantId: product.variants[0].id,
-        quantity: 1
+        quantity: 1,
       });
     }
   };
@@ -103,7 +108,7 @@ export function ModernProductCard({ product, index = 0 }: ModernProductCardProps
               -{discount}%
             </Badge>
           )}
-          
+
           {product.isTrending && (
             <Badge className="bg-orange-500 text-white font-bold px-2 py-1 text-xs flex items-center">
               <TrendingUp className="w-3 h-3 mr-1" />
@@ -124,19 +129,21 @@ export function ModernProductCard({ product, index = 0 }: ModernProductCardProps
           onClick={handleToggleLike}
           className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-all duration-200 shadow-lg"
         >
-          <Heart 
+          <Heart
             className={`w-5 h-5 transition-all duration-200 ${
-              isProductLiked 
-                ? 'text-red-500 fill-red-500' 
-                : 'text-gray-600 hover:text-red-400'
+              isProductLiked
+                ? "text-red-500 fill-red-500"
+                : "text-gray-600 hover:text-red-400"
             }`}
           />
         </button>
 
         {/* Hover Overlay */}
-        <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-all duration-300 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}>
+        <div
+          className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-all duration-300 ${
+            isHovered ? "opacity-100" : "opacity-0"
+          }`}
+        >
           <div className="flex space-x-2">
             <Link to={`/product/${product.id}`}>
               <Button
@@ -148,7 +155,7 @@ export function ModernProductCard({ product, index = 0 }: ModernProductCardProps
                 View
               </Button>
             </Link>
-            
+
             <Button
               size="sm"
               onClick={handleAddToCart}
@@ -163,7 +170,9 @@ export function ModernProductCard({ product, index = 0 }: ModernProductCardProps
         {/* Rating */}
         <div className="absolute bottom-3 left-3 flex items-center space-x-1 bg-white/80 backdrop-blur-sm rounded-full px-2 py-1">
           <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
-          <span className="text-gray-900 text-xs font-medium">{product.rating}</span>
+          <span className="text-gray-900 text-xs font-medium">
+            {product.rating}
+          </span>
         </div>
       </div>
 
@@ -189,7 +198,7 @@ export function ModernProductCard({ product, index = 0 }: ModernProductCardProps
               </span>
             )}
           </div>
-          
+
           <div className="text-right">
             <div className="text-xs text-gray-500">
               {product.reviews} reviews
@@ -212,10 +221,10 @@ export function ModernProductCard({ product, index = 0 }: ModernProductCardProps
 }
 
 // Grid container with smooth animations
-export function ModernProductGrid({ 
-  products, 
-  title 
-}: { 
+export function ModernProductGrid({
+  products,
+  title,
+}: {
   products: Product[];
   title?: string;
 }) {
@@ -226,7 +235,7 @@ export function ModernProductGrid({
 
     gsap.set(gridRef.current, {
       opacity: 0,
-      y: 30
+      y: 30,
     });
 
     ScrollTrigger.create({
@@ -237,13 +246,13 @@ export function ModernProductGrid({
           opacity: 1,
           y: 0,
           duration: 0.8,
-          ease: "power2.out"
+          ease: "power2.out",
         });
-      }
+      },
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
 
@@ -257,14 +266,10 @@ export function ModernProductGrid({
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full" />
         </div>
       )}
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map((product, index) => (
-          <ModernProductCard
-            key={product.id}
-            product={product}
-            index={index}
-          />
+          <ModernProductCard key={product.id} product={product} index={index} />
         ))}
       </div>
     </div>

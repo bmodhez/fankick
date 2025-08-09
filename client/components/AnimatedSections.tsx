@@ -1,11 +1,22 @@
-import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { useGSAP, useScrollFadeIn, useStaggerAnimation, useCounterAnimation, useParallax } from '@/hooks/useGSAP';
-import { useScrollDrop, useScrollDropSequence } from '@/hooks/useScrollDrop';
-import { useParallaxBackground, useMultiLayerParallax, useParallaxReveal, useImageParallax } from '@/hooks/useParallaxScrolling';
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import { gsap } from "gsap";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  useGSAP,
+  useScrollFadeIn,
+  useStaggerAnimation,
+  useCounterAnimation,
+  useParallax,
+} from "@/hooks/useGSAP";
+import { useScrollDrop, useScrollDropSequence } from "@/hooks/useScrollDrop";
+import {
+  useParallaxBackground,
+  useMultiLayerParallax,
+  useParallaxReveal,
+  useImageParallax,
+} from "@/hooks/useParallaxScrolling";
 import {
   ArrowRight,
   Star,
@@ -21,17 +32,35 @@ import {
   CreditCard,
   Sparkles,
   Globe,
-  Trophy
-} from 'lucide-react';
+  Trophy,
+} from "lucide-react";
 
 // Hero Categories Section
 export function AnimatedCategoriesSection() {
   const sectionRef = useScrollFadeIn(0.1);
   const parallaxBgRef = useParallaxBackground(0.4);
   const cardsRef = useScrollDropSequence([
-    { startY: -200, endY: 0, delay: 0, triggerStart: "top 80%", triggerEnd: "top 40%" },
-    { startY: -250, endY: 0, delay: 0.1, triggerStart: "top 80%", triggerEnd: "top 40%" },
-    { startY: -300, endY: 0, delay: 0.2, triggerStart: "top 80%", triggerEnd: "top 40%" }
+    {
+      startY: -200,
+      endY: 0,
+      delay: 0,
+      triggerStart: "top 80%",
+      triggerEnd: "top 40%",
+    },
+    {
+      startY: -250,
+      endY: 0,
+      delay: 0.1,
+      triggerStart: "top 80%",
+      triggerEnd: "top 40%",
+    },
+    {
+      startY: -300,
+      endY: 0,
+      delay: 0.2,
+      triggerStart: "top 80%",
+      triggerEnd: "top 40%",
+    },
   ]);
 
   const categories = [
@@ -39,40 +68,46 @@ export function AnimatedCategoriesSection() {
       title: "⚽ Football",
       subtitle: "Premium Jerseys & Gear",
       description: "Official team jerseys, boots, and training equipment",
-      image: "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F922085d1ab7548b585d0596e342d2e5d?format=webp&width=800",
+      image:
+        "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F922085d1ab7548b585d0596e342d2e5d?format=webp&width=800",
       link: "/category/football",
       gradient: "from-green-500 to-blue-600",
       icon: "⚽",
-      stats: "500+ Products"
+      stats: "500+ Products",
     },
     {
       title: "🎌 Anime",
       subtitle: "Collectibles & Merch",
       description: "Exclusive anime merchandise and collectibles",
-      image: "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=400",
+      image:
+        "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=400",
       link: "/category/anime",
       gradient: "from-purple-500 to-pink-600",
       icon: "🎌",
-      stats: "300+ Items"
+      stats: "300+ Items",
     },
     {
       title: "🎭 Pop Culture",
       subtitle: "Trending Merchandise",
       description: "Latest trends and pop culture collectibles",
-      image: "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F922085d1ab7548b585d0596e342d2e5d?format=webp&width=800",
+      image:
+        "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F922085d1ab7548b585d0596e342d2e5d?format=webp&width=800",
       link: "/category/pop-culture",
       gradient: "from-orange-500 to-red-600",
       icon: "🎭",
-      stats: "200+ Products"
-    }
+      stats: "200+ Products",
+    },
   ];
 
   return (
     <section ref={sectionRef} className="py-20 relative overflow-hidden">
       {/* Background Elements with Parallax */}
-      <div ref={parallaxBgRef} className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900" />
+      <div
+        ref={parallaxBgRef}
+        className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900"
+      />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(16,185,129,0.1)_0%,transparent_50%)] pointer-events-none" />
-      
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -81,20 +116,28 @@ export function AnimatedCategoriesSection() {
             Explore Categories
           </Badge>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Shop by{' '}
+            Shop by{" "}
             <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
               Passion
             </span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Discover our premium collection of fan gear across your favorite categories
+            Discover our premium collection of fan gear across your favorite
+            categories
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        <div
+          ref={cardsRef}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
+        >
           {categories.map((category, index) => (
-            <Link key={index} to={category.link} className="group mobile-optimized tablet-optimized desktop-enhanced">
+            <Link
+              key={index}
+              to={category.link}
+              className="group mobile-optimized tablet-optimized desktop-enhanced"
+            >
               <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gray-800 border border-gray-700 hover:border-primary/50 transition-all duration-500 hover:scale-105">
                 {/* Background Image with Parallax */}
                 <div className="absolute inset-0 overflow-hidden">
@@ -104,7 +147,9 @@ export function AnimatedCategoriesSection() {
                     alt={category.title}
                     className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-80 group-hover:opacity-90 transition-opacity duration-500`} />
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-80 group-hover:opacity-90 transition-opacity duration-500`}
+                  />
                 </div>
 
                 {/* Content */}
@@ -123,7 +168,7 @@ export function AnimatedCategoriesSection() {
                       {category.description}
                     </p>
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <Badge className="bg-white/10 text-white border-white/20">
                       {category.stats}
@@ -148,43 +193,77 @@ export function AnimatedStatsSection() {
   const sectionRef = useScrollFadeIn(0.1);
   const statsParallaxRef = useParallaxBackground(0.6);
   const statsRef = useScrollDropSequence([
-    { startY: -120, endY: 0, delay: 0, triggerStart: "top 85%", triggerEnd: "top 45%" },
-    { startY: -140, endY: 0, delay: 0.05, triggerStart: "top 85%", triggerEnd: "top 45%" },
-    { startY: -160, endY: 0, delay: 0.1, triggerStart: "top 85%", triggerEnd: "top 45%" },
-    { startY: -180, endY: 0, delay: 0.15, triggerStart: "top 85%", triggerEnd: "top 45%" }
+    {
+      startY: -120,
+      endY: 0,
+      delay: 0,
+      triggerStart: "top 85%",
+      triggerEnd: "top 45%",
+    },
+    {
+      startY: -140,
+      endY: 0,
+      delay: 0.05,
+      triggerStart: "top 85%",
+      triggerEnd: "top 45%",
+    },
+    {
+      startY: -160,
+      endY: 0,
+      delay: 0.1,
+      triggerStart: "top 85%",
+      triggerEnd: "top 45%",
+    },
+    {
+      startY: -180,
+      endY: 0,
+      delay: 0.15,
+      triggerStart: "top 85%",
+      triggerEnd: "top 45%",
+    },
   ]);
-  
+
   const stats = [
     { icon: Users, label: "Happy Customers", value: 50000, suffix: "+" },
     { icon: Package, label: "Products Sold", value: 100000, suffix: "+" },
     { icon: Globe, label: "Countries Served", value: 25, suffix: "+" },
-    { icon: Award, label: "Years Excellence", value: 5, suffix: "+" }
+    { icon: Award, label: "Years Excellence", value: 5, suffix: "+" },
   ];
 
   return (
     <section ref={sectionRef} className="py-20 relative overflow-hidden">
       {/* Parallax Background */}
-      <div ref={statsParallaxRef} className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900" />
+      <div
+        ref={statsParallaxRef}
+        className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"
+      />
       {/* Animated Background */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-10 left-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div
+          className="absolute bottom-10 right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Trusted by{' '}
+            Trusted by{" "}
             <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
               Fans Worldwide
             </span>
           </h2>
           <p className="text-gray-400 text-lg">
-            Join millions of satisfied customers who trust FanKick for their fan gear
+            Join millions of satisfied customers who trust FanKick for their fan
+            gear
           </p>
         </div>
 
-        <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+        <div
+          ref={statsRef}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+        >
           {stats.map((stat, index) => (
             <StatCard key={index} {...stat} />
           ))}
@@ -194,7 +273,12 @@ export function AnimatedStatsSection() {
   );
 }
 
-function StatCard({ icon: Icon, label, value, suffix }: {
+function StatCard({
+  icon: Icon,
+  label,
+  value,
+  suffix,
+}: {
   icon: any;
   label: string;
   value: number;
@@ -209,7 +293,7 @@ function StatCard({ icon: Icon, label, value, suffix }: {
         scale: 1.05,
         rotationY: 5,
         duration: 0.3,
-        ease: 'power2.out'
+        ease: "power2.out",
       });
     };
 
@@ -218,18 +302,18 @@ function StatCard({ icon: Icon, label, value, suffix }: {
         scale: 1,
         rotationY: 0,
         duration: 0.3,
-        ease: 'power2.out'
+        ease: "power2.out",
       });
     };
 
     const card = cardRef.current;
     if (card) {
-      card.addEventListener('mouseenter', handleMouseEnter);
-      card.addEventListener('mouseleave', handleMouseLeave);
+      card.addEventListener("mouseenter", handleMouseEnter);
+      card.addEventListener("mouseleave", handleMouseLeave);
 
       return () => {
-        card.removeEventListener('mouseenter', handleMouseEnter);
-        card.removeEventListener('mouseleave', handleMouseLeave);
+        card.removeEventListener("mouseenter", handleMouseEnter);
+        card.removeEventListener("mouseleave", handleMouseLeave);
       };
     }
   }, []);
@@ -261,26 +345,26 @@ export function AnimatedFeaturesSection() {
       icon: Shield,
       title: "Authentic Products",
       description: "100% genuine merchandise with authenticity guarantee",
-      color: "text-green-400"
+      color: "text-green-400",
     },
     {
       icon: Truck,
       title: "Fast Delivery",
       description: "Express shipping to your doorstep in 2-5 business days",
-      color: "text-blue-400"
+      color: "text-blue-400",
     },
     {
       icon: CreditCard,
       title: "Secure Payment",
       description: "Multiple payment options with bank-level security",
-      color: "text-purple-400"
+      color: "text-purple-400",
     },
     {
       icon: Heart,
       title: "Customer Love",
       description: "24/7 customer support with 99% satisfaction rate",
-      color: "text-red-400"
-    }
+      color: "text-red-400",
+    },
   ];
 
   return (
@@ -292,7 +376,7 @@ export function AnimatedFeaturesSection() {
             Why Choose FanKick
           </Badge>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Experience{' '}
+            Experience{" "}
             <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
               Excellence
             </span>
@@ -302,14 +386,16 @@ export function AnimatedFeaturesSection() {
           </p>
         </div>
 
-        <div ref={featuresRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div
+          ref={featuresRef}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className="text-center group cursor-pointer"
-            >
+            <div key={index} className="text-center group cursor-pointer">
               <div className="bg-gray-700 rounded-2xl p-8 hover:bg-gray-600 transition-all duration-300 group-hover:scale-105 border border-gray-600 hover:border-primary/30">
-                <div className={`w-16 h-16 rounded-2xl bg-gray-600 flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-500 transition-colors duration-300`}>
+                <div
+                  className={`w-16 h-16 rounded-2xl bg-gray-600 flex items-center justify-center mx-auto mb-6 group-hover:bg-gray-500 transition-colors duration-300`}
+                >
                   <feature.icon className={`w-8 h-8 ${feature.color}`} />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors duration-300">
@@ -331,7 +417,7 @@ export function AnimatedFeaturesSection() {
 export function AnimatedCTASection() {
   const sectionRef = useScrollFadeIn(0.1);
   const parallaxRef = useParallaxBackground(0.5);
-  const ctaContentRef = useParallaxReveal('up');
+  const ctaContentRef = useParallaxReveal("up");
 
   return (
     <section ref={sectionRef} className="py-20 relative overflow-hidden">
@@ -340,27 +426,33 @@ export function AnimatedCTASection() {
         ref={parallaxRef}
         className="absolute inset-0 bg-gradient-to-br from-primary/20 via-purple-600/20 to-pink-600/20"
       />
-      
+
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div
+          className="absolute bottom-20 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "2s" }}
+        />
       </div>
 
-      <div ref={ctaContentRef} className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <div
+        ref={ctaContentRef}
+        className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8"
+      >
         <div className="bg-gray-800/50 backdrop-blur-sm rounded-3xl p-12 border border-gray-700">
           <Sparkles className="w-16 h-16 text-primary mx-auto mb-6" />
-          
+
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Show Your{' '}
+            Ready to Show Your{" "}
             <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
               Fan Spirit?
             </span>
           </h2>
-          
+
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            Join millions of fans worldwide and get exclusive access to premium merchandise, 
-            early releases, and special discounts.
+            Join millions of fans worldwide and get exclusive access to premium
+            merchandise, early releases, and special discounts.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -374,7 +466,7 @@ export function AnimatedCTASection() {
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            
+
             <Link to="/category/trending">
               <Button
                 variant="outline"

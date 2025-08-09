@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { useAuth } from '@/contexts/AuthContext';
-import { useCart } from '@/contexts/CartContext';
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
 import {
   Search,
   ShoppingBag,
@@ -12,8 +12,8 @@ import {
   X,
   Crown,
   Heart,
-  Zap
-} from 'lucide-react';
+  Zap,
+} from "lucide-react";
 
 export function ModernNavigation() {
   const { user, logout, isAdmin } = useAuth();
@@ -27,27 +27,27 @@ export function ModernNavigation() {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const cartItemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   const navItems = [
-    { label: 'Home', path: '/' },
-    { label: 'Football', path: '/category/football' },
-    { label: 'Anime', path: '/category/anime' },
-    { label: 'Pop Culture', path: '/category/pop-culture' },
-    { label: 'Collections', path: '/collections' }
+    { label: "Home", path: "/" },
+    { label: "Football", path: "/category/football" },
+    { label: "Anime", path: "/category/anime" },
+    { label: "Pop Culture", path: "/category/pop-culture" },
+    { label: "Collections", path: "/collections" },
   ];
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-            : 'bg-white/80 backdrop-blur-sm'
+          isScrolled
+            ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100"
+            : "bg-white/80 backdrop-blur-sm"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,8 +72,8 @@ export function ModernNavigation() {
                   to={item.path}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                     location.pathname === item.path
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                   }`}
                 >
                   {item.label}
@@ -118,7 +118,7 @@ export function ModernNavigation() {
                       </Button>
                     </Link>
                   )}
-                  
+
                   <button
                     onClick={logout}
                     className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
@@ -164,14 +164,14 @@ export function ModernNavigation() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 ${
                     location.pathname === item.path
-                      ? 'text-blue-600 bg-blue-50'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                   }`}
                 >
                   {item.label}
                 </Link>
               ))}
-              
+
               {!user && (
                 <div className="pt-4 border-t border-gray-100">
                   <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>

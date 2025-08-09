@@ -9,26 +9,26 @@ const stats = [
     number: 10000,
     label: "Happy Customers",
     suffix: "+",
-    icon: "👥"
+    icon: "👥",
   },
   {
     number: 500,
     label: "Projects Completed",
     suffix: "+",
-    icon: "🚀"
+    icon: "🚀",
   },
   {
     number: 99,
     label: "Success Rate",
     suffix: "%",
-    icon: "⭐"
+    icon: "⭐",
   },
   {
     number: 24,
     label: "Support Available",
     suffix: "/7",
-    icon: "🛟"
-  }
+    icon: "🛟",
+  },
 ];
 
 export function ParallaxStats() {
@@ -49,23 +49,24 @@ export function ParallaxStats() {
         trigger: statsSection,
         start: "top bottom",
         end: "bottom top",
-        scrub: true
-      }
+        scrub: true,
+      },
     });
 
     // Stats animation
-    const statItems = statsSection.querySelectorAll('.stat-item');
-    
+    const statItems = statsSection.querySelectorAll(".stat-item");
+
     statItems.forEach((item, index) => {
-      const numberElement = item.querySelector('.stat-number');
+      const numberElement = item.querySelector(".stat-number");
       const number = stats[index].number;
-      
+
       // Animate the containers
-      gsap.fromTo(item,
+      gsap.fromTo(
+        item,
         {
           y: 100,
           opacity: 0,
-          scale: 0.8
+          scale: 0.8,
         },
         {
           y: 0,
@@ -77,15 +78,16 @@ export function ParallaxStats() {
           scrollTrigger: {
             trigger: item,
             start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
-        }
+            toggleActions: "play none none reverse",
+          },
+        },
       );
 
       // Animate the numbers
-      gsap.fromTo(numberElement,
+      gsap.fromTo(
+        numberElement,
         {
-          textContent: 0
+          textContent: 0,
         },
         {
           textContent: number,
@@ -96,9 +98,9 @@ export function ParallaxStats() {
           scrollTrigger: {
             trigger: item,
             start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
-        }
+            toggleActions: "play none none reverse",
+          },
+        },
       );
 
       // Floating animation
@@ -113,11 +115,10 @@ export function ParallaxStats() {
           trigger: statsSection,
           start: "top 60%",
           end: "bottom 40%",
-          toggleActions: "play pause play reverse"
-        }
+          toggleActions: "play pause play reverse",
+        },
       });
     });
-
   }, []);
 
   return (
@@ -127,13 +128,13 @@ export function ParallaxStats() {
         ref={backgroundRef}
         className="absolute inset-0 w-full h-[120%] bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://images.pexels.com/photos/33319398/pexels-photo-33319398.jpeg?auto=compress&cs=tinysrgb&w=5726&h=3817')`
+          backgroundImage: `url('https://images.pexels.com/photos/33319398/pexels-photo-33319398.jpeg?auto=compress&cs=tinysrgb&w=5726&h=3817')`,
         }}
       />
-      
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
-      
+
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
@@ -141,7 +142,7 @@ export function ParallaxStats() {
             Our Impact
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Numbers that speak louder than words. Our commitment to excellence 
+            Numbers that speak louder than words. Our commitment to excellence
             is reflected in every metric that matters.
           </p>
         </div>

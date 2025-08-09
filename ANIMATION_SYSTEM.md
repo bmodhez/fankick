@@ -63,18 +63,21 @@ client/
 ### Core Hooks
 
 #### `useGSAP()`
+
 Main hook for GSAP animations with context cleanup.
 
 ```typescript
 const containerRef = useGSAP(() => {
-  gsap.fromTo('.element', 
+  gsap.fromTo(
+    ".element",
     { opacity: 0, y: 50 },
-    { opacity: 1, y: 0, duration: 0.8 }
+    { opacity: 1, y: 0, duration: 0.8 },
   );
 }, [dependencies]);
 ```
 
 #### `useScrollFadeIn()`
+
 Scroll-triggered fade-in animations.
 
 ```typescript
@@ -82,6 +85,7 @@ const elementRef = useScrollFadeIn(0.1); // threshold
 ```
 
 #### `useStaggerAnimation()`
+
 Stagger animations for multiple elements.
 
 ```typescript
@@ -89,6 +93,7 @@ const containerRef = useStaggerAnimation(0.1); // stagger delay
 ```
 
 #### `useCounterAnimation()`
+
 Animated counters for statistics.
 
 ```typescript
@@ -96,6 +101,7 @@ const counterRef = useCounterAnimation(1000, 2); // end value, duration
 ```
 
 #### `useMagneticEffect()`
+
 Magnetic button hover effects.
 
 ```typescript
@@ -135,11 +141,11 @@ The homepage now includes:
 ### Basic Fade-In Animation
 
 ```tsx
-import { useScrollFadeIn } from '@/hooks/useGSAP';
+import { useScrollFadeIn } from "@/hooks/useGSAP";
 
 export function MyComponent() {
   const elementRef = useScrollFadeIn(0.2);
-  
+
   return (
     <div ref={elementRef} className="my-content">
       Content that fades in on scroll
@@ -151,19 +157,20 @@ export function MyComponent() {
 ### Custom GSAP Animation
 
 ```tsx
-import { useGSAP } from '@/hooks/useGSAP';
+import { useGSAP } from "@/hooks/useGSAP";
 
 export function CustomAnimation() {
   const containerRef = useGSAP(() => {
     const tl = gsap.timeline();
-    
-    tl.fromTo('.title', 
+
+    tl.fromTo(
+      ".title",
       { opacity: 0, scale: 0.8 },
-      { opacity: 1, scale: 1, duration: 0.6 }
-    )
-    .fromTo('.subtitle',
+      { opacity: 1, scale: 1, duration: 0.6 },
+    ).fromTo(
+      ".subtitle",
       { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.5 }
+      { opacity: 1, y: 0, duration: 0.5 },
     );
   }, []);
 
@@ -179,11 +186,11 @@ export function CustomAnimation() {
 ### Responsive Animation
 
 ```tsx
-import { useResponsiveGSAP } from '@/hooks/useResponsiveGSAP';
+import { useResponsiveGSAP } from "@/hooks/useResponsiveGSAP";
 
 export function ResponsiveComponent() {
   const containerRef = useResponsiveGSAP();
-  
+
   return (
     <div ref={containerRef}>
       <div className="mobile-optimized tablet-optimized desktop-enhanced">
@@ -225,12 +232,12 @@ Global GSAP settings are configured in `utils/gsapConfig.ts`:
 ```typescript
 gsap.config({
   force3D: true,
-  nullTargetWarn: false
+  nullTargetWarn: false,
 });
 
 ScrollTrigger.config({
   limitCallbacks: true,
-  ignoreMobileResize: true
+  ignoreMobileResize: true,
 });
 ```
 

@@ -72,10 +72,7 @@ const AppContent = () => {
                           <ScrollToTop />
                           <div className="min-h-screen">
                             <Routes>
-                              <Route
-                                path="/"
-                                element={<Index />}
-                              />
+                              <Route path="/" element={<Index />} />
                               <Route
                                 path="/category/:category"
                                 element={
@@ -338,7 +335,7 @@ let root: ReturnType<typeof createRoot>;
 if (import.meta.hot) {
   // In development, always create a fresh root for proper HMR
   if (rootElement.children.length > 0) {
-    rootElement.innerHTML = '';
+    rootElement.innerHTML = "";
   }
   root = createRoot(rootElement);
 } else {

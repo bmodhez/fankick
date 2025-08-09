@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   ArrowRight,
   ShoppingBag,
@@ -13,8 +13,8 @@ import {
   Truck,
   Shield,
   Heart,
-  Sparkles
-} from 'lucide-react';
+  Sparkles,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,36 +24,47 @@ export function ModernHero() {
 
   useEffect(() => {
     setIsLoaded(true);
-    
+
     if (!heroRef.current) return;
 
     const tl = gsap.timeline();
 
     // Smooth fade in animations
-    tl.fromTo('.hero-badge', 
+    tl.fromTo(
+      ".hero-badge",
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
     )
-    .fromTo('.hero-title', 
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, '-=0.6'
-    )
-    .fromTo('.hero-subtitle', 
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.8'
-    )
-    .fromTo('.hero-buttons', 
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.6'
-    )
-    .fromTo('.hero-stats', 
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', stagger: 0.1 }, '-=0.4'
-    )
-    .fromTo('.hero-image', 
-      { opacity: 0, scale: 0.9 },
-      { opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out' }, '-=1'
-    );
+      .fromTo(
+        ".hero-title",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, ease: "power2.out" },
+        "-=0.6",
+      )
+      .fromTo(
+        ".hero-subtitle",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        "-=0.8",
+      )
+      .fromTo(
+        ".hero-buttons",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        "-=0.6",
+      )
+      .fromTo(
+        ".hero-stats",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.1 },
+        "-=0.4",
+      )
+      .fromTo(
+        ".hero-image",
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" },
+        "-=1",
+      );
 
     return () => {
       tl.kill();
@@ -61,14 +72,17 @@ export function ModernHero() {
   }, []);
 
   const stats = [
-    { icon: Users, value: '50K+', label: 'Happy Customers' },
-    { icon: Award, value: '10K+', label: 'Products' },
-    { icon: Shield, value: '100%', label: 'Authentic' },
-    { icon: Truck, value: '24/7', label: 'Support' }
+    { icon: Users, value: "50K+", label: "Happy Customers" },
+    { icon: Award, value: "10K+", label: "Products" },
+    { icon: Shield, value: "100%", label: "Authentic" },
+    { icon: Truck, value: "24/7", label: "Support" },
   ];
 
   return (
-    <section ref={heroRef} className="relative min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
+    <section
+      ref={heroRef}
+      className="relative min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden"
+    >
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 right-20 w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-30" />
@@ -91,10 +105,10 @@ export function ModernHero() {
             {/* Title */}
             <div className="hero-title">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                Premium{' '}
+                Premium{" "}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Fan Gear
-                </span>{' '}
+                </span>{" "}
                 <br />
                 for True Fans
               </h1>
@@ -103,8 +117,9 @@ export function ModernHero() {
             {/* Subtitle */}
             <div className="hero-subtitle">
               <p className="text-xl text-gray-600 max-w-2xl leading-relaxed">
-                Discover authentic football jerseys, exclusive anime collectibles, 
-                and trending pop culture merchandise. Quality products for passionate fans.
+                Discover authentic football jerseys, exclusive anime
+                collectibles, and trending pop culture merchandise. Quality
+                products for passionate fans.
               </p>
             </div>
 
@@ -120,7 +135,7 @@ export function ModernHero() {
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              
+
               <Link to="/category/trending">
                 <Button
                   variant="outline"
@@ -141,7 +156,9 @@ export function ModernHero() {
                     <div className="bg-blue-50 w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-blue-100 transition-colors duration-300">
                       <stat.icon className="w-6 h-6 text-blue-600" />
                     </div>
-                    <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
+                    <div className="text-2xl font-bold text-gray-900 mb-1">
+                      {stat.value}
+                    </div>
                     <div className="text-sm text-gray-600">{stat.label}</div>
                   </div>
                 </div>
@@ -159,12 +176,12 @@ export function ModernHero() {
                   alt="Premium Fan Gear"
                   className="w-full max-w-md h-auto rounded-2xl"
                 />
-                
+
                 {/* Floating Elements */}
                 <div className="absolute -top-4 -right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg">
                   <Heart className="w-6 h-6" />
                 </div>
-                
+
                 <div className="absolute -bottom-4 -left-4 bg-green-500 text-white p-3 rounded-full shadow-lg">
                   <span className="text-sm font-bold">NEW</span>
                 </div>

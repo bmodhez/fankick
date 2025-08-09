@@ -17,7 +17,7 @@ export default function ParallaxSite() {
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
-    
+
     // Show loading screen for better UX
     const timer = setTimeout(() => {
       setShowLoading(false);
@@ -26,19 +26,19 @@ export default function ParallaxSite() {
     // Smooth scrolling configuration
     gsap.config({
       force3D: true,
-      nullTargetWarn: false
+      nullTargetWarn: false,
     });
 
     // Create a smooth scroll experience
     let scrollTween: gsap.core.Tween;
-    
+
     ScrollTrigger.normalizeScroll(true);
     ScrollTrigger.config({ ignoreMobileResize: true });
 
     return () => {
       clearTimeout(timer);
       if (scrollTween) scrollTween.kill();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -122,14 +122,17 @@ export default function ParallaxSite() {
         </ParallaxSection>
 
         {/* Contact Section */}
-        <div id="contact" className="py-32 bg-gradient-to-b from-black to-gray-900">
+        <div
+          id="contact"
+          className="py-32 bg-gradient-to-b from-black to-gray-900"
+        >
           <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
               Ready to Begin?
             </h2>
             <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-              Join thousands who have already transformed their digital experience. 
-              The future is waiting for you.
+              Join thousands who have already transformed their digital
+              experience. The future is waiting for you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">

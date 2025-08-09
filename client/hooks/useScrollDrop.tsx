@@ -1,6 +1,6 @@
-import { useRef, useLayoutEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef, useLayoutEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,7 +10,7 @@ export const useScrollDrop = (
   endY: number = 0, // Final position
   triggerStart: string = "top 80%", // When to start animation
   triggerEnd: string = "top 30%", // When to end animation
-  ease: string = "back.out(1.7)" // Easing function
+  ease: string = "back.out(1.7)", // Easing function
 ) => {
   const elementRef = useRef<HTMLDivElement>(null);
 
@@ -22,7 +22,7 @@ export const useScrollDrop = (
     // Set initial position above final location
     gsap.set(element, {
       y: startY,
-      opacity: 0
+      opacity: 0,
     });
 
     // Create scroll-triggered animation
@@ -33,14 +33,14 @@ export const useScrollDrop = (
       scrub: 1, // Smooth scrubbing, takes 1 second to "catch up"
       onUpdate: (self) => {
         const progress = self.progress;
-        
+
         // Animate from startY to endY based on scroll progress
         const currentY = startY + (endY - startY) * progress;
         const currentOpacity = progress;
 
         gsap.set(element, {
           y: currentY,
-          opacity: currentOpacity
+          opacity: currentOpacity,
         });
       },
       onComplete: () => {
@@ -49,9 +49,9 @@ export const useScrollDrop = (
           y: endY,
           opacity: 1,
           duration: 0.3,
-          ease: ease
+          ease: ease,
         });
-      }
+      },
     });
 
     return () => {
@@ -70,7 +70,7 @@ export const useScrollDropSequence = (
     delay?: number;
     triggerStart?: string;
     triggerEnd?: string;
-  }> = []
+  }> = [],
 ) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -90,13 +90,13 @@ export const useScrollDropSequence = (
         endY = 0,
         delay = index * 0.1,
         triggerStart = "top 80%",
-        triggerEnd = "top 20%"
+        triggerEnd = "top 20%",
       } = config;
 
       // Set initial position
       gsap.set(child, {
         y: startY,
-        opacity: 0
+        opacity: 0,
       });
 
       // Create scroll trigger for this element
@@ -112,7 +112,7 @@ export const useScrollDropSequence = (
 
           gsap.set(child, {
             y: currentY,
-            opacity: currentOpacity
+            opacity: currentOpacity,
           });
         },
         onComplete: () => {
@@ -121,16 +121,16 @@ export const useScrollDropSequence = (
             opacity: 1,
             duration: 0.3,
             ease: "back.out(1.7)",
-            delay: delay
+            delay: delay,
           });
-        }
+        },
       });
 
       scrollTriggers.push(st);
     });
 
     return () => {
-      scrollTriggers.forEach(st => st.kill());
+      scrollTriggers.forEach((st) => st.kill());
     };
   }, [elements]);
 
@@ -144,16 +144,16 @@ export const useProductDropAnimation = () => {
   useLayoutEffect(() => {
     if (!gridRef.current) return;
 
-    const cards = gridRef.current.querySelectorAll('.product-card');
+    const cards = gridRef.current.querySelectorAll(".product-card");
 
     cards.forEach((card, index) => {
       // Each card starts higher up
       const startY = -200 - (index % 4) * 50; // Stagger the start positions
-      
+
       gsap.set(card, {
         y: startY,
         opacity: 0,
-        scale: 0.8
+        scale: 0.8,
       });
 
       ScrollTrigger.create({
@@ -163,16 +163,16 @@ export const useProductDropAnimation = () => {
         scrub: 1.5, // Slower scrub for more control
         onUpdate: (self) => {
           const progress = self.progress;
-          
+
           // Calculate current position
           const currentY = startY + (0 - startY) * progress;
           const currentOpacity = progress;
-          const currentScale = 0.8 + (0.2 * progress);
+          const currentScale = 0.8 + 0.2 * progress;
 
           gsap.set(card, {
             y: currentY,
             opacity: currentOpacity,
-            scale: currentScale
+            scale: currentScale,
           });
         },
         onComplete: () => {
@@ -183,14 +183,14 @@ export const useProductDropAnimation = () => {
             scale: 1,
             duration: 0.5,
             ease: "elastic.out(1, 0.75)",
-            delay: index * 0.05
+            delay: index * 0.05,
           });
-        }
+        },
       });
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
 
@@ -204,10 +204,10 @@ export const useHeroDropAnimation = () => {
   useLayoutEffect(() => {
     if (!heroRef.current) return;
 
-    const title = heroRef.current.querySelector('.hero-title');
-    const subtitle = heroRef.current.querySelector('.hero-subtitle');
-    const cta = heroRef.current.querySelector('.hero-cta');
-    const stats = heroRef.current.querySelector('.hero-stats');
+    const title = heroRef.current.querySelector(".hero-title");
+    const subtitle = heroRef.current.querySelector(".hero-subtitle");
+    const cta = heroRef.current.querySelector(".hero-cta");
+    const stats = heroRef.current.querySelector(".hero-stats");
 
     // Set initial positions
     if (title) {
@@ -220,8 +220,8 @@ export const useHeroDropAnimation = () => {
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.set(title, {
-            y: -300 + (300 * progress),
-            opacity: progress
+            y: -300 + 300 * progress,
+            opacity: progress,
           });
         },
         onComplete: () => {
@@ -229,9 +229,9 @@ export const useHeroDropAnimation = () => {
             y: 0,
             opacity: 1,
             duration: 0.8,
-            ease: "bounce.out"
+            ease: "bounce.out",
           });
-        }
+        },
       });
     }
 
@@ -245,8 +245,8 @@ export const useHeroDropAnimation = () => {
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.set(subtitle, {
-            y: -200 + (200 * progress),
-            opacity: progress
+            y: -200 + 200 * progress,
+            opacity: progress,
           });
         },
         onComplete: () => {
@@ -255,9 +255,9 @@ export const useHeroDropAnimation = () => {
             opacity: 1,
             duration: 0.6,
             ease: "back.out(1.7)",
-            delay: 0.2
+            delay: 0.2,
           });
-        }
+        },
       });
     }
 
@@ -271,8 +271,8 @@ export const useHeroDropAnimation = () => {
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.set(cta, {
-            y: -150 + (150 * progress),
-            opacity: progress
+            y: -150 + 150 * progress,
+            opacity: progress,
           });
         },
         onComplete: () => {
@@ -281,9 +281,9 @@ export const useHeroDropAnimation = () => {
             opacity: 1,
             duration: 0.5,
             ease: "back.out(2)",
-            delay: 0.4
+            delay: 0.4,
           });
-        }
+        },
       });
     }
 
@@ -297,8 +297,8 @@ export const useHeroDropAnimation = () => {
         onUpdate: (self) => {
           const progress = self.progress;
           gsap.set(stats, {
-            y: -100 + (100 * progress),
-            opacity: progress
+            y: -100 + 100 * progress,
+            opacity: progress,
           });
         },
         onComplete: () => {
@@ -307,14 +307,14 @@ export const useHeroDropAnimation = () => {
             opacity: 1,
             duration: 0.4,
             ease: "back.out(1.5)",
-            delay: 0.6
+            delay: 0.6,
           });
-        }
+        },
       });
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, []);
 
@@ -329,13 +329,14 @@ export const useFloatingImageDrop = (imageSrc: string) => {
     if (!containerRef.current) return;
 
     const container = containerRef.current;
-    
+
     // Create floating image element
-    const img = document.createElement('img');
+    const img = document.createElement("img");
     img.src = imageSrc;
-    img.className = 'floating-product absolute w-32 h-32 object-cover rounded-xl shadow-2xl';
-    img.style.zIndex = '10';
-    
+    img.className =
+      "floating-product absolute w-32 h-32 object-cover rounded-xl shadow-2xl";
+    img.style.zIndex = "10";
+
     container.appendChild(img);
 
     // Start way above viewport
@@ -344,7 +345,7 @@ export const useFloatingImageDrop = (imageSrc: string) => {
       x: Math.random() * 200 - 100, // Random horizontal position
       opacity: 0,
       scale: 0.5,
-      rotation: Math.random() * 360
+      rotation: Math.random() * 360,
     });
 
     // Create scroll-based drop animation
@@ -355,12 +356,12 @@ export const useFloatingImageDrop = (imageSrc: string) => {
       scrub: 3, // Slower for more realistic physics
       onUpdate: (self) => {
         const progress = self.progress;
-        
+
         // Simulate gravity and settle
-        const currentY = -400 + (400 * progress);
+        const currentY = -400 + 400 * progress;
         const currentOpacity = progress;
-        const currentScale = 0.5 + (0.5 * progress);
-        
+        const currentScale = 0.5 + 0.5 * progress;
+
         // Add some rotation as it falls
         const currentRotation = Math.random() * 360 * progress;
 
@@ -368,7 +369,7 @@ export const useFloatingImageDrop = (imageSrc: string) => {
           y: currentY,
           opacity: currentOpacity,
           scale: currentScale,
-          rotation: currentRotation
+          rotation: currentRotation,
         });
       },
       onComplete: () => {
@@ -379,13 +380,13 @@ export const useFloatingImageDrop = (imageSrc: string) => {
           scale: 1,
           rotation: 0,
           duration: 1,
-          ease: "elastic.out(1, 0.5)"
+          ease: "elastic.out(1, 0.5)",
         });
-      }
+      },
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().forEach((st) => st.kill());
       if (img.parentNode) {
         img.parentNode.removeChild(img);
       }
