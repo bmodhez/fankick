@@ -47,15 +47,19 @@ export function ProductProvider({ children }: ProductProviderProps) {
       try {
         const { PRODUCTS } = await import("@/data/products");
 
-        // Immediately update all product images to Builder.io image
+        // Only set default images for products that have placeholder images
         const updatedProducts = PRODUCTS.map((product) => ({
           ...product,
-          images: [
+          images: product.images.some(img =>
+            img.includes('placeholder.svg') ||
+            img.includes('via.placeholder.com') ||
+            img === '/placeholder.svg'
+          ) ? [
             builderImageUrl,
             builderImageUrl,
             builderImageUrl,
             builderImageUrl,
-          ],
+          ] : product.images,
         }));
 
         console.log("FORCING PRODUCT IMAGES UPDATE:");
