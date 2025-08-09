@@ -39,7 +39,7 @@ import {
 
 export default function UserProfile() {
   const { user, logout, isAdmin, isAuthenticated } = useAuth();
-  const { items: cartItems, totalPrice } = useCart();
+  const { items: cartItems, totalPrice, addToCart } = useCart();
   const { selectedCurrency } = useCurrency();
   const { products } = useProducts();
   const { likeCount, refreshLikes, likedProducts } = useLike();
