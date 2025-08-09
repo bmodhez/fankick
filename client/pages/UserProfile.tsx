@@ -55,6 +55,10 @@ export default function UserProfile() {
   const [userWishlist, setUserWishlist] = useState<WishlistItem[]>([]);
   const [wishlistLoading, setWishlistLoading] = useState(false);
 
+  // Real user orders loaded from API (moved up to avoid initialization error)
+  const [orders, setOrders] = useState<UserOrder[]>([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
+
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
