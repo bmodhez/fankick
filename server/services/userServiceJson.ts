@@ -195,18 +195,27 @@ export class UserServiceJson {
 
   async getUserFromSession(sessionToken: string): Promise<User | null> {
     const session = sessions.get(sessionToken);
-    if (!session || session.expiresAt < new Date()) {
+    if (!session) {
+      console.log(`Session not found for token: ${sessionToken.substring(0, 8)}... (likely server restart)`);
+      return null;
+    }
+
+    if (session.expiresAt < new Date()) {
+      console.log(`Session expired for token: ${sessionToken.substring(0, 8)}...`);
       // Clean up expired session
-      if (session) {
-        sessions.delete(sessionToken);
-      }
+      sessions.delete(sessionToken);
       return null;
     }
 
     const users = await loadUsers();
     const user = users.find((u) => u.id === session.userId);
 
-    return user ? userToPublic(user) : null;
+    if (!user) {
+      console.log(`User not found for session: ${sessionToken.substring(0, 8)}...`);
+      return null;
+    }
+
+    return userToPublic(user);
   }
 
   async logout(sessionToken: string): Promise<void> {
