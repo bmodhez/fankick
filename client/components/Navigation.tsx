@@ -33,6 +33,7 @@ export function Navigation() {
   const { selectedCurrency, setCurrency } = useCurrency();
   const { user, logout, isAdmin } = useAuth();
   const { totalItems } = useCart();
+  const { likeCount } = useLike();
   const navigate = useNavigate();
   const currencyRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
