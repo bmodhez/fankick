@@ -35,6 +35,7 @@ export function Navigation() {
   const { user, logout, isAdmin } = useAuth();
   const { totalItems } = useCart();
   const { likeCount } = useLike();
+  const { cartCount, cartTotal, isOnline } = useRealTime();
   const navigate = useNavigate();
   const currencyRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
