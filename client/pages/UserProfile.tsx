@@ -47,6 +47,7 @@ export default function UserProfile() {
   const { products } = useProducts();
   const { likeCount, refreshLikes, likedProducts } = useLike();
   const navigate = useNavigate();
+  const { cartCount, cartTotal, orderCount, showNotification, updateUserStats } = useRealTime();
 
   const [activeTab, setActiveTab] = useState("profile");
   const [userWishlist, setUserWishlist] = useState<WishlistItem[]>([]);
