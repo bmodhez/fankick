@@ -312,32 +312,56 @@ export default function UserProfile() {
                 <p className="text-gray-400 mb-3">{user.email}</p>
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-primary">
-                      {orders.length}
+                  <div className="text-center group">
+                    <div className="text-xl font-bold text-primary transition-all duration-300 group-hover:scale-110">
+                      {orderCount || orders.length}
                     </div>
                     <div className="text-gray-400">Orders</div>
+                    <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-primary to-green-500 h-1 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${Math.min(((orderCount || orders.length) / 10) * 100, 100)}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-primary">
+                  <div className="text-center group">
+                    <div className="text-xl font-bold text-primary transition-all duration-300 group-hover:scale-110">
                       {likeCount}
                     </div>
                     <div className="text-gray-400">Liked Products</div>
+                    <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-primary to-pink-500 h-1 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${Math.min((likeCount / 20) * 100, 100)}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-primary">
-                      {cartItems.length}
+                  <div className="text-center group">
+                    <div className="text-xl font-bold text-primary transition-all duration-300 group-hover:scale-110">
+                      {cartCount || cartItems.length}
                     </div>
                     <div className="text-gray-400">Cart Items</div>
+                    <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-primary to-blue-500 h-1 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${Math.min(((cartCount || cartItems.length) / 5) * 100, 100)}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-primary">
+                  <div className="text-center group">
+                    <div className="text-xl font-bold text-primary transition-all duration-300 group-hover:scale-110">
                       {formatPrice(
                         convertPrice(cartTotal || totalPrice, selectedCurrency.code, "INR"),
                         selectedCurrency,
                       )}
                     </div>
                     <div className="text-gray-400">Cart Total</div>
+                    <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-primary to-yellow-500 h-1 rounded-full transition-all duration-1000 ease-out animate-pulse"
+                        style={{ width: `${Math.min(((cartTotal || totalPrice) / 10000) * 100, 100)}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
