@@ -314,6 +314,12 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
       return;
     }
 
+    console.log(`💾 Saving product with images:`, {
+      productName: formData.name,
+      imageCount: formData.images.length,
+      images: formData.images
+    });
+
     onSave(formData as Product);
     onClose();
   };
