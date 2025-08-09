@@ -356,9 +356,9 @@ export function Navigation() {
               style={{ pointerEvents: "auto" }}
             >
               <ShoppingCart className="h-4 w-4" />
-              {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-primary text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                  {totalItems > 99 ? "99+" : totalItems}
+              {(cartCount || totalItems) > 0 && (
+                <span className={`absolute -top-1 -right-1 bg-primary text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold transition-all duration-300 ${!isOnline ? 'opacity-50' : 'animate-pulse'}`}>
+                  {(cartCount || totalItems) > 99 ? "99+" : (cartCount || totalItems)}
                 </span>
               )}
             </Button>
