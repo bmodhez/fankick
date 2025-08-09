@@ -102,8 +102,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       localStorage.setItem("sessionToken", authData.sessionToken);
       localStorage.setItem("sessionExpiresAt", authData.expiresAt);
 
-      setUser(authData.user);
-      setIsAuthenticated(true);
+      updateAuthState(authData.user, true);
 
       return { success: true };
     } catch (error) {
