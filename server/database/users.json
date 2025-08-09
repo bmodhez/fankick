@@ -11,17 +11,6 @@
     "passwordHash": "$2b$10$kDzrWb6qxFH.KPQOnH/PQucaQzRD9lMNQNNmTIS30poPN6y1kkYk."
   },
   {
-    "id": "user_1754470541163_0on973j0s",
-    "email": "modhbhavin5@gmail.com",
-    "firstName": "Henish",
-    "phone": "9322667822",
-    "isVerified": false,
-    "isActive": true,
-    "createdAt": "2025-08-06T08:55:41.163Z",
-    "updatedAt": "2025-08-06T08:55:41.163Z",
-    "passwordHash": "$2b$10$DkErqQMUJgxk2j1/ugwdcOp0J9zxEVvfb5Tw5Hxz669GTToebJUnO"
-  },
-  {
     "id": "user_1754474129914_x6eyreebb",
     "email": "bhaijaan12@gmail.com",
     "firstName": "Bhai",
@@ -33,47 +22,25 @@
     "passwordHash": "$2b$10$7XrayhIwkDPAjoE8LpBzK.zIQrYqPxdmuBdCCKK9ctuVKATUYRGcS"
   },
   {
-    "id": "user_1754668499251_z9ysyo6ij",
-    "email": "testuser1754668499138@example.com",
-    "firstName": "Test",
-    "lastName": "User",
+    "id": "user_1754720109322_1gewz7kbq",
+    "email": "modhbhavin05@gmail.com",
+    "firstName": "Bhavin ",
+    "phone": "9322667822",
     "isVerified": false,
     "isActive": true,
-    "createdAt": "2025-08-08T15:54:59.251Z",
-    "updatedAt": "2025-08-08T15:54:59.251Z",
-    "passwordHash": "$2b$10$N.LhORMKMCAwxSXslMQNRucm/rMD3bfTOjhrOCw58omSaE8nzgohG"
+    "createdAt": "2025-08-09T06:15:09.322Z",
+    "updatedAt": "2025-08-09T06:15:09.322Z",
+    "passwordHash": "$2b$10$76pM0q4e0NxbljCLYcVP0.3d76V9fL17AyjjWnve4/IfD4eKrS41W"
   },
   {
-    "id": "user_1754668527101_lgzyflwrh",
-    "email": "testuser1754668527005@example.com",
-    "firstName": "Test",
-    "lastName": "User",
+    "id": "user_1754720435381_tl3fryryg",
+    "email": "modhbhavin546@gmail.com",
+    "firstName": "da",
+    "phone": "9875795435",
     "isVerified": false,
     "isActive": true,
-    "createdAt": "2025-08-08T15:55:27.101Z",
-    "updatedAt": "2025-08-08T15:55:27.101Z",
-    "passwordHash": "$2b$10$wV1Qiic4cvRyf6GIqsefEueR6U5LTkH.WELn3vKOmeHvuNc.b5fWW"
-  },
-  {
-    "id": "demo_user_test_123",
-    "email": "test@example.com",
-    "firstName": "Demo",
-    "lastName": "User",
-    "isVerified": true,
-    "isActive": true,
-    "createdAt": "2025-01-01T00:00:00.000Z",
-    "updatedAt": "2025-01-01T00:00:00.000Z",
-    "passwordHash": "$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
-  },
-  {
-    "id": "user_1754668616564_epgx503yi",
-    "email": "xxxjda12@gmail.com",
-    "firstName": "XYZ",
-    "phone": "6988936589",
-    "isVerified": false,
-    "isActive": true,
-    "createdAt": "2025-08-08T15:56:56.564Z",
-    "updatedAt": "2025-08-08T15:56:56.564Z",
-    "passwordHash": "$2b$10$CJtLUqiQNFMSe4AEmX0kJO2/MqKMaihC1PCicuOwdl7xEE6G9bAC6"
+    "createdAt": "2025-08-09T06:20:35.382Z",
+    "updatedAt": "2025-08-09T06:20:35.382Z",
+    "passwordHash": "$2b$10$bKptgvhFoB8/xza9DEwrMOMWXwVMpCdh1PhpwByMwM9BAFw9mrT3y"
   }
 ]

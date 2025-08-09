@@ -47,15 +47,22 @@ export function ProductProvider({ children }: ProductProviderProps) {
       try {
         const { PRODUCTS } = await import("@/data/products");
 
-        // Immediately update all product images to Builder.io image
+        // Only set default images for products that have placeholder images
         const updatedProducts = PRODUCTS.map((product) => ({
           ...product,
-          images: [
-            builderImageUrl,
-            builderImageUrl,
-            builderImageUrl,
-            builderImageUrl,
-          ],
+          images: product.images.some(
+            (img) =>
+              img.includes("placeholder.svg") ||
+              img.includes("via.placeholder.com") ||
+              img === "/placeholder.svg",
+          )
+            ? [
+                builderImageUrl,
+                builderImageUrl,
+                builderImageUrl,
+                builderImageUrl,
+              ]
+            : product.images,
         }));
 
         console.log("FORCING PRODUCT IMAGES UPDATE:");
@@ -173,14 +180,37 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   const updateProduct = async (updatedProduct: Product) => {
     try {
-      await productApi.update(updatedProduct.id, updatedProduct);
+      console.log(`🔄 Updating product ${updatedProduct.id}:`, {
+        name: updatedProduct.name,
+        price: updatedProduct.basePrice,
+        variants: updatedProduct.variants?.length || 0,
+        images: updatedProduct.images?.length || 0,
+      });
+
+      // Log detailed image information for debugging
+      console.log(`📸 Product images being updated:`, {
+        productId: updatedProduct.id,
+        imageCount: updatedProduct.images?.length || 0,
+        firstImage: updatedProduct.images?.[0] || "No images",
+        allImages: updatedProduct.images,
+      });
+
+      const result = await productApi.update(updatedProduct.id, updatedProduct);
+
+      console.log(
+        `✅ Product ${updatedProduct.id} updated successfully on backend`,
+      );
+
       setProducts((prevProducts) =>
         prevProducts.map((product) =>
           product.id === updatedProduct.id ? updatedProduct : product,
         ),
       );
+
+      console.log(`🔄 Local state updated for product ${updatedProduct.id}`);
     } catch (error) {
-      console.error("Error updating product:", error);
+      console.error("❌ Error updating product:", error);
+      console.error("Product data being sent:", updatedProduct);
 
       // Provide more specific error messages
       let errorMessage = "Failed to update product";
@@ -194,6 +224,10 @@ export function ProductProvider({ children }: ProductProviderProps) {
         } else if (error.message.includes("Network error")) {
           errorMessage =
             "Network error. Please check your internet connection.";
+        } else if (error.message.includes("404")) {
+          errorMessage = `Product with ID ${updatedProduct.id} not found on server`;
+        } else if (error.message.includes("500")) {
+          errorMessage = "Server error occurred while updating product";
         } else {
           errorMessage = error.message;
         }

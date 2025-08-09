@@ -152,8 +152,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       let errorMessage = "Registration failed";
       if (error instanceof Error) {
-        if (error.message.includes("already exists")) {
-          errorMessage = "An account with this email already exists";
+        if (error.message.includes("already exists") || error.message.includes("already registered")) {
+          if (error.message.includes("phone")) {
+            errorMessage = "This phone number is already registered. Please login or use a different phone number.";
+          } else {
+            errorMessage = "An account with this email already exists. Please login instead.";
+          }
         } else if (
           error.message.includes("network") ||
           error.message.includes("fetch")
@@ -227,14 +231,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  // Check if current user is admin based on specific email and phone
+  // Check if current user is admin - ONLY allow the specific user ID
   const isAdmin = (): boolean => {
     if (!user) return false;
 
-    const adminEmail = "modhbhavin5@gmail.com";
-    const adminPhone = "9322667822";
+    // ONLY this specific user has admin access
+    const adminUserId = "user_1754720109322_1gewz7kbq";
+    const adminEmail = "modhbhavin05@gmail.com";
 
-    return user.email === adminEmail && user.phone === adminPhone;
+    return user.id === adminUserId && user.email === adminEmail;
   };
 
   const value: AuthContextType = {

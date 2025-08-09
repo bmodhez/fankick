@@ -1,4 +1,6 @@
 import "./global.css";
+import React from "react";
+import { initializeGSAP, performanceMonitor } from "@/utils/gsapConfig";
 
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
@@ -42,6 +44,16 @@ import { Footer } from "./components/Footer";
 const queryClient = new QueryClient();
 
 const AppContent = () => {
+  // Initialize GSAP on app start
+  React.useEffect(() => {
+    initializeGSAP();
+    performanceMonitor.start();
+
+    return () => {
+      performanceMonitor.report();
+    };
+  }, []);
+
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
@@ -324,7 +336,10 @@ const App = () => <AppContent />;
 
 const rootElement = document.getElementById("root")!;
 
-// Store root globally to prevent recreation on hot reload
+// Create root if not exists or in development mode for HMR
+let root: ReturnType<typeof createRoot>;
+
+// Use singleton pattern for both development and production
 declare global {
   var __APP_ROOT__: ReturnType<typeof createRoot> | undefined;
 }
@@ -332,5 +347,11 @@ declare global {
 if (!globalThis.__APP_ROOT__) {
   globalThis.__APP_ROOT__ = createRoot(rootElement);
 }
+root = globalThis.__APP_ROOT__;
 
-globalThis.__APP_ROOT__.render(<App />);
+root.render(<App />);
+
+// Handle HMR cleanup
+if (import.meta.hot) {
+  import.meta.hot.accept();
+}
