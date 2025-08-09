@@ -77,8 +77,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Clear invalid session silently - this is normal on server restarts
       localStorage.removeItem("sessionToken");
       localStorage.removeItem("sessionExpiresAt");
-      setUser(null);
-      setIsAuthenticated(false);
+      updateAuthState(null, false);
     } finally {
       setIsLoading(false);
     }
