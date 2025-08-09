@@ -242,7 +242,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   };
 
   // Subscribe to auth state changes
-  const onAuthStateChange = (callback: (isAuthenticated: boolean, user: User | null) => void) => {
+  const onAuthStateChange = useCallback((callback: (isAuthenticated: boolean, user: User | null) => void) => {
     setAuthListeners(prev => new Set(prev).add(callback));
 
     // Return unsubscribe function
@@ -253,7 +253,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return newSet;
       });
     };
-  };
+  }, []); // No dependencies needed as it only manages listeners
 
   // Update auth state and notify listeners
   const updateAuthState = (userData: User | null, isAuth: boolean) => {
