@@ -583,76 +583,102 @@ export default function UserProfile() {
                   </CardContent>
                 </Card>
               ) : (
-                orders.map((order) => (
-                  <Card key={order.id} className="bg-gray-800 border-gray-700">
-                    <CardContent className="p-6">
-                      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-4 lg:space-y-0">
-                        <div className="flex items-center space-x-4">
-                          <div className="w-16 h-16 bg-gradient-to-r from-primary to-purple-500 rounded-lg flex items-center justify-center">
-                            <Package className="w-8 h-8 text-black" />
-                          </div>
-                          <div>
-                            <div className="flex items-center space-x-3 mb-2">
-                              <h3 className="font-semibold text-white">
-                                {order.orderNumber}
-                              </h3>
-                              <Badge className={getStatusColor(order.orderStatus)}>
-                                {order.orderStatus.charAt(0).toUpperCase() +
-                                  order.orderStatus.slice(1)}
-                              </Badge>
-                              <Badge className={order.paymentStatus === 'paid' ? 'bg-green-500 text-white' : 'bg-yellow-500 text-black'}>
-                                {order.paymentStatus.charAt(0).toUpperCase() +
-                                  order.paymentStatus.slice(1)}
-                              </Badge>
-                            </div>
-                            <p className="text-sm text-gray-400 mb-1">
-                              {order.items?.map(item => item.productName).join(", ") || "Order items"}
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              {order.items?.length || 0} items • {new Date(order.createdAt).toLocaleDateString()} • {order.paymentMethod || 'Unknown method'}
-                            </p>
-                          </div>
-                        </div>
+                orders.map((order) => {
+                  const progress = realTimeOrderService.getOrderProgress(order);
+                  const estimatedDelivery = realTimeOrderService.getEstimatedDelivery(order);
+                  const nextStatus = realTimeOrderService.getNextStatus(order);
 
-                        <div className="flex items-center space-x-4">
-                          <div className="text-right">
-                            <div className="text-lg font-bold text-primary">
-                              {formatPrice(
-                                convertPrice(
-                                  order.totalAmount,
-                                  order.currency,
-                                  selectedCurrency.code
-                                ),
-                                selectedCurrency,
+                  return (
+                    <Card key={order.id} className="bg-gray-800 border-gray-700 relative overflow-hidden">
+                      {/* Real-time progress indicator */}
+                      <div className="absolute top-0 left-0 h-1 bg-gray-700">
+                        <div
+                          className="h-full bg-gradient-to-r from-primary to-green-500 transition-all duration-1000 ease-out"
+                          style={{ width: `${progress}%` }}
+                        />
+                      </div>
+
+                      <CardContent className="p-6">
+                        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-4 lg:space-y-0">
+                          <div className="flex items-center space-x-4">
+                            <div className="w-16 h-16 bg-gradient-to-r from-primary to-purple-500 rounded-lg flex items-center justify-center relative">
+                              <Package className="w-8 h-8 text-black" />
+                              {order.orderStatus !== 'delivered' && (
+                                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" />
                               )}
                             </div>
-                            <div className="text-xs text-gray-500">
-                              {order.currency}
+                            <div>
+                              <div className="flex items-center space-x-3 mb-2">
+                                <h3 className="font-semibold text-white">
+                                  {order.orderNumber}
+                                </h3>
+                                <Badge className={getStatusColor(order.orderStatus)}>
+                                  {order.orderStatus.charAt(0).toUpperCase() +
+                                    order.orderStatus.slice(1)}
+                                </Badge>
+                                <Badge className={order.paymentStatus === 'paid' ? 'bg-green-500 text-white' : 'bg-yellow-500 text-black'}>
+                                  {order.paymentStatus.charAt(0).toUpperCase() +
+                                    order.paymentStatus.slice(1)}
+                                </Badge>
+                              </div>
+                              <p className="text-sm text-gray-400 mb-1">
+                                {order.items?.map(item => item.productName).join(", ") || "Order items"}
+                              </p>
+                              <p className="text-xs text-gray-500 mb-2">
+                                {order.items?.length || 0} items • {new Date(order.createdAt).toLocaleDateString()} • {order.paymentMethod || 'Unknown method'}
+                              </p>
+
+                              {/* Real-time delivery estimate */}
+                              <div className="flex items-center space-x-2 text-xs">
+                                <Clock className="w-3 h-3 text-primary" />
+                                <span className="text-primary font-medium">{estimatedDelivery}</span>
+                                {order.orderStatus !== 'delivered' && order.orderStatus !== 'cancelled' && (
+                                  <span className="text-gray-500">• Next: {nextStatus}</span>
+                                )}
+                              </div>
                             </div>
                           </div>
-                          <div className="flex space-x-2">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="border-gray-600 text-gray-300 hover:bg-gray-700"
-                            >
-                              <Eye className="w-4 h-4 mr-2" />
-                              View
-                            </Button>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="border-gray-600 text-gray-300 hover:bg-gray-700"
-                            >
-                              <Download className="w-4 h-4 mr-2" />
-                              Invoice
-                            </Button>
+
+                          <div className="flex items-center space-x-4">
+                            <div className="text-right">
+                              <div className="text-lg font-bold text-primary">
+                                {formatPrice(
+                                  convertPrice(
+                                    order.totalAmount,
+                                    order.currency,
+                                    selectedCurrency.code
+                                  ),
+                                  selectedCurrency,
+                                )}
+                              </div>
+                              <div className="text-xs text-gray-500">
+                                {order.currency} • {progress}% Complete
+                              </div>
+                            </div>
+                            <div className="flex space-x-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="border-gray-600 text-gray-300 hover:bg-gray-700"
+                              >
+                                <Eye className="w-4 h-4 mr-2" />
+                                Track
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="border-gray-600 text-gray-300 hover:bg-gray-700"
+                              >
+                                <Download className="w-4 h-4 mr-2" />
+                                Invoice
+                              </Button>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))
+                      </CardContent>
+                    </Card>
+                  );
+                })
               )}
             </div>
           )}
