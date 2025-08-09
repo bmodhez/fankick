@@ -96,9 +96,10 @@ export function AnimatedCategoriesSection() {
           {categories.map((category, index) => (
             <Link key={index} to={category.link} className="group mobile-optimized tablet-optimized desktop-enhanced">
               <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gray-800 border border-gray-700 hover:border-primary/50 transition-all duration-500 hover:scale-105">
-                {/* Background Image */}
-                <div className="absolute inset-0">
+                {/* Background Image with Parallax */}
+                <div className="absolute inset-0 overflow-hidden">
                   <img
+                    ref={useImageParallax(0.3)}
                     src={category.image}
                     alt={category.title}
                     className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500"
