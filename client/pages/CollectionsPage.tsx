@@ -56,7 +56,7 @@ export default function CollectionsPage() {
       description:
         "Discover authentic merchandise from Messi, Ronaldo, Mbappé and other football legends. Premium quality jerseys, professional boots, and exclusive fan gear.",
       categories: ["jerseys", "boots", "accessories"],
-      hero: "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F61ece27bc9db40fcb5161b972d368a2e?format=webp&width=800",
+      hero: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80",
       color: "from-green-600 to-blue-600",
       icon: "⚽",
     },
