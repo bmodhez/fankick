@@ -12,6 +12,7 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { convertPrice, formatPrice } from "@/utils/currency";
 import { SimpleNav } from "@/components/SimpleNav";
+import { orderApi } from "@/services/orderApi";
 import {
   ChevronLeft,
   MapPin,
