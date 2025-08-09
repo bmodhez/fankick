@@ -97,10 +97,15 @@ class OrderApi {
   }
 
   async getAllOrders(): Promise<UserOrder[]> {
-    const response = await fetch(`${BASE_URL}/orders`, {
+    // Add cache busting for real-time updates
+    const cacheBuster = Date.now();
+    const response = await fetch(`${BASE_URL}/orders?_t=${cacheBuster}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0"
       },
       credentials: "include",
     });
