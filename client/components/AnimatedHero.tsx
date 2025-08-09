@@ -33,7 +33,6 @@ export function AnimatedHero() {
   const magneticButtonRef = useMagneticEffect(0.5);
   const responsiveHeroRef = useMobileHeroAnimation();
   const heroDropRef = useHeroDropAnimation();
-  const floatingImageRef = useFloatingImageDrop(currentSlideData.image);
 
   // Optimize performance on mobile
   useMobilePerformanceOptimization();
