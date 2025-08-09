@@ -269,13 +269,13 @@ export function AnimatedHero() {
 
             {/* Subtitle */}
             <div ref={subtitleRef}>
-              <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl">
+              <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mobile-hero-subtitle tablet-hero-elements desktop-hero-elements">
                 {currentSlideData.subtitle}
               </p>
             </div>
 
             {/* CTA Buttons */}
-            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 mb-12">
+            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 mobile-hero-cta tablet-hero-elements desktop-hero-elements">
               <Link to="/collections">
                 <Button
                   ref={magneticButtonRef}
