@@ -67,8 +67,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       // Verify session with server
       const currentUser = await userApi.getCurrentUser();
-      setUser(currentUser);
-      setIsAuthenticated(true);
+      updateAuthState(currentUser, true);
       console.log("Session verified successfully for user:", currentUser.email);
     } catch (error) {
       console.log(
