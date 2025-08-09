@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useGSAP, useScrollFadeIn, useStaggerAnimation, useCounterAnimation, useParallax } from '@/hooks/useGSAP';
