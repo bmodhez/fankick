@@ -29,6 +29,7 @@ interface AuthContextType {
     updateData: Partial<User>,
   ) => Promise<{ success: boolean; error?: string }>;
   refreshUser: () => Promise<void>;
+  onAuthStateChange: (callback: (isAuthenticated: boolean, user: User | null) => void) => () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
