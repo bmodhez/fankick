@@ -213,7 +213,7 @@ export default function UserProfile() {
                   </div>
                   <div className="text-center">
                     <div className="text-xl font-bold text-primary">
-                      {userWishlist.length}
+                      {likeCount}
                     </div>
                     <div className="text-gray-400">Liked Products</div>
                   </div>
