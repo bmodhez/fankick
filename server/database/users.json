@@ -55,6 +55,17 @@
     "passwordHash": "$2b$10$wV1Qiic4cvRyf6GIqsefEueR6U5LTkH.WELn3vKOmeHvuNc.b5fWW"
   },
   {
+    "id": "demo_user_test_123",
+    "email": "test@example.com",
+    "firstName": "Demo",
+    "lastName": "User",
+    "isVerified": true,
+    "isActive": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z",
+    "passwordHash": "$2b$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi"
+  },
+  {
     "id": "user_1754668616564_epgx503yi",
     "email": "xxxjda12@gmail.com",
     "firstName": "XYZ",
