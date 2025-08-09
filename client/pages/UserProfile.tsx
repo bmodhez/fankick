@@ -12,6 +12,8 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
 import { useLike } from "@/contexts/LikeContext";
 import { userApi, WishlistItem } from "@/services/userApi";
+import { orderApi } from "@/services/orderApi";
+import { UserOrder } from "@/types/user";
 import { formatPrice, convertPrice } from "@/utils/currency";
 import {
   User,
@@ -212,7 +214,7 @@ export default function UserProfile() {
                     </Badge>
                   ) : (
                     <Badge className="bg-yellow-500 text-black">
-                      ⚠ Unverified
+                      ��� Unverified
                     </Badge>
                   )}
                 </div>
