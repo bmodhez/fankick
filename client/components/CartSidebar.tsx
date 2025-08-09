@@ -361,22 +361,34 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               </div>
             </div>
 
-            {/* Checkout Button */}
-            <div className="relative group">
+            {/* Buy Now Buttons */}
+            <div className="space-y-3">
+              {/* Main Buy Button */}
               <Button
                 onClick={handleCheckout}
-                className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/95 hover:via-green-400/95 hover:to-blue-400/95 font-bold py-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/40 relative overflow-hidden"
+                className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/95 hover:via-green-400/95 hover:to-blue-400/95 font-bold py-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/40 relative overflow-hidden animate-pulse"
               >
                 <div className="relative flex items-center justify-center">
-                  <CreditCard className="w-6 h-6 mr-3 animate-pulse" />
+                  <ShoppingCart className="w-6 h-6 mr-3" />
                   <div className="text-center">
-                    <div className="text-lg font-extrabold">
-                      Proceed to Checkout
+                    <div className="text-xl font-extrabold">
+                      🛒 BUY NOW / खरीदें
                     </div>
                     <div className="text-sm opacity-90 font-semibold">
-                      {formatPrice(finalTotal, selectedCurrency)}
+                      Total: {formatPrice(finalTotal, selectedCurrency)}
                     </div>
                   </div>
+                </div>
+              </Button>
+
+              {/* Quick Payment Option */}
+              <Button
+                onClick={() => setShowPaymentModal(true)}
+                className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 font-bold py-4 rounded-xl shadow-lg transition-all duration-300 border border-orange-400"
+              >
+                <div className="flex items-center justify-center">
+                  <Zap className="w-5 h-5 mr-2" />
+                  <span>⚡ Quick Pay - {formatPrice(finalTotal, selectedCurrency)}</span>
                 </div>
               </Button>
             </div>
