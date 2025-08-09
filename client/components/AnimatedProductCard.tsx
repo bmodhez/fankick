@@ -42,6 +42,7 @@ export function AnimatedProductCard({
   const overlayRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const magneticButtonRef = useMagneticEffect(0.3);
+  const touchRef = useTouchGestures();
 
   const isLiked = likedProducts.includes(product.id);
   const discount = Math.round(((product.originalPrice - product.basePrice) / product.originalPrice) * 100);
