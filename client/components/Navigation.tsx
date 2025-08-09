@@ -291,7 +291,7 @@ export function Navigation() {
                       className="w-full text-left px-4 py-2 hover:bg-gray-700 flex items-center"
                     >
                       <ShoppingCart className="w-4 h-4 mr-2" />
-                      Cart ({totalItems})
+                      Cart ({cartCount || totalItems})
                     </button>
 
                     <Link
