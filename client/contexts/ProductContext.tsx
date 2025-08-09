@@ -109,6 +109,7 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
       if (!signal?.aborted) {
         setProducts(apiProducts);
+        setLastUpdateTime(Date.now());
         console.log("Successfully loaded products from API");
       }
     } catch (error) {
