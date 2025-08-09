@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SimpleNav } from "@/components/SimpleNav";
+import { Navigation } from "@/components/Navigation";
 import { CheckCircle, Home, Package, Star } from "lucide-react";
 
 export default function OrderSuccess() {
