@@ -152,8 +152,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       let errorMessage = "Registration failed";
       if (error instanceof Error) {
-        if (error.message.includes("already exists")) {
-          errorMessage = "An account with this email already exists";
+        if (error.message.includes("already exists") || error.message.includes("already registered")) {
+          if (error.message.includes("phone")) {
+            errorMessage = "This phone number is already registered. Please login or use a different phone number.";
+          } else {
+            errorMessage = "An account with this email already exists. Please login instead.";
+          }
         } else if (
           error.message.includes("network") ||
           error.message.includes("fetch")
