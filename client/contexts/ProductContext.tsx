@@ -173,14 +173,26 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   const updateProduct = async (updatedProduct: Product) => {
     try {
-      await productApi.update(updatedProduct.id, updatedProduct);
+      console.log(`🔄 Updating product ${updatedProduct.id}:`, {
+        name: updatedProduct.name,
+        price: updatedProduct.basePrice,
+        variants: updatedProduct.variants?.length || 0
+      });
+
+      const result = await productApi.update(updatedProduct.id, updatedProduct);
+
+      console.log(`✅ Product ${updatedProduct.id} updated successfully on backend`);
+
       setProducts((prevProducts) =>
         prevProducts.map((product) =>
           product.id === updatedProduct.id ? updatedProduct : product,
         ),
       );
+
+      console.log(`🔄 Local state updated for product ${updatedProduct.id}`);
     } catch (error) {
-      console.error("Error updating product:", error);
+      console.error("❌ Error updating product:", error);
+      console.error("Product data being sent:", updatedProduct);
 
       // Provide more specific error messages
       let errorMessage = "Failed to update product";
@@ -194,6 +206,10 @@ export function ProductProvider({ children }: ProductProviderProps) {
         } else if (error.message.includes("Network error")) {
           errorMessage =
             "Network error. Please check your internet connection.";
+        } else if (error.message.includes("404")) {
+          errorMessage = `Product with ID ${updatedProduct.id} not found on server`;
+        } else if (error.message.includes("500")) {
+          errorMessage = "Server error occurred while updating product";
         } else {
           errorMessage = error.message;
         }
