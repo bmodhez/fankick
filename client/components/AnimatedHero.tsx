@@ -31,7 +31,9 @@ export function AnimatedHero() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
-  const backgroundRef = useParallax(0.3);
+  const backgroundRef = useParallaxBackground(0.3);
+  const meshOverlayRef = useAdvancedParallax({ yPercent: -20, scale: 1.1 });
+  const heroContentRef = useParallaxReveal('up');
   const magneticButtonRef = useMagneticEffect(0.5);
   const responsiveHeroRef = useMobileHeroAnimation();
   const heroDropRef = useHeroDramaticDrop();
@@ -231,9 +233,10 @@ export function AnimatedHero() {
         }}
       />
 
-      {/* Animated Mesh Overlay */}
+      {/* Animated Mesh Overlay with Parallax */}
       <div className="absolute inset-0 bg-black/20" />
-      <div 
+      <div
+        ref={meshOverlayRef}
         className="absolute inset-0 opacity-30"
         style={{
           backgroundImage: `radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
@@ -256,7 +259,7 @@ export function AnimatedHero() {
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div ref={heroContentRef} className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left">
