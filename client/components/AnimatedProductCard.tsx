@@ -9,6 +9,7 @@ import { useLike } from '@/contexts/LikeContext';
 import { useGSAP, useScrollFadeIn, useMagneticEffect } from '@/hooks/useGSAP';
 import { useResponsiveCardAnimation, useTouchGestures } from '@/hooks/useResponsiveGSAP';
 import { useScrollDrop, useProductDropAnimation } from '@/hooks/useScrollDrop';
+import { useScrollVisibleDrop, useProductPhysicsDrop } from '@/components/VisibleDropAnimation';
 import {
   Heart,
   ShoppingBag,
