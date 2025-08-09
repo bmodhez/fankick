@@ -142,11 +142,86 @@ function getStatusIcon(status: string) {
 }
 
 export function OrderManager() {
-  const [orders, setOrders] = useState(mockOrders);
+  const [orders, setOrders] = useState<Order[]>([testOrder]); // Start with 1 test order
+  const [realTimeOrders, setRealTimeOrders] = useState<UserOrder[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [dateRange, setDateRange] = useState("all");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { showNotification } = useRealTime();
+
+  // Load real orders from API
+  const loadRealOrders = async () => {
+    try {
+      setIsLoading(true);
+      const apiOrders = await orderApi.getAllOrders();
+      setRealTimeOrders(apiOrders);
+
+      // Convert API orders to admin format and combine with minimal test data
+      const convertedOrders = apiOrders.map(order => ({
+        id: order.id,
+        orderNumber: order.orderNumber,
+        customer: {
+          name: order.shippingAddress?.firstName ?
+            `${order.shippingAddress.firstName} ${order.shippingAddress.lastName || ''}`.trim() :
+            'Customer',
+          email: order.shippingAddress?.email || 'N/A',
+          phone: order.shippingAddress?.phone || 'N/A',
+          address: order.shippingAddress ?
+            `${order.shippingAddress.address || ''}, ${order.shippingAddress.city || ''}, ${order.shippingAddress.state || ''}`.replace(/^,\s*|,\s*$/g, '') :
+            'N/A',
+          country: order.shippingAddress?.country || 'India',
+          flag: "🇮🇳",
+        },
+        items: order.items?.map(item => ({
+          name: item.productName || 'Product',
+          variant: item.variantDetails || 'Standard',
+          quantity: item.quantity,
+          price: item.unitPrice,
+          image: "/placeholder.svg",
+        })) || [],
+        status: order.orderStatus as Order["status"],
+        payment: {
+          method: order.paymentMethod || 'Unknown',
+          status: order.paymentStatus as "pending" | "paid" | "failed" | "refunded",
+          amount: order.totalAmount,
+        },
+        shipping: {
+          method: "Standard Delivery",
+          cost: 0,
+          estimatedDelivery: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        },
+        createdAt: order.createdAt,
+        updatedAt: order.updatedAt,
+      }));
+
+      // Combine real orders with minimal test data
+      setOrders([testOrder, ...convertedOrders]);
+      showNotification(`Loaded ${apiOrders.length} real orders`, 'success');
+    } catch (error) {
+      console.error('Failed to load orders:', error);
+      showNotification('Failed to load orders', 'error');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Load orders on mount and set up real-time refresh
+  useEffect(() => {
+    loadRealOrders();
+
+    // Real-time refresh every 30 seconds
+    const interval = setInterval(loadRealOrders, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Refresh function for manual sync
+  const handleRefresh = () => {
+    showNotification('Syncing orders...', 'info');
+    loadRealOrders();
+  };
 
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
