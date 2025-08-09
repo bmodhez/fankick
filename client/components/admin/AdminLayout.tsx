@@ -196,7 +196,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => navigate('/')}
+                onClick={() => navigate("/")}
                 className="text-gray-400 hover:text-white flex items-center space-x-2"
                 title="Back to Store"
               >
