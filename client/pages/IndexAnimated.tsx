@@ -68,6 +68,9 @@ export default function IndexAnimated() {
         {/* Hero Section with stunning animations */}
         <AnimatedHero />
 
+        {/* Floating Product Showcase - Bottle Drop Effect */}
+        <FloatingProductShowcase />
+
         {/* Categories Section with scroll animations */}
         <AnimatedCategoriesSection />
 
