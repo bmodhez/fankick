@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { userApi } from "@/services/userApi";
 
@@ -16,32 +16,8 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
   const [likedProducts, setLikedProducts] = useState<Set<string>>(new Set());
   const { isAuthenticated, user, onAuthStateChange } = useAuth();
 
-  // Load liked products from server and localStorage as backup (only for authenticated users)
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      loadLikedProducts();
-    } else {
-      // Clear likes when user logs out
-      setLikedProducts(new Set());
-    }
-  }, [isAuthenticated, user]);
-
-  // Listen for auth state changes to refresh likes immediately
-  useEffect(() => {
-    const unsubscribe = onAuthStateChange((isAuth, userData) => {
-      if (isAuth && userData) {
-        // User just logged in, load their likes
-        loadLikedProducts();
-      } else {
-        // User logged out, clear likes
-        setLikedProducts(new Set());
-      }
-    });
-
-    return unsubscribe;
-  }, [onAuthStateChange]);
-
-  const loadLikedProducts = async () => {
+  // Memoize loadLikedProducts to prevent recreation on every render
+  const loadLikedProducts = useCallback(async () => {
     try {
       // Load from server first
       const wishlist = await userApi.getWishlist();
@@ -72,11 +48,38 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
         }
       }
     }
-  };
+  }, [user]); // Only depend on user to prevent infinite loops
+
+  // Load liked products from server and localStorage as backup (only for authenticated users)
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      loadLikedProducts();
+    } else {
+      // Clear likes when user logs out
+      setLikedProducts(new Set());
+    }
+  }, [isAuthenticated, user, loadLikedProducts]);
+
+  // Listen for auth state changes to refresh likes immediately
+  useEffect(() => {
+    if (!onAuthStateChange) return;
+
+    const unsubscribe = onAuthStateChange((isAuth, userData) => {
+      if (isAuth && userData) {
+        // User just logged in, load their likes
+        loadLikedProducts();
+      } else {
+        // User logged out, clear likes
+        setLikedProducts(new Set());
+      }
+    });
+
+    return unsubscribe;
+  }, [onAuthStateChange, loadLikedProducts]);
 
   // Save to localStorage whenever liked products change (only for authenticated users)
   useEffect(() => {
-    if (isAuthenticated && user) {
+    if (isAuthenticated && user && likedProducts.size > 0) {
       localStorage.setItem(
         `likedProducts_${user.id}`,
         JSON.stringify([...likedProducts]),
@@ -84,7 +87,7 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
     }
   }, [likedProducts, isAuthenticated, user]);
 
-  const toggleLike = async (productId: string, onAuthRequired?: () => void): Promise<boolean> => {
+  const toggleLike = useCallback(async (productId: string, onAuthRequired?: () => void): Promise<boolean> => {
     if (!isAuthenticated) {
       // Call the callback to show auth modal or redirect
       if (onAuthRequired) {
@@ -114,21 +117,6 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
         await userApi.addToWishlist(productId);
       }
 
-      // Update localStorage
-      if (user) {
-        const newArray = [...likedProducts];
-        if (wasLiked) {
-          const index = newArray.indexOf(productId);
-          if (index > -1) newArray.splice(index, 1);
-        } else {
-          newArray.push(productId);
-        }
-        localStorage.setItem(
-          `likedProducts_${user.id}`,
-          JSON.stringify(newArray)
-        );
-      }
-
       return true;
     } catch (error) {
       console.error("Error toggling like:", error);
@@ -146,17 +134,17 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
 
       return false;
     }
-  };
+  }, [isAuthenticated, likedProducts]);
 
-  const refreshLikes = async () => {
+  const refreshLikes = useCallback(async () => {
     if (isAuthenticated && user) {
       await loadLikedProducts();
     }
-  };
+  }, [isAuthenticated, user, loadLikedProducts]);
 
-  const isLiked = (productId: string) => {
+  const isLiked = useCallback((productId: string) => {
     return likedProducts.has(productId);
-  };
+  }, [likedProducts]);
 
   return (
     <LikeContext.Provider value={{
