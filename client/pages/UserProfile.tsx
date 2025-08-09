@@ -70,6 +70,13 @@ export default function UserProfile() {
     }
   }, [likeCount, isAuthenticated, user, activeTab]);
 
+  // Load orders when user is authenticated and orders tab is active
+  useEffect(() => {
+    if (isAuthenticated && user && activeTab === "orders") {
+      loadOrders();
+    }
+  }, [isAuthenticated, user, activeTab]);
+
   // Log cart changes for debugging real-time updates
   useEffect(() => {
     console.log("Cart items updated:", cartItems.length);
