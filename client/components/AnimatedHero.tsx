@@ -277,7 +277,7 @@ export function AnimatedHero() {
 
             {/* Subtitle */}
             <div ref={subtitleRef}>
-              <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mobile-hero-subtitle tablet-hero-elements desktop-hero-elements">
+              <p className="hero-subtitle text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mobile-hero-subtitle tablet-hero-elements desktop-hero-elements">
                 {currentSlideData.subtitle}
               </p>
             </div>
