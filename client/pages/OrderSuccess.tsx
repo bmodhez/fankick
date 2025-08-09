@@ -5,7 +5,7 @@ import { CheckCircle, Home, Package, Star } from "lucide-react";
 export default function OrderSuccess() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <SimpleNav />
+      <Navigation />
       
       <div className="max-w-2xl mx-auto px-4 py-16">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center">
