@@ -193,6 +193,17 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
                 <Menu className="h-5 w-5" />
               </Button>
 
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/')}
+                className="text-gray-400 hover:text-white flex items-center space-x-2"
+                title="Back to Store"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span className="hidden sm:inline">Back</span>
+              </Button>
+
               <div>
                 <h1 className="text-xl font-bold text-white">{title}</h1>
                 <p className="text-sm text-gray-400">FanKick Admin Panel</p>
