@@ -233,6 +233,38 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
+  // Notify all listeners when auth state changes
+  const notifyAuthListeners = (isAuth: boolean, userData: User | null) => {
+    authListeners.forEach(listener => {
+      try {
+        listener(isAuth, userData);
+      } catch (error) {
+        console.error('Error in auth state listener:', error);
+      }
+    });
+  };
+
+  // Subscribe to auth state changes
+  const onAuthStateChange = (callback: (isAuthenticated: boolean, user: User | null) => void) => {
+    setAuthListeners(prev => new Set(prev).add(callback));
+
+    // Return unsubscribe function
+    return () => {
+      setAuthListeners(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(callback);
+        return newSet;
+      });
+    };
+  };
+
+  // Update auth state and notify listeners
+  const updateAuthState = (userData: User | null, isAuth: boolean) => {
+    setUser(userData);
+    setIsAuthenticated(isAuth);
+    notifyAuthListeners(isAuth, userData);
+  };
+
   // Check if current user is admin - ONLY allow the specific user ID
   const isAdmin = (): boolean => {
     if (!user) return false;
