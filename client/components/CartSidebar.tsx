@@ -67,6 +67,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       WELCOME10: { discount: 10, description: "10% off for new customers" },
       SAVE20: { discount: 20, description: "20% off on orders above $100" },
       FANKICK15: { discount: 15, description: "15% off sitewide" },
+      FK2025: { discount: 10, description: "10% off with FK2025 code" },
     };
 
     const coupon =
