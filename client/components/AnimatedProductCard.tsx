@@ -251,8 +251,8 @@ export function AnimatedProductCard({
         >
           <Heart 
             className={`heart-icon w-5 h-5 transition-all duration-300 ${
-              isLiked 
-                ? 'text-red-500 fill-red-500 scale-110' 
+              isProductLiked
+                ? 'text-red-500 fill-red-500 scale-110'
                 : 'text-white group-hover/like:text-red-400'
             }`}
           />
