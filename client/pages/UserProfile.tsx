@@ -61,6 +61,13 @@ export default function UserProfile() {
     }
   }, [isAuthenticated, user]);
 
+  // Refresh wishlist when like count changes (real-time updates)
+  useEffect(() => {
+    if (isAuthenticated && user && activeTab === 'wishlist') {
+      loadWishlist();
+    }
+  }, [likeCount, isAuthenticated, user, activeTab]);
+
   const loadWishlist = async () => {
     try {
       setWishlistLoading(true);
