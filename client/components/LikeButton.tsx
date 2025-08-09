@@ -49,26 +49,28 @@ export function LikeButton({
     }
   };
 
+  const productIsLiked = isLiked(productId);
+
   return (
     <Button
       size={size}
       variant={variant}
       className={cn(
         "transition-all duration-200",
-        isLiked && "text-red-500 hover:text-red-600",
-        !isLiked && "hover:text-red-500",
+        productIsLiked && "text-red-500 hover:text-red-600",
+        !productIsLiked && "hover:text-red-500",
         isLoading && "opacity-50 cursor-not-allowed",
         className
       )}
       onClick={handleLikeToggle}
       disabled={isLoading}
-      aria-label={isLiked ? "Remove from favorites" : "Add to favorites"}
+      aria-label={productIsLiked ? "Remove from favorites" : "Add to favorites"}
     >
-      <Heart 
+      <Heart
         className={cn(
           "w-4 h-4 transition-all duration-200",
-          isLiked && "fill-current"
-        )} 
+          productIsLiked && "fill-current"
+        )}
       />
     </Button>
   );
