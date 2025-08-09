@@ -72,7 +72,15 @@ const AppContent = () => {
                           <ScrollToTop />
                           <div className="min-h-screen">
                             <Routes>
-                              <Route path="/" element={<Index />} />
+                              <Route
+                                path="/"
+                                element={
+                                  <>
+                                    <Navigation />
+                                    <Index />
+                                  </>
+                                }
+                              />
                               <Route
                                 path="/category/:category"
                                 element={
