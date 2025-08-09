@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useGSAP, useHeroTextReveal, useParallax, useMagneticEffect } from '@/hooks/useGSAP';
+import { useMobileHeroAnimation, useMobilePerformanceOptimization } from '@/hooks/useResponsiveGSAP';
 import {
   ArrowRight,
   Star,
