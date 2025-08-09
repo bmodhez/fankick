@@ -186,8 +186,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Clear local session data
       localStorage.removeItem("sessionToken");
       localStorage.removeItem("sessionExpiresAt");
-      setUser(null);
-      setIsAuthenticated(false);
+      updateAuthState(null, false);
     }
   };
 
