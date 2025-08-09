@@ -42,6 +42,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authListeners, setAuthListeners] = useState<Set<(isAuthenticated: boolean, user: User | null) => void>>(new Set());
 
   // Check for existing session on startup
   const checkSession = async () => {
