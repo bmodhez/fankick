@@ -63,12 +63,7 @@ const AppContent = () => {
                             <Routes>
                               <Route
                                 path="/"
-                                element={
-                                  <>
-                                    <Navigation />
-                                    <Index />
-                                  </>
-                                }
+                                element={<IndexAnimated />}
                               />
                               <Route
                                 path="/category/:category"
