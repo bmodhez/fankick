@@ -91,11 +91,11 @@ export default function UserProfile() {
     bio: "",
   });
 
-  // Real user orders (empty for new users)
+  // Real user orders (will be dynamic when order system is implemented)
   const [orders] = useState([]);
 
-  // Real user wishlist (empty for new users)
-  const [wishlist] = useState([]);
+  // Use real-time wishlist data from context instead of hardcoded empty array
+  // const [wishlist] = useState([]); // Removed - using userWishlist from API instead
 
   // Update form when user data changes
   useEffect(() => {
@@ -542,7 +542,7 @@ export default function UserProfile() {
                 <div className="text-center py-8">
                   <div className="text-gray-400">Loading liked products...</div>
                 </div>
-              ) : userWishlist.length === 0 ? (
+              ) : userWishlist.length === 0 && likeCount === 0 ? (
                 <div className="text-center py-8">
                   <Heart className="w-16 h-16 text-gray-600 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-gray-400 mb-2">
