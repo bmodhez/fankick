@@ -367,7 +367,7 @@ export function AnimatedProductGrid({
   title?: string;
   variant?: 'default' | 'featured' | 'trending';
 }) {
-  const gridRef = useProductDropAnimation();
+  const gridRef = useProductPhysicsDrop();
 
   return (
     <div ref={gridRef} className="space-y-6">
