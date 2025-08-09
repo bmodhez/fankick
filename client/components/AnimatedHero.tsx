@@ -308,7 +308,7 @@ export function AnimatedHero() {
             </div>
 
             {/* Stats */}
-            <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mobile-hero-elements tablet-hero-elements desktop-hero-elements">
+            <div ref={statsRef} className="hero-stats grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mobile-hero-elements tablet-hero-elements desktop-hero-elements">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center group mobile-optimized tablet-optimized desktop-enhanced">
                   <div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 mb-2 sm:mb-3 hover:bg-white/20 transition-all duration-300 group-hover:scale-105">
