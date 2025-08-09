@@ -293,6 +293,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   placeholder="Enter coupon code (Try FK2025)"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && couponCode.trim() && applyCoupon()}
                   className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
                 />
                 <Button
