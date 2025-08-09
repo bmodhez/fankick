@@ -15,6 +15,7 @@ import { userApi, WishlistItem } from "@/services/userApi";
 import { orderApi } from "@/services/orderApi";
 import { UserOrder } from "@/types/user";
 import { useRealTime } from "@/contexts/RealTimeContext";
+import { realTimeOrderService } from "@/services/realTimeOrderService";
 import { formatPrice, convertPrice } from "@/utils/currency";
 import {
   User,
