@@ -180,7 +180,16 @@ export function ProductProvider({ children }: ProductProviderProps) {
       console.log(`🔄 Updating product ${updatedProduct.id}:`, {
         name: updatedProduct.name,
         price: updatedProduct.basePrice,
-        variants: updatedProduct.variants?.length || 0
+        variants: updatedProduct.variants?.length || 0,
+        images: updatedProduct.images?.length || 0
+      });
+
+      // Log detailed image information for debugging
+      console.log(`📸 Product images being updated:`, {
+        productId: updatedProduct.id,
+        imageCount: updatedProduct.images?.length || 0,
+        firstImage: updatedProduct.images?.[0] || 'No images',
+        allImages: updatedProduct.images
       });
 
       const result = await productApi.update(updatedProduct.id, updatedProduct);
