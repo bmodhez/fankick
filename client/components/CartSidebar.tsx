@@ -363,6 +363,13 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               </div>
             </div>
 
+            {/* Urgency Message */}
+            <div className="text-center py-2 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-lg border border-red-500/30 mb-3">
+              <p className="text-sm text-red-400 font-semibold">
+                🔥 Limited Stock! Complete your purchase now!
+              </p>
+            </div>
+
             {/* Buy Now Buttons */}
             <div className="space-y-3">
               {/* Main Buy Button */}
