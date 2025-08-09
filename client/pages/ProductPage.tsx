@@ -271,7 +271,14 @@ export default function ProductPage() {
           <div className="space-y-4">
             <div className="relative aspect-square bg-muted rounded-lg overflow-hidden">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F61ece27bc9db40fcb5161b972d368a2e?format=webp&width=800"
+                src={product.name.toLowerCase().includes('messi') ? 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80' :
+                     product.name.toLowerCase().includes('naruto') ? 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80' :
+                     product.name.toLowerCase().includes('bts') || product.name.toLowerCase().includes('k-pop') ? 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80' :
+                     product.name.toLowerCase().includes('marvel') || product.name.toLowerCase().includes('spider') ? 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80' :
+                     product.name.toLowerCase().includes('jersey') || product.name.toLowerCase().includes('football') ? 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80' :
+                     product.name.toLowerCase().includes('ring') ? 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80' :
+                     product.name.toLowerCase().includes('hoodie') || product.name.toLowerCase().includes('sweatshirt') ? 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80' :
+                     'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80'}
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
@@ -319,7 +326,14 @@ export default function ProductPage() {
                   }`}
                 >
                   <img
-                    src="https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F61ece27bc9db40fcb5161b972d368a2e?format=webp&width=800"
+                    src={product.name.toLowerCase().includes('messi') ? 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80' :
+                         product.name.toLowerCase().includes('naruto') ? 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80' :
+                         product.name.toLowerCase().includes('bts') || product.name.toLowerCase().includes('k-pop') ? 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80' :
+                         product.name.toLowerCase().includes('marvel') || product.name.toLowerCase().includes('spider') ? 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80' :
+                         product.name.toLowerCase().includes('jersey') || product.name.toLowerCase().includes('football') ? 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80' :
+                         product.name.toLowerCase().includes('ring') ? 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80' :
+                         product.name.toLowerCase().includes('hoodie') || product.name.toLowerCase().includes('sweatshirt') ? 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80' :
+                         'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80'}
                     alt={`View ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
