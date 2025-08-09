@@ -174,6 +174,10 @@ export default function UserProfile() {
         return "bg-green-500 text-white";
       case "shipped":
         return "bg-blue-500 text-white";
+      case "confirmed":
+        return "bg-blue-400 text-white";
+      case "placed":
+        return "bg-yellow-500 text-black";
       case "processing":
         return "bg-yellow-500 text-black";
       case "cancelled":
