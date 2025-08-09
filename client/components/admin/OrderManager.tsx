@@ -151,11 +151,15 @@ export function OrderManager() {
   const [isLoading, setIsLoading] = useState(false);
   const { showNotification } = useRealTime();
 
-  // Load real orders from API
+  // Load real orders from API with cache busting
   const loadRealOrders = async () => {
     try {
       setIsLoading(true);
+      console.log('🔄 Loading orders from API...');
+
+      // Add cache busting to ensure fresh data
       const apiOrders = await orderApi.getAllOrders();
+      console.log(`📦 Loaded ${apiOrders.length} orders from API:`, apiOrders);
       setRealTimeOrders(apiOrders);
 
       // Convert API orders to admin format and combine with minimal test data
