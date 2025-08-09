@@ -38,12 +38,7 @@ export function AnimatedHero() {
   // Optimize performance on mobile
   useMobilePerformanceOptimization();
 
-  // Debug animations in development
-  useEffect(() => {
-    setTimeout(() => {
-      showAnimationDebug();
-    }, 3000);
-  }, []);
+  // Clean animations without debug
 
   // Stats animation refs
   const statsRef = useRef<HTMLDivElement>(null);
