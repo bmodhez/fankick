@@ -9,7 +9,13 @@ interface LikeButtonProps {
   productId: string;
   className?: string;
   size?: "default" | "sm" | "lg" | "icon";
-  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  variant?:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
   showLoginMessage?: boolean;
   onAuthRequired?: () => void;
 }
@@ -20,7 +26,7 @@ export function LikeButton({
   size = "sm",
   variant = "outline",
   showLoginMessage = true,
-  onAuthRequired
+  onAuthRequired,
 }: LikeButtonProps) {
   const { isAuthenticated } = useAuth();
   const { isLiked, toggleLike } = useLike();
@@ -29,7 +35,7 @@ export function LikeButton({
   const handleLikeToggle = async () => {
     if (!isAuthenticated) {
       if (showLoginMessage) {
-        alert('Please log in to like products');
+        alert("Please log in to like products");
       }
       if (onAuthRequired) {
         onAuthRequired();
@@ -41,11 +47,11 @@ export function LikeButton({
 
     setIsLoading(true);
     try {
-      console.log('🔄 Toggling like for product:', productId);
+      console.log("🔄 Toggling like for product:", productId);
       const success = await toggleLike(productId, onAuthRequired);
-      console.log('✅ Like toggle result:', success);
+      console.log("✅ Like toggle result:", success);
     } catch (error) {
-      console.error('❌ Error toggling like:', error);
+      console.error("❌ Error toggling like:", error);
     } finally {
       setIsLoading(false);
     }
@@ -62,7 +68,7 @@ export function LikeButton({
         productIsLiked && "text-red-500 hover:text-red-600",
         !productIsLiked && "hover:text-red-500",
         isLoading && "opacity-50 cursor-not-allowed",
-        className
+        className,
       )}
       onClick={handleLikeToggle}
       disabled={isLoading}
@@ -71,7 +77,7 @@ export function LikeButton({
       <Heart
         className={cn(
           "w-4 h-4 transition-all duration-200",
-          productIsLiked && "fill-current"
+          productIsLiked && "fill-current",
         )}
       />
     </Button>

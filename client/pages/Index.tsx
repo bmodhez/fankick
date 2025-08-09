@@ -63,7 +63,8 @@ export default function Index() {
     {
       title: "Football Legends",
       subtitle: "Messi • Ronaldo • Mbappé",
-      image: "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=800",
+      image:
+        "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=800",
       cta: "Shop Jerseys",
       link: "/football",
       color: "from-green-600 to-blue-600",
@@ -71,7 +72,8 @@ export default function Index() {
     {
       title: "Anime Universe",
       subtitle: "Naruto • Chainsaw Man • Demon Slayer",
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=400&fit=crop&crop=center&auto=format&q=80",
+      image:
+        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=400&fit=crop&crop=center&auto=format&q=80",
       cta: "Explore Anime",
       link: "/anime",
       color: "from-purple-600 to-pink-600",
@@ -79,7 +81,8 @@ export default function Index() {
     {
       title: "Pop Culture",
       subtitle: "Taylor Swift • K-pop • Marvel",
-      image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&h=400&fit=crop&crop=center&auto=format&q=80",
+      image:
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&h=400&fit=crop&crop=center&auto=format&q=80",
       cta: "Discover More",
       link: "/pop-culture",
       color: "from-red-600 to-orange-600",
@@ -326,8 +329,12 @@ export default function Index() {
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          target.parentElement!.classList.add(`bg-gradient-to-br`, category.color.split(' ')[0], category.color.split(' ')[1]);
+                          target.style.display = "none";
+                          target.parentElement!.classList.add(
+                            `bg-gradient-to-br`,
+                            category.color.split(" ")[0],
+                            category.color.split(" ")[1],
+                          );
                         }}
                       />
                       <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300"></div>
@@ -407,12 +414,16 @@ export default function Index() {
                     <CardContent className="p-0">
                       <div className="relative">
                         <img
-                          src={product.images[0] || "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2Fa924a8bea1e5433a8359466af5c1c95d?format=webp&width=800"}
+                          src={
+                            product.images[0] ||
+                            "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2Fa924a8bea1e5433a8359466af5c1c95d?format=webp&width=800"
+                          }
                           alt={product.name}
                           className="w-full h-40 sm:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.src = "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2Fa924a8bea1e5433a8359466af5c1c95d?format=webp&width=800";
+                            target.src =
+                              "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2Fa924a8bea1e5433a8359466af5c1c95d?format=webp&width=800";
                           }}
                         />
 
@@ -767,7 +778,7 @@ export default function Index() {
                 "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
                 "https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
                 "https://images.unsplash.com/photo-1560762484-813fc97650a0?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
-                "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=400&fit=crop&crop=center&auto=format&q=80"
+                "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
               ];
               return (
                 <div

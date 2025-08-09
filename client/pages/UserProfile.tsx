@@ -63,15 +63,15 @@ export default function UserProfile() {
 
   // Refresh wishlist when like count changes (real-time updates)
   useEffect(() => {
-    if (isAuthenticated && user && activeTab === 'wishlist') {
+    if (isAuthenticated && user && activeTab === "wishlist") {
       loadWishlist();
     }
   }, [likeCount, isAuthenticated, user, activeTab]);
 
   // Log cart changes for debugging real-time updates
   useEffect(() => {
-    console.log('Cart items updated:', cartItems.length);
-    console.log('Total price updated:', totalPrice);
+    console.log("Cart items updated:", cartItems.length);
+    console.log("Total price updated:", totalPrice);
   }, [cartItems, totalPrice]);
 
   const loadWishlist = async () => {
@@ -80,7 +80,7 @@ export default function UserProfile() {
       const wishlistData = await userApi.getWishlist();
       setUserWishlist(wishlistData);
     } catch (error) {
-      console.error('Error loading wishlist:', error);
+      console.error("Error loading wishlist:", error);
     } finally {
       setWishlistLoading(false);
     }
@@ -89,9 +89,11 @@ export default function UserProfile() {
   const removeFromWishlist = async (productId: string) => {
     try {
       await userApi.removeFromWishlist(productId);
-      setUserWishlist(prev => prev.filter(item => item.productId !== productId));
+      setUserWishlist((prev) =>
+        prev.filter((item) => item.productId !== productId),
+      );
     } catch (error) {
-      console.error('Error removing from wishlist:', error);
+      console.error("Error removing from wishlist:", error);
     }
   };
 
@@ -574,17 +576,21 @@ export default function UserProfile() {
                 <div>
                   <div className="mb-4">
                     <p className="text-gray-400 text-sm">
-                      Showing {likeCount} liked product{likeCount !== 1 ? 's' : ''}
+                      Showing {likeCount} liked product
+                      {likeCount !== 1 ? "s" : ""}
                     </p>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {/* Display products from real-time liked products context */}
                     {[...likedProducts].map((productId) => {
-                      const product = products.find(p => p.id === productId);
+                      const product = products.find((p) => p.id === productId);
                       if (!product) return null;
 
                       return (
-                        <Card key={productId} className="bg-gray-800 border-gray-700">
+                        <Card
+                          key={productId}
+                          className="bg-gray-800 border-gray-700"
+                        >
                           <CardContent className="p-4">
                             <Link to={`/product/${product.id}`}>
                               <img
@@ -601,7 +607,12 @@ export default function UserProfile() {
                             <div className="flex items-center justify-between mb-3">
                               <span className="text-lg font-bold text-primary">
                                 {formatPrice(
-                                  convertPrice(product.variants[0]?.price || product.basePrice, selectedCurrency.code, "INR"),
+                                  convertPrice(
+                                    product.variants[0]?.price ||
+                                      product.basePrice,
+                                    selectedCurrency.code,
+                                    "INR",
+                                  ),
                                   selectedCurrency,
                                 )}
                               </span>
@@ -612,7 +623,9 @@ export default function UserProfile() {
                                     : "bg-red-500 text-white"
                                 }
                               >
-                                {product.stockQuantity > 0 ? "In Stock" : "Out of Stock"}
+                                {product.stockQuantity > 0
+                                  ? "In Stock"
+                                  : "Out of Stock"}
                               </Badge>
                             </div>
                             <div className="flex space-x-2">
@@ -630,7 +643,7 @@ export default function UserProfile() {
                                       size: "Default",
                                       color: "Default",
                                       price: product.basePrice,
-                                      stock: product.stockQuantity
+                                      stock: product.stockQuantity,
                                     };
                                     addToCart(product, defaultVariant);
                                   }

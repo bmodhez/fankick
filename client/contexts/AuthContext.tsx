@@ -30,7 +30,9 @@ interface AuthContextType {
     updateData: Partial<User>,
   ) => Promise<{ success: boolean; error?: string }>;
   refreshUser: () => Promise<void>;
-  onAuthStateChange: (callback: (isAuthenticated: boolean, user: User | null) => void) => () => void;
+  onAuthStateChange: (
+    callback: (isAuthenticated: boolean, user: User | null) => void,
+  ) => () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -43,7 +45,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authListeners, setAuthListeners] = useState<Set<(isAuthenticated: boolean, user: User | null) => void>>(new Set());
+  const [authListeners, setAuthListeners] = useState<
+    Set<(isAuthenticated: boolean, user: User | null) => void>
+  >(new Set());
 
   // Check for existing session on startup
   const checkSession = async () => {
@@ -152,11 +156,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       let errorMessage = "Registration failed";
       if (error instanceof Error) {
-        if (error.message.includes("already exists") || error.message.includes("already registered")) {
+        if (
+          error.message.includes("already exists") ||
+          error.message.includes("already registered")
+        ) {
           if (error.message.includes("phone")) {
-            errorMessage = "This phone number is already registered. Please login or use a different phone number.";
+            errorMessage =
+              "This phone number is already registered. Please login or use a different phone number.";
           } else {
-            errorMessage = "An account with this email already exists. Please login instead.";
+            errorMessage =
+              "An account with this email already exists. Please login instead.";
           }
         } else if (
           error.message.includes("network") ||
@@ -232,28 +241,31 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Notify all listeners when auth state changes
   const notifyAuthListeners = (isAuth: boolean, userData: User | null) => {
-    authListeners.forEach(listener => {
+    authListeners.forEach((listener) => {
       try {
         listener(isAuth, userData);
       } catch (error) {
-        console.error('Error in auth state listener:', error);
+        console.error("Error in auth state listener:", error);
       }
     });
   };
 
   // Subscribe to auth state changes
-  const onAuthStateChange = useCallback((callback: (isAuthenticated: boolean, user: User | null) => void) => {
-    setAuthListeners(prev => new Set(prev).add(callback));
+  const onAuthStateChange = useCallback(
+    (callback: (isAuthenticated: boolean, user: User | null) => void) => {
+      setAuthListeners((prev) => new Set(prev).add(callback));
 
-    // Return unsubscribe function
-    return () => {
-      setAuthListeners(prev => {
-        const newSet = new Set(prev);
-        newSet.delete(callback);
-        return newSet;
-      });
-    };
-  }, []); // No dependencies needed as it only manages listeners
+      // Return unsubscribe function
+      return () => {
+        setAuthListeners((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(callback);
+          return newSet;
+        });
+      };
+    },
+    [],
+  ); // No dependencies needed as it only manages listeners
 
   // Update auth state and notify listeners
   const updateAuthState = (userData: User | null, isAuth: boolean) => {

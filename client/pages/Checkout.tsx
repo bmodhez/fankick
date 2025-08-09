@@ -47,7 +47,7 @@ export default function Checkout() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("new");
   const [selectedPayment, setSelectedPayment] = useState(
-    location.state?.paymentMethod || "card"
+    location.state?.paymentMethod || "card",
   );
 
   // Form states with user data pre-filled
@@ -67,7 +67,9 @@ export default function Checkout() {
     cardNumber: "",
     expiryDate: "",
     cvv: "",
-    cardholderName: user?.firstName ? `${user.firstName} ${user.lastName || ''}` : "",
+    cardholderName: user?.firstName
+      ? `${user.firstName} ${user.lastName || ""}`
+      : "",
     upiId: "",
   });
 
@@ -77,7 +79,7 @@ export default function Checkout() {
       navigate("/login", {
         state: {
           from: location,
-          message: "Please login to proceed with checkout"
+          message: "Please login to proceed with checkout",
         },
         replace: true,
       });
@@ -87,16 +89,18 @@ export default function Checkout() {
   // Update form when user data changes
   useEffect(() => {
     if (user) {
-      setShippingForm(prev => ({
+      setShippingForm((prev) => ({
         ...prev,
         firstName: user.firstName || "",
         lastName: user.lastName || "",
         email: user.email || "",
         phone: user.phone || "",
       }));
-      setPaymentForm(prev => ({
+      setPaymentForm((prev) => ({
         ...prev,
-        cardholderName: user.firstName ? `${user.firstName} ${user.lastName || ''}` : "",
+        cardholderName: user.firstName
+          ? `${user.firstName} ${user.lastName || ""}`
+          : "",
       }));
     }
   }, [user]);
@@ -107,7 +111,9 @@ export default function Checkout() {
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
-          <h2 className="text-xl font-semibold text-white mb-2">Securing Your Session</h2>
+          <h2 className="text-xl font-semibold text-white mb-2">
+            Securing Your Session
+          </h2>
           <p className="text-gray-400">Redirecting to login...</p>
         </div>
       </div>
@@ -116,8 +122,15 @@ export default function Checkout() {
 
   // Price calculations with enhanced display
   const convertedTotal = convertPrice(totalPrice, selectedCurrency.code, "INR");
-  const freeShippingThreshold = convertPrice(4200, selectedCurrency.code, "INR");
-  const shippingCost = convertedTotal >= freeShippingThreshold ? 0 : convertPrice(420, selectedCurrency.code, "INR");
+  const freeShippingThreshold = convertPrice(
+    4200,
+    selectedCurrency.code,
+    "INR",
+  );
+  const shippingCost =
+    convertedTotal >= freeShippingThreshold
+      ? 0
+      : convertPrice(420, selectedCurrency.code, "INR");
   const tax = Math.round(convertedTotal * 0.18); // 18% GST
   const discount = Math.round(convertedTotal * 0.1); // 10% loyalty discount for logged-in users
   const finalTotal = convertedTotal + shippingCost + tax - discount;
@@ -132,9 +145,12 @@ export default function Checkout() {
             <div className="w-20 h-20 bg-gradient-to-r from-primary to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <Crown className="w-10 h-10 text-black" />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-4">Your cart is empty</h1>
+            <h1 className="text-3xl font-bold text-white mb-4">
+              Your cart is empty
+            </h1>
             <p className="text-gray-400 mb-8 max-w-md mx-auto">
-              Hey {user.firstName}! Add some amazing products to your cart to continue shopping
+              Hey {user.firstName}! Add some amazing products to your cart to
+              continue shopping
             </p>
             <Link
               to="/"
@@ -173,14 +189,19 @@ export default function Checkout() {
     try {
       // Validate payment details based on selected payment method
       if (selectedPayment === "card") {
-        if (!paymentForm.cardNumber || !paymentForm.cardholderName || !paymentForm.expiryDate || !paymentForm.cvv) {
+        if (
+          !paymentForm.cardNumber ||
+          !paymentForm.cardholderName ||
+          !paymentForm.expiryDate ||
+          !paymentForm.cvv
+        ) {
           alert("Please fill in all card details");
           setIsProcessing(false);
           return;
         }
 
         // Basic card number validation (should be 16 digits)
-        const cleanCardNumber = paymentForm.cardNumber.replace(/\s/g, '');
+        const cleanCardNumber = paymentForm.cardNumber.replace(/\s/g, "");
         if (cleanCardNumber.length !== 16 || !/^\d+$/.test(cleanCardNumber)) {
           alert("Please enter a valid 16-digit card number");
           setIsProcessing(false);
@@ -195,7 +216,7 @@ export default function Checkout() {
         }
 
         // Basic expiry date validation
-        const [month, year] = paymentForm.expiryDate.split('/');
+        const [month, year] = paymentForm.expiryDate.split("/");
         const currentDate = new Date();
         const expiryDate = new Date(2000 + parseInt(year), parseInt(month) - 1);
         if (expiryDate <= currentDate) {
@@ -211,7 +232,7 @@ export default function Checkout() {
         }
 
         // Basic UPI ID validation
-        if (!paymentForm.upiId.includes('@') || paymentForm.upiId.length < 6) {
+        if (!paymentForm.upiId.includes("@") || paymentForm.upiId.length < 6) {
           alert("Please enter a valid UPI ID (e.g., yourname@paytm)");
           setIsProcessing(false);
           return;
@@ -226,7 +247,16 @@ export default function Checkout() {
       }
 
       // Validate shipping details
-      if (!shippingForm.firstName || !shippingForm.lastName || !shippingForm.email || !shippingForm.phone || !shippingForm.address || !shippingForm.city || !shippingForm.state || !shippingForm.zipCode) {
+      if (
+        !shippingForm.firstName ||
+        !shippingForm.lastName ||
+        !shippingForm.email ||
+        !shippingForm.phone ||
+        !shippingForm.address ||
+        !shippingForm.city ||
+        !shippingForm.state ||
+        !shippingForm.zipCode
+      ) {
         alert("Please fill in all shipping details");
         setIsProcessing(false);
         return;
@@ -241,7 +271,7 @@ export default function Checkout() {
       }
 
       // Phone validation (basic)
-      if (!/^\d{10}$/.test(shippingForm.phone.replace(/[^\d]/g, ''))) {
+      if (!/^\d{10}$/.test(shippingForm.phone.replace(/[^\d]/g, ""))) {
         alert("Please enter a valid 10-digit phone number");
         setIsProcessing(false);
         return;
@@ -254,7 +284,9 @@ export default function Checkout() {
       const paymentSuccess = Math.random() > 0.05;
 
       if (!paymentSuccess) {
-        alert("Payment failed. Please try again or use a different payment method.");
+        alert(
+          "Payment failed. Please try again or use a different payment method.",
+        );
         setIsProcessing(false);
         return;
       }
@@ -268,9 +300,9 @@ export default function Checkout() {
             amount: finalTotal,
             currency: selectedCurrency.code,
             shippingAddress: shippingForm,
-            customerName: user.firstName
-          }
-        }
+            customerName: user.firstName,
+          },
+        },
       });
     } catch (error) {
       console.error("Order processing error:", error);
@@ -294,7 +326,7 @@ export default function Checkout() {
             <ChevronLeft className="w-4 h-4 mr-1" />
             Continue Shopping
           </Link>
-          
+
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-4xl font-bold text-white mb-2 font-sport">
@@ -305,11 +337,15 @@ export default function Checkout() {
                   <User className="w-4 h-4 text-black" />
                 </div>
                 <p className="text-gray-300">
-                  Hey <span className="text-primary font-semibold">{user.firstName}</span>! Let's complete your order
+                  Hey{" "}
+                  <span className="text-primary font-semibold">
+                    {user.firstName}
+                  </span>
+                  ! Let's complete your order
                 </p>
               </div>
             </div>
-            
+
             <div className="hidden md:flex items-center space-x-4">
               <Badge className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2">
                 <ShieldCheck className="w-4 h-4 mr-2" />
@@ -351,7 +387,7 @@ export default function Checkout() {
                         className={`block text-sm font-bold ${
                           activeStep === step.id
                             ? "text-white"
-                            : step.completed 
+                            : step.completed
                               ? "text-green-400"
                               : "text-gray-400"
                         }`}
@@ -364,9 +400,13 @@ export default function Checkout() {
                     </div>
                   </div>
                   {index < steps.length - 1 && (
-                    <div className={`flex-1 h-1 mx-6 rounded-full transition-all duration-300 ${
-                      step.completed ? "bg-gradient-to-r from-green-500 to-emerald-500" : "bg-white/10"
-                    }`} />
+                    <div
+                      className={`flex-1 h-1 mx-6 rounded-full transition-all duration-300 ${
+                        step.completed
+                          ? "bg-gradient-to-r from-green-500 to-emerald-500"
+                          : "bg-white/10"
+                      }`}
+                    />
                   )}
                 </div>
               );
@@ -405,7 +445,9 @@ export default function Checkout() {
                           <div className="flex-1">
                             <Label htmlFor="saved" className="cursor-pointer">
                               <div className="flex items-center space-x-2 mb-2">
-                                <div className="font-medium text-white">{user.firstName} {user.lastName}</div>
+                                <div className="font-medium text-white">
+                                  {user.firstName} {user.lastName}
+                                </div>
                                 <Badge className="bg-green-500/20 text-green-400 border border-green-500/30">
                                   <Home className="w-3 h-3 mr-1" />
                                   Primary
@@ -428,8 +470,15 @@ export default function Checkout() {
 
                       <div className="group relative overflow-hidden">
                         <div className="flex items-start space-x-4 p-6 border border-white/10 rounded-xl hover:bg-white/5 cursor-pointer transition-all duration-300">
-                          <RadioGroupItem value="new" id="new" className="mt-1 border-white/30" />
-                          <Label htmlFor="new" className="cursor-pointer font-medium text-white flex items-center">
+                          <RadioGroupItem
+                            value="new"
+                            id="new"
+                            className="mt-1 border-white/30"
+                          />
+                          <Label
+                            htmlFor="new"
+                            className="cursor-pointer font-medium text-white flex items-center"
+                          >
                             <MapPin className="w-4 h-4 mr-2 text-primary" />
                             Add new address
                           </Label>
@@ -446,7 +495,10 @@ export default function Checkout() {
                     <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <Label htmlFor="firstName" className="text-white font-medium mb-2 flex items-center">
+                          <Label
+                            htmlFor="firstName"
+                            className="text-white font-medium mb-2 flex items-center"
+                          >
                             <User className="w-4 h-4 mr-2 text-primary" />
                             First Name *
                           </Label>
@@ -464,7 +516,10 @@ export default function Checkout() {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="lastName" className="text-white font-medium mb-2 flex items-center">
+                          <Label
+                            htmlFor="lastName"
+                            className="text-white font-medium mb-2 flex items-center"
+                          >
                             <User className="w-4 h-4 mr-2 text-primary" />
                             Last Name *
                           </Label>
@@ -482,7 +537,10 @@ export default function Checkout() {
                           />
                         </div>
                         <div className="md:col-span-2">
-                          <Label htmlFor="email" className="text-white font-medium mb-2 flex items-center">
+                          <Label
+                            htmlFor="email"
+                            className="text-white font-medium mb-2 flex items-center"
+                          >
                             <Mail className="w-4 h-4 mr-2 text-primary" />
                             Email Address *
                           </Label>
@@ -501,7 +559,10 @@ export default function Checkout() {
                           />
                         </div>
                         <div className="md:col-span-2">
-                          <Label htmlFor="phone" className="text-white font-medium mb-2 flex items-center">
+                          <Label
+                            htmlFor="phone"
+                            className="text-white font-medium mb-2 flex items-center"
+                          >
                             <Phone className="w-4 h-4 mr-2 text-primary" />
                             Phone Number *
                           </Label>
@@ -520,7 +581,10 @@ export default function Checkout() {
                           />
                         </div>
                         <div className="md:col-span-2">
-                          <Label htmlFor="address" className="text-white font-medium mb-2 flex items-center">
+                          <Label
+                            htmlFor="address"
+                            className="text-white font-medium mb-2 flex items-center"
+                          >
                             <Home className="w-4 h-4 mr-2 text-primary" />
                             Street Address *
                           </Label>
@@ -538,7 +602,10 @@ export default function Checkout() {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="city" className="text-white font-medium mb-2 flex items-center">
+                          <Label
+                            htmlFor="city"
+                            className="text-white font-medium mb-2 flex items-center"
+                          >
                             <MapPin className="w-4 h-4 mr-2 text-primary" />
                             City *
                           </Label>
@@ -556,7 +623,10 @@ export default function Checkout() {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="state" className="text-white font-medium mb-2">
+                          <Label
+                            htmlFor="state"
+                            className="text-white font-medium mb-2"
+                          >
                             State *
                           </Label>
                           <Input
@@ -573,7 +643,10 @@ export default function Checkout() {
                           />
                         </div>
                         <div>
-                          <Label htmlFor="zipCode" className="text-white font-medium mb-2">
+                          <Label
+                            htmlFor="zipCode"
+                            className="text-white font-medium mb-2"
+                          >
                             ZIP Code *
                           </Label>
                           <Input
@@ -627,8 +700,15 @@ export default function Checkout() {
                       <div className="border border-white/10 rounded-xl overflow-hidden bg-gradient-to-br from-blue-500/5 to-purple-500/5">
                         <div className="p-6">
                           <div className="flex items-center space-x-3 mb-4">
-                            <RadioGroupItem value="card" id="card" className="border-white/30" />
-                            <Label htmlFor="card" className="cursor-pointer font-medium text-white flex items-center">
+                            <RadioGroupItem
+                              value="card"
+                              id="card"
+                              className="border-white/30"
+                            />
+                            <Label
+                              htmlFor="card"
+                              className="cursor-pointer font-medium text-white flex items-center"
+                            >
                               <CreditCard className="w-5 h-5 mr-2 text-primary" />
                               Credit/Debit Card
                             </Label>
@@ -652,7 +732,10 @@ export default function Checkout() {
                           {selectedPayment === "card" && (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-white/5 rounded-lg">
                               <div className="md:col-span-2">
-                                <Label htmlFor="cardNumber" className="text-white font-medium mb-2">
+                                <Label
+                                  htmlFor="cardNumber"
+                                  className="text-white font-medium mb-2"
+                                >
                                   Card Number *
                                 </Label>
                                 <Input
@@ -669,7 +752,10 @@ export default function Checkout() {
                                 />
                               </div>
                               <div className="md:col-span-2">
-                                <Label htmlFor="cardholderName" className="text-white font-medium mb-2">
+                                <Label
+                                  htmlFor="cardholderName"
+                                  className="text-white font-medium mb-2"
+                                >
                                   Cardholder Name *
                                 </Label>
                                 <Input
@@ -686,7 +772,10 @@ export default function Checkout() {
                                 />
                               </div>
                               <div>
-                                <Label htmlFor="expiryDate" className="text-white font-medium mb-2">
+                                <Label
+                                  htmlFor="expiryDate"
+                                  className="text-white font-medium mb-2"
+                                >
                                   Expiry Date *
                                 </Label>
                                 <Input
@@ -703,7 +792,10 @@ export default function Checkout() {
                                 />
                               </div>
                               <div>
-                                <Label htmlFor="cvv" className="text-white font-medium mb-2">
+                                <Label
+                                  htmlFor="cvv"
+                                  className="text-white font-medium mb-2"
+                                >
                                   CVV *
                                 </Label>
                                 <Input
@@ -728,8 +820,15 @@ export default function Checkout() {
                       <div className="border border-white/10 rounded-xl overflow-hidden">
                         <div className="p-6">
                           <div className="flex items-center space-x-3 mb-4">
-                            <RadioGroupItem value="upi" id="upi" className="border-white/30" />
-                            <Label htmlFor="upi" className="cursor-pointer font-medium text-white flex items-center">
+                            <RadioGroupItem
+                              value="upi"
+                              id="upi"
+                              className="border-white/30"
+                            />
+                            <Label
+                              htmlFor="upi"
+                              className="cursor-pointer font-medium text-white flex items-center"
+                            >
                               <Zap className="w-5 h-5 mr-2 text-primary" />
                               UPI Payment
                             </Label>
@@ -740,7 +839,10 @@ export default function Checkout() {
 
                           {selectedPayment === "upi" && (
                             <div className="p-4 bg-white/5 rounded-lg">
-                              <Label htmlFor="upiId" className="text-white font-medium mb-2">
+                              <Label
+                                htmlFor="upiId"
+                                className="text-white font-medium mb-2"
+                              >
                                 UPI ID *
                               </Label>
                               <Input
@@ -764,8 +866,15 @@ export default function Checkout() {
                       <div className="border border-white/10 rounded-xl overflow-hidden">
                         <div className="p-6">
                           <div className="flex items-center space-x-3">
-                            <RadioGroupItem value="cod" id="cod" className="border-white/30" />
-                            <Label htmlFor="cod" className="cursor-pointer font-medium text-white flex items-center">
+                            <RadioGroupItem
+                              value="cod"
+                              id="cod"
+                              className="border-white/30"
+                            />
+                            <Label
+                              htmlFor="cod"
+                              className="cursor-pointer font-medium text-white flex items-center"
+                            >
                               <Truck className="w-5 h-5 mr-2 text-primary" />
                               Cash on Delivery
                             </Label>
@@ -779,8 +888,8 @@ export default function Checkout() {
                   </RadioGroup>
 
                   <div className="flex items-center justify-between">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       onClick={handleStepBack}
                       className="border-white/20 text-white hover:bg-white/10"
                     >
@@ -833,16 +942,22 @@ export default function Checkout() {
                               {item.product.name}
                             </h4>
                             <p className="text-sm text-gray-400">
-                              {item.variant.size && `Size: ${item.variant.size}`}
-                              {item.variant.color && ` • Color: ${item.variant.color}`}
+                              {item.variant.size &&
+                                `Size: ${item.variant.size}`}
+                              {item.variant.color &&
+                                ` • Color: ${item.variant.color}`}
                             </p>
                             <p className="text-sm font-medium text-gray-300">
-                              Qty: {item.quantity} × {formatPrice(convertedPrice, selectedCurrency)}
+                              Qty: {item.quantity} ×{" "}
+                              {formatPrice(convertedPrice, selectedCurrency)}
                             </p>
                           </div>
                           <div className="text-right">
                             <p className="font-bold text-primary text-lg">
-                              {formatPrice(convertedPrice * item.quantity, selectedCurrency)}
+                              {formatPrice(
+                                convertedPrice * item.quantity,
+                                selectedCurrency,
+                              )}
                             </p>
                           </div>
                         </div>
@@ -883,8 +998,8 @@ export default function Checkout() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       onClick={handleStepBack}
                       className="border-white/20 text-white hover:bg-white/10"
                     >
@@ -936,7 +1051,9 @@ export default function Checkout() {
                         className="w-12 h-12 object-cover rounded-lg"
                       />
                       <div className="flex-1">
-                        <p className="truncate text-white font-medium">{item.product.name}</p>
+                        <p className="truncate text-white font-medium">
+                          {item.product.name}
+                        </p>
                         <p className="text-gray-400">Qty: {item.quantity}</p>
                       </div>
                     </div>
@@ -958,8 +1075,14 @@ export default function Checkout() {
                   </div>
                   <div className="flex justify-between text-gray-300">
                     <span>Shipping</span>
-                    <span className={shippingCost === 0 ? "text-green-400 font-medium" : ""}>
-                      {shippingCost === 0 ? "FREE" : formatPrice(shippingCost, selectedCurrency)}
+                    <span
+                      className={
+                        shippingCost === 0 ? "text-green-400 font-medium" : ""
+                      }
+                    >
+                      {shippingCost === 0
+                        ? "FREE"
+                        : formatPrice(shippingCost, selectedCurrency)}
                     </span>
                   </div>
                   <div className="flex justify-between text-gray-300">
@@ -987,7 +1110,8 @@ export default function Checkout() {
                   <div className="flex items-center space-x-2 text-sm text-green-400">
                     <Truck className="w-4 h-4" />
                     <span>
-                      Free delivery on orders above {formatPrice(freeShippingThreshold, selectedCurrency)}
+                      Free delivery on orders above{" "}
+                      {formatPrice(freeShippingThreshold, selectedCurrency)}
                     </span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm text-blue-400">
@@ -1005,19 +1129,27 @@ export default function Checkout() {
                   <div className="grid grid-cols-2 gap-3 text-xs">
                     <div className="flex flex-col items-center space-y-2 p-3 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20">
                       <ShieldCheck className="w-6 h-6 text-green-400" />
-                      <span className="text-green-400 font-medium">Secure Payment</span>
+                      <span className="text-green-400 font-medium">
+                        Secure Payment
+                      </span>
                     </div>
                     <div className="flex flex-col items-center space-y-2 p-3 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-500/20">
                       <Truck className="w-6 h-6 text-blue-400" />
-                      <span className="text-blue-400 font-medium">Fast Delivery</span>
+                      <span className="text-blue-400 font-medium">
+                        Fast Delivery
+                      </span>
                     </div>
                     <div className="flex flex-col items-center space-y-2 p-3 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/20">
                       <Gift className="w-6 h-6 text-purple-400" />
-                      <span className="text-purple-400 font-medium">Easy Returns</span>
+                      <span className="text-purple-400 font-medium">
+                        Easy Returns
+                      </span>
                     </div>
                     <div className="flex flex-col items-center space-y-2 p-3 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-lg border border-yellow-500/20">
                       <Star className="w-6 h-6 text-yellow-400" />
-                      <span className="text-yellow-400 font-medium">5-Star Support</span>
+                      <span className="text-yellow-400 font-medium">
+                        5-Star Support
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -1027,7 +1159,9 @@ export default function Checkout() {
                   <div className="bg-gradient-to-r from-primary/20 to-purple-500/20 p-4 rounded-lg border border-primary/30">
                     <div className="flex items-center space-x-2 mb-2">
                       <Crown className="w-4 h-4 text-primary" />
-                      <span className="text-white font-medium text-sm">VIP Benefits Applied</span>
+                      <span className="text-white font-medium text-sm">
+                        VIP Benefits Applied
+                      </span>
                     </div>
                     <div className="text-xs text-gray-300 space-y-1">
                       <div>• 10% loyalty discount applied</div>

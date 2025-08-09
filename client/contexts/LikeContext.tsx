@@ -1,10 +1,19 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { userApi } from "@/services/userApi";
 
 interface LikeContextType {
   likedProducts: Set<string>;
-  toggleLike: (productId: string, onAuthRequired?: () => void) => Promise<boolean>;
+  toggleLike: (
+    productId: string,
+    onAuthRequired?: () => void,
+  ) => Promise<boolean>;
   isLiked: (productId: string) => boolean;
   refreshLikes: () => Promise<void>;
   likeCount: number;
@@ -21,7 +30,7 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
     try {
       // Load from server first
       const wishlist = await userApi.getWishlist();
-      const likedProductIds = wishlist.map(item => item.productId);
+      const likedProductIds = wishlist.map((item) => item.productId);
       const newLikedProducts = new Set(likedProductIds);
       setLikedProducts(newLikedProducts);
 
@@ -29,7 +38,7 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
       if (user) {
         localStorage.setItem(
           `likedProducts_${user.id}`,
-          JSON.stringify(likedProductIds)
+          JSON.stringify(likedProductIds),
         );
       }
     } catch (error) {
@@ -43,7 +52,10 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
             const parsed = JSON.parse(stored);
             setLikedProducts(new Set(parsed));
           } catch (parseError) {
-            console.error("Error parsing liked products from localStorage:", parseError);
+            console.error(
+              "Error parsing liked products from localStorage:",
+              parseError,
+            );
           }
         }
       }
@@ -87,54 +99,60 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
     }
   }, [likedProducts, isAuthenticated, user]);
 
-  const toggleLike = useCallback(async (productId: string, onAuthRequired?: () => void): Promise<boolean> => {
-    if (!isAuthenticated) {
-      // Call the callback to show auth modal or redirect
-      if (onAuthRequired) {
-        onAuthRequired();
+  const toggleLike = useCallback(
+    async (
+      productId: string,
+      onAuthRequired?: () => void,
+    ): Promise<boolean> => {
+      if (!isAuthenticated) {
+        // Call the callback to show auth modal or redirect
+        if (onAuthRequired) {
+          onAuthRequired();
+        }
+        return false;
       }
-      return false;
-    }
 
-    try {
-      const wasLiked = likedProducts.has(productId);
+      try {
+        const wasLiked = likedProducts.has(productId);
 
-      // Optimistically update UI
-      setLikedProducts((prev) => {
-        const newSet = new Set(prev);
+        // Optimistically update UI
+        setLikedProducts((prev) => {
+          const newSet = new Set(prev);
+          if (wasLiked) {
+            newSet.delete(productId);
+          } else {
+            newSet.add(productId);
+          }
+          return newSet;
+        });
+
+        // Update server
         if (wasLiked) {
-          newSet.delete(productId);
+          await userApi.removeFromWishlist(productId);
         } else {
-          newSet.add(productId);
+          await userApi.addToWishlist(productId);
         }
-        return newSet;
-      });
 
-      // Update server
-      if (wasLiked) {
-        await userApi.removeFromWishlist(productId);
-      } else {
-        await userApi.addToWishlist(productId);
+        return true;
+      } catch (error) {
+        console.error("Error toggling like:", error);
+
+        // Revert optimistic update on error
+        setLikedProducts((prev) => {
+          const newSet = new Set(prev);
+          if (prev.has(productId)) {
+            newSet.delete(productId);
+          } else {
+            newSet.add(productId);
+          }
+          return newSet;
+        });
+
+        return false;
       }
-
-      return true;
-    } catch (error) {
-      console.error("Error toggling like:", error);
-
-      // Revert optimistic update on error
-      setLikedProducts((prev) => {
-        const newSet = new Set(prev);
-        if (prev.has(productId)) {
-          newSet.delete(productId);
-        } else {
-          newSet.add(productId);
-        }
-        return newSet;
-      });
-
-      return false;
-    }
-  }, [isAuthenticated, likedProducts]);
+    },
+    [isAuthenticated, likedProducts],
+  );
 
   const refreshLikes = useCallback(async () => {
     if (isAuthenticated && user) {
@@ -142,18 +160,23 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
     }
   }, [isAuthenticated, user, loadLikedProducts]);
 
-  const isLiked = useCallback((productId: string) => {
-    return likedProducts.has(productId);
-  }, [likedProducts]);
+  const isLiked = useCallback(
+    (productId: string) => {
+      return likedProducts.has(productId);
+    },
+    [likedProducts],
+  );
 
   return (
-    <LikeContext.Provider value={{
-      likedProducts,
-      toggleLike,
-      isLiked,
-      refreshLikes,
-      likeCount: likedProducts.size
-    }}>
+    <LikeContext.Provider
+      value={{
+        likedProducts,
+        toggleLike,
+        isLiked,
+        refreshLikes,
+        likeCount: likedProducts.size,
+      }}
+    >
       {children}
     </LikeContext.Provider>
   );
