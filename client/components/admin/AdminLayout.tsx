@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRealTime } from "@/contexts/RealTimeContext";
+import { orderApi } from "@/services/orderApi";
 import {
   BarChart3,
   Package,
