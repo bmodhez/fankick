@@ -145,8 +145,10 @@ export async function logoutUser(req: Request, res: Response) {
 export async function getCurrentUser(req: Request, res: Response) {
   try {
     const sessionToken = req.headers.authorization?.replace("Bearer ", "");
+    console.log(`Session verification request with token: ${sessionToken ? sessionToken.substring(0, 8) + '...' : 'none'}`);
 
     if (!sessionToken) {
+      console.log("No session token provided in request");
       const response: UserResponse = {
         success: false,
         error: "No session token provided",
@@ -157,6 +159,7 @@ export async function getCurrentUser(req: Request, res: Response) {
     const user = await userService.getUserFromSession(sessionToken);
 
     if (!user) {
+      console.log("Session verification failed - invalid or expired session");
       const response: UserResponse = {
         success: false,
         error: "Invalid or expired session",
@@ -164,6 +167,7 @@ export async function getCurrentUser(req: Request, res: Response) {
       return res.status(401).json(response);
     }
 
+    console.log(`Session verified successfully for user: ${user.email}`);
     const response: UserResponse = {
       success: true,
       data: user,
