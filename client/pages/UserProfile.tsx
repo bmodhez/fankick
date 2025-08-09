@@ -68,6 +68,12 @@ export default function UserProfile() {
     }
   }, [likeCount, isAuthenticated, user, activeTab]);
 
+  // Log cart changes for debugging real-time updates
+  useEffect(() => {
+    console.log('Cart items updated:', cartItems.length);
+    console.log('Total price updated:', totalPrice);
+  }, [cartItems, totalPrice]);
+
   const loadWishlist = async () => {
     try {
       setWishlistLoading(true);
