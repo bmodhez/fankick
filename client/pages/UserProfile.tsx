@@ -774,17 +774,28 @@ export default function UserProfile() {
                                   selectedCurrency,
                                 )}
                               </span>
-                              <Badge
-                                className={
-                                  product.stockQuantity > 0
-                                    ? "bg-green-500 text-white"
-                                    : "bg-red-500 text-white"
-                                }
-                              >
-                                {product.stockQuantity > 0
-                                  ? "In Stock"
-                                  : "Out of Stock"}
-                              </Badge>
+                              <div className="flex flex-col items-end space-y-1">
+                                <Badge
+                                  className={
+                                    product.stockQuantity > 10
+                                      ? "bg-green-500 text-white animate-pulse"
+                                      : product.stockQuantity > 0
+                                      ? "bg-yellow-500 text-black animate-pulse"
+                                      : "bg-red-500 text-white"
+                                  }
+                                >
+                                  {product.stockQuantity > 10
+                                    ? "✅ In Stock"
+                                    : product.stockQuantity > 0
+                                    ? `⚠️ Only ${product.stockQuantity} left`
+                                    : "❌ Out of Stock"}
+                                </Badge>
+                                {product.stockQuantity > 0 && product.stockQuantity <= 10 && (
+                                  <div className="text-xs text-yellow-400 font-medium">
+                                    🔥 Limited Stock!
+                                  </div>
+                                )}
+                              </div>
                             </div>
                             <div className="flex space-x-2">
                               <Button
