@@ -145,7 +145,9 @@ export async function logoutUser(req: Request, res: Response) {
 export async function getCurrentUser(req: Request, res: Response) {
   try {
     const sessionToken = req.headers.authorization?.replace("Bearer ", "");
-    console.log(`Session verification request with token: ${sessionToken ? sessionToken.substring(0, 8) + '...' : 'none'}`);
+    console.log(
+      `Session verification request with token: ${sessionToken ? sessionToken.substring(0, 8) + "..." : "none"}`,
+    );
 
     if (!sessionToken) {
       console.log("No session token provided in request");

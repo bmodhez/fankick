@@ -224,9 +224,12 @@ export default function Login() {
                   setPassword("password123");
                   // Auto-submit demo login
                   setTimeout(() => {
-                    const form = document.querySelector('form');
+                    const form = document.querySelector("form");
                     if (form) {
-                      const event = new Event('submit', { bubbles: true, cancelable: true });
+                      const event = new Event("submit", {
+                        bubbles: true,
+                        cancelable: true,
+                      });
                       form.dispatchEvent(event);
                     }
                   }, 100);

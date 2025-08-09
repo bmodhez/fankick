@@ -69,7 +69,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setIsAuthenticated(true);
       console.log("Session verified successfully for user:", currentUser.email);
     } catch (error) {
-      console.log("Session verification failed (likely server restart), clearing session:", error.message);
+      console.log(
+        "Session verification failed (likely server restart), clearing session:",
+        error.message,
+      );
       // Clear invalid session silently - this is normal on server restarts
       localStorage.removeItem("sessionToken");
       localStorage.removeItem("sessionExpiresAt");

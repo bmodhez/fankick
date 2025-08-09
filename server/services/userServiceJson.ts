@@ -146,8 +146,11 @@ export class UserServiceJson {
     // Check if it's a phone number or email
     // A phone number should contain only digits, spaces, dashes, or parentheses
     // and should not contain @ symbol (which indicates email)
-    const isPhoneNumber = !loginData.email.includes('@') &&
-      /^[\d\s\-\(\)\+]{10,15}$/.test(loginData.email.replace(/[\s\-\(\)\+]/g, ''));
+    const isPhoneNumber =
+      !loginData.email.includes("@") &&
+      /^[\d\s\-\(\)\+]{10,15}$/.test(
+        loginData.email.replace(/[\s\-\(\)\+]/g, ""),
+      );
 
     // Find user by email or phone
     const user = users.find((u) => {
@@ -196,12 +199,16 @@ export class UserServiceJson {
   async getUserFromSession(sessionToken: string): Promise<User | null> {
     const session = sessions.get(sessionToken);
     if (!session) {
-      console.log(`Session not found for token: ${sessionToken.substring(0, 8)}... (likely server restart)`);
+      console.log(
+        `Session not found for token: ${sessionToken.substring(0, 8)}... (likely server restart)`,
+      );
       return null;
     }
 
     if (session.expiresAt < new Date()) {
-      console.log(`Session expired for token: ${sessionToken.substring(0, 8)}...`);
+      console.log(
+        `Session expired for token: ${sessionToken.substring(0, 8)}...`,
+      );
       // Clean up expired session
       sessions.delete(sessionToken);
       return null;
@@ -211,7 +218,9 @@ export class UserServiceJson {
     const user = users.find((u) => u.id === session.userId);
 
     if (!user) {
-      console.log(`User not found for session: ${sessionToken.substring(0, 8)}...`);
+      console.log(
+        `User not found for session: ${sessionToken.substring(0, 8)}...`,
+      );
       return null;
     }
 

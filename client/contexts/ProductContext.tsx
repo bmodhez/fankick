@@ -185,10 +185,15 @@ export function ProductProvider({ children }: ProductProviderProps) {
       // Provide more specific error messages
       let errorMessage = "Failed to update product";
       if (error instanceof Error) {
-        if (error.message.includes('timed out') || error.message.includes('cancelled')) {
-          errorMessage = "Request timed out. Please check your connection and try again.";
-        } else if (error.message.includes('Network error')) {
-          errorMessage = "Network error. Please check your internet connection.";
+        if (
+          error.message.includes("timed out") ||
+          error.message.includes("cancelled")
+        ) {
+          errorMessage =
+            "Request timed out. Please check your connection and try again.";
+        } else if (error.message.includes("Network error")) {
+          errorMessage =
+            "Network error. Please check your internet connection.";
         } else {
           errorMessage = error.message;
         }
@@ -226,10 +231,15 @@ export function ProductProvider({ children }: ProductProviderProps) {
       // Provide more specific error messages
       let errorMessage = "Failed to create product";
       if (error instanceof Error) {
-        if (error.message.includes('timed out') || error.message.includes('cancelled')) {
-          errorMessage = "Request timed out. Please check your connection and try again.";
-        } else if (error.message.includes('Network error')) {
-          errorMessage = "Network error. Please check your internet connection.";
+        if (
+          error.message.includes("timed out") ||
+          error.message.includes("cancelled")
+        ) {
+          errorMessage =
+            "Request timed out. Please check your connection and try again.";
+        } else if (error.message.includes("Network error")) {
+          errorMessage =
+            "Network error. Please check your internet connection.";
         } else {
           errorMessage = error.message;
         }

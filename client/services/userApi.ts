@@ -46,7 +46,7 @@ interface AuthData {
 interface UserAddress {
   id: string;
   userId: string;
-  addressType: 'home' | 'work' | 'other';
+  addressType: "home" | "work" | "other";
   streetAddress: string;
   city: string;
   state: string;
@@ -92,8 +92,8 @@ async function userApiRequest<T>(
   const url = `${API_BASE_URL}${endpoint}`;
 
   // Get session token from localStorage
-  const sessionToken = localStorage.getItem('sessionToken');
-  
+  const sessionToken = localStorage.getItem("sessionToken");
+
   const defaultOptions: RequestInit = {
     headers: {
       "Content-Type": "application/json",
@@ -107,7 +107,9 @@ async function userApiRequest<T>(
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      console.log(`User API Request ${attempt + 1}/${retries + 1}: ${options.method || 'GET'} ${url}`);
+      console.log(
+        `User API Request ${attempt + 1}/${retries + 1}: ${options.method || "GET"} ${url}`,
+      );
 
       // Add a small delay between retries
       if (attempt > 0) {
@@ -130,12 +132,13 @@ async function userApiRequest<T>(
 
       if (!response.ok) {
         // Use the server's error message if available, otherwise use user-friendly message
-        let errorMessage = result.error || `HTTP error! status: ${response.status}`;
+        let errorMessage =
+          result.error || `HTTP error! status: ${response.status}`;
 
         // Provide user-friendly messages for common HTTP status codes
         if (response.status === 401) {
           // Don't show scary error messages for session verification failures
-          if (endpoint === '/auth/me') {
+          if (endpoint === "/auth/me") {
             errorMessage = result.error || "Session expired";
           } else {
             errorMessage = result.error || "Invalid email or password";
@@ -153,27 +156,39 @@ async function userApiRequest<T>(
         throw new Error(result.error || "API request failed");
       }
 
-      console.log(`User API Request successful: ${options.method || 'GET'} ${url}`);
+      console.log(
+        `User API Request successful: ${options.method || "GET"} ${url}`,
+      );
       return result.data!;
     } catch (error) {
       lastError = error as Error;
-      
+
       if (error instanceof Error && error.name === "AbortError") {
-        throw new Error('Request was cancelled or timed out');
+        throw new Error("Request was cancelled or timed out");
       }
 
       // Don't retry client errors (4xx) or if it's a JSON parsing issue
-      if (error instanceof UserApiError && error.status >= 400 && error.status < 500) {
+      if (
+        error instanceof UserApiError &&
+        error.status >= 400 &&
+        error.status < 500
+      ) {
         throw error;
       }
 
       // Don't retry JSON parsing errors or abort errors
-      if (error instanceof Error && (error.message.includes('JSON') || error.name === "AbortError")) {
+      if (
+        error instanceof Error &&
+        (error.message.includes("JSON") || error.name === "AbortError")
+      ) {
         throw error;
       }
 
       if (attempt === retries) {
-        console.error(`User API Request failed after ${retries + 1} attempts:`, error);
+        console.error(
+          `User API Request failed after ${retries + 1} attempts:`,
+          error,
+        );
         throw error;
       }
 
@@ -189,17 +204,25 @@ async function userApiRequest<T>(
 export const userApi = {
   // Authentication
   async register(userData: UserCreateRequest): Promise<User> {
-    return userApiRequest<User>("/auth/register", {
-      method: "POST",
-      body: JSON.stringify(userData),
-    }, 2);
+    return userApiRequest<User>(
+      "/auth/register",
+      {
+        method: "POST",
+        body: JSON.stringify(userData),
+      },
+      2,
+    );
   },
 
   async login(loginData: UserLoginRequest): Promise<AuthData> {
-    return userApiRequest<AuthData>("/auth/login", {
-      method: "POST",
-      body: JSON.stringify(loginData),
-    }, 2);
+    return userApiRequest<AuthData>(
+      "/auth/login",
+      {
+        method: "POST",
+        body: JSON.stringify(loginData),
+      },
+      2,
+    );
   },
 
   async logout(): Promise<void> {
@@ -214,10 +237,14 @@ export const userApi = {
 
   // Profile management
   async updateProfile(updateData: Partial<User>): Promise<User> {
-    return userApiRequest<User>("/users/profile", {
-      method: "PUT",
-      body: JSON.stringify(updateData),
-    }, 2);
+    return userApiRequest<User>(
+      "/users/profile",
+      {
+        method: "PUT",
+        body: JSON.stringify(updateData),
+      },
+      2,
+    );
   },
 
   // Address management
@@ -225,7 +252,9 @@ export const userApi = {
     return userApiRequest<UserAddress[]>("/users/addresses");
   },
 
-  async addAddress(addressData: Omit<UserAddress, 'id' | 'userId' | 'createdAt' | 'updatedAt'>): Promise<UserAddress> {
+  async addAddress(
+    addressData: Omit<UserAddress, "id" | "userId" | "createdAt" | "updatedAt">,
+  ): Promise<UserAddress> {
     return userApiRequest<UserAddress>("/users/addresses", {
       method: "POST",
       body: JSON.stringify(addressData),
@@ -237,7 +266,11 @@ export const userApi = {
     return userApiRequest<CartItem[]>("/users/cart");
   },
 
-  async addToCart(productId: string, variantId: string, quantity: number = 1): Promise<CartItem> {
+  async addToCart(
+    productId: string,
+    variantId: string,
+    quantity: number = 1,
+  ): Promise<CartItem> {
     return userApiRequest<CartItem>("/users/cart", {
       method: "POST",
       body: JSON.stringify({ productId, variantId, quantity }),
@@ -270,4 +303,12 @@ export const userApi = {
 };
 
 export default userApi;
-export type { User, UserCreateRequest, UserLoginRequest, AuthData, UserAddress, CartItem, WishlistItem };
+export type {
+  User,
+  UserCreateRequest,
+  UserLoginRequest,
+  AuthData,
+  UserAddress,
+  CartItem,
+  WishlistItem,
+};

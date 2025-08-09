@@ -128,15 +128,41 @@ export default function Index() {
   ];
 
   const socialProof = [
-    { metric: "500K+", label: "Happy Customers", icon: Users, color: "text-blue-500" },
-    { metric: "150+", label: "Countries Shipped", icon: Globe, color: "text-green-500" },
-    { metric: "4.8★", label: "Average Rating", icon: Award, color: "text-yellow-500" },
-    { metric: "24/7", label: "Customer Support", icon: ShieldCheck, color: "text-purple-500" },
+    {
+      metric: "500K+",
+      label: "Happy Customers",
+      icon: Users,
+      color: "text-blue-500",
+    },
+    {
+      metric: "150+",
+      label: "Countries Shipped",
+      icon: Globe,
+      color: "text-green-500",
+    },
+    {
+      metric: "4.8★",
+      label: "Average Rating",
+      icon: Award,
+      color: "text-yellow-500",
+    },
+    {
+      metric: "24/7",
+      label: "Customer Support",
+      icon: ShieldCheck,
+      color: "text-purple-500",
+    },
   ];
 
   const urgencyOffers = [
-    { text: "🔥 LIMITED TIME: Extra 25% OFF on first order!", bgColor: "bg-red-500" },
-    { text: "⚡ FREE shipping worldwide - No minimum order!", bgColor: "bg-blue-500" },
+    {
+      text: "🔥 LIMITED TIME: Extra 25% OFF on first order!",
+      bgColor: "bg-red-500",
+    },
+    {
+      text: "⚡ FREE shipping worldwide - No minimum order!",
+      bgColor: "bg-blue-500",
+    },
     { text: "🎁 Buy 2 Get 1 FREE on selected items!", bgColor: "bg-green-500" },
   ];
 
@@ -153,22 +179,22 @@ export default function Index() {
       location: "🇺🇸 USA",
       text: "Best quality jerseys I've ever bought! My Messi jersey looks exactly like the real one. Fast shipping too!",
       rating: 5,
-      verified: true
+      verified: true,
     },
     {
       name: "Alex K.",
       location: "🇬🇧 UK",
       text: "Amazing anime rings collection! Got my Naruto ring and it's perfect. Customer service is top-notch.",
       rating: 5,
-      verified: true
+      verified: true,
     },
     {
       name: "Michael R.",
       location: "🇨🇦 Canada",
       text: "FanKick is my go-to for all pop culture merch. Quality is incredible and prices are unbeatable!",
       rating: 5,
-      verified: true
-    }
+      verified: true,
+    },
   ];
 
   return (
@@ -177,7 +203,8 @@ export default function Index() {
       <div className="bg-gradient-to-r from-red-500 via-orange-500 to-pink-500 text-white py-2 overflow-hidden">
         <div className="animate-scroll whitespace-nowrap">
           <span className="inline-block px-4 font-bold text-sm">
-            🔥 MEGA SALE: 50% OFF Everything + FREE Worldwide Shipping! Limited Time Only!
+            🔥 MEGA SALE: 50% OFF Everything + FREE Worldwide Shipping! Limited
+            Time Only!
           </span>
           <span className="inline-block px-4 font-bold text-sm">
             ⚡ Use Code: FANKICK50 | Order now and get instant 50% discount!
@@ -225,8 +252,13 @@ export default function Index() {
               {socialProof.map((item, index) => {
                 const IconComponent = item.icon;
                 return (
-                  <div key={index} className="text-center bg-white/80 dark:bg-black/20 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-lg border border-white/20">
-                    <IconComponent className={`w-6 h-6 mx-auto mb-2 ${item.color}`} />
+                  <div
+                    key={index}
+                    className="text-center bg-white/80 dark:bg-black/20 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-lg border border-white/20"
+                  >
+                    <IconComponent
+                      className={`w-6 h-6 mx-auto mb-2 ${item.color}`}
+                    />
                     <div className="text-lg sm:text-2xl font-bold text-primary">
                       {item.metric}
                     </div>
@@ -243,10 +275,17 @@ export default function Index() {
               {trustSignals.map((signal, index) => {
                 const IconComponent = signal.icon;
                 return (
-                  <div key={index} className="flex flex-col items-center bg-white/60 dark:bg-black/10 backdrop-blur-sm rounded-lg p-2 sm:p-3 border border-white/20">
+                  <div
+                    key={index}
+                    className="flex flex-col items-center bg-white/60 dark:bg-black/10 backdrop-blur-sm rounded-lg p-2 sm:p-3 border border-white/20"
+                  >
                     <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 text-primary mb-1" />
-                    <div className="text-xs sm:text-sm font-semibold text-center">{signal.text}</div>
-                    <div className="text-xs text-muted-foreground text-center">{signal.desc}</div>
+                    <div className="text-xs sm:text-sm font-semibold text-center">
+                      {signal.text}
+                    </div>
+                    <div className="text-xs text-muted-foreground text-center">
+                      {signal.desc}
+                    </div>
                   </div>
                 );
               })}
@@ -274,7 +313,8 @@ export default function Index() {
             {/* Limited Time Offer */}
             <div className="mt-6 sm:mt-8 text-center">
               <div className="inline-block bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold animate-pulse">
-                ⏰ HURRY! Offer ends in: <span className="font-mono">23:59:45</span>
+                ⏰ HURRY! Offer ends in:{" "}
+                <span className="font-mono">23:59:45</span>
               </div>
             </div>
           </div>
@@ -288,13 +328,18 @@ export default function Index() {
                     <div
                       className={`h-40 sm:h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
                       style={{
-                        backgroundImage: category.title === 'Football Jerseys' ? 'url(https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80)' :
-                                       category.title === 'Anime Rings' ? 'url(https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80)' :
-                                       category.title === 'K-pop Merch' ? 'url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80)' :
-                                       category.title === 'Marvel Hoodies' ? 'url(https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80)' :
-                                       'url(https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80)',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center'
+                        backgroundImage:
+                          category.title === "Football Jerseys"
+                            ? "url(https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80)"
+                            : category.title === "Anime Rings"
+                              ? "url(https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80)"
+                              : category.title === "K-pop Merch"
+                                ? "url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80)"
+                                : category.title === "Marvel Hoodies"
+                                  ? "url(https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80)"
+                                  : "url(https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80)",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
                       }}
                     >
                       <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300"></div>
@@ -323,7 +368,9 @@ export default function Index() {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-4 font-bold">
             <Zap className="w-6 h-6 animate-bounce" />
-            <span className="text-lg">⚡ FLASH SALE: Extra 25% OFF for next 100 customers only!</span>
+            <span className="text-lg">
+              ⚡ FLASH SALE: Extra 25% OFF for next 100 customers only!
+            </span>
             <Crown className="w-6 h-6 animate-bounce" />
           </div>
         </div>
@@ -347,7 +394,9 @@ export default function Index() {
               🔥 BEST SELLERS - UP TO 70% OFF!
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
-              <span className="font-bold text-red-500">LIMITED STOCK!</span> Join 500K+ fans who grabbed these trending items. <span className="font-bold">Only few pieces left!</span>
+              <span className="font-bold text-red-500">LIMITED STOCK!</span>{" "}
+              Join 500K+ fans who grabbed these trending items.{" "}
+              <span className="font-bold">Only few pieces left!</span>
             </p>
           </div>
 
@@ -370,14 +419,41 @@ export default function Index() {
                     <CardContent className="p-0">
                       <div className="relative">
                         <img
-                          src={product.name.toLowerCase().includes('messi') ? 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80' :
-                               product.name.toLowerCase().includes('naruto') ? 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80' :
-                               product.name.toLowerCase().includes('bts') || product.name.toLowerCase().includes('k-pop') ? 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80' :
-                               product.name.toLowerCase().includes('marvel') || product.name.toLowerCase().includes('spider') ? 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80' :
-                               product.name.toLowerCase().includes('jersey') || product.name.toLowerCase().includes('football') ? 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80' :
-                               product.name.toLowerCase().includes('ring') ? 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80' :
-                               product.name.toLowerCase().includes('hoodie') || product.name.toLowerCase().includes('sweatshirt') ? 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80' :
-                               'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80'}
+                          src={
+                            product.name.toLowerCase().includes("messi")
+                              ? "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80"
+                              : product.name.toLowerCase().includes("naruto")
+                                ? "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"
+                                : product.name.toLowerCase().includes("bts") ||
+                                    product.name.toLowerCase().includes("k-pop")
+                                  ? "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80"
+                                  : product.name
+                                        .toLowerCase()
+                                        .includes("marvel") ||
+                                      product.name
+                                        .toLowerCase()
+                                        .includes("spider")
+                                    ? "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80"
+                                    : product.name
+                                          .toLowerCase()
+                                          .includes("jersey") ||
+                                        product.name
+                                          .toLowerCase()
+                                          .includes("football")
+                                      ? "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80"
+                                      : product.name
+                                            .toLowerCase()
+                                            .includes("ring")
+                                        ? "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80"
+                                        : product.name
+                                              .toLowerCase()
+                                              .includes("hoodie") ||
+                                            product.name
+                                              .toLowerCase()
+                                              .includes("sweatshirt")
+                                          ? "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80"
+                                          : "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80"
+                          }
                           alt={product.name}
                           className="w-full h-40 sm:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                         />
@@ -534,7 +610,10 @@ export default function Index() {
               SHOP BY YOUR PASSION
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4">
-              <span className="font-bold text-primary">500K+ fans trust us</span> for authentic merchandise. Find your perfect collection below!
+              <span className="font-bold text-primary">
+                500K+ fans trust us
+              </span>{" "}
+              for authentic merchandise. Find your perfect collection below!
             </p>
           </div>
 
@@ -560,7 +639,10 @@ export default function Index() {
                           {category.name}
                         </h3>
                         <p className="text-xs sm:text-sm text-white/80">
-                          {category.items} products • <span className="text-yellow-400 font-bold">⭐ 4.8 rating</span>
+                          {category.items} products •{" "}
+                          <span className="text-yellow-400 font-bold">
+                            ⭐ 4.8 rating
+                          </span>
                         </p>
                       </div>
                     </div>
@@ -568,9 +650,7 @@ export default function Index() {
                       <p className="text-muted-foreground text-xs sm:text-sm mb-3 sm:mb-4">
                         {category.description}
                       </p>
-                      <Button
-                        className="w-full bg-gradient-to-r from-primary to-purple-500 text-white hover:from-purple-500 hover:to-pink-500 font-bold text-xs sm:text-sm py-2 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
-                      >
+                      <Button className="w-full bg-gradient-to-r from-primary to-purple-500 text-white hover:from-purple-500 hover:to-pink-500 font-bold text-xs sm:text-sm py-2 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200">
                         <Zap className="w-3 h-3 mr-1" />
                         Shop Now - 70% OFF!
                       </Button>
@@ -639,12 +719,18 @@ export default function Index() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {customerTestimonials.map((testimonial, index) => (
-              <Card key={index} className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-green-200 dark:border-green-800">
+              <Card
+                key={index}
+                className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-green-200 dark:border-green-800"
+              >
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
                     <div className="flex items-center">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                        <Star
+                          key={i}
+                          className="w-4 h-4 text-yellow-400 fill-current"
+                        />
                       ))}
                     </div>
                     {testimonial.verified && (
@@ -662,8 +748,12 @@ export default function Index() {
                       {testimonial.name.charAt(0)}
                     </div>
                     <div className="ml-3">
-                      <div className="font-semibold text-sm">{testimonial.name}</div>
-                      <div className="text-xs text-muted-foreground">{testimonial.location}</div>
+                      <div className="font-semibold text-sm">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {testimonial.location}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -692,14 +782,19 @@ export default function Index() {
               JOIN THE FANKICK COMMUNITY
             </h2>
             <p className="text-muted-foreground text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 px-4">
-              <span className="font-bold text-primary">1M+ fans worldwide</span> are already showing off their FanKick gear! <span className="font-bold">Tag us and get featured!</span>
+              <span className="font-bold text-primary">1M+ fans worldwide</span>{" "}
+              are already showing off their FanKick gear!{" "}
+              <span className="font-bold">Tag us and get featured!</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:opacity-90 font-semibold">
                 <Instagram className="w-4 h-4 mr-2" />
                 Follow @fankick_global
               </Button>
-              <Button variant="outline" className="border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white font-semibold">
+              <Button
+                variant="outline"
+                className="border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white font-semibold"
+              >
                 <Heart className="w-4 h-4 mr-2" />
                 Share Your Style
               </Button>
@@ -775,18 +870,26 @@ export default function Index() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-red-500 hover:bg-gray-100 font-bold px-8 py-4 text-xl shadow-2xl">
+            <Button
+              size="lg"
+              className="bg-white text-red-500 hover:bg-gray-100 font-bold px-8 py-4 text-xl shadow-2xl"
+            >
               <Zap className="w-6 h-6 mr-2" />
               CLAIM 70% OFF NOW!
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-red-500 font-bold px-8 py-4 text-xl">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-white text-white hover:bg-white hover:text-red-500 font-bold px-8 py-4 text-xl"
+            >
               <Gift className="w-6 h-6 mr-2" />
               Free Gift Included
             </Button>
           </div>
 
           <p className="text-sm mt-4 opacity-90">
-            ⚡ Over 1,000 customers bought in the last 24 hours! Only <span className="font-bold">few items left</span> at this price.
+            ⚡ Over 1,000 customers bought in the last 24 hours! Only{" "}
+            <span className="font-bold">few items left</span> at this price.
           </p>
         </div>
       </section>
