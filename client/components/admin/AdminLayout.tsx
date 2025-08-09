@@ -161,10 +161,13 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
   useEffect(() => {
     const loadOrderCount = async () => {
       try {
+        console.log('📊 Loading order count for admin nav...');
         const orders = await orderApi.getAllOrders();
-        setOrderCount(orders.length + 1); // +1 for test order
+        const newCount = orders.length + 1; // +1 for test order
+        setOrderCount(newCount);
+        console.log(`📊 Updated admin nav order count: ${newCount} (${orders.length} real + 1 test)`);
       } catch (error) {
-        console.error('Failed to load order count:', error);
+        console.error('❌ Failed to load order count:', error);
       }
     };
 
