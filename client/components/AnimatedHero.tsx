@@ -283,7 +283,7 @@ export function AnimatedHero() {
             </div>
 
             {/* CTA Buttons */}
-            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 mobile-hero-cta tablet-hero-elements desktop-hero-elements">
+            <div ref={ctaRef} className="hero-cta flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 mobile-hero-cta tablet-hero-elements desktop-hero-elements">
               <Link to="/collections">
                 <Button
                   ref={magneticButtonRef}
