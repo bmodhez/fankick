@@ -7,6 +7,7 @@ import { useGSAP, useHeroTextReveal, useParallax, useMagneticEffect } from '@/ho
 import { useMobileHeroAnimation, useMobilePerformanceOptimization } from '@/hooks/useResponsiveGSAP';
 import { useHeroDropAnimation, useFloatingImageDrop } from '@/hooks/useScrollDrop';
 import { useHeroDramaticDrop, showAnimationDebug } from '@/components/VisibleDropAnimation';
+import { useParallaxBackground, useAdvancedParallax, useParallaxReveal } from '@/hooks/useParallaxScrolling';
 import {
   ArrowRight,
   Star,
