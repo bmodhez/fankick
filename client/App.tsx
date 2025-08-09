@@ -1,4 +1,5 @@
 import "./global.css";
+import { initializeGSAP, performanceMonitor } from "@/utils/gsapConfig";
 
 import { Toaster } from "@/components/ui/toaster";
 import { createRoot } from "react-dom/client";
