@@ -96,5 +96,12 @@ export function createServer() {
   app.post("/api/users/wishlist", addToWishlist);
   app.delete("/api/users/wishlist/:productId", removeFromWishlist);
 
+  // Order routes
+  app.post("/api/orders", createOrder);
+  app.get("/api/orders/user/:userId", getUserOrders);
+  app.get("/api/orders/:orderId", getOrder);
+  app.put("/api/orders/:orderId/status", updateOrderStatus);
+  app.get("/api/orders", getAllOrders);
+
   return app;
 }
