@@ -246,20 +246,22 @@ export default function Checkout() {
         }
       }
 
-      // Validate shipping details
-      if (
-        !shippingForm.firstName ||
-        !shippingForm.lastName ||
-        !shippingForm.email ||
-        !shippingForm.phone ||
-        !shippingForm.address ||
-        !shippingForm.city ||
-        !shippingForm.state ||
-        !shippingForm.zipCode
-      ) {
-        alert("Please fill in all shipping details");
-        setIsProcessing(false);
-        return;
+      // Validate shipping details only if new address is selected
+      if (selectedAddress === "new") {
+        if (
+          !shippingForm.firstName ||
+          !shippingForm.lastName ||
+          !shippingForm.email ||
+          !shippingForm.phone ||
+          !shippingForm.address ||
+          !shippingForm.city ||
+          !shippingForm.state ||
+          !shippingForm.zipCode
+        ) {
+          alert("Please fill in all shipping details");
+          setIsProcessing(false);
+          return;
+        }
       }
 
       // Email validation
