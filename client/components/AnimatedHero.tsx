@@ -33,7 +33,7 @@ export function AnimatedHero() {
   const backgroundRef = useParallax(0.3);
   const magneticButtonRef = useMagneticEffect(0.5);
   const responsiveHeroRef = useMobileHeroAnimation();
-  const heroDropRef = useHeroDropAnimation();
+  const heroDropRef = useHeroDramaticDrop();
 
   // Optimize performance on mobile
   useMobilePerformanceOptimization();
