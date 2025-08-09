@@ -295,14 +295,16 @@ export function OrderManager() {
           <p className="text-gray-400">Track and manage customer orders</p>
         </div>
         <div className="flex items-center space-x-3">
+          <div className="text-xs text-gray-400">
+            Auto-refresh: 5s
+          </div>
           <Button
-            variant="outline"
-            className="border-gray-600 text-gray-300 hover:bg-gray-700"
+            className="bg-primary text-black hover:bg-primary/90 font-bold"
             onClick={handleRefresh}
             disabled={isLoading}
           >
             <RefreshCw className={`w-4 h-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
-            {isLoading ? 'Syncing...' : 'Sync Orders'}
+            {isLoading ? 'Syncing...' : '🔄 Refresh Now'}
           </Button>
           <Button variant="outline" className="border-gray-600 text-gray-300">
             <Download className="w-4 h-4 mr-2" />
