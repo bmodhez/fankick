@@ -28,6 +28,7 @@ import {
   Bot,
   Shield,
   Calendar,
+  ArrowLeft,
 } from "lucide-react";
 
 interface AdminLayoutProps {
