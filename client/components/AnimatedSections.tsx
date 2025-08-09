@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useGSAP, useScrollFadeIn, useStaggerAnimation, useCounterAnimation, useParallax } from '@/hooks/useGSAP';
 import { useScrollDrop, useScrollDropSequence } from '@/hooks/useScrollDrop';
+import { useParallaxBackground, useMultiLayerParallax, useParallaxReveal, useImageParallax } from '@/hooks/useParallaxScrolling';
 import {
   ArrowRight,
   Star,
@@ -26,6 +27,7 @@ import {
 // Hero Categories Section
 export function AnimatedCategoriesSection() {
   const sectionRef = useScrollFadeIn(0.1);
+  const parallaxBgRef = useParallaxBackground(0.4);
   const cardsRef = useScrollDropSequence([
     { startY: -200, endY: 0, delay: 0, triggerStart: "top 80%", triggerEnd: "top 40%" },
     { startY: -250, endY: 0, delay: 0.1, triggerStart: "top 80%", triggerEnd: "top 40%" },
@@ -67,8 +69,8 @@ export function AnimatedCategoriesSection() {
 
   return (
     <section ref={sectionRef} className="py-20 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900" />
+      {/* Background Elements with Parallax */}
+      <div ref={parallaxBgRef} className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(16,185,129,0.1)_0%,transparent_50%)] pointer-events-none" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
