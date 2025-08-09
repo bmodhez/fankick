@@ -214,6 +214,7 @@ export function AnimatedHero() {
   }, [currentSlide]);
 
   const currentSlideData = heroSlides[currentSlide];
+  const floatingImageRef = useFloatingImageDrop(currentSlideData.image);
 
   return (
     <div ref={heroDropRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
