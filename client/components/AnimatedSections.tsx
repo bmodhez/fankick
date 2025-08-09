@@ -143,7 +143,12 @@ export function AnimatedCategoriesSection() {
 // Stats Section
 export function AnimatedStatsSection() {
   const sectionRef = useScrollFadeIn(0.1);
-  const statsRef = useStaggerAnimation(0.1);
+  const statsRef = useScrollDropSequence([
+    { startY: -120, endY: 0, delay: 0, triggerStart: "top 85%", triggerEnd: "top 45%" },
+    { startY: -140, endY: 0, delay: 0.05, triggerStart: "top 85%", triggerEnd: "top 45%" },
+    { startY: -160, endY: 0, delay: 0.1, triggerStart: "top 85%", triggerEnd: "top 45%" },
+    { startY: -180, endY: 0, delay: 0.15, triggerStart: "top 85%", triggerEnd: "top 45%" }
+  ]);
   
   const stats = [
     { icon: Users, label: "Happy Customers", value: 50000, suffix: "+" },
