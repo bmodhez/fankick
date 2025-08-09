@@ -237,9 +237,20 @@ export function OrderManager() {
 
   // Refresh function for manual sync
   const handleRefresh = () => {
-    showNotification('Syncing orders...', 'info');
+    showNotification('🔄 Syncing orders...', 'info');
     loadRealOrders();
   };
+
+  // Add window focus listener for immediate refresh when user returns
+  useEffect(() => {
+    const handleFocus = () => {
+      console.log('🎯 Window focused - refreshing orders immediately');
+      loadRealOrders();
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, []);
 
   const filteredOrders = orders.filter((order) => {
     const matchesSearch =
