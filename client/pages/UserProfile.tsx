@@ -786,7 +786,18 @@ export default function UserProfile() {
                           selectedCurrency,
                         )}
                       </span>
-                      <Button className="bg-primary text-black hover:bg-primary/90">
+                      <Button
+                        onClick={() => {
+                          if (!user) {
+                            navigate("/login", {
+                              state: { from: { pathname: "/checkout" } },
+                            });
+                            return;
+                          }
+                          navigate("/checkout");
+                        }}
+                        className="bg-primary text-black hover:bg-primary/90 font-semibold"
+                      >
                         <CreditCard className="w-4 h-4 mr-2" />
                         Checkout
                       </Button>
