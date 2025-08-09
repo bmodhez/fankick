@@ -8,6 +8,7 @@ import {
   AnimatedCTASection
 } from "@/components/AnimatedSections";
 import { AnimationShowcase } from "@/components/AnimationShowcase";
+import { FloatingProductShowcase } from "@/components/FloatingProductShowcase";
 import { AnimatedProductGrid } from "@/components/AnimatedProductCard";
 import { PageTransition, LoadingScreen } from "@/components/PageTransition";
 import { Footer } from "@/components/Footer";
