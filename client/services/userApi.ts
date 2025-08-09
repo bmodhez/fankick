@@ -134,7 +134,12 @@ async function userApiRequest<T>(
 
         // Provide user-friendly messages for common HTTP status codes
         if (response.status === 401) {
-          errorMessage = result.error || "Invalid email or password";
+          // Don't show scary error messages for session verification failures
+          if (endpoint === '/auth/me') {
+            errorMessage = result.error || "Session expired";
+          } else {
+            errorMessage = result.error || "Invalid email or password";
+          }
         } else if (response.status === 400) {
           errorMessage = result.error || "Invalid request data";
         } else if (response.status === 500) {
