@@ -26,6 +26,21 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
     }
   }, [isAuthenticated, user]);
 
+  // Listen for auth state changes to refresh likes immediately
+  useEffect(() => {
+    const unsubscribe = onAuthStateChange((isAuth, userData) => {
+      if (isAuth && userData) {
+        // User just logged in, load their likes
+        loadLikedProducts();
+      } else {
+        // User logged out, clear likes
+        setLikedProducts(new Set());
+      }
+    });
+
+    return unsubscribe;
+  }, [onAuthStateChange]);
+
   const loadLikedProducts = async () => {
     try {
       // Load from server first
