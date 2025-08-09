@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
+import { useLike } from "@/contexts/LikeContext";
 import { userApi, WishlistItem } from "@/services/userApi";
 import { formatPrice, convertPrice } from "@/utils/currency";
 import {
@@ -38,9 +39,10 @@ import {
 
 export default function UserProfile() {
   const { user, logout, isAdmin, isAuthenticated } = useAuth();
-  const { items: cartItems, totalPrice } = useCart();
+  const { items: cartItems, totalPrice, addToCart } = useCart();
   const { selectedCurrency } = useCurrency();
   const { products } = useProducts();
+  const { likeCount, refreshLikes, likedProducts } = useLike();
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("profile");
@@ -59,13 +61,26 @@ export default function UserProfile() {
     }
   }, [isAuthenticated, user]);
 
+  // Refresh wishlist when like count changes (real-time updates)
+  useEffect(() => {
+    if (isAuthenticated && user && activeTab === "wishlist") {
+      loadWishlist();
+    }
+  }, [likeCount, isAuthenticated, user, activeTab]);
+
+  // Log cart changes for debugging real-time updates
+  useEffect(() => {
+    console.log("Cart items updated:", cartItems.length);
+    console.log("Total price updated:", totalPrice);
+  }, [cartItems, totalPrice]);
+
   const loadWishlist = async () => {
     try {
       setWishlistLoading(true);
       const wishlistData = await userApi.getWishlist();
       setUserWishlist(wishlistData);
     } catch (error) {
-      console.error('Error loading wishlist:', error);
+      console.error("Error loading wishlist:", error);
     } finally {
       setWishlistLoading(false);
     }
@@ -74,9 +89,11 @@ export default function UserProfile() {
   const removeFromWishlist = async (productId: string) => {
     try {
       await userApi.removeFromWishlist(productId);
-      setUserWishlist(prev => prev.filter(item => item.productId !== productId));
+      setUserWishlist((prev) =>
+        prev.filter((item) => item.productId !== productId),
+      );
     } catch (error) {
-      console.error('Error removing from wishlist:', error);
+      console.error("Error removing from wishlist:", error);
     }
   };
 
@@ -89,11 +106,11 @@ export default function UserProfile() {
     bio: "",
   });
 
-  // Real user orders (empty for new users)
+  // Real user orders (will be dynamic when order system is implemented)
   const [orders] = useState([]);
 
-  // Real user wishlist (empty for new users)
-  const [wishlist] = useState([]);
+  // Use real-time wishlist data from context instead of hardcoded empty array
+  // const [wishlist] = useState([]); // Removed - using userWishlist from API instead
 
   // Update form when user data changes
   useEffect(() => {
@@ -147,7 +164,7 @@ export default function UserProfile() {
   const tabs = [
     { id: "profile", label: "Profile", icon: User, count: null },
     { id: "orders", label: "Orders", icon: Package, count: orders.length },
-    { id: "wishlist", label: "Liked Products", icon: Heart, count: userWishlist.length },
+    { id: "wishlist", label: "Liked Products", icon: Heart, count: likeCount },
     { id: "cart", label: "Cart", icon: ShoppingCart, count: cartItems.length },
   ];
 
@@ -211,7 +228,7 @@ export default function UserProfile() {
                   </div>
                   <div className="text-center">
                     <div className="text-xl font-bold text-primary">
-                      {userWishlist.length}
+                      {likeCount}
                     </div>
                     <div className="text-gray-400">Liked Products</div>
                   </div>
@@ -540,7 +557,7 @@ export default function UserProfile() {
                 <div className="text-center py-8">
                   <div className="text-gray-400">Loading liked products...</div>
                 </div>
-              ) : userWishlist.length === 0 ? (
+              ) : likeCount === 0 ? (
                 <div className="text-center py-8">
                   <Heart className="w-16 h-16 text-gray-600 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-gray-400 mb-2">
@@ -556,68 +573,103 @@ export default function UserProfile() {
                   </Link>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {userWishlist.map((wishlistItem) => {
-                    const product = products.find(p => p.id === wishlistItem.productId);
-                    if (!product) return null;
+                <div>
+                  <div className="mb-4">
+                    <p className="text-gray-400 text-sm">
+                      Showing {likeCount} liked product
+                      {likeCount !== 1 ? "s" : ""}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Display products from real-time liked products context */}
+                    {[...likedProducts].map((productId) => {
+                      const product = products.find((p) => p.id === productId);
+                      if (!product) return null;
 
-                    return (
-                      <Card key={wishlistItem.id} className="bg-gray-800 border-gray-700">
-                        <CardContent className="p-4">
-                          <Link to={`/product/${product.id}`}>
-                            <img
-                              src={product.images[0]}
-                              alt={product.name}
-                              className="w-full h-32 object-cover rounded-lg mb-4 hover:scale-105 transition-transform"
-                            />
-                          </Link>
-                          <Link to={`/product/${product.id}`}>
-                            <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2 hover:text-primary transition-colors">
-                              {product.name}
-                            </h3>
-                          </Link>
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="text-lg font-bold text-primary">
-                              {formatPrice(
-                                convertPrice(product.variants[0]?.price || product.price, selectedCurrency.code, "INR"),
-                                selectedCurrency,
-                              )}
-                            </span>
-                            <Badge
-                              className={
-                                product.stockQuantity > 0
-                                  ? "bg-green-500 text-white"
-                                  : "bg-red-500 text-white"
-                              }
-                            >
-                              {product.stockQuantity > 0 ? "In Stock" : "Out of Stock"}
-                            </Badge>
-                          </div>
-                          <div className="flex space-x-2">
-                            <Button
-                              disabled={product.stockQuantity === 0}
-                              className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
-                              onClick={() => {
-                                // Add to cart logic here
-                                console.log('Add to cart:', product.id);
-                              }}
-                            >
-                              <ShoppingCart className="w-4 h-4 mr-2" />
-                              Add to Cart
-                            </Button>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="border-gray-600 text-red-400 hover:bg-red-500 hover:text-white"
-                              onClick={() => removeFromWishlist(product.id)}
-                            >
-                              <X className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
+                      return (
+                        <Card
+                          key={productId}
+                          className="bg-gray-800 border-gray-700"
+                        >
+                          <CardContent className="p-4">
+                            <Link to={`/product/${product.id}`}>
+                              <img
+                                src={product.images[0]}
+                                alt={product.name}
+                                className="w-full h-32 object-cover rounded-lg mb-4 hover:scale-105 transition-transform"
+                              />
+                            </Link>
+                            <Link to={`/product/${product.id}`}>
+                              <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2 hover:text-primary transition-colors">
+                                {product.name}
+                              </h3>
+                            </Link>
+                            <div className="flex items-center justify-between mb-3">
+                              <span className="text-lg font-bold text-primary">
+                                {formatPrice(
+                                  convertPrice(
+                                    product.variants[0]?.price ||
+                                      product.basePrice,
+                                    selectedCurrency.code,
+                                    "INR",
+                                  ),
+                                  selectedCurrency,
+                                )}
+                              </span>
+                              <Badge
+                                className={
+                                  product.stockQuantity > 0
+                                    ? "bg-green-500 text-white"
+                                    : "bg-red-500 text-white"
+                                }
+                              >
+                                {product.stockQuantity > 0
+                                  ? "In Stock"
+                                  : "Out of Stock"}
+                              </Badge>
+                            </div>
+                            <div className="flex space-x-2">
+                              <Button
+                                disabled={product.stockQuantity === 0}
+                                className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  if (product.variants.length > 0) {
+                                    addToCart(product, product.variants[0]);
+                                  } else {
+                                    // Create a default variant if none exist
+                                    const defaultVariant = {
+                                      id: `${product.id}-default`,
+                                      size: "Default",
+                                      color: "Default",
+                                      price: product.basePrice,
+                                      stock: product.stockQuantity,
+                                    };
+                                    addToCart(product, defaultVariant);
+                                  }
+                                }}
+                              >
+                                <ShoppingCart className="w-4 h-4 mr-2" />
+                                Add to Cart
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="border-gray-600 text-red-400 hover:bg-red-500 hover:text-white"
+                                onClick={async () => {
+                                  await removeFromWishlist(product.id);
+                                  // Also refresh the like context
+                                  refreshLikes();
+                                }}
+                              >
+                                <X className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>

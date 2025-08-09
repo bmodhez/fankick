@@ -19,6 +19,7 @@ import { CartSidebar } from "./CartSidebar";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
+import { useLike } from "@/contexts/LikeContext";
 import { CURRENCIES } from "@/utils/currency";
 
 export function Navigation() {
@@ -32,6 +33,7 @@ export function Navigation() {
   const { selectedCurrency, setCurrency } = useCurrency();
   const { user, logout, isAdmin } = useAuth();
   const { totalItems } = useCart();
+  const { likeCount } = useLike();
   const navigate = useNavigate();
   const currencyRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -292,11 +294,18 @@ export function Navigation() {
 
                     <Link
                       to="/profile"
-                      className="block px-4 py-2 hover:bg-gray-700 flex items-center"
+                      className="block px-4 py-2 hover:bg-gray-700 flex items-center justify-between"
                       onClick={() => setShowUserMenu(false)}
                     >
-                      <Heart className="w-4 h-4 mr-2" />
-                      Wishlist
+                      <div className="flex items-center">
+                        <Heart className="w-4 h-4 mr-2" />
+                        Wishlist
+                      </div>
+                      {likeCount > 0 && (
+                        <span className="bg-red-500 text-white text-xs rounded-full px-2 py-0.5 min-w-[20px] text-center">
+                          {likeCount}
+                        </span>
+                      )}
                     </Link>
 
                     {isAdmin() && (
