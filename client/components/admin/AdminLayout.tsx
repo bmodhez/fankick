@@ -151,9 +151,32 @@ const quickStats = [
 export function AdminLayout({ children, title }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [orderCount, setOrderCount] = useState(1); // Start with 1 (test order)
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { showNotification } = useRealTime();
+
+  // Load real-time order count
+  useEffect(() => {
+    const loadOrderCount = async () => {
+      try {
+        const orders = await orderApi.getAllOrders();
+        setOrderCount(orders.length + 1); // +1 for test order
+      } catch (error) {
+        console.error('Failed to load order count:', error);
+      }
+    };
+
+    loadOrderCount();
+
+    // Refresh count every 60 seconds
+    const interval = setInterval(loadOrderCount, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const navigation = getNavigation(orderCount);
 
   const currentPath = location.pathname;
 
