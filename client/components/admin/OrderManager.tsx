@@ -67,119 +67,41 @@ interface Order {
   updatedAt: string;
 }
 
-const mockOrders: Order[] = [
-  {
-    id: "ord-001",
-    orderNumber: "FK2024001",
-    customer: {
-      name: "Arjun Kumar",
-      email: "arjun.k@example.com",
-      phone: "+91 9876543210",
-      address: "Mumbai, Maharashtra, India",
-      country: "India",
-      flag: "🇮🇳",
-    },
-    items: [
-      {
-        name: "Messi Inter Miami Jersey",
-        variant: "Size: M, Color: Pink",
-        quantity: 1,
-        price: 7999,
-        image: "/placeholder.svg",
-      },
-    ],
-    status: "shipped",
-    payment: {
-      method: "Razorpay",
-      status: "paid",
-      amount: 7999,
-    },
-    shipping: {
-      method: "Standard Delivery",
-      cost: 0,
-      trackingNumber: "FK24001TRK",
-      estimatedDelivery: "2024-01-28",
-    },
-    createdAt: "2024-01-25T10:30:00Z",
-    updatedAt: "2024-01-26T14:20:00Z",
+// Minimal test data - only 1 order for demo
+const testOrder: Order = {
+  id: "test-001",
+  orderNumber: "FK-TEST",
+  customer: {
+    name: "Test User",
+    email: "test@example.com",
+    phone: "+91 9999999999",
+    address: "Test Address, India",
+    country: "India",
+    flag: "🇮🇳",
   },
-  {
-    id: "ord-002",
-    orderNumber: "FK2024002",
-    customer: {
-      name: "Sarah Wilson",
-      email: "sarah.w@example.com",
-      phone: "+1 555-123-4567",
-      address: "New York, NY, USA",
-      country: "USA",
-      flag: "🇺🇸",
+  items: [
+    {
+      name: "Test Product",
+      variant: "Size: M",
+      quantity: 1,
+      price: 999,
+      image: "/placeholder.svg",
     },
-    items: [
-      {
-        name: "Taylor Swift Eras Hoodie",
-        variant: "Size: L, Color: Lavender",
-        quantity: 2,
-        price: 3799,
-        image: "/placeholder.svg",
-      },
-    ],
-    status: "pending",
-    payment: {
-      method: "PayPal",
-      status: "paid",
-      amount: 7598,
-    },
-    shipping: {
-      method: "Express Delivery",
-      cost: 599,
-      estimatedDelivery: "2024-01-30",
-    },
-    createdAt: "2024-01-26T08:15:00Z",
-    updatedAt: "2024-01-26T08:15:00Z",
+  ],
+  status: "pending",
+  payment: {
+    method: "Test",
+    status: "paid",
+    amount: 999,
   },
-  {
-    id: "ord-003",
-    orderNumber: "FK2024003",
-    customer: {
-      name: "Ahmed Al-Rashid",
-      email: "ahmed.r@example.com",
-      phone: "+966 50 123 4567",
-      address: "Riyadh, Saudi Arabia",
-      country: "Saudi Arabia",
-      flag: "🇸🇦",
-    },
-    items: [
-      {
-        name: "Ronaldo Al Nassr Jersey",
-        variant: "Size: XL",
-        quantity: 1,
-        price: 8499,
-        image: "/placeholder.svg",
-      },
-      {
-        name: "Football Boots",
-        variant: "Size: 42",
-        quantity: 1,
-        price: 12999,
-        image: "/placeholder.svg",
-      },
-    ],
-    status: "delivered",
-    payment: {
-      method: "COD",
-      status: "paid",
-      amount: 21498,
-    },
-    shipping: {
-      method: "Standard Delivery",
-      cost: 0,
-      trackingNumber: "FK24003TRK",
-      estimatedDelivery: "2024-01-27",
-    },
-    createdAt: "2024-01-23T16:45:00Z",
-    updatedAt: "2024-01-27T11:30:00Z",
+  shipping: {
+    method: "Standard",
+    cost: 0,
+    estimatedDelivery: "2024-01-30",
   },
-];
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+};
 
 function getStatusColor(status: string) {
   switch (status) {
