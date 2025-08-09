@@ -233,14 +233,31 @@ export function OrderManager() {
     return matchesSearch && matchesStatus;
   });
 
-  const updateOrderStatus = (orderId: string, newStatus: Order["status"]) => {
-    setOrders(
-      orders.map((order) =>
-        order.id === orderId
-          ? { ...order, status: newStatus, updatedAt: new Date().toISOString() }
-          : order,
-      ),
-    );
+  const updateOrderStatus = async (orderId: string, newStatus: Order["status"]) => {
+    try {
+      // Update in API if it's a real order (not test order)
+      if (orderId !== "test-001") {
+        await orderApi.updateOrderStatus(orderId, { orderStatus: newStatus });
+        showNotification(`Order status updated to ${newStatus}`, 'success');
+      }
+
+      // Update local state immediately for UI feedback
+      setOrders(
+        orders.map((order) =>
+          order.id === orderId
+            ? { ...order, status: newStatus, updatedAt: new Date().toISOString() }
+            : order,
+        ),
+      );
+
+      // Refresh from API to ensure consistency
+      if (orderId !== "test-001") {
+        setTimeout(loadRealOrders, 1000);
+      }
+    } catch (error) {
+      console.error('Failed to update order status:', error);
+      showNotification('Failed to update order status', 'error');
+    }
   };
 
   const orderStats = {
