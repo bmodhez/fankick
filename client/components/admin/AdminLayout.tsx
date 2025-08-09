@@ -117,31 +117,31 @@ const getNavigation = (orderCount: number = 1) => [
   },
 ];
 
-const quickStats = [
+const getQuickStats = (orderCount: number) => [
   {
     name: "Live Visitors",
-    value: "234",
-    change: "+12%",
+    value: "5",
+    change: "+20%",
     icon: Globe,
     color: "text-green-400",
   },
   {
     name: "Today Sales",
-    value: "₹45.2K",
-    change: "+8%",
+    value: "₹2.5K",
+    change: "+15%",
     icon: DollarSign,
     color: "text-green-400",
   },
   {
-    name: "Pending Orders",
-    value: "23",
-    change: "-5%",
+    name: "Total Orders",
+    value: orderCount.toString(),
+    change: "+100%",
     icon: ShoppingCart,
-    color: "text-red-400",
+    color: "text-green-400",
   },
   {
     name: "Stock Alerts",
-    value: "8",
+    value: "2",
     change: "0%",
     icon: Bell,
     color: "text-yellow-400",
