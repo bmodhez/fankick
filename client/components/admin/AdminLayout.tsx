@@ -170,8 +170,8 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
 
     loadOrderCount();
 
-    // Refresh count every 60 seconds
-    const interval = setInterval(loadOrderCount, 60000);
+    // Refresh count every 10 seconds for real-time updates
+    const interval = setInterval(loadOrderCount, 10000);
 
     return () => clearInterval(interval);
   }, []);
