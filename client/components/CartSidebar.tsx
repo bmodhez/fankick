@@ -78,6 +78,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         discount: coupon.discount,
       });
       setCouponCode("");
+      alert(`🎉 Coupon applied! You saved ${coupon.discount}%`);
+    } else if (couponCode.trim()) {
+      alert("❌ Invalid coupon code. Try FK2025 for 10% off!");
     }
   };
 
