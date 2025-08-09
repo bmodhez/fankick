@@ -155,7 +155,7 @@ export default function ProductPage() {
               >
                 <ShoppingCart className="w-4 h-4 text-green-600" />
                 <span className="text-sm font-semibold text-green-800">
-                  {totalItems} item{totalItems > 1 ? 's' : ''} in cart
+                  {totalItems} item{totalItems > 1 ? "s" : ""} in cart
                 </span>
 
                 {/* Mini Cart Dropdown */}
@@ -167,7 +167,10 @@ export default function ProductPage() {
                       </div>
                       <div className="space-y-2 max-h-60 overflow-y-auto">
                         {items.slice(0, 3).map((item) => (
-                          <div key={item.id} className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded">
+                          <div
+                            key={item.id}
+                            className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded"
+                          >
                             <img
                               src={item.product.images[0]}
                               alt={item.product.name}
@@ -178,7 +181,15 @@ export default function ProductPage() {
                                 {item.product.name}
                               </p>
                               <p className="text-xs text-gray-500">
-                                Qty: {item.quantity} • {formatPrice(convertPrice(item.variant.price, selectedCurrency.code, "INR"), selectedCurrency)}
+                                Qty: {item.quantity} •{" "}
+                                {formatPrice(
+                                  convertPrice(
+                                    item.variant.price,
+                                    selectedCurrency.code,
+                                    "INR",
+                                  ),
+                                  selectedCurrency,
+                                )}
                               </p>
                             </div>
                           </div>
@@ -193,7 +204,7 @@ export default function ProductPage() {
                         <Button
                           size="sm"
                           className="w-full bg-orange-500 hover:bg-orange-600 text-white"
-                          onClick={() => navigate('/checkout')}
+                          onClick={() => navigate("/checkout")}
                         >
                           View Full Cart & Checkout
                         </Button>
@@ -206,10 +217,18 @@ export default function ProductPage() {
                 <span>Total:</span>
                 <span className="font-bold">
                   {formatPrice(
-                    items.reduce((sum, item) =>
-                      sum + convertPrice(item.variant.price, selectedCurrency.code, "INR") * item.quantity, 0
+                    items.reduce(
+                      (sum, item) =>
+                        sum +
+                        convertPrice(
+                          item.variant.price,
+                          selectedCurrency.code,
+                          "INR",
+                        ) *
+                          item.quantity,
+                      0,
                     ),
-                    selectedCurrency
+                    selectedCurrency,
                   )}
                 </span>
               </div>
@@ -221,7 +240,7 @@ export default function ProductPage() {
               <Button
                 size="sm"
                 className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-1.5"
-                onClick={() => navigate('/checkout')}
+                onClick={() => navigate("/checkout")}
               >
                 <ShoppingCart className="w-4 h-4 mr-1" />
                 Go to Cart
@@ -271,7 +290,29 @@ export default function ProductPage() {
           <div className="space-y-4">
             <div className="relative aspect-square bg-muted rounded-lg overflow-hidden">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F61ece27bc9db40fcb5161b972d368a2e?format=webp&width=800"
+                src={
+                  product.name.toLowerCase().includes("messi")
+                    ? "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80"
+                    : product.name.toLowerCase().includes("naruto")
+                      ? "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"
+                      : product.name.toLowerCase().includes("bts") ||
+                          product.name.toLowerCase().includes("k-pop")
+                        ? "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80"
+                        : product.name.toLowerCase().includes("marvel") ||
+                            product.name.toLowerCase().includes("spider")
+                          ? "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80"
+                          : product.name.toLowerCase().includes("jersey") ||
+                              product.name.toLowerCase().includes("football")
+                            ? "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80"
+                            : product.name.toLowerCase().includes("ring")
+                              ? "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80"
+                              : product.name.toLowerCase().includes("hoodie") ||
+                                  product.name
+                                    .toLowerCase()
+                                    .includes("sweatshirt")
+                                ? "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80"
+                                : "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80"
+                }
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
@@ -319,7 +360,33 @@ export default function ProductPage() {
                   }`}
                 >
                   <img
-                    src="https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2F61ece27bc9db40fcb5161b972d368a2e?format=webp&width=800"
+                    src={
+                      product.name.toLowerCase().includes("messi")
+                        ? "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80"
+                        : product.name.toLowerCase().includes("naruto")
+                          ? "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"
+                          : product.name.toLowerCase().includes("bts") ||
+                              product.name.toLowerCase().includes("k-pop")
+                            ? "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80"
+                            : product.name.toLowerCase().includes("marvel") ||
+                                product.name.toLowerCase().includes("spider")
+                              ? "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80"
+                              : product.name.toLowerCase().includes("jersey") ||
+                                  product.name
+                                    .toLowerCase()
+                                    .includes("football")
+                                ? "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80"
+                                : product.name.toLowerCase().includes("ring")
+                                  ? "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80"
+                                  : product.name
+                                        .toLowerCase()
+                                        .includes("hoodie") ||
+                                      product.name
+                                        .toLowerCase()
+                                        .includes("sweatshirt")
+                                    ? "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80"
+                                    : "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80"
+                    }
                     alt={`View ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
@@ -460,7 +527,7 @@ export default function ProductPage() {
                   setShowCartNotification(true);
                   toast({
                     title: "Added to Cart! 🛒",
-                    description: `${quantity}x ${product.name} (${currentVariant.size || currentVariant.color || 'Default'}) added to your cart.`,
+                    description: `${quantity}x ${product.name} (${currentVariant.size || currentVariant.color || "Default"}) added to your cart.`,
                     duration: 3000,
                   });
                 }}
@@ -480,11 +547,14 @@ export default function ProductPage() {
                     addToCart(product, currentVariant, quantity);
                     toast({
                       title: "Proceeding to COD Checkout 💰",
-                      description: "Taking you to checkout with Cash on Delivery selected.",
+                      description:
+                        "Taking you to checkout with Cash on Delivery selected.",
                       duration: 2000,
                     });
                     setTimeout(() => {
-                      navigate('/checkout', { state: { paymentMethod: 'cod' } });
+                      navigate("/checkout", {
+                        state: { paymentMethod: "cod" },
+                      });
                     }, 500);
                   }}
                 >

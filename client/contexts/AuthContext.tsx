@@ -56,6 +56,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       // Check if session is expired
       if (new Date() >= new Date(expiresAt)) {
+        console.log("Session expired, clearing local storage");
         localStorage.removeItem("sessionToken");
         localStorage.removeItem("sessionExpiresAt");
         setIsLoading(false);
@@ -66,9 +67,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const currentUser = await userApi.getCurrentUser();
       setUser(currentUser);
       setIsAuthenticated(true);
+      console.log("Session verified successfully for user:", currentUser.email);
     } catch (error) {
-      console.error("Session verification failed:", error);
-      // Clear invalid session
+      console.log(
+        "Session verification failed (likely server restart), clearing session:",
+        error.message,
+      );
+      // Clear invalid session silently - this is normal on server restarts
       localStorage.removeItem("sessionToken");
       localStorage.removeItem("sessionExpiresAt");
       setUser(null);

@@ -31,8 +31,8 @@ async function apiRequest<T>(
       "Content-Type": "application/json",
       ...options.headers,
     },
-    // Add shorter timeout to fail fast on network issues
-    signal: options.signal || AbortSignal.timeout(10000), // 10 second timeout
+    // Set reasonable timeout for product operations
+    signal: options.signal || AbortSignal.timeout(45000), // 45 second timeout for product operations
   };
 
   let lastError: Error;
@@ -42,6 +42,12 @@ async function apiRequest<T>(
       console.log(
         `API Request ${attempt + 1}/${retries + 1}: ${options.method || "GET"} ${url}`,
       );
+
+      // Add delay between retries
+      if (attempt > 0) {
+        const delay = Math.min(1000 * Math.pow(2, attempt - 1), 3000);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
 
       const response = await fetch(url, { ...defaultOptions, ...options });
 
