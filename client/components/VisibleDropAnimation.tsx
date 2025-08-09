@@ -279,33 +279,9 @@ export const useHeroDramaticDrop = () => {
   return heroRef;
 };
 
-// Debug function to show animation boundaries
+// Debug function disabled for production
 export const showAnimationDebug = () => {
-  if (typeof window === 'undefined') return;
-  
-  // Add visual indicators for scroll triggers
-  ScrollTrigger.getAll().forEach((st, index) => {
-    const indicator = document.createElement('div');
-    indicator.innerHTML = `ST ${index + 1}`;
-    indicator.style.cssText = `
-      position: fixed;
-      top: ${10 + index * 30}px;
-      right: 10px;
-      background: #ff0000;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 12px;
-      z-index: 10000;
-      font-family: monospace;
-    `;
-    document.body.appendChild(indicator);
-  });
-
-  console.log('🎬 Animation Debug Info:');
-  console.log('ScrollTriggers:', ScrollTrigger.getAll().length);
-  console.log('GSAP version:', gsap.version);
-  console.log('Active tweens:', gsap.getTweensOf('*').length);
+  // Debug removed for clean UI
 };
 
 export default useImmediateDropAnimation;
