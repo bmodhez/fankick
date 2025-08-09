@@ -1,8 +1,10 @@
-import { useState, ReactNode } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRealTime } from "@/contexts/RealTimeContext";
+import { orderApi } from "@/services/orderApi";
 import {
   BarChart3,
   Package,
@@ -28,6 +30,7 @@ import {
   Bot,
   Shield,
   Calendar,
+  ArrowLeft,
 } from "lucide-react";
 
 interface AdminLayoutProps {
@@ -35,7 +38,7 @@ interface AdminLayoutProps {
   title: string;
 }
 
-const navigation = [
+const getNavigation = (orderCount: number = 1) => [
   {
     name: "Dashboard",
     href: "/admin",
@@ -48,21 +51,21 @@ const navigation = [
     href: "/admin/products",
     icon: Package,
     emoji: "📦",
-    badge: "1.2K",
+    badge: "12", // Minimal test data
   },
   {
     name: "Orders",
     href: "/admin/orders",
     icon: ShoppingCart,
     emoji: "🛒",
-    badge: "45",
+    badge: orderCount.toString(), // Real-time count
   },
   {
     name: "Customers",
     href: "/admin/customers",
     icon: Users,
     emoji: "👥",
-    badge: "2.8K",
+    badge: "5", // Minimal test data
   },
   {
     name: "Categories",
@@ -114,31 +117,31 @@ const navigation = [
   },
 ];
 
-const quickStats = [
+const getQuickStats = (orderCount: number) => [
   {
     name: "Live Visitors",
-    value: "234",
-    change: "+12%",
+    value: "5",
+    change: "+20%",
     icon: Globe,
     color: "text-green-400",
   },
   {
     name: "Today Sales",
-    value: "₹45.2K",
-    change: "+8%",
+    value: "₹2.5K",
+    change: "+15%",
     icon: DollarSign,
     color: "text-green-400",
   },
   {
-    name: "Pending Orders",
-    value: "23",
-    change: "-5%",
+    name: "Total Orders",
+    value: orderCount.toString(),
+    change: "+100%",
     icon: ShoppingCart,
-    color: "text-red-400",
+    color: "text-green-400",
   },
   {
     name: "Stock Alerts",
-    value: "8",
+    value: "2",
     change: "0%",
     icon: Bell,
     color: "text-yellow-400",
@@ -148,9 +151,35 @@ const quickStats = [
 export function AdminLayout({ children, title }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [orderCount, setOrderCount] = useState(1); // Start with 1 (test order)
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { showNotification } = useRealTime();
+
+  // Load real-time order count
+  useEffect(() => {
+    const loadOrderCount = async () => {
+      try {
+        console.log('📊 Loading order count for admin nav...');
+        const orders = await orderApi.getAllOrders();
+        const newCount = orders.length + 1; // +1 for test order
+        setOrderCount(newCount);
+        console.log(`📊 Updated admin nav order count: ${newCount} (${orders.length} real + 1 test)`);
+      } catch (error) {
+        console.error('❌ Failed to load order count:', error);
+      }
+    };
+
+    loadOrderCount();
+
+    // Refresh count every 10 seconds for real-time updates
+    const interval = setInterval(loadOrderCount, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const navigation = getNavigation(orderCount);
 
   const currentPath = location.pathname;
 
@@ -167,6 +196,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
         <div className="fixed left-0 top-0 bottom-0 w-64 bg-gray-800 border-r border-gray-700">
           <SidebarContent
             currentPath={currentPath}
+            navigation={navigation}
             onItemClick={() => setSidebarOpen(false)}
           />
         </div>
@@ -174,7 +204,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
 
       {/* Desktop sidebar */}
       <div className="hidden lg:block fixed left-0 top-0 bottom-0 w-64 bg-gray-800 border-r border-gray-700">
-        <SidebarContent currentPath={currentPath} />
+        <SidebarContent currentPath={currentPath} navigation={navigation} />
       </div>
 
       {/* Main content */}
@@ -190,6 +220,17 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
                 onClick={() => setSidebarOpen(true)}
               >
                 <Menu className="h-5 w-5" />
+              </Button>
+
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate("/")}
+                className="text-gray-400 hover:text-white flex items-center space-x-2"
+                title="Back to Store"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span className="hidden sm:inline">Back</span>
               </Button>
 
               <div>
@@ -247,7 +288,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
           {/* Quick stats bar */}
           <div className="py-4 border-t border-gray-700">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {quickStats.map((stat, index) => (
+              {getQuickStats(orderCount).map((stat, index) => (
                 <div key={index} className="bg-gray-800 rounded-lg p-3">
                   <div className="flex items-center justify-between">
                     <div>
@@ -278,9 +319,11 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
 
 function SidebarContent({
   currentPath,
+  navigation,
   onItemClick,
 }: {
   currentPath: string;
+  navigation: any[];
   onItemClick?: () => void;
 }) {
   return (

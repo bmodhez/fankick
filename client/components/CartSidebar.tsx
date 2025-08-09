@@ -14,11 +14,13 @@ import {
   Minus,
   Trash2,
   ShoppingBag,
+  ShoppingCart,
   CreditCard,
   Truck,
   ShieldCheck,
   Gift,
   MapPin,
+  Zap,
 } from "lucide-react";
 
 interface CartSidebarProps {
@@ -67,6 +69,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
       WELCOME10: { discount: 10, description: "10% off for new customers" },
       SAVE20: { discount: 20, description: "20% off on orders above $100" },
       FANKICK15: { discount: 15, description: "15% off sitewide" },
+      FK2025: { discount: 10, description: "10% off with FK2025 code" },
     };
 
     const coupon =
@@ -77,6 +80,9 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
         discount: coupon.discount,
       });
       setCouponCode("");
+      alert(`🎉 Coupon applied! You saved ${coupon.discount}%`);
+    } else if (couponCode.trim()) {
+      alert("❌ Invalid coupon code. Try FK2025 for 10% off!");
     }
   };
 
@@ -286,10 +292,11 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             <div className="space-y-2">
               <div className="flex space-x-2">
                 <Input
-                  placeholder="Enter coupon code"
+                  placeholder="Enter coupon code (Try FK2025)"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
-                  className="bg-gray-800 border-gray-600 text-white"
+                  onKeyPress={(e) => e.key === 'Enter' && couponCode.trim() && applyCoupon()}
+                  className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
                 />
                 <Button
                   onClick={applyCoupon}
@@ -299,6 +306,12 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   Apply
                 </Button>
               </div>
+              {!appliedCoupon && (
+                <div className="text-xs text-gray-400 flex items-center space-x-1">
+                  <span>💡</span>
+                  <span>Use code <strong className="text-primary">FK2025</strong> for 10% off!</span>
+                </div>
+              )}
 
               {appliedCoupon && (
                 <div className="flex items-center justify-between bg-green-500/20 border border-green-500 rounded p-2">
@@ -350,22 +363,41 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               </div>
             </div>
 
-            {/* Checkout Button */}
-            <div className="relative group">
+            {/* Urgency Message */}
+            <div className="text-center py-2 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-lg border border-red-500/30 mb-3">
+              <p className="text-sm text-red-400 font-semibold">
+                🔥 Limited Stock! Complete your purchase now!
+              </p>
+            </div>
+
+            {/* Buy Now Buttons */}
+            <div className="space-y-3">
+              {/* Main Buy Button */}
               <Button
                 onClick={handleCheckout}
-                className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/95 hover:via-green-400/95 hover:to-blue-400/95 font-bold py-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/40 relative overflow-hidden"
+                className="w-full bg-gradient-to-r from-primary via-green-400 to-blue-400 text-black hover:from-primary/95 hover:via-green-400/95 hover:to-blue-400/95 font-bold py-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-primary/40 relative overflow-hidden animate-pulse"
               >
                 <div className="relative flex items-center justify-center">
-                  <CreditCard className="w-6 h-6 mr-3 animate-pulse" />
+                  <ShoppingCart className="w-6 h-6 mr-3" />
                   <div className="text-center">
-                    <div className="text-lg font-extrabold">
-                      Proceed to Checkout
+                    <div className="text-xl font-extrabold">
+                      🛒 BUY NOW / खरीदें
                     </div>
                     <div className="text-sm opacity-90 font-semibold">
-                      {formatPrice(finalTotal, selectedCurrency)}
+                      Total: {formatPrice(finalTotal, selectedCurrency)}
                     </div>
                   </div>
+                </div>
+              </Button>
+
+              {/* Quick Payment Option */}
+              <Button
+                onClick={() => setShowPaymentModal(true)}
+                className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white hover:from-orange-600 hover:to-red-600 font-bold py-4 rounded-xl shadow-lg transition-all duration-300 border border-orange-400"
+              >
+                <div className="flex items-center justify-center">
+                  <Zap className="w-5 h-5 mr-2" />
+                  <span>⚡ Quick Pay - {formatPrice(finalTotal, selectedCurrency)}</span>
                 </div>
               </Button>
             </div>

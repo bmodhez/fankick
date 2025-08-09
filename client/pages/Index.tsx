@@ -54,12 +54,6 @@ export default function Index() {
 
   // Use original product images without override
 
-  // Add global debug function
-  (window as any).updateProductImages = () => {
-    console.log("🔄 Manually updating product images...");
-    console.log("New image URL:", builderImageUrl);
-  };
-
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,7 +63,8 @@ export default function Index() {
     {
       title: "Football Legends",
       subtitle: "Messi • Ronaldo • Mbappé",
-      image: "/placeholder.svg",
+      image:
+        "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=800",
       cta: "Shop Jerseys",
       link: "/football",
       color: "from-green-600 to-blue-600",
@@ -77,7 +72,8 @@ export default function Index() {
     {
       title: "Anime Universe",
       subtitle: "Naruto • Chainsaw Man • Demon Slayer",
-      image: "/placeholder.svg",
+      image:
+        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=400&fit=crop&crop=center&auto=format&q=80",
       cta: "Explore Anime",
       link: "/anime",
       color: "from-purple-600 to-pink-600",
@@ -85,7 +81,8 @@ export default function Index() {
     {
       title: "Pop Culture",
       subtitle: "Taylor Swift • K-pop • Marvel",
-      image: "/placeholder.svg",
+      image:
+        "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&h=400&fit=crop&crop=center&auto=format&q=80",
       cta: "Discover More",
       link: "/pop-culture",
       color: "from-red-600 to-orange-600",
@@ -217,7 +214,7 @@ export default function Index() {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-8 sm:py-12 lg:py-20 overflow-hidden border-b border-border/20">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1920&q=80')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1560762484-813fc97650a0?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80')] bg-cover bg-center opacity-5"></div>
 
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -325,23 +322,21 @@ export default function Index() {
               <Link key={index} to={category.link}>
                 <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-secondary to-background border-border shadow-lg hover:shadow-xl">
                   <CardContent className="p-0">
-                    <div
-                      className={`h-40 sm:h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
-                      style={{
-                        backgroundImage:
-                          category.title === "Football Jerseys"
-                            ? "url(https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80)"
-                            : category.title === "Anime Rings"
-                              ? "url(https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80)"
-                              : category.title === "K-pop Merch"
-                                ? "url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80)"
-                                : category.title === "Marvel Hoodies"
-                                  ? "url(https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80)"
-                                  : "url(https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80)",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    >
+                    <div className="h-40 sm:h-48 relative overflow-hidden">
+                      <img
+                        src={category.image}
+                        alt={category.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = "none";
+                          target.parentElement!.classList.add(
+                            `bg-gradient-to-br`,
+                            category.color.split(" ")[0],
+                            category.color.split(" ")[1],
+                          );
+                        }}
+                      />
                       <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300"></div>
                       <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white">
                         <h3 className="font-sport font-bold text-lg sm:text-2xl mb-1">
@@ -420,42 +415,16 @@ export default function Index() {
                       <div className="relative">
                         <img
                           src={
-                            product.name.toLowerCase().includes("messi")
-                              ? "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80"
-                              : product.name.toLowerCase().includes("naruto")
-                                ? "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"
-                                : product.name.toLowerCase().includes("bts") ||
-                                    product.name.toLowerCase().includes("k-pop")
-                                  ? "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80"
-                                  : product.name
-                                        .toLowerCase()
-                                        .includes("marvel") ||
-                                      product.name
-                                        .toLowerCase()
-                                        .includes("spider")
-                                    ? "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80"
-                                    : product.name
-                                          .toLowerCase()
-                                          .includes("jersey") ||
-                                        product.name
-                                          .toLowerCase()
-                                          .includes("football")
-                                      ? "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80"
-                                      : product.name
-                                            .toLowerCase()
-                                            .includes("ring")
-                                        ? "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80"
-                                        : product.name
-                                              .toLowerCase()
-                                              .includes("hoodie") ||
-                                            product.name
-                                              .toLowerCase()
-                                              .includes("sweatshirt")
-                                          ? "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80"
-                                          : "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80"
+                            product.images[0] ||
+                            "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2Fa924a8bea1e5433a8359466af5c1c95d?format=webp&width=800"
                           }
                           alt={product.name}
                           className="w-full h-40 sm:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src =
+                              "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2Fa924a8bea1e5433a8359466af5c1c95d?format=webp&width=800";
+                          }}
                         />
 
                         {/* Enhanced Overlays */}
@@ -685,7 +654,7 @@ export default function Index() {
                 🇬🇧 UK: 7-10 days
               </span>
               <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
-                🇩🇪 Germany: 6-9 days
+                🇩��� Germany: 6-9 days
               </span>
               <span className="bg-black/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 🇨🇦 Canada: 8-12 days
@@ -802,21 +771,31 @@ export default function Index() {
           </div>
 
           <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4">
-            {Array.from({ length: 6 }, (_, i) => (
-              <div
-                key={i}
-                className="aspect-square bg-gray-200 rounded-xl overflow-hidden group cursor-pointer relative"
-              >
-                <img
-                  src="/placeholder.svg"
-                  alt={`Community post ${i + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                  <Instagram className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {Array.from({ length: 6 }, (_, i) => {
+              const communityImages = [
+                "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+                "https://images.unsplash.com/photo-1614027164687-a7dd4b27c3dc?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+                "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+                "https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+                "https://images.unsplash.com/photo-1560762484-813fc97650a0?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+                "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=400&fit=crop&crop=center&auto=format&q=80",
+              ];
+              return (
+                <div
+                  key={i}
+                  className="aspect-square bg-gray-200 rounded-xl overflow-hidden group cursor-pointer relative"
+                >
+                  <img
+                    src={communityImages[i]}
+                    alt={`Community post ${i + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                    <Instagram className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

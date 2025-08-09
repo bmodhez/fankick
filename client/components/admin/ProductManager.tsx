@@ -258,8 +258,10 @@ export function ProductManager() {
           `✅ Product "${productData.name}" has been created successfully!\n\nChanges are now saved to the backend and live on the main website.`,
         );
       } else {
+        console.log(`🔄 Attempting to update product: ${productData.name} (ID: ${productData.id})`);
         await updateProduct(productData);
         setLastSyncTime(new Date().toISOString());
+        console.log(`✅ Product update completed for: ${productData.name}`);
         alert(
           `✅ Product "${productData.name}" has been updated successfully!\n\nChanges are now saved to the backend and live on the main website.`,
         );
@@ -267,11 +269,18 @@ export function ProductManager() {
       setShowProductForm(false);
       setEditingProduct(null);
     } catch (error) {
-      console.error("Error saving product:", error);
+      console.error("❌ Error saving product:", error);
+      console.error("Product data:", productData);
 
       // More user-friendly error handling
       let errorMessage = "Unknown error occurred";
       if (error instanceof Error) {
+        console.error("Error details:", {
+          message: error.message,
+          name: error.name,
+          stack: error.stack
+        });
+
         if (
           error.message.includes("cancelled") ||
           error.message.includes("aborted")

@@ -76,14 +76,22 @@ const sizeOptions = {
   accessories: ["One Size"],
 };
 
-export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductFormProps) {
+export function ProductForm({
+  product,
+  isOpen,
+  onClose,
+  onSave,
+  mode,
+}: ProductFormProps) {
   const [formData, setFormData] = useState<FormData>({
     id: "",
     name: "",
     description: "",
     category: "football",
     subcategory: "",
-    images: ["/placeholder.svg"],
+    images: [
+      "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=400",
+    ],
     variants: [],
     basePrice: 0,
     originalPrice: 0,
@@ -106,7 +114,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
   const [newImage, setNewImage] = useState("");
   const [activeTab, setActiveTab] = useState("basic");
   const [isDragOver, setIsDragOver] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState<{ [key: string]: number }>({});
+  const [uploadProgress, setUploadProgress] = useState<{
+    [key: string]: number;
+  }>({});
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
@@ -123,7 +133,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
         description: "",
         category: "football",
         subcategory: "",
-        images: ["/placeholder.svg"],
+        images: [
+          "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F936c98762f5f474d8370b2d7a65496d9?format=webp&width=400",
+        ],
         variants: [],
         basePrice: 0,
         originalPrice: 0,
@@ -161,7 +173,11 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
     }));
   };
 
-  const updateVariant = (index: number, field: keyof ProductVariant, value: any) => {
+  const updateVariant = (
+    index: number,
+    field: keyof ProductVariant,
+    value: any,
+  ) => {
     const updatedVariants = [...formData.variants];
     updatedVariants[index] = { ...updatedVariants[index], [field]: value };
     setFormData((prev) => ({ ...prev, variants: updatedVariants }));
@@ -174,7 +190,10 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
     }));
   };
 
-  const addItem = (field: "tags" | "badges" | "materials" | "features", value: string) => {
+  const addItem = (
+    field: "tags" | "badges" | "materials" | "features",
+    value: string,
+  ) => {
     if (value.trim()) {
       setFormData((prev) => ({
         ...prev,
@@ -183,7 +202,10 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
     }
   };
 
-  const removeItem = (field: "tags" | "badges" | "materials" | "features", index: number) => {
+  const removeItem = (
+    field: "tags" | "badges" | "materials" | "features",
+    index: number,
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [field]: prev[field].filter((_, i) => i !== index),
@@ -216,7 +238,7 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
       const file = files[i];
 
       // Validate file type
-      if (!file.type.startsWith('image/')) {
+      if (!file.type.startsWith("image/")) {
         alert(`File ${file.name} is not an image and will be skipped.`);
         continue;
       }
@@ -230,7 +252,7 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
       try {
         // Simulate upload progress
         const fileId = `upload-${Date.now()}-${i}`;
-        setUploadProgress(prev => ({ ...prev, [fileId]: 0 }));
+        setUploadProgress((prev) => ({ ...prev, [fileId]: 0 }));
 
         // Convert file to data URL for demo purposes
         // In production, you'd upload to a real service like AWS S3, Cloudinary, etc.
@@ -238,12 +260,12 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
 
         // Simulate upload progress
         for (let progress = 0; progress <= 100; progress += 20) {
-          setUploadProgress(prev => ({ ...prev, [fileId]: progress }));
-          await new Promise(resolve => setTimeout(resolve, 100));
+          setUploadProgress((prev) => ({ ...prev, [fileId]: progress }));
+          await new Promise((resolve) => setTimeout(resolve, 100));
         }
 
         newImages.push(dataUrl);
-        setUploadProgress(prev => {
+        setUploadProgress((prev) => {
           const newProgress = { ...prev };
           delete newProgress[fileId];
           return newProgress;
@@ -295,10 +317,10 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
   };
 
   const triggerFileSelect = () => {
-    const input = document.createElement('input');
-    input.type = 'file';
+    const input = document.createElement("input");
+    input.type = "file";
     input.multiple = true;
-    input.accept = 'image/*';
+    input.accept = "image/*";
     input.onchange = (e) => {
       const files = (e.target as HTMLInputElement).files;
       if (files) {
@@ -309,10 +331,20 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
   };
 
   const handleSave = () => {
-    if (!formData.name || !formData.description || formData.variants.length === 0) {
+    if (
+      !formData.name ||
+      !formData.description ||
+      formData.variants.length === 0
+    ) {
       alert("Please fill in all required fields and add at least one variant.");
       return;
     }
+
+    console.log(`💾 Saving product with images:`, {
+      productName: formData.name,
+      imageCount: formData.images.length,
+      images: formData.images,
+    });
 
     onSave(formData as Product);
     onClose();
@@ -335,14 +367,25 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
           <div className="flex items-center justify-between">
             <CardTitle className="text-white flex items-center space-x-2">
               <Package className="w-5 h-5" />
-              <span>{mode === "create" ? "Add New Product" : "Edit Product"}</span>
+              <span>
+                {mode === "create" ? "Add New Product" : "Edit Product"}
+              </span>
             </CardTitle>
             <div className="flex items-center space-x-2">
-              <Button variant="outline" onClick={() => handleSave()} className="text-white border-gray-600">
+              <Button
+                variant="outline"
+                onClick={() => handleSave()}
+                className="text-white border-gray-600"
+              >
                 <Save className="w-4 h-4 mr-2" />
                 Save Product
               </Button>
-              <Button variant="ghost" size="sm" onClick={onClose} className="text-gray-400 hover:text-white">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onClose}
+                className="text-gray-400 hover:text-white"
+              >
                 <X className="w-4 h-4" />
               </Button>
             </div>
@@ -378,7 +421,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                     </label>
                     <Input
                       value={formData.name}
-                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("name", e.target.value)
+                      }
                       placeholder="Enter product name"
                       className="bg-gray-700 border-gray-600 text-white"
                     />
@@ -408,7 +453,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                     </label>
                     <select
                       value={formData.subcategory}
-                      onChange={(e) => handleInputChange("subcategory", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("subcategory", e.target.value)
+                      }
                       className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary"
                     >
                       <option value="">Select subcategory</option>
@@ -426,7 +473,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                     </label>
                     <Input
                       value={formData.brand || ""}
-                      onChange={(e) => handleInputChange("brand", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("brand", e.target.value)
+                      }
                       placeholder="Enter brand name"
                       className="bg-gray-700 border-gray-600 text-white"
                     />
@@ -442,7 +491,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                       <Input
                         type="number"
                         value={formData.basePrice}
-                        onChange={(e) => handleInputChange("basePrice", Number(e.target.value))}
+                        onChange={(e) =>
+                          handleInputChange("basePrice", Number(e.target.value))
+                        }
                         placeholder="0"
                         className="bg-gray-700 border-gray-600 text-white"
                       />
@@ -454,7 +505,12 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                       <Input
                         type="number"
                         value={formData.originalPrice}
-                        onChange={(e) => handleInputChange("originalPrice", Number(e.target.value))}
+                        onChange={(e) =>
+                          handleInputChange(
+                            "originalPrice",
+                            Number(e.target.value),
+                          )
+                        }
                         placeholder="0"
                         className="bg-gray-700 border-gray-600 text-white"
                       />
@@ -469,7 +525,12 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                       <Input
                         type="number"
                         value={formData.shippingDays}
-                        onChange={(e) => handleInputChange("shippingDays", Number(e.target.value))}
+                        onChange={(e) =>
+                          handleInputChange(
+                            "shippingDays",
+                            Number(e.target.value),
+                          )
+                        }
                         placeholder="7"
                         className="bg-gray-700 border-gray-600 text-white"
                       />
@@ -481,7 +542,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                       <Input
                         type="number"
                         value={formData.reviews}
-                        onChange={(e) => handleInputChange("reviews", Number(e.target.value))}
+                        onChange={(e) =>
+                          handleInputChange("reviews", Number(e.target.value))
+                        }
                         placeholder="0"
                         className="bg-gray-700 border-gray-600 text-white"
                       />
@@ -493,7 +556,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                       <input
                         type="checkbox"
                         checked={formData.codAvailable}
-                        onChange={(e) => handleInputChange("codAvailable", e.target.checked)}
+                        onChange={(e) =>
+                          handleInputChange("codAvailable", e.target.checked)
+                        }
                         className="rounded"
                       />
                       <span className="text-white">COD Available</span>
@@ -502,7 +567,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                       <input
                         type="checkbox"
                         checked={formData.isTrending}
-                        onChange={(e) => handleInputChange("isTrending", e.target.checked)}
+                        onChange={(e) =>
+                          handleInputChange("isTrending", e.target.checked)
+                        }
                         className="rounded"
                       />
                       <span className="text-white">Trending</span>
@@ -511,7 +578,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                       <input
                         type="checkbox"
                         checked={formData.isExclusive}
-                        onChange={(e) => handleInputChange("isExclusive", e.target.checked)}
+                        onChange={(e) =>
+                          handleInputChange("isExclusive", e.target.checked)
+                        }
                         className="rounded"
                       />
                       <span className="text-white">Exclusive</span>
@@ -526,7 +595,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                 </label>
                 <Textarea
                   value={formData.description}
-                  onChange={(e) => handleInputChange("description", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("description", e.target.value)
+                  }
                   placeholder="Enter detailed product description"
                   rows={4}
                   className="bg-gray-700 border-gray-600 text-white"
@@ -538,8 +609,13 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
           {activeTab === "variants" && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-white">Product Variants</h3>
-                <Button onClick={addVariant} className="bg-primary text-black hover:bg-primary/90">
+                <h3 className="text-lg font-semibold text-white">
+                  Product Variants
+                </h3>
+                <Button
+                  onClick={addVariant}
+                  className="bg-primary text-black hover:bg-primary/90"
+                >
                   <Plus className="w-4 h-4 mr-2" />
                   Add Variant
                 </Button>
@@ -548,12 +624,17 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
               {formData.variants.length === 0 ? (
                 <div className="text-center py-8">
                   <Copy className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-                  <p className="text-gray-400">No variants added yet. Create your first variant.</p>
+                  <p className="text-gray-400">
+                    No variants added yet. Create your first variant.
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {formData.variants.map((variant, index) => (
-                    <Card key={variant.id} className="bg-gray-700 border-gray-600">
+                    <Card
+                      key={variant.id}
+                      className="bg-gray-700 border-gray-600"
+                    >
                       <CardContent className="p-4">
                         <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
                           <div>
@@ -562,7 +643,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                             </label>
                             <Input
                               value={variant.size || ""}
-                              onChange={(e) => updateVariant(index, "size", e.target.value)}
+                              onChange={(e) =>
+                                updateVariant(index, "size", e.target.value)
+                              }
                               placeholder="Size"
                               className="bg-gray-600 border-gray-500 text-white"
                             />
@@ -573,7 +656,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                             </label>
                             <Input
                               value={variant.color || ""}
-                              onChange={(e) => updateVariant(index, "color", e.target.value)}
+                              onChange={(e) =>
+                                updateVariant(index, "color", e.target.value)
+                              }
                               placeholder="Color"
                               className="bg-gray-600 border-gray-500 text-white"
                             />
@@ -585,7 +670,13 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                             <Input
                               type="number"
                               value={variant.price}
-                              onChange={(e) => updateVariant(index, "price", Number(e.target.value))}
+                              onChange={(e) =>
+                                updateVariant(
+                                  index,
+                                  "price",
+                                  Number(e.target.value),
+                                )
+                              }
                               className="bg-gray-600 border-gray-500 text-white"
                             />
                           </div>
@@ -596,7 +687,13 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                             <Input
                               type="number"
                               value={variant.originalPrice}
-                              onChange={(e) => updateVariant(index, "originalPrice", Number(e.target.value))}
+                              onChange={(e) =>
+                                updateVariant(
+                                  index,
+                                  "originalPrice",
+                                  Number(e.target.value),
+                                )
+                              }
                               className="bg-gray-600 border-gray-500 text-white"
                             />
                           </div>
@@ -607,7 +704,13 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                             <Input
                               type="number"
                               value={variant.stock}
-                              onChange={(e) => updateVariant(index, "stock", Number(e.target.value))}
+                              onChange={(e) =>
+                                updateVariant(
+                                  index,
+                                  "stock",
+                                  Number(e.target.value),
+                                )
+                              }
                               className="bg-gray-600 border-gray-500 text-white"
                             />
                           </div>
@@ -633,10 +736,13 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
           {activeTab === "media" && (
             <div className="space-y-6">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-white">Product Images</h3>
+                <h3 className="text-lg font-semibold text-white">
+                  Product Images
+                </h3>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-400">
-                    {formData.images.length} image{formData.images.length !== 1 ? 's' : ''}
+                    {formData.images.length} image
+                    {formData.images.length !== 1 ? "s" : ""}
                   </span>
                 </div>
               </div>
@@ -654,17 +760,21 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                     <div
                       className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
                         isDragOver
-                          ? 'border-primary bg-primary/10'
-                          : 'border-gray-500 hover:border-primary/50 hover:bg-gray-600/50'
+                          ? "border-primary bg-primary/10"
+                          : "border-gray-500 hover:border-primary/50 hover:bg-gray-600/50"
                       }`}
                       onDragOver={handleDragOver}
                       onDragLeave={handleDragLeave}
                       onDrop={handleDrop}
                       onClick={triggerFileSelect}
                     >
-                      <CloudUpload className={`w-12 h-12 mx-auto mb-4 ${isDragOver ? 'text-primary' : 'text-gray-400'}`} />
+                      <CloudUpload
+                        className={`w-12 h-12 mx-auto mb-4 ${isDragOver ? "text-primary" : "text-gray-400"}`}
+                      />
                       <p className="text-white font-medium mb-2">
-                        {isDragOver ? 'Drop images here' : 'Drag & drop images here'}
+                        {isDragOver
+                          ? "Drop images here"
+                          : "Drag & drop images here"}
                       </p>
                       <p className="text-gray-400 text-sm mb-4">
                         or click to browse from your computer
@@ -689,20 +799,26 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                     {/* Upload Progress */}
                     {Object.keys(uploadProgress).length > 0 && (
                       <div className="mt-4 space-y-2">
-                        {Object.entries(uploadProgress).map(([fileId, progress]) => (
-                          <div key={fileId} className="space-y-1">
-                            <div className="flex justify-between text-sm">
-                              <span className="text-gray-400">Uploading...</span>
-                              <span className="text-primary">{progress}%</span>
+                        {Object.entries(uploadProgress).map(
+                          ([fileId, progress]) => (
+                            <div key={fileId} className="space-y-1">
+                              <div className="flex justify-between text-sm">
+                                <span className="text-gray-400">
+                                  Uploading...
+                                </span>
+                                <span className="text-primary">
+                                  {progress}%
+                                </span>
+                              </div>
+                              <div className="w-full bg-gray-600 rounded-full h-2">
+                                <div
+                                  className="bg-primary h-2 rounded-full transition-all duration-300"
+                                  style={{ width: `${progress}%` }}
+                                />
+                              </div>
                             </div>
-                            <div className="w-full bg-gray-600 rounded-full h-2">
-                              <div
-                                className="bg-primary h-2 rounded-full transition-all duration-300"
-                                style={{ width: `${progress}%` }}
-                              />
-                            </div>
-                          </div>
-                        ))}
+                          ),
+                        )}
                       </div>
                     )}
                   </CardContent>
@@ -739,12 +855,14 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                       </Button>
 
                       <div className="p-3 bg-gray-600 rounded-lg">
-                        <p className="text-xs text-gray-400 mb-2">💡 Quick URLs for testing:</p>
+                        <p className="text-xs text-gray-400 mb-2">
+                          💡 Quick URLs for testing:
+                        </p>
                         <div className="space-y-1">
                           {[
-                            'https://via.placeholder.com/400x400/10b981/ffffff?text=Product+1',
-                            'https://via.placeholder.com/400x400/8b5cf6/ffffff?text=Product+2',
-                            'https://via.placeholder.com/400x400/f59e0b/ffffff?text=Product+3'
+                            "https://via.placeholder.com/400x400/10b981/ffffff?text=Product+1",
+                            "https://via.placeholder.com/400x400/8b5cf6/ffffff?text=Product+2",
+                            "https://via.placeholder.com/400x400/f59e0b/ffffff?text=Product+3",
                           ].map((url, index) => (
                             <button
                               key={index}
@@ -777,7 +895,12 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => setFormData(prev => ({ ...prev, images: ["/placeholder.svg"] }))}
+                      onClick={() =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          images: ["/placeholder.svg"],
+                        }))
+                      }
                       className="border-gray-600 text-gray-300"
                     >
                       <Trash className="w-4 h-4 mr-2" />
@@ -787,7 +910,10 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
 
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {formData.images.map((image, index) => (
-                      <Card key={index} className="bg-gray-700 border-gray-600 group hover:border-primary/50 transition-colors">
+                      <Card
+                        key={index}
+                        className="bg-gray-700 border-gray-600 group hover:border-primary/50 transition-colors"
+                      >
                         <CardContent className="p-3">
                           <div className="relative">
                             <img
@@ -795,7 +921,8 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                               alt={`Product ${index + 1}`}
                               className="w-full h-32 object-cover rounded-lg"
                               onError={(e) => {
-                                (e.target as HTMLImageElement).src = "/placeholder.svg";
+                                (e.target as HTMLImageElement).src =
+                                  "/placeholder.svg";
                               }}
                             />
 
@@ -804,7 +931,7 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => window.open(image, '_blank')}
+                                onClick={() => window.open(image, "_blank")}
                                 className="text-white hover:text-primary bg-black/70 hover:bg-black/90"
                               >
                                 <Eye className="w-4 h-4" />
@@ -839,7 +966,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                           {/* Image Details */}
                           <div className="mt-2">
                             <p className="text-xs text-gray-400 truncate">
-                              {image.length > 50 ? `${image.substring(0, 50)}...` : image}
+                              {image.length > 50
+                                ? `${image.substring(0, 50)}...`
+                                : image}
                             </p>
                           </div>
                         </CardContent>
@@ -850,8 +979,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                   {/* Reorder Instructions */}
                   <div className="p-3 bg-gray-700 rounded-lg">
                     <p className="text-sm text-gray-400">
-                      💡 <strong>Tip:</strong> The first image will be used as the main product image.
-                      You can reorder images by deleting and re-adding them in your preferred order.
+                      💡 <strong>Tip:</strong> The first image will be used as
+                      the main product image. You can reorder images by deleting
+                      and re-adding them in your preferred order.
                     </p>
                   </div>
                 </div>
@@ -862,7 +992,8 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                     No images uploaded yet
                   </h3>
                   <p className="text-gray-500 mb-4">
-                    Upload images using the methods above to showcase your product
+                    Upload images using the methods above to showcase your
+                    product
                   </p>
                 </div>
               )}
@@ -965,7 +1096,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                       min="0"
                       max="5"
                       value={formData.rating}
-                      onChange={(e) => handleInputChange("rating", Number(e.target.value))}
+                      onChange={(e) =>
+                        handleInputChange("rating", Number(e.target.value))
+                      }
                       className="bg-gray-700 border-gray-600 text-white"
                     />
                   </div>
@@ -976,7 +1109,9 @@ export function ProductForm({ product, isOpen, onClose, onSave, mode }: ProductF
                     </label>
                     <Input
                       value={formData.stockAlert || ""}
-                      onChange={(e) => handleInputChange("stockAlert", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("stockAlert", e.target.value)
+                      }
                       placeholder="e.g., Only 3 left in stock!"
                       className="bg-gray-700 border-gray-600 text-white"
                     />

@@ -81,7 +81,7 @@ Your FanKick website is now fully functional with all major features implemented
 ### Test Accounts Available
 
 - `test@example.com` / `test123`
-- `modhbhavin5@gmail.com` / (your password) - **ADMIN**
+- `modhbhavin05@gmail.com` / (your password) - **ADMIN**
 - `bhaijaan12@gmail.com` / (their password)
 - `xxxjda12@gmail.com` / (their password)
 

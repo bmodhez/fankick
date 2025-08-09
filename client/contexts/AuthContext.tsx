@@ -3,6 +3,7 @@ import {
   useContext,
   useState,
   useEffect,
+  useCallback,
   ReactNode,
 } from "react";
 import {
@@ -29,6 +30,9 @@ interface AuthContextType {
     updateData: Partial<User>,
   ) => Promise<{ success: boolean; error?: string }>;
   refreshUser: () => Promise<void>;
+  onAuthStateChange: (
+    callback: (isAuthenticated: boolean, user: User | null) => void,
+  ) => () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -41,6 +45,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authListeners, setAuthListeners] = useState<
+    Set<(isAuthenticated: boolean, user: User | null) => void>
+  >(new Set());
 
   // Check for existing session on startup
   const checkSession = async () => {
@@ -65,8 +72,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       // Verify session with server
       const currentUser = await userApi.getCurrentUser();
-      setUser(currentUser);
-      setIsAuthenticated(true);
+      updateAuthState(currentUser, true);
       console.log("Session verified successfully for user:", currentUser.email);
     } catch (error) {
       console.log(
@@ -76,8 +82,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Clear invalid session silently - this is normal on server restarts
       localStorage.removeItem("sessionToken");
       localStorage.removeItem("sessionExpiresAt");
-      setUser(null);
-      setIsAuthenticated(false);
+      updateAuthState(null, false);
     } finally {
       setIsLoading(false);
     }
@@ -100,8 +105,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       localStorage.setItem("sessionToken", authData.sessionToken);
       localStorage.setItem("sessionExpiresAt", authData.expiresAt);
 
-      setUser(authData.user);
-      setIsAuthenticated(true);
+      updateAuthState(authData.user, true);
 
       return { success: true };
     } catch (error) {
@@ -152,8 +156,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       let errorMessage = "Registration failed";
       if (error instanceof Error) {
-        if (error.message.includes("already exists")) {
-          errorMessage = "An account with this email already exists";
+        if (
+          error.message.includes("already exists") ||
+          error.message.includes("already registered")
+        ) {
+          if (error.message.includes("phone")) {
+            errorMessage =
+              "This phone number is already registered. Please login or use a different phone number.";
+          } else {
+            errorMessage =
+              "An account with this email already exists. Please login instead.";
+          }
         } else if (
           error.message.includes("network") ||
           error.message.includes("fetch")
@@ -181,8 +194,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Clear local session data
       localStorage.removeItem("sessionToken");
       localStorage.removeItem("sessionExpiresAt");
-      setUser(null);
-      setIsAuthenticated(false);
+      updateAuthState(null, false);
     }
   };
 
@@ -227,14 +239,50 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  // Check if current user is admin based on specific email and phone
+  // Notify all listeners when auth state changes
+  const notifyAuthListeners = (isAuth: boolean, userData: User | null) => {
+    authListeners.forEach((listener) => {
+      try {
+        listener(isAuth, userData);
+      } catch (error) {
+        console.error("Error in auth state listener:", error);
+      }
+    });
+  };
+
+  // Subscribe to auth state changes
+  const onAuthStateChange = useCallback(
+    (callback: (isAuthenticated: boolean, user: User | null) => void) => {
+      setAuthListeners((prev) => new Set(prev).add(callback));
+
+      // Return unsubscribe function
+      return () => {
+        setAuthListeners((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(callback);
+          return newSet;
+        });
+      };
+    },
+    [],
+  ); // No dependencies needed as it only manages listeners
+
+  // Update auth state and notify listeners
+  const updateAuthState = (userData: User | null, isAuth: boolean) => {
+    setUser(userData);
+    setIsAuthenticated(isAuth);
+    notifyAuthListeners(isAuth, userData);
+  };
+
+  // Check if current user is admin - ONLY allow the specific user ID
   const isAdmin = (): boolean => {
     if (!user) return false;
 
-    const adminEmail = "modhbhavin5@gmail.com";
-    const adminPhone = "9322667822";
+    // ONLY this specific user has admin access
+    const adminUserId = "user_1754720109322_1gewz7kbq";
+    const adminEmail = "modhbhavin05@gmail.com";
 
-    return user.email === adminEmail && user.phone === adminPhone;
+    return user.id === adminUserId && user.email === adminEmail;
   };
 
   const value: AuthContextType = {
@@ -247,6 +295,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     logout,
     updateProfile,
     refreshUser,
+    onAuthStateChange,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

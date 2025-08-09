@@ -215,29 +215,6 @@ export default function Login() {
                 )}
               </Button>
 
-              {/* Demo Login Button */}
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => {
-                  setEmail("test@example.com");
-                  setPassword("password123");
-                  // Auto-submit demo login
-                  setTimeout(() => {
-                    const form = document.querySelector("form");
-                    if (form) {
-                      const event = new Event("submit", {
-                        bubbles: true,
-                        cancelable: true,
-                      });
-                      form.dispatchEvent(event);
-                    }
-                  }, 100);
-                }}
-                className="w-full mt-3 border-2 border-primary/30 text-primary hover:bg-primary/10"
-              >
-                🚀 Try Demo Login
-              </Button>
             </form>
 
             {/* Divider */}

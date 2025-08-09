@@ -46,7 +46,7 @@ export const PRODUCTS: Product[] = [
     category: "football",
     subcategory: "jerseys",
     images: [
-      "https://cdn.builder.io/api/v1/image/assets%2Fddba8a59ba1f49149550d5bc623e56d7%2Fd06d91ac47304df7bd4bed50148a0102?format=webp&width=800",
+      "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2F8d18befe3a2b4a4695242d4447dcb6d0?format=webp&width=800",
       "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80",
       "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80",
       "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=800&q=80",
@@ -136,8 +136,8 @@ export const PRODUCTS: Product[] = [
     subcategory: "jerseys",
     images: [
       "https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=800&q=80",
-      "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=800&q=80",
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80",
+      "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=800&q=80",
     ],
     variants: [
       {
@@ -200,8 +200,8 @@ export const PRODUCTS: Product[] = [
     subcategory: "boots",
     images: [
       "https://images.unsplash.com/photo-1544966503-7ba6c6d57339?w=800&q=80",
-      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80",
       "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80",
+      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80",
       "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=800&q=80",
     ],
     variants: [
@@ -275,9 +275,9 @@ export const PRODUCTS: Product[] = [
     category: "anime",
     subcategory: "rings",
     images: [
+      "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&q=80",
       "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80",
       "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=800&q=80",
-      "https://images.unsplash.com/photo-1594736797933-d0bd64d8c9ba?w=800&q=80",
     ],
     variants: [
       {
@@ -324,9 +324,9 @@ export const PRODUCTS: Product[] = [
     category: "anime",
     subcategory: "hoodies",
     images: [
+      "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=800&q=80",
       "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&q=80",
       "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=80",
-      "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80",
     ],
     variants: [
       {
@@ -458,9 +458,9 @@ export const PRODUCTS: Product[] = [
     category: "anime",
     subcategory: "hoodies",
     images: [
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80",
       "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
       "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=80",
-      "https://images.unsplash.com/photo-1522706604291-210a56c3b376?w=800&q=80",
     ],
     variants: [
       {
@@ -901,9 +901,9 @@ export const PRODUCTS: Product[] = [
     category: "pop-culture",
     subcategory: "hoodies",
     images: [
+      "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800&q=80",
       "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=80",
       "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80",
-      "https://images.unsplash.com/photo-1543269664-7eef42226a21?w=800&q=80",
     ],
     variants: [
       {
@@ -994,8 +994,9 @@ export const PRODUCTS: Product[] = [
     category: "pop-culture",
     subcategory: "tshirts",
     images: [
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
-      "https://cdn.builder.io/api/v1/image/assets%2F6c1dea172d6a4b98b66fa189fb2ab1aa%2Ffac74a824cd940739911733438f9924b?format=webp&width=800",
+      "https://images.unsplash.com/photo-1576993537667-c6d2386f46a0?w=800&q=80",
+      "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=800&q=80",
+      "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=80",
     ],
     variants: [
       {

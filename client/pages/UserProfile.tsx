@@ -10,7 +10,12 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useProducts } from "@/contexts/ProductContext";
+import { useLike } from "@/contexts/LikeContext";
 import { userApi, WishlistItem } from "@/services/userApi";
+import { orderApi } from "@/services/orderApi";
+import { UserOrder } from "@/types/user";
+import { useRealTime } from "@/contexts/RealTimeContext";
+import { realTimeOrderService } from "@/services/realTimeOrderService";
 import { formatPrice, convertPrice } from "@/utils/currency";
 import {
   User,
@@ -34,18 +39,25 @@ import {
   Download,
   X,
   ArrowLeft,
+  Clock,
 } from "lucide-react";
 
 export default function UserProfile() {
   const { user, logout, isAdmin, isAuthenticated } = useAuth();
-  const { items: cartItems, totalPrice } = useCart();
+  const { items: cartItems, totalPrice, addToCart } = useCart();
   const { selectedCurrency } = useCurrency();
   const { products } = useProducts();
+  const { likeCount, refreshLikes, likedProducts } = useLike();
   const navigate = useNavigate();
+  const { cartCount, cartTotal, orderCount, showNotification, updateUserStats } = useRealTime();
 
   const [activeTab, setActiveTab] = useState("profile");
   const [userWishlist, setUserWishlist] = useState<WishlistItem[]>([]);
   const [wishlistLoading, setWishlistLoading] = useState(false);
+
+  // Real user orders loaded from API (moved up to avoid initialization error)
+  const [orders, setOrders] = useState<UserOrder[]>([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -59,24 +71,120 @@ export default function UserProfile() {
     }
   }, [isAuthenticated, user]);
 
+  // Refresh wishlist when like count changes (real-time updates)
+  useEffect(() => {
+    if (isAuthenticated && user && activeTab === "wishlist") {
+      loadWishlist();
+    }
+  }, [likeCount, isAuthenticated, user, activeTab]);
+
+  // Load orders when user is authenticated and orders tab is active
+  useEffect(() => {
+    if (isAuthenticated && user && activeTab === "orders") {
+      loadOrders();
+    }
+  }, [isAuthenticated, user, activeTab]);
+
+  // Real-time updates when switching tabs
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      updateUserStats();
+    }
+  }, [activeTab, isAuthenticated, user, updateUserStats]);
+
+  // Auto-refresh data every 2 minutes for real-time updates
+  useEffect(() => {
+    if (!isAuthenticated || !user) return;
+
+    const interval = setInterval(() => {
+      if (activeTab === "orders") {
+        loadOrders();
+      } else if (activeTab === "wishlist") {
+        loadWishlist();
+      }
+      updateUserStats();
+    }, 120000); // 2 minutes
+
+    return () => clearInterval(interval);
+  }, [activeTab, isAuthenticated, user]);
+
+  // Start real-time order tracking
+  useEffect(() => {
+    if (isAuthenticated && user && activeTab === "orders") {
+      realTimeOrderService.startOrderTracking(user.id, (updatedOrders) => {
+        const oldOrderStatuses = orders.map(o => o.orderStatus);
+        const newOrderStatuses = updatedOrders.map(o => o.orderStatus);
+
+        // Check for status changes and show notifications
+        updatedOrders.forEach((order, index) => {
+          if (oldOrderStatuses[index] && oldOrderStatuses[index] !== newOrderStatuses[index]) {
+            const statusMessages = {
+              confirmed: '✅ Order confirmed!',
+              shipped: '🚚 Order shipped!',
+              delivered: '📦 Order delivered!',
+              cancelled: '❌ Order cancelled'
+            };
+            const message = statusMessages[order.orderStatus as keyof typeof statusMessages] || 'Order status updated';
+            showNotification(message, 'success');
+          }
+        });
+
+        setOrders(updatedOrders);
+      });
+    }
+
+    return () => {
+      if (activeTab !== "orders") {
+        realTimeOrderService.stopOrderTracking();
+      }
+    };
+  }, [isAuthenticated, user, activeTab, orders]);
+
+  // Log cart changes for debugging real-time updates
+  useEffect(() => {
+    console.log("Cart items updated:", cartItems.length);
+    console.log("Total price updated:", totalPrice);
+  }, [cartItems, totalPrice]);
+
   const loadWishlist = async () => {
     try {
       setWishlistLoading(true);
       const wishlistData = await userApi.getWishlist();
       setUserWishlist(wishlistData);
     } catch (error) {
-      console.error('Error loading wishlist:', error);
+      console.error("Error loading wishlist:", error);
     } finally {
       setWishlistLoading(false);
     }
   };
 
+  const loadOrders = async () => {
+    try {
+      setOrdersLoading(true);
+      const ordersData = await orderApi.getUserOrders(user.id);
+      setOrders(ordersData);
+    } catch (error) {
+      console.error("Error loading orders:", error);
+    } finally {
+      setOrdersLoading(false);
+    }
+  };
+
   const removeFromWishlist = async (productId: string) => {
     try {
+      // Optimistic update for immediate feedback
+      setUserWishlist((prev) =>
+        prev.filter((item) => item.productId !== productId),
+      );
+
       await userApi.removeFromWishlist(productId);
-      setUserWishlist(prev => prev.filter(item => item.productId !== productId));
+      refreshLikes(); // Update like count in real-time
+      showNotification('Removed from wishlist', 'info');
     } catch (error) {
-      console.error('Error removing from wishlist:', error);
+      console.error("Error removing from wishlist:", error);
+      showNotification('Failed to remove from wishlist', 'error');
+      // Revert optimistic update on error
+      loadWishlist();
     }
   };
 
@@ -89,11 +197,9 @@ export default function UserProfile() {
     bio: "",
   });
 
-  // Real user orders (empty for new users)
-  const [orders] = useState([]);
 
-  // Real user wishlist (empty for new users)
-  const [wishlist] = useState([]);
+  // Use real-time wishlist data from context instead of hardcoded empty array
+  // const [wishlist] = useState([]); // Removed - using userWishlist from API instead
 
   // Update form when user data changes
   useEffect(() => {
@@ -135,6 +241,10 @@ export default function UserProfile() {
         return "bg-green-500 text-white";
       case "shipped":
         return "bg-blue-500 text-white";
+      case "confirmed":
+        return "bg-blue-400 text-white";
+      case "placed":
+        return "bg-yellow-500 text-black";
       case "processing":
         return "bg-yellow-500 text-black";
       case "cancelled":
@@ -146,9 +256,9 @@ export default function UserProfile() {
 
   const tabs = [
     { id: "profile", label: "Profile", icon: User, count: null },
-    { id: "orders", label: "Orders", icon: Package, count: orders.length },
-    { id: "wishlist", label: "Liked Products", icon: Heart, count: userWishlist.length },
-    { id: "cart", label: "Cart", icon: ShoppingCart, count: cartItems.length },
+    { id: "orders", label: "Orders", icon: Package, count: orderCount || orders.length },
+    { id: "wishlist", label: "Liked Products", icon: Heart, count: likeCount },
+    { id: "cart", label: "Cart", icon: ShoppingCart, count: cartCount || cartItems.length },
   ];
 
   return (
@@ -203,32 +313,56 @@ export default function UserProfile() {
                 <p className="text-gray-400 mb-3">{user.email}</p>
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-primary">
-                      {orders.length}
+                  <div className="text-center group">
+                    <div className="text-xl font-bold text-primary transition-all duration-300 group-hover:scale-110">
+                      {orderCount || orders.length}
                     </div>
                     <div className="text-gray-400">Orders</div>
+                    <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-primary to-green-500 h-1 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${Math.min(((orderCount || orders.length) / 10) * 100, 100)}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-primary">
-                      {userWishlist.length}
+                  <div className="text-center group">
+                    <div className="text-xl font-bold text-primary transition-all duration-300 group-hover:scale-110">
+                      {likeCount}
                     </div>
                     <div className="text-gray-400">Liked Products</div>
+                    <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-primary to-pink-500 h-1 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${Math.min((likeCount / 20) * 100, 100)}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-primary">
-                      {cartItems.length}
+                  <div className="text-center group">
+                    <div className="text-xl font-bold text-primary transition-all duration-300 group-hover:scale-110">
+                      {cartCount || cartItems.length}
                     </div>
                     <div className="text-gray-400">Cart Items</div>
+                    <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-primary to-blue-500 h-1 rounded-full transition-all duration-1000 ease-out"
+                        style={{ width: `${Math.min(((cartCount || cartItems.length) / 5) * 100, 100)}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-xl font-bold text-primary">
+                  <div className="text-center group">
+                    <div className="text-xl font-bold text-primary transition-all duration-300 group-hover:scale-110">
                       {formatPrice(
-                        convertPrice(totalPrice, selectedCurrency.code, "INR"),
+                        convertPrice(cartTotal || totalPrice, selectedCurrency.code, "INR"),
                         selectedCurrency,
                       )}
                     </div>
                     <div className="text-gray-400">Cart Total</div>
+                    <div className="w-full bg-gray-700 rounded-full h-1 mt-2">
+                      <div
+                        className="bg-gradient-to-r from-primary to-yellow-500 h-1 rounded-full transition-all duration-1000 ease-out animate-pulse"
+                        style={{ width: `${Math.min(((cartTotal || totalPrice) / 10000) * 100, 100)}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -445,7 +579,17 @@ export default function UserProfile() {
           {/* Orders Tab */}
           {activeTab === "orders" && (
             <div className="space-y-4">
-              {orders.length === 0 ? (
+              {ordersLoading ? (
+                <Card className="bg-gray-800 border-gray-700">
+                  <CardContent className="p-12 text-center">
+                    <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+                    <h3 className="text-xl font-semibold text-white mb-2">
+                      Loading orders...
+                    </h3>
+                    <p className="text-gray-400">Please wait while we fetch your order history</p>
+                  </CardContent>
+                </Card>
+              ) : orders.length === 0 ? (
                 <Card className="bg-gray-800 border-gray-700">
                   <CardContent className="p-12 text-center">
                     <Package className="w-20 h-20 text-gray-600 mx-auto mb-6" />
@@ -465,70 +609,102 @@ export default function UserProfile() {
                   </CardContent>
                 </Card>
               ) : (
-                orders.map((order) => (
-                  <Card key={order.id} className="bg-gray-800 border-gray-700">
-                    <CardContent className="p-6">
-                      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-4 lg:space-y-0">
-                        <div className="flex items-center space-x-4">
-                          <img
-                            src={order.image}
-                            alt="Order"
-                            className="w-16 h-16 object-cover rounded-lg"
-                          />
-                          <div>
-                            <div className="flex items-center space-x-3 mb-2">
-                              <h3 className="font-semibold text-white">
-                                Order #{order.id}
-                              </h3>
-                              <Badge className={getStatusColor(order.status)}>
-                                {order.status.charAt(0).toUpperCase() +
-                                  order.status.slice(1)}
-                              </Badge>
-                            </div>
-                            <p className="text-sm text-gray-400 mb-1">
-                              {order.products.join(", ")}
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              {order.items} items • {order.date}
-                            </p>
-                          </div>
-                        </div>
+                orders.map((order) => {
+                  const progress = realTimeOrderService.getOrderProgress(order);
+                  const estimatedDelivery = realTimeOrderService.getEstimatedDelivery(order);
+                  const nextStatus = realTimeOrderService.getNextStatus(order);
 
-                        <div className="flex items-center space-x-4">
-                          <div className="text-right">
-                            <div className="text-lg font-bold text-primary">
-                              {formatPrice(
-                                convertPrice(
-                                  order.total,
-                                  selectedCurrency.code,
-                                ),
-                                selectedCurrency,
+                  return (
+                    <Card key={order.id} className="bg-gray-800 border-gray-700 relative overflow-hidden">
+                      {/* Real-time progress indicator */}
+                      <div className="absolute top-0 left-0 h-1 bg-gray-700">
+                        <div
+                          className="h-full bg-gradient-to-r from-primary to-green-500 transition-all duration-1000 ease-out"
+                          style={{ width: `${progress}%` }}
+                        />
+                      </div>
+
+                      <CardContent className="p-6">
+                        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-4 lg:space-y-0">
+                          <div className="flex items-center space-x-4">
+                            <div className="w-16 h-16 bg-gradient-to-r from-primary to-purple-500 rounded-lg flex items-center justify-center relative">
+                              <Package className="w-8 h-8 text-black" />
+                              {order.orderStatus !== 'delivered' && (
+                                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" />
                               )}
                             </div>
+                            <div>
+                              <div className="flex items-center space-x-3 mb-2">
+                                <h3 className="font-semibold text-white">
+                                  {order.orderNumber}
+                                </h3>
+                                <Badge className={getStatusColor(order.orderStatus)}>
+                                  {order.orderStatus.charAt(0).toUpperCase() +
+                                    order.orderStatus.slice(1)}
+                                </Badge>
+                                <Badge className={order.paymentStatus === 'paid' ? 'bg-green-500 text-white' : 'bg-yellow-500 text-black'}>
+                                  {order.paymentStatus.charAt(0).toUpperCase() +
+                                    order.paymentStatus.slice(1)}
+                                </Badge>
+                              </div>
+                              <p className="text-sm text-gray-400 mb-1">
+                                {order.items?.map(item => item.productName).join(", ") || "Order items"}
+                              </p>
+                              <p className="text-xs text-gray-500 mb-2">
+                                {order.items?.length || 0} items • {new Date(order.createdAt).toLocaleDateString()} • {order.paymentMethod || 'Unknown method'}
+                              </p>
+
+                              {/* Real-time delivery estimate */}
+                              <div className="flex items-center space-x-2 text-xs">
+                                <Clock className="w-3 h-3 text-primary" />
+                                <span className="text-primary font-medium">{estimatedDelivery}</span>
+                                {order.orderStatus !== 'delivered' && order.orderStatus !== 'cancelled' && (
+                                  <span className="text-gray-500">• Next: {nextStatus}</span>
+                                )}
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex space-x-2">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="border-gray-600 text-gray-300"
-                            >
-                              <Eye className="w-4 h-4 mr-2" />
-                              View
-                            </Button>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="border-gray-600 text-gray-300"
-                            >
-                              <Download className="w-4 h-4 mr-2" />
-                              Invoice
-                            </Button>
+
+                          <div className="flex items-center space-x-4">
+                            <div className="text-right">
+                              <div className="text-lg font-bold text-primary">
+                                {formatPrice(
+                                  convertPrice(
+                                    order.totalAmount,
+                                    order.currency,
+                                    selectedCurrency.code
+                                  ),
+                                  selectedCurrency,
+                                )}
+                              </div>
+                              <div className="text-xs text-gray-500">
+                                {order.currency} • {progress}% Complete
+                              </div>
+                            </div>
+                            <div className="flex space-x-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="border-gray-600 text-gray-300 hover:bg-gray-700"
+                              >
+                                <Eye className="w-4 h-4 mr-2" />
+                                Track
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="border-gray-600 text-gray-300 hover:bg-gray-700"
+                              >
+                                <Download className="w-4 h-4 mr-2" />
+                                Invoice
+                              </Button>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))
+                      </CardContent>
+                    </Card>
+                  );
+                })
               )}
             </div>
           )}
@@ -540,7 +716,7 @@ export default function UserProfile() {
                 <div className="text-center py-8">
                   <div className="text-gray-400">Loading liked products...</div>
                 </div>
-              ) : userWishlist.length === 0 ? (
+              ) : likeCount === 0 ? (
                 <div className="text-center py-8">
                   <Heart className="w-16 h-16 text-gray-600 mx-auto mb-4" />
                   <h3 className="text-lg font-semibold text-gray-400 mb-2">
@@ -556,68 +732,115 @@ export default function UserProfile() {
                   </Link>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {userWishlist.map((wishlistItem) => {
-                    const product = products.find(p => p.id === wishlistItem.productId);
-                    if (!product) return null;
+                <div>
+                  <div className="mb-4">
+                    <p className="text-gray-400 text-sm">
+                      Showing {likeCount} liked product
+                      {likeCount !== 1 ? "s" : ""}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Display products from real-time liked products context */}
+                    {[...likedProducts].map((productId) => {
+                      const product = products.find((p) => p.id === productId);
+                      if (!product) return null;
 
-                    return (
-                      <Card key={wishlistItem.id} className="bg-gray-800 border-gray-700">
-                        <CardContent className="p-4">
-                          <Link to={`/product/${product.id}`}>
-                            <img
-                              src={product.images[0]}
-                              alt={product.name}
-                              className="w-full h-32 object-cover rounded-lg mb-4 hover:scale-105 transition-transform"
-                            />
-                          </Link>
-                          <Link to={`/product/${product.id}`}>
-                            <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2 hover:text-primary transition-colors">
-                              {product.name}
-                            </h3>
-                          </Link>
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="text-lg font-bold text-primary">
-                              {formatPrice(
-                                convertPrice(product.variants[0]?.price || product.price, selectedCurrency.code, "INR"),
-                                selectedCurrency,
-                              )}
-                            </span>
-                            <Badge
-                              className={
-                                product.stockQuantity > 0
-                                  ? "bg-green-500 text-white"
-                                  : "bg-red-500 text-white"
-                              }
-                            >
-                              {product.stockQuantity > 0 ? "In Stock" : "Out of Stock"}
-                            </Badge>
-                          </div>
-                          <div className="flex space-x-2">
-                            <Button
-                              disabled={product.stockQuantity === 0}
-                              className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
-                              onClick={() => {
-                                // Add to cart logic here
-                                console.log('Add to cart:', product.id);
-                              }}
-                            >
-                              <ShoppingCart className="w-4 h-4 mr-2" />
-                              Add to Cart
-                            </Button>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="border-gray-600 text-red-400 hover:bg-red-500 hover:text-white"
-                              onClick={() => removeFromWishlist(product.id)}
-                            >
-                              <X className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    );
-                  })}
+                      return (
+                        <Card
+                          key={productId}
+                          className="bg-gray-800 border-gray-700"
+                        >
+                          <CardContent className="p-4">
+                            <Link to={`/product/${product.id}`}>
+                              <img
+                                src={product.images[0]}
+                                alt={product.name}
+                                className="w-full h-32 object-cover rounded-lg mb-4 hover:scale-105 transition-transform"
+                              />
+                            </Link>
+                            <Link to={`/product/${product.id}`}>
+                              <h3 className="font-semibold text-white text-sm mb-2 line-clamp-2 hover:text-primary transition-colors">
+                                {product.name}
+                              </h3>
+                            </Link>
+                            <div className="flex items-center justify-between mb-3">
+                              <span className="text-lg font-bold text-primary">
+                                {formatPrice(
+                                  convertPrice(
+                                    product.variants[0]?.price ||
+                                      product.basePrice,
+                                    selectedCurrency.code,
+                                    "INR",
+                                  ),
+                                  selectedCurrency,
+                                )}
+                              </span>
+                              <div className="flex flex-col items-end space-y-1">
+                                <Badge
+                                  className={
+                                    product.stockQuantity > 10
+                                      ? "bg-green-500 text-white animate-pulse"
+                                      : product.stockQuantity > 0
+                                      ? "bg-yellow-500 text-black animate-pulse"
+                                      : "bg-red-500 text-white"
+                                  }
+                                >
+                                  {product.stockQuantity > 10
+                                    ? "✅ In Stock"
+                                    : product.stockQuantity > 0
+                                    ? `⚠️ Only ${product.stockQuantity} left`
+                                    : "❌ Out of Stock"}
+                                </Badge>
+                                {product.stockQuantity > 0 && product.stockQuantity <= 10 && (
+                                  <div className="text-xs text-yellow-400 font-medium">
+                                    🔥 Limited Stock!
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                            <div className="flex space-x-2">
+                              <Button
+                                disabled={product.stockQuantity === 0}
+                                className="flex-1 bg-primary text-black hover:bg-primary/90 disabled:opacity-50"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  if (product.variants.length > 0) {
+                                    addToCart(product, product.variants[0]);
+                                  } else {
+                                    // Create a default variant if none exist
+                                    const defaultVariant = {
+                                      id: `${product.id}-default`,
+                                      size: "Default",
+                                      color: "Default",
+                                      price: product.basePrice,
+                                      stock: product.stockQuantity,
+                                    };
+                                    addToCart(product, defaultVariant);
+                                  }
+                                  showNotification(`${product.name} added to cart!`, 'success');
+                                }}
+                              >
+                                <ShoppingCart className="w-4 h-4 mr-2" />
+                                Add to Cart
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="border-gray-600 text-red-400 hover:bg-red-500 hover:text-white"
+                                onClick={async () => {
+                                  await removeFromWishlist(product.id);
+                                  // Also refresh the like context
+                                  refreshLikes();
+                                }}
+                              >
+                                <X className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
@@ -692,7 +915,18 @@ export default function UserProfile() {
                           selectedCurrency,
                         )}
                       </span>
-                      <Button className="bg-primary text-black hover:bg-primary/90">
+                      <Button
+                        onClick={() => {
+                          if (!user) {
+                            navigate("/login", {
+                              state: { from: { pathname: "/checkout" } },
+                            });
+                            return;
+                          }
+                          navigate("/checkout");
+                        }}
+                        className="bg-primary text-black hover:bg-primary/90 font-semibold"
+                      >
                         <CreditCard className="w-4 h-4 mr-2" />
                         Checkout
                       </Button>
