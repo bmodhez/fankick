@@ -103,6 +103,38 @@ export default function UserProfile() {
     return () => clearInterval(interval);
   }, [activeTab, isAuthenticated, user]);
 
+  // Start real-time order tracking
+  useEffect(() => {
+    if (isAuthenticated && user && activeTab === "orders") {
+      realTimeOrderService.startOrderTracking(user.id, (updatedOrders) => {
+        const oldOrderStatuses = orders.map(o => o.orderStatus);
+        const newOrderStatuses = updatedOrders.map(o => o.orderStatus);
+
+        // Check for status changes and show notifications
+        updatedOrders.forEach((order, index) => {
+          if (oldOrderStatuses[index] && oldOrderStatuses[index] !== newOrderStatuses[index]) {
+            const statusMessages = {
+              confirmed: '✅ Order confirmed!',
+              shipped: '🚚 Order shipped!',
+              delivered: '📦 Order delivered!',
+              cancelled: '❌ Order cancelled'
+            };
+            const message = statusMessages[order.orderStatus as keyof typeof statusMessages] || 'Order status updated';
+            showNotification(message, 'success');
+          }
+        });
+
+        setOrders(updatedOrders);
+      });
+    }
+
+    return () => {
+      if (activeTab !== "orders") {
+        realTimeOrderService.stopOrderTracking();
+      }
+    };
+  }, [isAuthenticated, user, activeTab, orders]);
+
   // Log cart changes for debugging real-time updates
   useEffect(() => {
     console.log("Cart items updated:", cartItems.length);
