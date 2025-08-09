@@ -721,6 +721,7 @@ export default function UserProfile() {
                                     };
                                     addToCart(product, defaultVariant);
                                   }
+                                  showNotification(`${product.name} added to cart!`, 'success');
                                 }}
                               >
                                 <ShoppingCart className="w-4 h-4 mr-2" />
