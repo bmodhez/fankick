@@ -8,14 +8,14 @@ gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 // Custom hook for GSAP animations
 export const useGSAP = (
-  callback: (context: gsap.Context) => void,
+  callback: () => void,
   dependencies: any[] = []
 ) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      callback(ctx);
+      callback();
     }, containerRef);
 
     return () => ctx.revert();
