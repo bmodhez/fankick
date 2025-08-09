@@ -20,5 +20,16 @@
     "createdAt": "2025-08-06T09:55:29.914Z",
     "updatedAt": "2025-08-06T09:55:29.914Z",
     "passwordHash": "$2b$10$7XrayhIwkDPAjoE8LpBzK.zIQrYqPxdmuBdCCKK9ctuVKATUYRGcS"
+  },
+  {
+    "id": "user_1754720109322_1gewz7kbq",
+    "email": "modhbhavin05@gmail.com",
+    "firstName": "Bhavin ",
+    "phone": "9322667822",
+    "isVerified": false,
+    "isActive": true,
+    "createdAt": "2025-08-09T06:15:09.322Z",
+    "updatedAt": "2025-08-09T06:15:09.322Z",
+    "passwordHash": "$2b$10$76pM0q4e0NxbljCLYcVP0.3d76V9fL17AyjjWnve4/IfD4eKrS41W"
   }
 ]
