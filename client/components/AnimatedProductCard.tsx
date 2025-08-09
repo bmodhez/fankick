@@ -221,12 +221,12 @@ export function AnimatedProductCard({
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col space-y-2">
           {discount > 0 && (
-            <Badge 
+            <div
               ref={badgeRef}
-              className="bg-red-500 text-white font-bold px-2 py-1 text-xs"
+              className="bg-red-500 text-white font-bold px-2 py-1 text-xs rounded-md inline-block"
             >
               -{discount}%
-            </Badge>
+            </div>
           )}
           
           {product.isTrending && (
