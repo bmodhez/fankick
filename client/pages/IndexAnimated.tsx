@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { AnimatedNavigation } from "@/components/AnimatedNavigation";
 import { AnimatedHero } from "@/components/AnimatedHero";
-import { 
+import {
   AnimatedCategoriesSection,
   AnimatedStatsSection,
   AnimatedFeaturesSection,
   AnimatedCTASection
 } from "@/components/AnimatedSections";
+import { AnimationShowcase } from "@/components/AnimationShowcase";
 import { AnimatedProductGrid } from "@/components/AnimatedProductCard";
 import { PageTransition, LoadingScreen } from "@/components/PageTransition";
 import { Footer } from "@/components/Footer";
