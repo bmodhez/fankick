@@ -66,8 +66,8 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
 
     const unsubscribe = onAuthStateChange((isAuth, userData) => {
       if (isAuth && userData) {
-        // User just logged in, load their likes
-        loadLikedProducts();
+        // User just logged in - the main useEffect will handle loading
+        // We don't need to call loadLikedProducts here to avoid double loading
       } else {
         // User logged out, clear likes
         setLikedProducts(new Set());
@@ -75,7 +75,7 @@ export function LikeProvider({ children }: { children: React.ReactNode }) {
     });
 
     return unsubscribe;
-  }, [onAuthStateChange, loadLikedProducts]);
+  }, [onAuthStateChange]);
 
   // Save to localStorage whenever liked products change (only for authenticated users)
   useEffect(() => {
