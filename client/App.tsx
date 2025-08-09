@@ -64,7 +64,8 @@ const AppContent = () => {
               <ProductProvider>
                 <CartProvider>
                   <LikeProvider>
-                    <TooltipProvider>
+                    <RealTimeProvider>
+                      <TooltipProvider>
                       <AppInitializer>
                         <Toaster />
                         <Sonner />
@@ -321,7 +322,8 @@ const AppContent = () => {
                           </div>
                         </BrowserRouter>
                       </AppInitializer>
-                    </TooltipProvider>
+                      </TooltipProvider>
+                    </RealTimeProvider>
                   </LikeProvider>
                 </CartProvider>
               </ProductProvider>
