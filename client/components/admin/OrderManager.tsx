@@ -211,10 +211,22 @@ export function OrderManager() {
   useEffect(() => {
     loadRealOrders();
 
-    // Real-time refresh every 30 seconds
-    const interval = setInterval(loadRealOrders, 30000);
+    // Aggressive real-time refresh every 5 seconds for true real-time experience
+    const interval = setInterval(loadRealOrders, 5000);
 
     return () => clearInterval(interval);
+  }, []);
+
+  // Also refresh when component becomes visible
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        loadRealOrders();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, []);
 
   // Refresh function for manual sync
