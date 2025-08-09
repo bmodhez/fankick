@@ -44,6 +44,16 @@ import { Footer } from "./components/Footer";
 const queryClient = new QueryClient();
 
 const AppContent = () => {
+  // Initialize GSAP on app start
+  React.useEffect(() => {
+    initializeGSAP();
+    performanceMonitor.start();
+
+    return () => {
+      performanceMonitor.report();
+    };
+  }, []);
+
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
