@@ -42,7 +42,7 @@ export default function UserProfile() {
   const { items: cartItems, totalPrice } = useCart();
   const { selectedCurrency } = useCurrency();
   const { products } = useProducts();
-  const { likeCount, refreshLikes } = useLike();
+  const { likeCount, refreshLikes, likedProducts } = useLike();
   const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("profile");
