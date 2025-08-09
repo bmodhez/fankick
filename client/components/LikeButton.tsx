@@ -41,9 +41,11 @@ export function LikeButton({
 
     setIsLoading(true);
     try {
-      await toggleLike(productId, onAuthRequired);
+      console.log('🔄 Toggling like for product:', productId);
+      const success = await toggleLike(productId, onAuthRequired);
+      console.log('✅ Like toggle result:', success);
     } catch (error) {
-      console.error('Error toggling like:', error);
+      console.error('❌ Error toggling like:', error);
     } finally {
       setIsLoading(false);
     }
