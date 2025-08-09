@@ -44,7 +44,7 @@ export function AnimatedProductCard({
   const magneticButtonRef = useMagneticEffect(0.3);
   const touchRef = useTouchGestures();
 
-  const isLiked = likedProducts.includes(product.id);
+  const isProductLiked = isLiked(product.id);
   const discount = Math.round(((product.originalPrice - product.basePrice) / product.originalPrice) * 100);
 
   // Card hover animations
