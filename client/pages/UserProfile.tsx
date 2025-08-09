@@ -108,8 +108,9 @@ export default function UserProfile() {
     bio: "",
   });
 
-  // Real user orders (will be dynamic when order system is implemented)
-  const [orders] = useState([]);
+  // Real user orders loaded from API
+  const [orders, setOrders] = useState<UserOrder[]>([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
 
   // Use real-time wishlist data from context instead of hardcoded empty array
   // const [wishlist] = useState([]); // Removed - using userWishlist from API instead
@@ -214,7 +215,7 @@ export default function UserProfile() {
                     </Badge>
                   ) : (
                     <Badge className="bg-yellow-500 text-black">
-                      ��� Unverified
+                      ⚠ Unverified
                     </Badge>
                   )}
                 </div>
