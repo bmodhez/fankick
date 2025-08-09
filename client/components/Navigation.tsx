@@ -20,6 +20,7 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useLike } from "@/contexts/LikeContext";
+import { useRealTime } from "@/contexts/RealTimeContext";
 import { CURRENCIES } from "@/utils/currency";
 
 export function Navigation() {
