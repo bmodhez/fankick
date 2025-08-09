@@ -202,7 +202,9 @@ export function OrderManager() {
 
       // Combine real orders with minimal test data
       setOrders([testOrder, ...convertedOrders]);
-      showNotification(`Loaded ${apiOrders.length} real orders`, 'success');
+      const timestamp = new Date().toLocaleTimeString();
+      showNotification(`✅ ${timestamp}: Loaded ${apiOrders.length} real orders`, 'success');
+      console.log(`✅ Successfully updated orders at ${timestamp}`);
     } catch (error) {
       console.error('Failed to load orders:', error);
       showNotification('Failed to load orders', 'error');
