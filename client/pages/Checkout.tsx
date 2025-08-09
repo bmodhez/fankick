@@ -264,19 +264,22 @@ export default function Checkout() {
         }
       }
 
-      // Email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(shippingForm.email)) {
-        alert("Please enter a valid email address");
-        setIsProcessing(false);
-        return;
-      }
+      // Email and phone validation only for new address
+      if (selectedAddress === "new") {
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(shippingForm.email)) {
+          alert("Please enter a valid email address");
+          setIsProcessing(false);
+          return;
+        }
 
-      // Phone validation (basic)
-      if (!/^\d{10}$/.test(shippingForm.phone.replace(/[^\d]/g, ""))) {
-        alert("Please enter a valid 10-digit phone number");
-        setIsProcessing(false);
-        return;
+        // Phone validation (basic)
+        if (!/^\d{10}$/.test(shippingForm.phone.replace(/[^\d]/g, ""))) {
+          alert("Please enter a valid 10-digit phone number");
+          setIsProcessing(false);
+          return;
+        }
       }
 
       // Simulate payment processing
