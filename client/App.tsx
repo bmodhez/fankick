@@ -18,6 +18,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ProductProvider } from "@/contexts/ProductContext";
 import { CartProvider } from "@/contexts/CartContext";
 import { LikeProvider } from "@/contexts/LikeContext";
+import { RealTimeProvider } from "@/contexts/RealTimeContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PlaceholderPage from "./pages/PlaceholderPage";
