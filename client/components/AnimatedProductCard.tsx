@@ -198,7 +198,7 @@ export function AnimatedProductCard({
   return (
     <div
       ref={cardRef}
-      className={`relative group rounded-xl sm:rounded-2xl border overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 mobile-card tablet-card desktop-card mobile-optimized tablet-optimized desktop-enhanced ${cardClasses[variant]}`}
+      className={`product-card relative group rounded-xl sm:rounded-2xl border overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 mobile-card tablet-card desktop-card mobile-optimized tablet-optimized desktop-enhanced ${cardClasses[variant]}`}
       style={{
         animationDelay: `${index * 0.1}s`
       }}
