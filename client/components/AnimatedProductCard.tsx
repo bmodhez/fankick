@@ -7,6 +7,7 @@ import { Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
 import { useLikes } from '@/contexts/LikeContext';
 import { useGSAP, useScrollFadeIn, useMagneticEffect } from '@/hooks/useGSAP';
+import { useResponsiveCardAnimation, useTouchGestures } from '@/hooks/useResponsiveGSAP';
 import {
   Heart,
   ShoppingBag,
