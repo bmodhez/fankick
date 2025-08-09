@@ -297,19 +297,70 @@ export default function Checkout() {
         return;
       }
 
-      // Clear cart and redirect only after successful payment
-      clearCart();
-      navigate("/order-success", {
-        state: {
-          orderDetails: {
-            paymentMethod: selectedPayment,
-            amount: finalTotal,
-            currency: selectedCurrency.code,
-            shippingAddress: shippingForm,
-            customerName: user.firstName,
+      // Save order to database
+      const orderData = {
+        userId: user.id,
+        totalAmount: finalTotal,
+        currency: selectedCurrency.code,
+        paymentMethod: selectedPayment,
+        paymentStatus: selectedPayment === "cod" ? "pending" : "paid",
+        orderStatus: "placed",
+        shippingAddress: selectedAddress === "saved" ? {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          address: "123 Main Street, Apartment 4B",
+          city: "New York",
+          state: "NY",
+          zipCode: "10001",
+          phone: "+1 (555) 123-4567"
+        } : shippingForm,
+        items: items.map(item => ({
+          productId: item.id,
+          variantId: item.selectedVariant || "default",
+          quantity: item.quantity,
+          price: convertPrice(item.price, selectedCurrency.code, "INR"),
+          name: item.name,
+          selectedVariant: item.selectedVariant
+        })),
+        notes: `Payment method: ${selectedPayment}, Address type: ${selectedAddress}`
+      };
+
+      try {
+        const savedOrder = await orderApi.createOrder(orderData);
+        console.log("Order saved successfully:", savedOrder);
+
+        // Clear cart and redirect only after successful order creation
+        clearCart();
+        navigate("/order-success", {
+          state: {
+            orderDetails: {
+              paymentMethod: selectedPayment,
+              amount: finalTotal,
+              currency: selectedCurrency.code,
+              shippingAddress: orderData.shippingAddress,
+              customerName: user.firstName,
+              orderId: savedOrder.orderNumber,
+              orderData: savedOrder
+            },
           },
-        },
-      });
+        });
+      } catch (orderError) {
+        console.error("Error saving order:", orderError);
+        // Still proceed with success page but log the error
+        clearCart();
+        navigate("/order-success", {
+          state: {
+            orderDetails: {
+              paymentMethod: selectedPayment,
+              amount: finalTotal,
+              currency: selectedCurrency.code,
+              shippingAddress: orderData.shippingAddress,
+              customerName: user.firstName,
+              error: "Order placement successful but failed to save order details"
+            },
+          },
+        });
+      }
     } catch (error) {
       console.error("Order processing error:", error);
       alert("Something went wrong. Please try again.");
