@@ -258,9 +258,9 @@ export function AnimatedHero() {
 
             {/* Title */}
             <div ref={titleRef} className="mb-6">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight mobile-hero-title tablet-hero-title desktop-hero-title">
                 {currentSlideData.title.split(' ').map((word, index) => (
-                  <span key={index} className="word inline-block mr-4">
+                  <span key={index} className="word inline-block mr-2 sm:mr-4">
                     {word}
                   </span>
                 ))}
