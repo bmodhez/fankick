@@ -316,9 +316,11 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
 
 function SidebarContent({
   currentPath,
+  navigation,
   onItemClick,
 }: {
   currentPath: string;
+  navigation: any[];
   onItemClick?: () => void;
 }) {
   return (
