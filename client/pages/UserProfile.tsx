@@ -79,6 +79,29 @@ export default function UserProfile() {
     }
   }, [isAuthenticated, user, activeTab]);
 
+  // Real-time updates when switching tabs
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      updateUserStats();
+    }
+  }, [activeTab, isAuthenticated, user, updateUserStats]);
+
+  // Auto-refresh data every 2 minutes for real-time updates
+  useEffect(() => {
+    if (!isAuthenticated || !user) return;
+
+    const interval = setInterval(() => {
+      if (activeTab === "orders") {
+        loadOrders();
+      } else if (activeTab === "wishlist") {
+        loadWishlist();
+      }
+      updateUserStats();
+    }, 120000); // 2 minutes
+
+    return () => clearInterval(interval);
+  }, [activeTab, isAuthenticated, user]);
+
   // Log cart changes for debugging real-time updates
   useEffect(() => {
     console.log("Cart items updated:", cartItems.length);
