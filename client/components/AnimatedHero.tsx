@@ -30,6 +30,10 @@ export function AnimatedHero() {
   const particlesRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useParallax(0.3);
   const magneticButtonRef = useMagneticEffect(0.5);
+  const responsiveHeroRef = useMobileHeroAnimation();
+
+  // Optimize performance on mobile
+  useMobilePerformanceOptimization();
 
   // Stats animation refs
   const statsRef = useRef<HTMLDivElement>(null);
