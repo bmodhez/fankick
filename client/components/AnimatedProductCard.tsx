@@ -33,7 +33,7 @@ export function AnimatedProductCard({
   variant = 'default' 
 }: AnimatedProductCardProps) {
   const { addToCart } = useCart();
-  const { likedProducts, toggleLike } = useLikes();
+  const { likedProducts, toggleLike, isLiked } = useLike();
   const [isHovered, setIsHovered] = useState(false);
   
   const cardRef = useScrollFadeIn(0.2);
