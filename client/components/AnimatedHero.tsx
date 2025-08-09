@@ -217,7 +217,7 @@ export function AnimatedHero() {
   const currentSlideData = heroSlides[currentSlide];
 
   return (
-    <div ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div ref={heroDropRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
       <div
         ref={backgroundRef}
