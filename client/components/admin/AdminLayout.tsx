@@ -38,7 +38,7 @@ interface AdminLayoutProps {
   title: string;
 }
 
-const navigation = [
+const getNavigation = (orderCount: number = 1) => [
   {
     name: "Dashboard",
     href: "/admin",
@@ -51,21 +51,21 @@ const navigation = [
     href: "/admin/products",
     icon: Package,
     emoji: "📦",
-    badge: "1.2K",
+    badge: "12", // Minimal test data
   },
   {
     name: "Orders",
     href: "/admin/orders",
     icon: ShoppingCart,
     emoji: "🛒",
-    badge: "45",
+    badge: orderCount.toString(), // Real-time count
   },
   {
     name: "Customers",
     href: "/admin/customers",
     icon: Users,
     emoji: "👥",
-    badge: "2.8K",
+    badge: "5", // Minimal test data
   },
   {
     name: "Categories",
