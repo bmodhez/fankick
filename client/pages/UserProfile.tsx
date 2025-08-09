@@ -95,6 +95,18 @@ export default function UserProfile() {
     }
   };
 
+  const loadOrders = async () => {
+    try {
+      setOrdersLoading(true);
+      const ordersData = await orderApi.getUserOrders(user.id);
+      setOrders(ordersData);
+    } catch (error) {
+      console.error("Error loading orders:", error);
+    } finally {
+      setOrdersLoading(false);
+    }
+  };
+
   const removeFromWishlist = async (productId: string) => {
     try {
       await userApi.removeFromWishlist(productId);
