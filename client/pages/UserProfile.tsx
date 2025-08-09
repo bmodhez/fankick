@@ -134,12 +134,19 @@ export default function UserProfile() {
 
   const removeFromWishlist = async (productId: string) => {
     try {
-      await userApi.removeFromWishlist(productId);
+      // Optimistic update for immediate feedback
       setUserWishlist((prev) =>
         prev.filter((item) => item.productId !== productId),
       );
+
+      await userApi.removeFromWishlist(productId);
+      refreshLikes(); // Update like count in real-time
+      showNotification('Removed from wishlist', 'info');
     } catch (error) {
       console.error("Error removing from wishlist:", error);
+      showNotification('Failed to remove from wishlist', 'error');
+      // Revert optimistic update on error
+      loadWishlist();
     }
   };
 
