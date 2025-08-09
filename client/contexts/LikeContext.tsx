@@ -14,7 +14,7 @@ const LikeContext = createContext<LikeContextType | undefined>(undefined);
 
 export function LikeProvider({ children }: { children: React.ReactNode }) {
   const [likedProducts, setLikedProducts] = useState<Set<string>>(new Set());
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, onAuthStateChange } = useAuth();
 
   // Load liked products from server and localStorage as backup (only for authenticated users)
   useEffect(() => {
