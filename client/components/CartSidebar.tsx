@@ -290,10 +290,10 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             <div className="space-y-2">
               <div className="flex space-x-2">
                 <Input
-                  placeholder="Enter coupon code"
+                  placeholder="Enter coupon code (Try FK2025)"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
-                  className="bg-gray-800 border-gray-600 text-white"
+                  className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
                 />
                 <Button
                   onClick={applyCoupon}
@@ -303,6 +303,12 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   Apply
                 </Button>
               </div>
+              {!appliedCoupon && (
+                <div className="text-xs text-gray-400 flex items-center space-x-1">
+                  <span>💡</span>
+                  <span>Use code <strong className="text-primary">FK2025</strong> for 10% off!</span>
+                </div>
+              )}
 
               {appliedCoupon && (
                 <div className="flex items-center justify-between bg-green-500/20 border border-green-500 rounded p-2">
