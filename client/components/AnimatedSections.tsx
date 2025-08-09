@@ -26,7 +26,11 @@ import {
 // Hero Categories Section
 export function AnimatedCategoriesSection() {
   const sectionRef = useScrollFadeIn(0.1);
-  const cardsRef = useStaggerAnimation(0.2);
+  const cardsRef = useScrollDropSequence([
+    { startY: -200, endY: 0, delay: 0, triggerStart: "top 80%", triggerEnd: "top 40%" },
+    { startY: -250, endY: 0, delay: 0.1, triggerStart: "top 80%", triggerEnd: "top 40%" },
+    { startY: -300, endY: 0, delay: 0.2, triggerStart: "top 80%", triggerEnd: "top 40%" }
+  ]);
 
   const categories = [
     {
