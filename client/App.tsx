@@ -1,4 +1,5 @@
 import "./global.css";
+import React from "react";
 import { initializeGSAP, performanceMonitor } from "@/utils/gsapConfig";
 
 import { Toaster } from "@/components/ui/toaster";
