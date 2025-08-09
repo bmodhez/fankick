@@ -299,7 +299,7 @@ export default function UserProfile() {
                   <div className="text-center">
                     <div className="text-xl font-bold text-primary">
                       {formatPrice(
-                        convertPrice(totalPrice, selectedCurrency.code, "INR"),
+                        convertPrice(cartTotal || totalPrice, selectedCurrency.code, "INR"),
                         selectedCurrency,
                       )}
                     </div>
