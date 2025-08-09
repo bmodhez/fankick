@@ -357,16 +357,16 @@ export function AnimatedProductCard({
 }
 
 // Grid container with stagger animation
-export function AnimatedProductGrid({ 
-  products, 
+export function AnimatedProductGrid({
+  products,
   title,
-  variant = 'default' 
-}: { 
+  variant = 'default'
+}: {
   products: Product[];
   title?: string;
   variant?: 'default' | 'featured' | 'trending';
 }) {
-  const gridRef = useScrollFadeIn(0.1);
+  const gridRef = useProductDropAnimation();
 
   return (
     <div ref={gridRef} className="space-y-6">
