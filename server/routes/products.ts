@@ -123,6 +123,15 @@ export async function updateProduct(req: Request, res: Response) {
       JSON.stringify(updateData, null, 2),
     );
 
+    // Log specific image update information
+    if (updateData.images) {
+      console.log(`📸 Product ${id} image update:`, {
+        imageCount: updateData.images.length,
+        firstImage: updateData.images[0] || 'No images',
+        allImages: updateData.images
+      });
+    }
+
     const updatedProduct = await productService.updateProduct(id, updateData);
 
     if (!updatedProduct) {
