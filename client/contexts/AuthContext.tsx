@@ -282,6 +282,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     logout,
     updateProfile,
     refreshUser,
+    onAuthStateChange,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
