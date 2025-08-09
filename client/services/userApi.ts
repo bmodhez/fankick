@@ -100,7 +100,7 @@ async function userApiRequest<T>(
       ...(sessionToken && { Authorization: `Bearer ${sessionToken}` }),
       ...options.headers,
     },
-    signal: options.signal || AbortSignal.timeout(30000),
+    signal: options.signal || AbortSignal.timeout(60000),
   };
 
   let lastError: Error;
@@ -108,7 +108,13 @@ async function userApiRequest<T>(
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
       console.log(`User API Request ${attempt + 1}/${retries + 1}: ${options.method || 'GET'} ${url}`);
-      
+
+      // Add a small delay between retries
+      if (attempt > 0) {
+        const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+
       const response = await fetch(url, { ...defaultOptions, ...options });
 
       let result: ApiResponse<T>;
