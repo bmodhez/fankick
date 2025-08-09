@@ -217,11 +217,7 @@ export default function Index() {
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900 py-8 sm:py-12 lg:py-20 overflow-hidden border-b border-border/20">
-<<<<<<< HEAD
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1560762484-813fc97650a0?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80')] bg-cover bg-center opacity-5"></div>
-=======
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1920&q=80')] bg-cover bg-center opacity-10"></div>
->>>>>>> origin/main
 
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -329,7 +325,6 @@ export default function Index() {
               <Link key={index} to={category.link}>
                 <Card className="group cursor-pointer hover:scale-105 transition-all duration-300 overflow-hidden bg-gradient-to-br from-secondary to-background border-border shadow-lg hover:shadow-xl">
                   <CardContent className="p-0">
-<<<<<<< HEAD
                     <div className="h-40 sm:h-48 relative overflow-hidden">
                       <img
                         src={category.image}
@@ -341,25 +336,6 @@ export default function Index() {
                           target.parentElement!.classList.add(`bg-gradient-to-br`, category.color.split(' ')[0], category.color.split(' ')[1]);
                         }}
                       />
-=======
-                    <div
-                      className={`h-40 sm:h-48 bg-gradient-to-br ${category.color} relative overflow-hidden`}
-                      style={{
-                        backgroundImage:
-                          category.title === "Football Jerseys"
-                            ? "url(https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80)"
-                            : category.title === "Anime Rings"
-                              ? "url(https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80)"
-                              : category.title === "K-pop Merch"
-                                ? "url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80)"
-                                : category.title === "Marvel Hoodies"
-                                  ? "url(https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80)"
-                                  : "url(https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80)",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    >
->>>>>>> origin/main
                       <div className="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-20 transition-all duration-300"></div>
                       <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 text-white">
                         <h3 className="font-sport font-bold text-lg sm:text-2xl mb-1">
@@ -437,45 +413,7 @@ export default function Index() {
                     <CardContent className="p-0">
                       <div className="relative">
                         <img
-<<<<<<< HEAD
                           src={product.images[0] || "https://cdn.builder.io/api/v1/image/assets%2Fc7d7a55a70cb48c2b58c8c2fd35f2ab0%2Fa924a8bea1e5433a8359466af5c1c95d?format=webp&width=800"}
-=======
-                          src={
-                            product.name.toLowerCase().includes("messi")
-                              ? "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=80"
-                              : product.name.toLowerCase().includes("naruto")
-                                ? "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"
-                                : product.name.toLowerCase().includes("bts") ||
-                                    product.name.toLowerCase().includes("k-pop")
-                                  ? "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80"
-                                  : product.name
-                                        .toLowerCase()
-                                        .includes("marvel") ||
-                                      product.name
-                                        .toLowerCase()
-                                        .includes("spider")
-                                    ? "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&q=80"
-                                    : product.name
-                                          .toLowerCase()
-                                          .includes("jersey") ||
-                                        product.name
-                                          .toLowerCase()
-                                          .includes("football")
-                                      ? "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80"
-                                      : product.name
-                                            .toLowerCase()
-                                            .includes("ring")
-                                        ? "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&q=80"
-                                        : product.name
-                                              .toLowerCase()
-                                              .includes("hoodie") ||
-                                            product.name
-                                              .toLowerCase()
-                                              .includes("sweatshirt")
-                                          ? "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=80"
-                                          : "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=800&q=80"
-                          }
->>>>>>> origin/main
                           alt={product.name}
                           className="w-full h-40 sm:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                           onError={(e) => {
