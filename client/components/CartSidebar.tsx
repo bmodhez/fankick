@@ -14,11 +14,13 @@ import {
   Minus,
   Trash2,
   ShoppingBag,
+  ShoppingCart,
   CreditCard,
   Truck,
   ShieldCheck,
   Gift,
   MapPin,
+  Zap,
 } from "lucide-react";
 
 interface CartSidebarProps {
