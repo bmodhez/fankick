@@ -37,7 +37,7 @@ export function AnimatedProductCard({
   const { likedProducts, toggleLike, isLiked } = useLike();
   const [isHovered, setIsHovered] = useState(false);
   
-  const cardRef = useScrollFadeIn(0.2);
+  const cardRef = useScrollDrop(-150, 0, "top 90%", "top 30%", "elastic.out(1, 0.75)");
   const imageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
