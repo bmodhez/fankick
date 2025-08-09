@@ -145,6 +145,7 @@ export function AnimatedCategoriesSection() {
 // Stats Section
 export function AnimatedStatsSection() {
   const sectionRef = useScrollFadeIn(0.1);
+  const statsParallaxRef = useParallaxBackground(0.6);
   const statsRef = useScrollDropSequence([
     { startY: -120, endY: 0, delay: 0, triggerStart: "top 85%", triggerEnd: "top 45%" },
     { startY: -140, endY: 0, delay: 0.05, triggerStart: "top 85%", triggerEnd: "top 45%" },
@@ -160,7 +161,9 @@ export function AnimatedStatsSection() {
   ];
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+    <section ref={sectionRef} className="py-20 relative overflow-hidden">
+      {/* Parallax Background */}
+      <div ref={statsParallaxRef} className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900" />
       {/* Animated Background */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-10 left-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl animate-pulse" />
@@ -326,7 +329,8 @@ export function AnimatedFeaturesSection() {
 // Call-to-Action Section
 export function AnimatedCTASection() {
   const sectionRef = useScrollFadeIn(0.1);
-  const parallaxRef = useParallax(0.5);
+  const parallaxRef = useParallaxBackground(0.5);
+  const ctaContentRef = useParallaxReveal('up');
 
   return (
     <section ref={sectionRef} className="py-20 relative overflow-hidden">
@@ -342,7 +346,7 @@ export function AnimatedCTASection() {
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <div ref={ctaContentRef} className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <div className="bg-gray-800/50 backdrop-blur-sm rounded-3xl p-12 border border-gray-700">
           <Sparkles className="w-16 h-16 text-primary mx-auto mb-6" />
           
