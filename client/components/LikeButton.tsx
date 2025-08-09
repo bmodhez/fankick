@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { userApi } from "@/services/userApi";
+import { useLike } from "@/contexts/LikeContext";
 import { cn } from "@/lib/utils";
 
 interface LikeButtonProps {
@@ -11,39 +11,28 @@ interface LikeButtonProps {
   size?: "default" | "sm" | "lg" | "icon";
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
   showLoginMessage?: boolean;
+  onAuthRequired?: () => void;
 }
 
-export function LikeButton({ 
-  productId, 
-  className, 
-  size = "sm", 
+export function LikeButton({
+  productId,
+  className,
+  size = "sm",
   variant = "outline",
-  showLoginMessage = true 
+  showLoginMessage = true,
+  onAuthRequired
 }: LikeButtonProps) {
-  const { user, isAuthenticated } = useAuth();
-  const [isLiked, setIsLiked] = useState(false);
+  const { isAuthenticated } = useAuth();
+  const { isLiked, toggleLike } = useLike();
   const [isLoading, setIsLoading] = useState(false);
-
-  // Check if product is already liked on component mount
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      checkIfLiked();
-    }
-  }, [isAuthenticated, user, productId]);
-
-  const checkIfLiked = async () => {
-    try {
-      const wishlist = await userApi.getWishlist();
-      setIsLiked(wishlist.some(item => item.productId === productId));
-    } catch (error) {
-      console.error('Error checking if product is liked:', error);
-    }
-  };
 
   const handleLikeToggle = async () => {
     if (!isAuthenticated) {
       if (showLoginMessage) {
         alert('Please log in to like products');
+      }
+      if (onAuthRequired) {
+        onAuthRequired();
       }
       return;
     }
@@ -52,17 +41,9 @@ export function LikeButton({
 
     setIsLoading(true);
     try {
-      if (isLiked) {
-        await userApi.removeFromWishlist(productId);
-        setIsLiked(false);
-      } else {
-        await userApi.addToWishlist(productId);
-        setIsLiked(true);
-      }
+      await toggleLike(productId, onAuthRequired);
     } catch (error) {
       console.error('Error toggling like:', error);
-      // Revert the state on error
-      setIsLiked(!isLiked);
     } finally {
       setIsLoading(false);
     }
