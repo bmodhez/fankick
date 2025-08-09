@@ -284,7 +284,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
           {/* Quick stats bar */}
           <div className="py-4 border-t border-gray-700">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {quickStats.map((stat, index) => (
+              {getQuickStats(orderCount).map((stat, index) => (
                 <div key={index} className="bg-gray-800 rounded-lg p-3">
                   <div className="flex items-center justify-between">
                     <div>
