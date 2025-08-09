@@ -84,7 +84,7 @@ export function AnimatedCategoriesSection() {
         </div>
 
         {/* Categories Grid */}
-        <div ref={cardsRef} className="grid md:grid-cols-3 gap-8">
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {categories.map((category, index) => (
             <Link key={index} to={category.link} className="group">
               <div className="relative overflow-hidden rounded-3xl bg-gray-800 border border-gray-700 hover:border-primary/50 transition-all duration-500 hover:scale-105">
