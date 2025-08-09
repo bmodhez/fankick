@@ -193,6 +193,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
         <div className="fixed left-0 top-0 bottom-0 w-64 bg-gray-800 border-r border-gray-700">
           <SidebarContent
             currentPath={currentPath}
+            navigation={navigation}
             onItemClick={() => setSidebarOpen(false)}
           />
         </div>
